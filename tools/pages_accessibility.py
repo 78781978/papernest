@@ -14,7 +14,7 @@ def build():
 
 <section class="section">
   <div class="container">
-    <div class="two-col" style="grid-template-columns:.7fr 2fr;align-items:start">
+    <div class="two-col cols-toc" style="align-items:start">
       <aside class="legal-toc reveal" style="position:sticky;top:110px">
         <h4>Spis treści</h4>
         <a href="#status">Status zgodności</a>

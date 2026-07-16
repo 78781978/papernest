@@ -46,7 +46,7 @@ def build():
 
 <section class="section-tight">
   <div class="container">
-    <div class="use-grid" style="grid-template-columns:repeat(4,1fr)">{value_cards}</div>
+    <div class="use-grid">{value_cards}</div>
   </div>
 </section>
 

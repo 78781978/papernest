@@ -30,7 +30,7 @@ def build_cart():
       {icon('info')}
       <p><strong>Podgląd funkcji koszyka.</strong> To statyczny prototyp — przykładowa zawartość poniżej pokazuje docelowy wygląd. Po wdrożeniu na WordPressie koszyk będzie obsługiwany przez WooCommerce (dodawanie, usuwanie i przeliczanie zamówień w czasie rzeczywistym).</p>
     </div>
-    <div class="two-col" style="grid-template-columns:2fr 1fr;align-items:start">
+    <div class="two-col cols-sidebar" style="align-items:start">
       {reveal(f'''<div class="card card-pad" style="overflow-x:auto">
         <table class="cart-table">
           <thead><tr><th>Produkt</th><th>Cena</th><th>Ilość</th><th>Suma</th><th></th></tr></thead>
@@ -95,7 +95,7 @@ def build_account():
     </div>
 
     {reveal('''<div class="section-head"><span class="eyebrow">Panel klienta</span><h2 style="font-size:1.6rem">Podgląd panelu po zalogowaniu</h2></div>''')}
-    <div class="two-col reveal" style="grid-template-columns:.9fr 2.5fr;align-items:start">
+    <div class="two-col cols-account reveal" style="align-items:start">
       <nav class="card card-pad account-tabs">
         <a href="#" class="active">{icon('user')} Pulpit</a>
         <a href="#">{icon('box')} Zamówienia</a>

@@ -149,29 +149,20 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  /* Testimonials — ruchomy slajder (scroll-snap track + strzałki) */
-  document.querySelectorAll('.testi-slider').forEach(function (slider) {
-    var track = slider.querySelector('[data-testi-track]');
-    var prev = slider.querySelector('[data-testi-prev]');
-    var next = slider.querySelector('[data-testi-next]');
-    if (!track || !prev || !next) return;
-    function step() {
-      var card = track.querySelector('.testi-card');
-      if (!card) return track.clientWidth * 0.9;
-      var style = window.getComputedStyle(track);
-      var gap = parseFloat(style.columnGap || style.gap || '0') || 0;
-      return card.getBoundingClientRect().width + gap;
-    }
-    function updateButtons() {
-      var max = track.scrollWidth - track.clientWidth - 4;
-      prev.disabled = track.scrollLeft <= 4;
-      next.disabled = track.scrollLeft >= max;
-    }
-    prev.addEventListener('click', function () { track.scrollBy({ left: -step(), behavior: 'smooth' }); });
-    next.addEventListener('click', function () { track.scrollBy({ left: step(), behavior: 'smooth' }); });
-    track.addEventListener('scroll', updateButtons, { passive: true });
-    window.addEventListener('resize', updateButtons);
-    updateButtons();
+  /* Testimonials — samoczynnie przepływający pasek (czysty CSS), z przyciskiem
+     pauzy/wznowienia wymaganym przez WCAG 2.2.2 dla automatycznie poruszającej
+     się treści. */
+  document.querySelectorAll('[data-testi-slider]').forEach(function (slider) {
+    var toggle = slider.querySelector('[data-testi-toggle]');
+    if (!toggle) return;
+    var pauseIcon = toggle.innerHTML;
+    var playIcon = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M7 4.8v14.4c0 .9 1 1.5 1.8 1L19 13.4c.7-.5.7-1.5 0-2L8.8 3.8c-.8-.5-1.8.1-1.8 1Z"/></svg>';
+    toggle.addEventListener('click', function () {
+      var paused = slider.classList.toggle('is-paused');
+      toggle.setAttribute('aria-pressed', paused ? 'true' : 'false');
+      toggle.setAttribute('aria-label', paused ? 'Wznów automatyczne przewijanie opinii' : 'Zatrzymaj automatyczne przewijanie opinii');
+      toggle.innerHTML = paused ? playIcon : pauseIcon;
+    });
   });
 
   /* =====================================================================

@@ -17,7 +17,7 @@ def build():
       {icon('info')}
       <p><strong>Podgląd procesu zamówienia.</strong> To statyczny prototyp formularza zakupowego. Po wdrożeniu na WordPressie krok ten obsłuży WooCommerce wraz z bramką płatności paynow.</p>
     </div>
-    <div class="two-col" style="grid-template-columns:2fr 1fr;align-items:start">
+    <div class="two-col cols-sidebar" style="align-items:start">
       {reveal(f'''<div class="card card-pad">
         <h2 style="font-size:1.2rem;margin-bottom:18px">Dane do wysyłki</h2>
         <form onsubmit="event.preventDefault(); alert('To formularz demonstracyjny prototypu — płatność zostanie podłączona do paynow po wdrożeniu na WordPressie.');">

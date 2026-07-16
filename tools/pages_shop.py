@@ -103,7 +103,7 @@ def build_shop():
         <select><option>Polecane</option><option>Cena rosnąco</option><option>Cena malejąco</option></select>
       </div>
     </div>
-    <div class="product-grid reveal-stagger" style="grid-template-columns:repeat(4,1fr)">
+    <div class="product-grid cols-4 reveal-stagger">
       {cards}
     </div>
   </div>

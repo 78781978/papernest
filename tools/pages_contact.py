@@ -44,13 +44,13 @@ def build():
 
 <section class="section">
   <div class="container">
-    <div class="contact-grid reveal-stagger" style="grid-template-columns:repeat(4,1fr)">{cards}</div>
+    <div class="contact-grid cols-4 reveal-stagger">{cards}</div>
   </div>
 </section>
 
 <section class="section-tight" style="padding-top:0">
   <div class="container">
-    {reveal(f'''<div class="use-grid" style="grid-template-columns:repeat(3,1fr)">
+    {reveal(f'''<div class="use-grid cols-3">
       {photo_placeholder("Magazyn PaperNest", cls="wide")}
       {photo_placeholder("Sklep / punkt odbioru", cls="wide")}
       {photo_placeholder("Biuro sprzedaży", cls="wide")}

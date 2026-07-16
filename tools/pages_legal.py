@@ -49,7 +49,7 @@ def legal_page(slug, title, desc, h5_note, raw_html, active=None, with_toc=False
           <h4>Spis paragrafów</h4>{items}
         </aside>'''
 
-    layout_open = '<div class="two-col" style="grid-template-columns:.72fr 2fr;align-items:start">' if toc_html else '<div>'
+    layout_open = '<div class="two-col cols-toc" style="align-items:start">' if toc_html else '<div>'
 
     content = f"""
 <section class="page-hero" style="padding-block:56px 40px">

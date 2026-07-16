@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from build import icon, svg_file, reveal, page, photo_placeholder
-from pages_home import TESTIMONIALS
+from pages_home import testi_marquee
 
 
 def build():
@@ -63,9 +63,9 @@ def build():
   <div class="container">
     {reveal('''<div class="section-head center">
       <span class="eyebrow" style="justify-content:center">Nasza oferta</span>
-      <h2 class="text-balance">Do pakowania.&nbsp;Dla&nbsp;piskląt.&nbsp;Dla&nbsp;budownictwa.</h2>
+      <h2 class="text-balance">Do pakowania. Dla&nbsp;piskląt. Dla&nbsp;budownictwa.</h2>
     </div>''')}
-    <div class="use-grid" style="grid-template-columns:repeat(3,1fr)">
+    <div class="use-grid cols-3">
       {reveal(f'''<div class="use-card">{photo_placeholder("Zdjęcie: wypełniacz papierowy")}<span class="ic">{icon('gift')}</span><b>Wypełniacz Papierowy</b><span class="text-muted" style="font-size:.85rem">Zabezpiecza przesyłki, w 100% z recyklingu.</span></div>''')}
       {reveal(f'''<div class="use-card">{photo_placeholder("Zdjęcie: papier dla piskląt")}<span class="ic">{icon('egg')}</span><b>Papier Dla Piskląt</b><span class="text-muted" style="font-size:.85rem">Bezpieczny start hodowli od pierwszego dnia.</span></div>''')}
       {reveal(f'''<div class="use-card">{photo_placeholder("Zdjęcie: tektura budowlana")}<span class="ic">{icon('hammer')}</span><b>Tektura Budowlana</b><span class="text-muted" style="font-size:.85rem">Ochrona podłóg i powierzchni podczas remontu.</span></div>''')}
@@ -79,20 +79,7 @@ def build():
       <span class="eyebrow" style="justify-content:center">Opinie</span>
       <h2 class="text-balance">Co mówią o nas klienci?</h2>
     </div>''')}
-    <div class="testi-slider">
-      <div class="testimonial-track reveal-stagger" data-testi-track>
-        {"".join(reveal(f'''<div class="testi-card">
-          <div class="stars">{icon('star')*5}</div>
-          <b style="color:var(--heading);font-size:.98rem">{t['title']}</b>
-          <blockquote>{t['text']}</blockquote>
-          <div class="who"><span class="avatar">{t['initials']}</span><div><b>{t['name']}</b><span>{t['role']}</span></div></div>
-        </div>''') for t in TESTIMONIALS)}
-      </div>
-      <div class="testi-nav">
-        <button type="button" class="prev" data-testi-prev aria-label="Poprzednie opinie">{icon('arrow')}</button>
-        <button type="button" class="next" data-testi-next aria-label="Następne opinie">{icon('arrow')}</button>
-      </div>
-    </div>
+    {testi_marquee()}
   </div>
 </section>
 

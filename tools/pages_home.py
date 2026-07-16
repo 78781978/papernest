@@ -12,6 +12,31 @@ TESTIMONIALS = [
          text="Bardzo miła i pomocna obsługa. Wypełniacz papierowy jest wysokiej jakości, skutecznie chroni produkty podczas transportu i świetnie sprawdza się podczas pakowania zamówień z naszego sklepu internetowego."),
 ]
 
+
+def testi_marquee():
+    """Opinie klientów jako samoczynnie, płynnie przepływający pasek (czysta
+    animacja CSS, treść zdublowana dla bezszwowej pętli). Zgodnie z WCAG 2.2.2
+    (Pauza, Stop, Ukryj) ruch zatrzymuje się pod najechaniem/fokusem i jest
+    dostępny widoczny przycisk pauzy/wznowienia dla użytkowników klawiatury."""
+    def card(t, hidden=False):
+        attrs = ' aria-hidden="true" tabindex="-1"' if hidden else ''
+        return f'''<div class="testi-card"{attrs}>
+          <div class="stars">{icon('star')*5}</div>
+          <b style="color:var(--heading);font-size:.98rem">{t['title']}</b>
+          <blockquote>{t['text']}</blockquote>
+          <div class="who"><span class="avatar">{t['initials']}</span><div><b>{t['name']}</b><span>{t['role']}</span></div></div>
+        </div>'''
+    cards = "".join(card(t) for t in TESTIMONIALS)
+    cards_dup = "".join(card(t, hidden=True) for t in TESTIMONIALS)
+    return reveal(f'''<div class="testi-slider" data-testi-slider>
+      <div class="testimonial-track">
+        <div class="testi-rail">{cards}{cards_dup}</div>
+      </div>
+      <div class="testi-nav">
+        <button type="button" class="testi-pause" data-testi-toggle aria-pressed="false" aria-label="Zatrzymaj automatyczne przewijanie opinii">{icon('pause')}</button>
+      </div>
+    </div>''')
+
 def build():
     content = f"""
 <section class="hero">
@@ -122,20 +147,7 @@ def build():
       <span class="eyebrow" style="justify-content:center">Opinie</span>
       <h2 class="text-balance">Co mówią o nas klienci?</h2>
     </div>''')}
-    <div class="testi-slider">
-      <div class="testimonial-track reveal-stagger" data-testi-track>
-        {"".join(reveal(f'''<div class="testi-card">
-          <div class="stars">{icon('star')*5}</div>
-          <b style="color:var(--heading);font-size:.98rem">{t['title']}</b>
-          <blockquote>{t['text']}</blockquote>
-          <div class="who"><span class="avatar">{t['initials']}</span><div><b>{t['name']}</b><span>{t['role']}</span></div></div>
-        </div>''') for t in TESTIMONIALS)}
-      </div>
-      <div class="testi-nav">
-        <button type="button" class="prev" data-testi-prev aria-label="Poprzednie opinie">{icon('arrow')}</button>
-        <button type="button" class="next" data-testi-next aria-label="Następne opinie">{icon('arrow')}</button>
-      </div>
-    </div>
+    {testi_marquee()}
   </div>
 </section>
 
