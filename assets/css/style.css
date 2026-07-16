@@ -1,55 +1,55 @@
 /* =========================================================
-   PaperNest — Premium Design System (wersja cream/noir/gold)
-   Kremowa, papierowa baza + głęboka czerń + szampański złoty —
-   jasny minimalizm premium. Czarne panele (stopka, hero-panel,
-   pasek statystyk) pozostają jako celowe, ciemne akcenty głębi.
+   PaperNest — Premium Design System (wersja navy/green/white)
+   Oryginalna paleta marki — granat + zieleń — na czysto białym
+   tle. Granatowe panele (stopka, hero-panel, pasek statystyk)
+   pozostają jako celowe, głębokie akcenty.
    Zbudowany zgodnie z WCAG 2.1 AA: kontrast, focus-visible,
    prefers-reduced-motion, semantyka, pełny system zgód cookie.
    ========================================================= */
 
 :root{
-  /* --- Brand core: czerń jako główny akcent (zastępuje jaskrawą zieleń) --- */
-  --brand-green:        #17140f; /* teraz "czerń marki" — tła przycisków, plakietek, aktywnych stanów */
-  --brand-green-dark:   #000000;
-  --brand-green-deep:   #6b5226; /* stonowane złoto do ikon/tekstu na JASNYCH powierzchniach */
-  --brand-navy:         #17140f; /* czarne panele (stopka, hero-panel) — ta sama czerń, spójna tożsamość */
-  --brand-navy-light:   #2b2620;
-  --brand-link-green:   #6b5226; /* linki — czytelne na kremowym tle */
+  /* --- Brand core (oryginalna paleta marki) --- */
+  --brand-green:        #8bc113; /* jaskrawa zieleń — tła przycisków, plakietek, aktywnych stanów */
+  --brand-green-dark:   #6f9e0f;
+  --brand-green-deep:   #4f7309; /* stonowana zieleń do ikon/tekstu na JASNYCH powierzchniach */
+  --brand-navy:         #0b2345; /* granatowe panele (stopka, hero-panel) */
+  --brand-navy-light:   #123561;
+  --brand-link-green:   #0b7a4b; /* linki — czytelne na białym tle */
 
-  /* --- Ekskluzywny akcent: szampański złoty --- */
-  --gold:        #b8935a; /* złoty dekoracyjny — gwiazdki, obramowania, detale (nie do samodzielnego tekstu) */
-  --gold-ink:    #6b5226; /* ciemne złoto — tekst/ikony na JASNYCH powierzchniach (karty, tło strony) */
-  --gold-glow:   #dcb877; /* jasne złoto — tekst/ikony na CZARNYCH panelach (stopka, karta-feature) */
+  /* --- Premium akcent: stonowane złoto (tylko detale — gwiazdki, obramowania) --- */
+  --gold:        #c9a24b; /* złoty dekoracyjny, używany oszczędnie */
+  --gold-ink:    #4f7309; /* zieleń — tekst/ikony na JASNYCH powierzchniach (karty, tło strony) */
+  --gold-glow:   #8bc113; /* jasna zieleń — tekst/ikony na GRANATOWYCH panelach (stopka, karta-feature) */
   --gold-bright: var(--gold-ink); /* alias wstecznej zgodności — domyślnie jasny kontekst */
-  --gold-dim:    rgba(139,106,53,.10); /* złota poświata w tle kółek ikon na jasnych kartach */
-  --grad-gold:   linear-gradient(135deg, #dcb877 0%, #b8935a 45%, #8a6a35 100%);
+  --gold-dim:    rgba(79,115,9,.10); /* zielona poświata w tle kółek ikon na jasnych kartach */
+  --grad-gold:   linear-gradient(135deg, #9ed324 0%, #7cab13 45%, #5c8a0e 100%);
 
   /* --- Premium extended palette (jasna, biała) --- */
   --paper-50:  #ffffff; /* tło strony — czysta biel */
-  --paper-100: rgba(139,106,53,.10); /* tło kółek ikon / notice-box — złota poświata na bieli */
-  --paper-200: rgba(139,106,53,.24); /* obramowania na tej samej poświacie */
+  --paper-100: rgba(139,193,19,.12); /* tło kółek ikon / notice-box — zielona poświata na bieli */
+  --paper-200: rgba(139,193,19,.26); /* obramowania na tej samej poświacie */
   --cream:     #ffffff;
   --surface:   #ffffff; /* karty / panele — czysta biel, oddzielona liniami i cieniem */
   --surface-glass: rgba(255,255,255,.82); /* szklana powierzchnia z blur — nagłówek, baner cookie */
-  --ink-900:   #17140f;
-  --heading:   #17140f; /* kolor nagłówków — głęboka, ciepła czerń */
-  --ink-800:   #2b2620; /* główny tekst */
-  --ink-700:   #453e34;
-  --ink-600:   #6e6355; /* tekst drugorzędny */
-  --ink-500:   #6e6355; /* etykiety / meta — ta sama czytelność co ink-600 (WCAG AA) */
-  --ink-400:   #948a78; /* tekst wyciszony / placeholder */
-  --line:      rgba(23,20,15,.14);
-  --line-soft: rgba(23,20,15,.08);
-  --line-gold: rgba(107,82,38,.4);
+  --ink-900:   #0b1a2b;
+  --heading:   #0b2345; /* kolor nagłówków — głęboki granat */
+  --ink-800:   #16283f; /* główny tekst */
+  --ink-700:   #24374f;
+  --ink-600:   #445267; /* tekst drugorzędny */
+  --ink-500:   #445267; /* etykiety / meta — ta sama czytelność co ink-600 (WCAG AA) */
+  --ink-400:   #94a3b8; /* tekst wyciszony / placeholder */
+  --line:      #e4e9ee;
+  --line-soft: #edf1ee;
+  --line-gold: rgba(111,158,15,.4);
 
   --white: #ffffff;
 
   /* --- Gradients --- */
-  --grad-hero: radial-gradient(120% 140% at 85% -10%, rgba(184,147,90,.16) 0%, rgba(184,147,90,0) 55%),
-               radial-gradient(90% 120% at 5% 0%, rgba(23,20,15,.05) 0%, rgba(23,20,15,0) 60%);
-  --grad-green: linear-gradient(135deg, #2b2620 0%, #17140f 55%, #000000 100%); /* teraz gradient czerni — tło głównych przycisków */
-  --grad-navy: linear-gradient(160deg, #2b2620 0%, #17140f 55%, #000000 100%); /* czarne panele głębi */
-  --grad-sheen: linear-gradient(115deg, rgba(255,255,255,0) 40%, rgba(255,255,255,.14) 50%, rgba(255,255,255,0) 60%);
+  --grad-hero: radial-gradient(120% 140% at 85% -10%, rgba(139,193,19,.16) 0%, rgba(139,193,19,0) 55%),
+               radial-gradient(90% 120% at 5% 0%, rgba(11,35,69,.05) 0%, rgba(11,35,69,0) 60%);
+  --grad-green: linear-gradient(135deg, #9ed324 0%, #7cab13 55%, #5c8a0e 100%);
+  --grad-navy: linear-gradient(160deg, #123561 0%, #0b2345 55%, #071730 100%); /* granatowe panele głębi */
+  --grad-sheen: linear-gradient(115deg, rgba(255,255,255,0) 40%, rgba(255,255,255,.55) 50%, rgba(255,255,255,0) 60%);
 
   /* Subtelna ziarnista tekstura (film grain) — na jasnym tle bardzo delikatna,
      dodaje "papierowej" faktury bez przyciemniania kompozycji. */
@@ -59,14 +59,13 @@
   --font-display: "Fraunces", "Iowan Old Style", "Georgia", serif;
   --font-sans: "General Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
-  /* --- Shadows (na jasnym tle: miękkie, ciepłe, nisko nasycone) --- */
-  --shadow-xs: 0 1px 2px rgba(23,20,15,.07);
-  --shadow-sm: 0 2px 10px rgba(23,20,15,.07), 0 1px 2px rgba(23,20,15,.05);
-  --shadow-md: 0 10px 28px rgba(23,20,15,.09), 0 2px 8px rgba(23,20,15,.05);
-  --shadow-lg: 0 26px 60px rgba(23,20,15,.13), 0 6px 18px rgba(23,20,15,.07);
-  --shadow-green: 0 14px 32px rgba(184,147,90,.35); /* złota poświata pod głównym (czarnym) przyciskiem */
-  --shadow-gold: 0 14px 32px rgba(184,147,90,.3);
-  --shadow-navy: 0 18px 40px rgba(23,20,15,.22);
+  /* --- Shadows (na jasnym tle: miękkie, chłodne, granatowe) --- */
+  --shadow-xs: 0 1px 2px rgba(11,26,43,.06);
+  --shadow-sm: 0 2px 8px rgba(11,26,43,.06), 0 1px 2px rgba(11,26,43,.05);
+  --shadow-md: 0 8px 24px rgba(11,26,43,.08), 0 2px 6px rgba(11,26,43,.05);
+  --shadow-lg: 0 20px 48px rgba(11,26,43,.12), 0 4px 12px rgba(11,26,43,.06);
+  --shadow-green: 0 14px 30px rgba(139,193,19,.28);
+  --shadow-navy: 0 18px 40px rgba(11,35,69,.28);
 
   /* --- Radii --- */
   --r-sm: 8px;
@@ -129,7 +128,7 @@ body::before{
 }
 #main, .site-header, .site-footer{ position:relative; z-index:1; }
 
-::selection{ background:var(--gold); color:#1a1400; }
+::selection{ background:var(--brand-green); color:#fff; }
 html{ scrollbar-color: var(--line) transparent; }
 ::-webkit-scrollbar{ width:11px; height:11px; }
 ::-webkit-scrollbar-track{ background:var(--paper-50); }
@@ -149,14 +148,15 @@ svg{ display:block; width:1em; height:1em; }
 
 /* focus-visible accessibility, zachowane z oryginału */
 a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible{
-  outline:3px solid var(--brand-green);
+  outline:3px solid var(--brand-navy);
   outline-offset:3px;
   border-radius:4px;
 }
-/* Na czarnych panelach (stopka, hero-panel, pasek statystyk, banery, karta-feature)
-   czarna obwódka fokusu byłaby niewidoczna — zamieniamy na jasne złoto (WCAG 2.4.11). */
+/* Na granatowych panelach (stopka, hero-panel, pasek statystyk, karta-feature)
+   granatowa obwódka fokusu byłaby niewidoczna — zamieniamy na jasną zieleń (WCAG 2.4.11).
+   Banery w jaskrawej zieleni (.cta-banner) zostają przy domyślnej granatowej obwódce. */
 .site-footer *:focus-visible, .page-hero *:focus-visible, .stat-band *:focus-visible,
-.cta-banner *:focus-visible, .bento-item.is-feature *:focus-visible, .hero-visual *:focus-visible{
+.bento-item.is-feature *:focus-visible, .hero-visual *:focus-visible{
   outline-color: var(--gold-glow);
 }
 
@@ -221,11 +221,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 
 .btn-primary{
   background:var(--grad-green);
-  color:var(--paper-50); /* krem na czarnym przycisku — wysoki kontrast */
+  color:var(--heading); /* granatowy tekst na jaskrawozielonym przycisku — wysoki kontrast (WCAG AA) */
   font-weight:700;
   box-shadow:var(--shadow-green);
 }
-.btn-primary:hover{ transform:translateY(-2px); box-shadow:0 20px 38px rgba(184,147,90,.4); }
+.btn-primary:hover{ transform:translateY(-2px); box-shadow:0 20px 38px rgba(139,193,19,.36); }
 .btn-primary:active{ transform:translateY(0); }
 
 .btn-navy{
@@ -233,14 +233,14 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   color:var(--paper-50);
   box-shadow:var(--shadow-navy);
 }
-.btn-navy:hover{ transform:translateY(-2px); box-shadow:0 22px 40px rgba(23,20,15,.4); }
+.btn-navy:hover{ transform:translateY(-2px); box-shadow:0 22px 40px rgba(11,35,69,.36); }
 
 .btn-outline{
   background:transparent;
-  border-color:rgba(23,20,15,.28);
+  border-color:rgba(11,35,69,.18);
   color:var(--heading);
 }
-.btn-outline:hover{ border-color:var(--brand-green); background:rgba(184,147,90,.08); transform:translateY(-2px); }
+.btn-outline:hover{ border-color:var(--brand-navy); background:rgba(11,35,69,.04); transform:translateY(-2px); }
 
 /* Wariant do użycia na CIEMNYCH panelach (stopka, hero-panel, page-hero) —
    biały/kremowy tekst na przezroczystym jasnym obramowaniu. */
@@ -255,13 +255,13 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 /* Wariant do użycia na JASNYCH powierzchniach (białe karty, kremowe tło) —
    ciemny tekst zapewnia kontrast zgodny z WCAG AA. */
 .btn-ghost-dark{
-  background:rgba(23,20,15,.05);
-  border-color:rgba(23,20,15,.3);
+  background:rgba(11,35,69,.05);
+  border-color:rgba(11,35,69,.3);
   color:var(--heading);
   font-weight:700;
   backdrop-filter: blur(6px);
 }
-.btn-ghost-dark:hover{ background:rgba(23,20,15,.1); transform:translateY(-2px); }
+.btn-ghost-dark:hover{ background:rgba(11,35,69,.1); transform:translateY(-2px); }
 
 .btn-sm{ padding:.75em 1.3em; font-size:.88rem; }
 .btn-block{ width:100%; }
@@ -331,7 +331,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .icon-btn svg{ width:19px; height:19px; }
 .cart-count{
   position:absolute; top:-4px; right:-4px; width:18px; height:18px; border-radius:50%;
-  background:var(--brand-green); color:var(--paper-50); font-size:.62rem; font-weight:800;
+  background:var(--brand-green); color:var(--heading); font-size:.62rem; font-weight:800;
   display:flex; align-items:center; justify-content:center; box-shadow:0 0 0 2px var(--surface);
 }
 
@@ -381,7 +381,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 }
 .hero-copy h1 em{
   font-style:normal; color:var(--brand-green-deep);
-  background:linear-gradient(180deg, transparent 62%, rgba(184,147,90,.35) 62%);
+  background:linear-gradient(180deg, transparent 62%, rgba(139,193,19,.28) 62%);
   padding-inline:.05em;
 }
 .hero-kicker{
@@ -390,7 +390,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   font-size:.82rem; font-weight:700; color:var(--heading); box-shadow:var(--shadow-xs);
   margin-bottom:var(--sp-5);
 }
-.hero-kicker .dot{ width:8px; height:8px; border-radius:50%; background:var(--brand-green); box-shadow:0 0 0 4px rgba(184,147,90,.22); }
+.hero-kicker .dot{ width:8px; height:8px; border-radius:50%; background:var(--brand-green); box-shadow:0 0 0 4px rgba(139,193,19,.18); }
 
 .hero-copy p.lead{
   margin-top:var(--sp-5); font-size:1.14rem; line-height:1.75; color:var(--ink-600); max-width:52ch;
@@ -493,7 +493,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   grid-column:span 2; grid-row:span 2;
   background:var(--grad-navy); border-color:var(--line-gold);
 }
-.bento-item.is-feature .ic{ width:64px; height:64px; border-radius:18px; background:rgba(220,184,119,.16); color:var(--gold-glow); }
+.bento-item.is-feature .ic{ width:64px; height:64px; border-radius:18px; background:rgba(158,211,36,.18); color:var(--gold-glow); }
 .bento-item.is-feature .ic svg{ width:30px; height:30px; }
 .bento-item.is-feature b{ font-family:var(--font-display); font-size:1.5rem; font-weight:600; color:#fff; }
 .bento-item.is-feature p{ color:rgba(255,255,255,.72); max-width:34ch; }
@@ -590,7 +590,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .testi-card blockquote{ margin:0; font-size:.95rem; line-height:1.68; color:var(--ink-700); font-style:normal; }
 .testi-card .who{ display:flex; align-items:center; gap:.8em; margin-top:auto; padding-top:var(--sp-2); }
 .testi-card .avatar{
-  width:42px; height:42px; border-radius:50%; background:var(--grad-green); color:var(--paper-50); display:flex; align-items:center; justify-content:center;
+  width:42px; height:42px; border-radius:50%; background:var(--grad-green); color:var(--heading); display:flex; align-items:center; justify-content:center;
   font-weight:700; font-size:.9rem; flex:none;
 }
 .testi-card .who b{ display:block; font-size:.9rem; color:var(--heading); }
@@ -603,11 +603,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .cta-banner{
   background:var(--grad-green); border-radius:var(--r-xl); padding:clamp(40px,6vw,72px);
   display:flex; align-items:center; justify-content:space-between; gap:var(--sp-8); flex-wrap:wrap;
-  position:relative; overflow:hidden; color:var(--paper-50);
+  position:relative; overflow:hidden; color:var(--heading); /* granatowy tekst na jaskrawozielonym tle — WCAG AA */
 }
 .cta-banner::before{ content:""; position:absolute; inset:0; background:var(--grad-sheen); opacity:.6; }
-.cta-banner h2{ color:var(--paper-50); font-size:clamp(1.7rem,3vw,2.3rem); max-width:22ch; position:relative; }
-.cta-banner p{ color:rgba(247,243,234,.75); margin-top:var(--sp-3); max-width:46ch; position:relative; }
+.cta-banner h2{ color:var(--heading); font-size:clamp(1.7rem,3vw,2.3rem); max-width:22ch; position:relative; }
+.cta-banner p{ color:rgba(11,35,69,.78); margin-top:var(--sp-3); max-width:46ch; position:relative; }
 .cta-banner .cta-actions{ position:relative; display:flex; gap:var(--sp-3); flex-wrap:wrap; }
 
 /* ---------- Footer ---------- */
@@ -621,7 +621,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   width:38px; height:38px; border-radius:50%; border:1px solid rgba(255,255,255,.18); display:flex; align-items:center; justify-content:center;
   transition:background .25s, border-color .25s, transform .25s;
 }
-.footer-social a:hover{ background:var(--grad-gold); border-color:var(--gold); color:var(--brand-green); transform:translateY(-3px); }
+.footer-social a:hover{ background:var(--brand-green); border-color:var(--brand-green); transform:translateY(-3px); }
 .footer-social svg{ width:16px; height:16px; }
 
 .footer-col h4{ color:#fff; font-family:var(--font-sans); font-size:.85rem; letter-spacing:.06em; text-transform:uppercase; margin-bottom:var(--sp-4); font-weight:700; }
@@ -719,7 +719,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   background:var(--surface); color:var(--ink-800); transition:border-color .2s, box-shadow .2s;
 }
 .form-field input:focus,.form-field textarea:focus,.form-field select:focus{
-  border-color:var(--brand-green); box-shadow:0 0 0 4px rgba(184,147,90,.2); outline:none;
+  border-color:var(--brand-green); box-shadow:0 0 0 4px rgba(139,193,19,.2); outline:none;
 }
 .form-row{ display:grid; grid-template-columns:1fr 1fr; gap:var(--sp-4); }
 @media (max-width:560px){ .form-row{ grid-template-columns:1fr; } }
@@ -935,5 +935,5 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .switch input:checked + .switch-track::before{ transform:translateX(18px); background:var(--paper-50); }
 .switch input:disabled + .switch-track{ background:var(--gold-dim); border-color:var(--line-gold); opacity:.9; }
 .switch input:disabled + .switch-track::before{ background:var(--gold-bright); }
-.switch input:focus-visible + .switch-track{ outline:3px solid var(--brand-green); outline-offset:3px; }
+.switch input:focus-visible + .switch-track{ outline:3px solid var(--brand-navy); outline-offset:3px; }
 .switch-label{ font-weight:700; font-size:.98rem; color:var(--heading); }

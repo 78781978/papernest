@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 400" preserveAspectRatio="xMidYMid slice">
   <defs>
     <linearGradient id="bgChick" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#ffffff"/>
-      <stop offset="1" stop-color="#f2ede0"/>
+      <stop offset="0" stop-color="#F3F9E8"/>
+      <stop offset="1" stop-color="#E4F0CE"/>
     </linearGradient>
     <linearGradient id="rollChick" x1="0" y1="0" x2="1" y2="0">
       <stop offset="0" stop-color="#8BC113"/>
@@ -11,7 +11,7 @@
     </linearGradient>
   </defs>
   <rect width="480" height="400" fill="url(#bgChick)"/>
-  <ellipse cx="250" cy="335" rx="160" ry="20" fill="#17140F" opacity=".07"/>
+  <ellipse cx="250" cy="335" rx="160" ry="20" fill="#0B2345" opacity=".06"/>
 
   <!-- unrolled sheet on floor -->
   <path d="M60 300 C160 270 340 270 430 300 L430 320 C340 300 160 300 60 320 Z" fill="#9ED324" opacity=".35"/>
@@ -29,10 +29,10 @@
   <g transform="translate(112,290)">
     <ellipse cx="0" cy="20" rx="26" ry="20" fill="#F7C948"/>
     <circle cx="18" cy="-2" r="15" fill="#F9D766"/>
-    <circle cx="23" cy="-6" r="2.4" fill="#17140F"/>
+    <circle cx="23" cy="-6" r="2.4" fill="#0B2345"/>
     <path d="M32 -4 L42 -1 L32 3 Z" fill="#E8871E"/>
     <path d="M-22 24 L-30 32 M-4 30 L-8 38" stroke="#E8871E" stroke-width="3" stroke-linecap="round"/>
   </g>
 
-  <circle cx="404" cy="64" r="26" fill="#B8935A" opacity=".18"/>
+  <circle cx="404" cy="64" r="26" fill="#8BC113" opacity=".16"/>
 </svg>

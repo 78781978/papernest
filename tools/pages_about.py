@@ -98,7 +98,7 @@ def build():
         <p>Współpraca oparta na doświadczeniu, wysokiej jakości i wzajemnym zaufaniu pozwala budować trwałe relacje biznesowe i osiągać ambitne cele bez ograniczeń.</p>
       </div>
       <div class="cta-actions">
-        <a href="kontakt.html" class="btn" style="background:#fff;color:#6b5226;box-shadow:0 14px 30px rgba(0,0,0,.35)">Skontaktuj się z nami</a>
+        <a href="kontakt.html" class="btn" style="background:#fff;color:#4f7309;box-shadow:0 14px 30px rgba(0,0,0,.35)">Skontaktuj się z nami</a>
       </div>
     </div>''')}
   </div>

@@ -1,26 +1,26 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" preserveAspectRatio="xMidYMid slice">
   <defs>
     <linearGradient id="aboutBg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#ffffff"/>
-      <stop offset="1" stop-color="#f2ede0"/>
+      <stop offset="0" stop-color="#EEF3E2"/>
+      <stop offset="1" stop-color="#F6FAF0"/>
     </linearGradient>
     <linearGradient id="hallRoof" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#2b2620"/>
-      <stop offset="1" stop-color="#17140f"/>
+      <stop offset="0" stop-color="#123561"/>
+      <stop offset="1" stop-color="#0B2345"/>
     </linearGradient>
   </defs>
   <rect width="500" height="500" fill="url(#aboutBg)"/>
-  <rect x="0" y="380" width="500" height="120" fill="#17140F" opacity=".05"/>
+  <rect x="0" y="380" width="500" height="120" fill="#0B2345" opacity=".06"/>
 
   <!-- hala produkcyjna -->
   <g transform="translate(90,180)">
-    <polygon points="0,60 160,0 320,60 320,260 0,260" fill="#ffffff" stroke="#e4d9bd" stroke-width="2"/>
+    <polygon points="0,60 160,0 320,60 320,260 0,260" fill="#fff" stroke="#DCE3D2" stroke-width="2"/>
     <polygon points="0,60 160,0 320,60 160,110" fill="url(#hallRoof)"/>
-    <rect x="30" y="120" width="60" height="60" fill="#DCB877" opacity=".85"/>
-    <rect x="110" y="120" width="60" height="60" fill="#DCB877" opacity=".45"/>
-    <rect x="190" y="120" width="60" height="60" fill="#DCB877" opacity=".65"/>
-    <rect x="130" y="200" width="60" height="60" fill="#17140F"/>
-    <circle cx="160" cy="230" r="18" fill="#B8935A"/>
+    <rect x="30" y="120" width="60" height="60" fill="#8BC113" opacity=".85"/>
+    <rect x="110" y="120" width="60" height="60" fill="#DCE3D2"/>
+    <rect x="190" y="120" width="60" height="60" fill="#DCE3D2"/>
+    <rect x="130" y="200" width="60" height="60" fill="#0B2345"/>
+    <circle cx="160" cy="230" r="18" fill="#8BC113"/>
   </g>
 
   <!-- roll pallet z boku -->
@@ -39,6 +39,6 @@
     </g>
   </g>
 
-  <circle cx="420" cy="90" r="34" fill="#B8935A" opacity=".2"/>
-  <circle cx="440" cy="420" r="22" fill="#17140F" opacity=".08"/>
+  <circle cx="420" cy="90" r="34" fill="#8BC113" opacity=".18"/>
+  <circle cx="440" cy="420" r="22" fill="#0B2345" opacity=".08"/>
 </svg>

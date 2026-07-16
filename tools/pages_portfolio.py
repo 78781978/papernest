@@ -68,7 +68,7 @@ def build():
         <p>Doradzimy, który papier PaperNest najlepiej sprawdzi się w Twojej branży — napisz do nas lub zadzwoń.</p>
       </div>
       <div class="cta-actions">
-        <a href="kontakt.html" class="btn" style="background:#fff;color:#6b5226;box-shadow:0 14px 30px rgba(0,0,0,.35)">Skontaktuj się {icon('arrow')}</a>
+        <a href="kontakt.html" class="btn" style="background:#fff;color:#4f7309;box-shadow:0 14px 30px rgba(0,0,0,.35)">Skontaktuj się {icon('arrow')}</a>
       </div>
     </div>''')}
   </div>
