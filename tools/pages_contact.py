@@ -19,7 +19,7 @@ LOCATIONS = [
 
 def cline(l):
     if l == PHONE_DISPLAY:
-        return f'<a class="cline" href="{PHONE_TEL}">{l}</a>'
+        return f'<a class="cline cline-nowrap" href="{PHONE_TEL}">{l}</a>'
     if l == EMAIL:
         return f'<a class="cline" href="mailto:{l}">{l}</a>'
     return f'<span class="cline">{l}</span>'
@@ -30,7 +30,7 @@ def build():
       <span class="ic">{icon(loc['ic'])}</span>
       <h3>{loc['title']}</h3>
       <p>{loc['text']}</p>
-      {"".join(cline(l) for l in loc['lines'])}
+      <div class="cline-group">{"".join(cline(l) for l in loc['lines'])}</div>
     </div>''') for loc in LOCATIONS)
 
     content = f"""
