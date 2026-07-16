@@ -661,7 +661,9 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 
 /* ---------- Footer ---------- */
 .site-footer{
-  background:var(--satin-sheen), var(--grad-navy);
+  background-image:url("../img/textures/satin-navy.svg");
+  background-size:cover; background-position:center; background-repeat:no-repeat;
+  background-color:#0b2345;
   color:rgba(255,255,255,.72); margin-top:var(--sp-16); border-top:1px solid var(--line-soft);
   position:relative; overflow:hidden;
 }

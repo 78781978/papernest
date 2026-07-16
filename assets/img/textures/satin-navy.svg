@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 800" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="base" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0c1e3c"/>
+      <stop offset="1" stop-color="#040a16"/>
+    </linearGradient>
+
+    <linearGradient id="foldA" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0"   stop-color="#040a16" stop-opacity="0"/>
+      <stop offset=".26" stop-color="#122a4d"/>
+      <stop offset=".5"  stop-color="#5c85c4" stop-opacity=".95"/>
+      <stop offset=".74" stop-color="#0c1830"/>
+      <stop offset="1"   stop-color="#040a16" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="foldB" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0"   stop-color="#020610" stop-opacity="0"/>
+      <stop offset=".32" stop-color="#081428"/>
+      <stop offset=".55" stop-color="#3f66a3" stop-opacity=".85"/>
+      <stop offset=".8"  stop-color="#050e1e"/>
+      <stop offset="1"   stop-color="#020610" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="foldC" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0"   stop-color="#040a16" stop-opacity="0"/>
+      <stop offset=".4"  stop-color="#75a0e0" stop-opacity=".7"/>
+      <stop offset=".62" stop-color="#0e1e3c"/>
+      <stop offset="1"   stop-color="#040a16" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="foldD" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0"   stop-color="#020610" stop-opacity="0"/>
+      <stop offset=".45" stop-color="#020610"/>
+      <stop offset=".55" stop-color="#000000" stop-opacity=".8"/>
+      <stop offset="1"   stop-color="#020610" stop-opacity="0"/>
+    </linearGradient>
+
+    <radialGradient id="vignette" cx="50%" cy="30%" r="80%">
+      <stop offset="0" stop-color="#0c1e3c" stop-opacity="0"/>
+      <stop offset="70%" stop-color="#040a16" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#01050c" stop-opacity=".65"/>
+    </radialGradient>
+
+    <filter id="soft" x="-50%" y="-50%" width="200%" height="200%" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="20"/>
+    </filter>
+    <filter id="soft2" x="-50%" y="-50%" width="200%" height="200%" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="9"/>
+    </filter>
+    <filter id="sharp" x="-50%" y="-50%" width="200%" height="200%" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="2.5"/>
+    </filter>
+  </defs>
+
+  <rect width="1920" height="800" fill="url(#base)"/>
+
+  <g filter="url(#soft)">
+    <path d="M-200,110 C220,10 520,270 900,130 S1520,30 2100,210 L2100,-100 -200,-100 Z" fill="url(#foldA)"/>
+    <path d="M-200,430 C320,300 660,580 1060,400 S1680,250 2100,490 L2100,900 -200,900 Z" fill="url(#foldB)"/>
+    <path d="M-200,660 C260,540 620,800 1020,650 S1640,510 2100,710" fill="none" stroke="url(#foldD)" stroke-width="200" stroke-linecap="round"/>
+  </g>
+
+  <g filter="url(#soft2)">
+    <path d="M-100,250 C360,150 630,390 990,260 S1580,140 2000,340" fill="none" stroke="url(#foldC)" stroke-width="30" stroke-linecap="round"/>
+    <path d="M-100,570 C410,470 710,670 1090,540 S1690,410 2000,610" fill="none" stroke="#6a93d6" stroke-opacity=".32" stroke-width="20" stroke-linecap="round"/>
+    <path d="M-100,50 C310,0 570,160 910,80 S1510,0 2000,130" fill="none" stroke="#0a1730" stroke-opacity=".7" stroke-width="46" stroke-linecap="round"/>
+  </g>
+
+  <g filter="url(#sharp)" opacity=".55">
+    <path d="M-100,240 C360,140 630,380 990,250 S1580,130 2000,330" fill="none" stroke="#8fb2ea" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M-100,565 C410,465 710,665 1090,535 S1690,405 2000,605" fill="none" stroke="#7fa4dc" stroke-width="2" stroke-linecap="round"/>
+  </g>
+
+  <rect width="1920" height="800" fill="url(#vignette)"/>
+</svg>
