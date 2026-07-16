@@ -363,7 +363,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .hero{
   position:relative;
   padding-block: clamp(72px, 11vw, 132px) clamp(56px, 8vw, 96px);
-  background:var(--grad-hero), var(--paper-50);
+  background:var(--paper-50);
   overflow:hidden;
 }
 .hero::after{
