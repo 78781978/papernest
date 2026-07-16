@@ -50,15 +50,6 @@
   --grad-green: linear-gradient(135deg, #9ed324 0%, #7cab13 55%, #5c8a0e 100%);
   --grad-navy: linear-gradient(160deg, #123561 0%, #0b2345 55%, #071730 100%); /* granatowe panele głębi */
   --grad-sheen: linear-gradient(115deg, rgba(255,255,255,0) 40%, rgba(255,255,255,.55) 50%, rgba(255,255,255,0) 60%);
-  /* Efekt pofałdowanej satyny — kilka miękkich, przesuniętych poświat + delikatne
-     prążkowanie pod kątem, nałożone na granatowy gradient (stopka, page-hero). */
-  --satin-sheen:
-    radial-gradient(65% 140% at 12% -10%, rgba(255,255,255,.14) 0%, rgba(255,255,255,0) 55%),
-    radial-gradient(55% 120% at 40% 115%, rgba(255,255,255,.08) 0%, rgba(255,255,255,0) 60%),
-    radial-gradient(70% 160% at 82% 10%, rgba(255,255,255,.12) 0%, rgba(255,255,255,0) 55%),
-    radial-gradient(45% 110% at 105% 90%, rgba(255,255,255,.09) 0%, rgba(255,255,255,0) 60%),
-    radial-gradient(40% 90% at -5% 60%, rgba(255,255,255,.07) 0%, rgba(255,255,255,0) 55%),
-    repeating-linear-gradient(112deg, rgba(255,255,255,.04) 0px, rgba(255,255,255,.04) 1.5px, rgba(255,255,255,0) 1.5px, rgba(255,255,255,0) 16px);
 
   /* Subtelna ziarnista tekstura (film grain) — na jasnym tle bardzo delikatna,
      dodaje "papierowej" faktury bez przyciemniania kompozycji. */
@@ -702,16 +693,17 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 
 /* ---------- Breadcrumb / page header (subpages) ---------- */
 .page-hero{
-  background:var(--satin-sheen), var(--grad-navy); color:#fff; padding-block:clamp(64px,8vw,104px) clamp(48px,6vw,72px);
+  background:
+    radial-gradient(65% 130% at 88% -15%, rgba(169,201,236,.4) 0%, rgba(169,201,236,0) 60%),
+    linear-gradient(135deg, #0a1d3a 0%, #123561 45%, #356bb0 100%);
+  color:#fff;
+  max-width:var(--container); margin:28px auto 0; border-radius:var(--r-xl);
+  box-shadow:0 32px 60px rgba(10,29,58,.32), 0 10px 26px rgba(10,29,58,.2);
+  padding-block:clamp(56px,7vw,92px) clamp(44px,5vw,64px);
   position:relative; overflow:hidden;
 }
 .page-hero::before{
-  content:""; position:absolute; inset:0; background:var(--grad-sheen); opacity:.3; mix-blend-mode:overlay;
-}
-.page-hero::after{
-  content:""; position:absolute; z-index:0; right:-10%; top:-30%; width:60%; height:160%;
-  background:radial-gradient(circle, rgba(139,193,19,.14) 0%, rgba(139,193,19,0) 65%);
-  pointer-events:none;
+  content:""; position:absolute; inset:0; background:var(--grad-sheen); opacity:.25; mix-blend-mode:overlay;
 }
 .page-hero .container{ position:relative; z-index:1; }
 .page-hero .crumbs{ display:flex; gap:.5em; align-items:center; font-size:.85rem; color:rgba(255,255,255,.6); margin-bottom:var(--sp-4); position:relative; }

@@ -66,7 +66,6 @@ def build_shop():
               <span class="price"><span class="old-price">{v['old']} zł</span>{v['price']} zł<small>/ {v['label'].lower()}</small></span>
               <a href="{p['detail_url']}" class="btn btn-outline btn-sm">Wybierz {icon('arrow')}</a>
             </div>
-            {product_contact_block()}
           </div>
         </article>""")
         for extra in p["variants"][1:]:
@@ -79,7 +78,6 @@ def build_shop():
                   <span class="price">{old_price_html}{extra['price']} zł</span>
                   <a href="{p['detail_url']}" class="btn btn-outline btn-sm">Wybierz {icon('arrow')}</a>
                 </div>
-                {product_contact_block()}
               </div>
             </article>""")
 
@@ -179,7 +177,7 @@ def build_products():
           {old_html}
           {save_html}
         </div>
-        <p style="color:var(--ink-600);line-height:1.75;font-size:1rem">{p['short']}</p>
+        {product_contact_block()}
 
         <div class="variant-group">
           <h4>Wybierz wariant</h4>
@@ -228,7 +226,6 @@ def build_products():
         <div class="body">
           <h3>{o["name"]}</h3>
           <div class="meta"><span class="price">od <span>{o["variants"][0]["price"]} zł</span></span><a href="{o["detail_url"]}" class="btn btn-outline btn-sm">Zobacz {icon('arrow')}</a></div>
-          {product_contact_block()}
         </div>
       </article>''' for o in others)}
     </div>

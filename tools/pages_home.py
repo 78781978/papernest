@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from build import icon, svg_file, reveal, page, product_contact_block
+from build import icon, svg_file, reveal, page
 
 TESTIMONIALS = [
     dict(initials="BP", name="Bracia Pikuła", role="Fermy BKK Pikuła", title="Doskonała Jakość",
@@ -67,7 +67,6 @@ def build():
         <div class="body">
           <h3>Wypełniacz Papierowy</h3>
           <div class="meta"><span class="price">od <span>45 zł</span><small>/ rolka</small></span><a href="produkt-wypelniacz.html" class="btn btn-outline btn-sm">Zobacz {icon('arrow')}</a></div>
-          {product_contact_block()}
         </div>
       </article>''')}
       {reveal(f'''<article class="product-card">
@@ -75,7 +74,6 @@ def build():
         <div class="body">
           <h3>Papier Dla Piskląt</h3>
           <div class="meta"><span class="price">od <span>51,49 zł</span><small>/ rolka</small></span><a href="produkt-papier-dla-pisklat.html" class="btn btn-outline btn-sm">Zobacz {icon('arrow')}</a></div>
-          {product_contact_block()}
         </div>
       </article>''')}
       {reveal(f'''<article class="product-card">
@@ -83,7 +81,6 @@ def build():
         <div class="body">
           <h3>Tektura Budowlana</h3>
           <div class="meta"><span class="price">od <span>26,90 zł</span><small>/ rolka</small></span><a href="produkt-tektura-budowlana.html" class="btn btn-outline btn-sm">Zobacz {icon('arrow')}</a></div>
-          {product_contact_block()}
         </div>
       </article>''')}
     </div>
