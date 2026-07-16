@@ -144,8 +144,8 @@ def build():
         <p>Dołącz do grona naszych klientów i przekonaj się, jak wspólnie możemy tworzyć rozwiązania, które wspierają rozwój Twojej firmy.</p>
       </div>
       <div class="cta-actions">
-        <a href="sklep.html" class="btn" style="background:#fff;color:#3d5708;box-shadow:0 14px 30px rgba(0,0,0,.25)">Przejdź do sklepu</a>
-        <a href="kontakt.html" class="btn btn-ghost-dark">Skontaktuj się {icon('arrow')}</a>
+        <a href="sklep.html" class="btn" style="background:#fff;color:#6b5226;box-shadow:0 14px 30px rgba(0,0,0,.35)">Przejdź do sklepu</a>
+        <a href="kontakt.html" class="btn btn-ghost-light">Skontaktuj się {icon('arrow')}</a>
       </div>
     </div>''')}
   </div>

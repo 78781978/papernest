@@ -1,69 +1,72 @@
 /* =========================================================
-   PaperNest — Premium Design System (wersja exclusive/luxury)
-   Głęboka czerń + szampański złoty jako sygnał luksusu +
-   zielony marki jako akcent funkcjonalny (CTA, rozpoznawalność).
+   PaperNest — Premium Design System (wersja cream/noir/gold)
+   Kremowa, papierowa baza + głęboka czerń + szampański złoty —
+   jasny minimalizm premium. Czarne panele (stopka, hero-panel,
+   pasek statystyk) pozostają jako celowe, ciemne akcenty głębi.
    Zbudowany zgodnie z WCAG 2.1 AA: kontrast, focus-visible,
    prefers-reduced-motion, semantyka, pełny system zgód cookie.
    ========================================================= */
 
 :root{
-  /* --- Brand core (z oryginalnej strony) --- */
-  --brand-green:        #8bc113;
-  --brand-green-dark:   #6f9e0f;
-  --brand-green-deep:   #a6d92a; /* jaśniejszy zielony do ikon/akcentów na ciemnym tle */
-  --brand-navy:         #0b2345;
-  --brand-navy-light:   #123561;
-  --brand-link-green:   #9bd428; /* linki — czytelne na czarnym tle */
+  /* --- Brand core: czerń jako główny akcent (zastępuje jaskrawą zieleń) --- */
+  --brand-green:        #17140f; /* teraz "czerń marki" — tła przycisków, plakietek, aktywnych stanów */
+  --brand-green-dark:   #000000;
+  --brand-green-deep:   #6b5226; /* stonowane złoto do ikon/tekstu na JASNYCH powierzchniach */
+  --brand-navy:         #17140f; /* czarne panele (stopka, hero-panel) — ta sama czerń, spójna tożsamość */
+  --brand-navy-light:   #2b2620;
+  --brand-link-green:   #6b5226; /* linki — czytelne na kremowym tle */
 
   /* --- Ekskluzywny akcent: szampański złoty --- */
-  --gold:        #d7b56d; /* główny złoty — hairline, obramowania hover, detale premium */
-  --gold-bright: #f0d38f; /* jaśniejszy złoty — tekst/ikony na czarnym, wyższy kontrast */
-  --gold-dim:    rgba(215,181,109,.14); /* złota poświata w tle / obramowania */
-  --grad-gold:   linear-gradient(135deg, #f0d38f 0%, #d7b56d 45%, #a9813f 100%);
+  --gold:        #b8935a; /* złoty dekoracyjny — gwiazdki, obramowania, detale (nie do samodzielnego tekstu) */
+  --gold-ink:    #6b5226; /* ciemne złoto — tekst/ikony na JASNYCH powierzchniach (karty, tło strony) */
+  --gold-glow:   #dcb877; /* jasne złoto — tekst/ikony na CZARNYCH panelach (stopka, karta-feature) */
+  --gold-bright: var(--gold-ink); /* alias wstecznej zgodności — domyślnie jasny kontekst */
+  --gold-dim:    rgba(139,106,53,.10); /* złota poświata w tle kółek ikon na jasnych kartach */
+  --grad-gold:   linear-gradient(135deg, #dcb877 0%, #b8935a 45%, #8a6a35 100%);
 
-  /* --- Premium extended palette (dark) --- */
-  --paper-50:  #08090a; /* tło strony — głęboka, chłodna czerń (odrobinę grafitowa, nie zielona) */
-  --paper-100: rgba(139,193,19,.12); /* tło kółek ikon / notice-box — zielona poświata na czarnym */
-  --paper-200: rgba(139,193,19,.24); /* obramowania na tej samej poświacie */
-  --cream:     #f8f6ee;
-  --surface:   #131417; /* karty / panele — chłodna grafitowa powierzchnia uniesiona nad tłem */
-  --surface-glass: rgba(19,20,23,.62); /* szklana powierzchnia z blur — nagłówek, modale */
-  --ink-900:   #f8f7f2;
-  --heading:   #f8f7f2; /* kolor nagłówków — ciepła kość słoniowa zamiast bieli */
-  --ink-800:   #ebe9e2; /* główny tekst */
-  --ink-700:   #d2d1c8;
-  --ink-600:   #a3a599; /* tekst drugorzędny */
-  --ink-500:   #82847a; /* etykiety / meta */
-  --ink-400:   #565850; /* tekst wyciszony / placeholder */
-  --line:      rgba(255,255,255,.12);
-  --line-soft: rgba(255,255,255,.06);
-  --line-gold: rgba(215,181,109,.35);
+  /* --- Premium extended palette (jasna, papierowa) --- */
+  --paper-50:  #f7f3ea; /* tło strony — ciepły, papierowy krem */
+  --paper-100: rgba(139,106,53,.10); /* tło kółek ikon / notice-box — złota poświata na kremie */
+  --paper-200: rgba(139,106,53,.24); /* obramowania na tej samej poświacie */
+  --cream:     #f7f3ea;
+  --surface:   #ffffff; /* karty / panele — czysta biel unosząca się nad kremowym tłem */
+  --surface-glass: rgba(247,243,234,.82); /* szklana powierzchnia z blur — nagłówek, baner cookie */
+  --ink-900:   #17140f;
+  --heading:   #17140f; /* kolor nagłówków — głęboka, ciepła czerń */
+  --ink-800:   #2b2620; /* główny tekst */
+  --ink-700:   #453e34;
+  --ink-600:   #6e6355; /* tekst drugorzędny */
+  --ink-500:   #6e6355; /* etykiety / meta — ta sama czytelność co ink-600 (WCAG AA) */
+  --ink-400:   #948a78; /* tekst wyciszony / placeholder */
+  --line:      rgba(23,20,15,.14);
+  --line-soft: rgba(23,20,15,.08);
+  --line-gold: rgba(107,82,38,.4);
 
   --white: #ffffff;
 
   /* --- Gradients --- */
-  --grad-hero: radial-gradient(120% 140% at 85% -10%, rgba(215,181,109,.14) 0%, rgba(215,181,109,0) 55%),
-               radial-gradient(90% 120% at 5% 0%, rgba(139,193,19,.07) 0%, rgba(139,193,19,0) 60%);
-  --grad-green: linear-gradient(135deg, #9ed324 0%, #7cab13 55%, #5c8a0e 100%);
-  --grad-navy: linear-gradient(160deg, #101d30 0%, #0a1420 55%, #030507 100%);
-  --grad-sheen: linear-gradient(115deg, rgba(255,255,255,0) 40%, rgba(255,255,255,.16) 50%, rgba(255,255,255,0) 60%);
+  --grad-hero: radial-gradient(120% 140% at 85% -10%, rgba(184,147,90,.16) 0%, rgba(184,147,90,0) 55%),
+               radial-gradient(90% 120% at 5% 0%, rgba(23,20,15,.05) 0%, rgba(23,20,15,0) 60%);
+  --grad-green: linear-gradient(135deg, #2b2620 0%, #17140f 55%, #000000 100%); /* teraz gradient czerni — tło głównych przycisków */
+  --grad-navy: linear-gradient(160deg, #2b2620 0%, #17140f 55%, #000000 100%); /* czarne panele głębi */
+  --grad-sheen: linear-gradient(115deg, rgba(255,255,255,0) 40%, rgba(255,255,255,.14) 50%, rgba(255,255,255,0) 60%);
 
-  /* Subtelna ziarnista tekstura (film grain) — dodaje "materiałowej" głębi czerni,
-     bez wpływu na wydajność (jedna mała, powtarzana warstwa SVG). */
+  /* Subtelna ziarnista tekstura (film grain) — na jasnym tle bardzo delikatna,
+     dodaje "papierowej" faktury bez przyciemniania kompozycji. */
   --noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
 
   /* --- Typography --- */
   --font-display: "Fraunces", "Iowan Old Style", "Georgia", serif;
   --font-sans: "General Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
-  /* --- Shadows (na czarnym tle liczy się głębia + subtelna jasna obwódka z --line) --- */
-  --shadow-xs: 0 1px 2px rgba(0,0,0,.5);
-  --shadow-sm: 0 2px 10px rgba(0,0,0,.45), 0 1px 2px rgba(0,0,0,.35);
-  --shadow-md: 0 10px 28px rgba(0,0,0,.5), 0 2px 8px rgba(0,0,0,.35);
-  --shadow-lg: 0 26px 60px rgba(0,0,0,.6), 0 6px 18px rgba(0,0,0,.4);
-  --shadow-green: 0 14px 32px rgba(139,193,19,.32);
-  --shadow-gold: 0 14px 32px rgba(215,181,109,.28);
-  --shadow-navy: 0 18px 40px rgba(0,0,0,.5);
+  /* --- Shadows (na jasnym tle: miękkie, ciepłe, nisko nasycone) --- */
+  --shadow-xs: 0 1px 2px rgba(23,20,15,.07);
+  --shadow-sm: 0 2px 10px rgba(23,20,15,.07), 0 1px 2px rgba(23,20,15,.05);
+  --shadow-md: 0 10px 28px rgba(23,20,15,.09), 0 2px 8px rgba(23,20,15,.05);
+  --shadow-lg: 0 26px 60px rgba(23,20,15,.13), 0 6px 18px rgba(23,20,15,.07);
+  --shadow-green: 0 14px 32px rgba(184,147,90,.35); /* złota poświata pod głównym (czarnym) przyciskiem */
+  --shadow-gold: 0 14px 32px rgba(184,147,90,.3);
+  --shadow-navy: 0 18px 40px rgba(23,20,15,.22);
 
   /* --- Radii --- */
   --r-sm: 8px;
@@ -121,8 +124,8 @@ body::before{
   content:"";
   position:fixed; inset:0; z-index:0; pointer-events:none;
   background-image:var(--noise);
-  mix-blend-mode:overlay;
-  opacity:.5;
+  mix-blend-mode:multiply;
+  opacity:.18;
 }
 #main, .site-header, .site-footer{ position:relative; z-index:1; }
 
@@ -149,6 +152,12 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   outline:3px solid var(--brand-green);
   outline-offset:3px;
   border-radius:4px;
+}
+/* Na czarnych panelach (stopka, hero-panel, pasek statystyk, banery, karta-feature)
+   czarna obwódka fokusu byłaby niewidoczna — zamieniamy na jasne złoto (WCAG 2.4.11). */
+.site-footer *:focus-visible, .page-hero *:focus-visible, .stat-band *:focus-visible,
+.cta-banner *:focus-visible, .bento-item.is-feature *:focus-visible, .hero-visual *:focus-visible{
+  outline-color: var(--gold-glow);
 }
 
 .skip-link{
@@ -212,45 +221,47 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 
 .btn-primary{
   background:var(--grad-green);
-  color:#0a0d02; /* ciemny tekst — biały na zieleni nie spełnia WCAG AA (kontrast ok. 2:1) */
+  color:var(--paper-50); /* krem na czarnym przycisku — wysoki kontrast */
   font-weight:700;
   box-shadow:var(--shadow-green);
 }
-.btn-primary:hover{ transform:translateY(-2px); box-shadow:0 20px 38px rgba(139,193,19,.36); }
+.btn-primary:hover{ transform:translateY(-2px); box-shadow:0 20px 38px rgba(184,147,90,.4); }
 .btn-primary:active{ transform:translateY(0); }
 
 .btn-navy{
   background:var(--grad-navy);
-  color:#fff;
+  color:var(--paper-50);
   box-shadow:var(--shadow-navy);
 }
-.btn-navy:hover{ transform:translateY(-2px); box-shadow:0 22px 40px rgba(11,35,69,.36); }
+.btn-navy:hover{ transform:translateY(-2px); box-shadow:0 22px 40px rgba(23,20,15,.4); }
 
 .btn-outline{
   background:transparent;
-  border-color:rgba(255,255,255,.22);
+  border-color:rgba(23,20,15,.28);
   color:var(--heading);
 }
-.btn-outline:hover{ border-color:var(--brand-green); background:rgba(139,193,19,.08); transform:translateY(-2px); }
+.btn-outline:hover{ border-color:var(--brand-green); background:rgba(184,147,90,.08); transform:translateY(-2px); }
 
+/* Wariant do użycia na CIEMNYCH panelach (stopka, hero-panel, page-hero) —
+   biały/kremowy tekst na przezroczystym jasnym obramowaniu. */
 .btn-ghost-light{
-  background:rgba(255,255,255,.1);
+  background:rgba(255,255,255,.08);
   border-color:rgba(255,255,255,.35);
   color:#fff;
   backdrop-filter: blur(6px);
 }
-.btn-ghost-light:hover{ background:rgba(255,255,255,.2); transform:translateY(-2px); }
+.btn-ghost-light:hover{ background:rgba(255,255,255,.16); transform:translateY(-2px); }
 
-/* Wariant do użycia na jasnych/zielonych tłach (np. cta-banner) — biały tekst
-   nie spełniałby tam WCAG AA, więc kontrast zapewnia ciemna, przyciemniona wersja. */
+/* Wariant do użycia na JASNYCH powierzchniach (białe karty, kremowe tło) —
+   ciemny tekst zapewnia kontrast zgodny z WCAG AA. */
 .btn-ghost-dark{
-  background:rgba(10,13,2,.1);
-  border-color:rgba(10,13,2,.4);
-  color:#0a0d02;
+  background:rgba(23,20,15,.05);
+  border-color:rgba(23,20,15,.3);
+  color:var(--heading);
   font-weight:700;
   backdrop-filter: blur(6px);
 }
-.btn-ghost-dark:hover{ background:rgba(10,13,2,.18); transform:translateY(-2px); }
+.btn-ghost-dark:hover{ background:rgba(23,20,15,.1); transform:translateY(-2px); }
 
 .btn-sm{ padding:.75em 1.3em; font-size:.88rem; }
 .btn-block{ width:100%; }
@@ -266,7 +277,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .site-header::before{
   content:"";
   position:absolute; inset:0;
-  background: rgba(10,11,8,.78);
+  background: rgba(247,243,234,.8);
   backdrop-filter: blur(14px) saturate(140%);
   -webkit-backdrop-filter: blur(14px) saturate(140%);
   opacity:0;
@@ -320,7 +331,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .icon-btn svg{ width:19px; height:19px; }
 .cart-count{
   position:absolute; top:-4px; right:-4px; width:18px; height:18px; border-radius:50%;
-  background:var(--brand-green); color:#0a0d02; font-size:.62rem; font-weight:800;
+  background:var(--brand-green); color:var(--paper-50); font-size:.62rem; font-weight:800;
   display:flex; align-items:center; justify-content:center; box-shadow:0 0 0 2px var(--surface);
 }
 
@@ -370,7 +381,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 }
 .hero-copy h1 em{
   font-style:normal; color:var(--brand-green-deep);
-  background:linear-gradient(180deg, transparent 62%, rgba(139,193,19,.28) 62%);
+  background:linear-gradient(180deg, transparent 62%, rgba(184,147,90,.35) 62%);
   padding-inline:.05em;
 }
 .hero-kicker{
@@ -379,7 +390,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   font-size:.82rem; font-weight:700; color:var(--heading); box-shadow:var(--shadow-xs);
   margin-bottom:var(--sp-5);
 }
-.hero-kicker .dot{ width:8px; height:8px; border-radius:50%; background:var(--brand-green); box-shadow:0 0 0 4px rgba(139,193,19,.18); }
+.hero-kicker .dot{ width:8px; height:8px; border-radius:50%; background:var(--brand-green); box-shadow:0 0 0 4px rgba(184,147,90,.22); }
 
 .hero-copy p.lead{
   margin-top:var(--sp-5); font-size:1.14rem; line-height:1.75; color:var(--ink-600); max-width:52ch;
@@ -482,7 +493,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   grid-column:span 2; grid-row:span 2;
   background:var(--grad-navy); border-color:var(--line-gold);
 }
-.bento-item.is-feature .ic{ width:64px; height:64px; border-radius:18px; background:var(--gold-dim); color:var(--gold-bright); }
+.bento-item.is-feature .ic{ width:64px; height:64px; border-radius:18px; background:rgba(220,184,119,.16); color:var(--gold-glow); }
 .bento-item.is-feature .ic svg{ width:30px; height:30px; }
 .bento-item.is-feature b{ font-family:var(--font-display); font-size:1.5rem; font-weight:600; color:#fff; }
 .bento-item.is-feature p{ color:rgba(255,255,255,.72); max-width:34ch; }
@@ -579,7 +590,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .testi-card blockquote{ margin:0; font-size:.95rem; line-height:1.68; color:var(--ink-700); font-style:normal; }
 .testi-card .who{ display:flex; align-items:center; gap:.8em; margin-top:auto; padding-top:var(--sp-2); }
 .testi-card .avatar{
-  width:42px; height:42px; border-radius:50%; background:var(--grad-green); color:#0a0d02; display:flex; align-items:center; justify-content:center;
+  width:42px; height:42px; border-radius:50%; background:var(--grad-green); color:var(--paper-50); display:flex; align-items:center; justify-content:center;
   font-weight:700; font-size:.9rem; flex:none;
 }
 .testi-card .who b{ display:block; font-size:.9rem; color:var(--heading); }
@@ -592,33 +603,33 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .cta-banner{
   background:var(--grad-green); border-radius:var(--r-xl); padding:clamp(40px,6vw,72px);
   display:flex; align-items:center; justify-content:space-between; gap:var(--sp-8); flex-wrap:wrap;
-  position:relative; overflow:hidden; color:#0a0d02;
+  position:relative; overflow:hidden; color:var(--paper-50);
 }
 .cta-banner::before{ content:""; position:absolute; inset:0; background:var(--grad-sheen); opacity:.6; }
-.cta-banner h2{ color:#0a0d02; font-size:clamp(1.7rem,3vw,2.3rem); max-width:22ch; position:relative; }
-.cta-banner p{ color:rgba(10,13,2,.78); margin-top:var(--sp-3); max-width:46ch; position:relative; }
+.cta-banner h2{ color:var(--paper-50); font-size:clamp(1.7rem,3vw,2.3rem); max-width:22ch; position:relative; }
+.cta-banner p{ color:rgba(247,243,234,.75); margin-top:var(--sp-3); max-width:46ch; position:relative; }
 .cta-banner .cta-actions{ position:relative; display:flex; gap:var(--sp-3); flex-wrap:wrap; }
 
 /* ---------- Footer ---------- */
 .site-footer{ background:var(--grad-navy); color:rgba(255,255,255,.72); margin-top:var(--sp-16); border-top:1px solid var(--line-soft); }
 .footer-top{ padding-block:clamp(56px,7vw,88px); display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr 1.1fr; gap:var(--sp-8); }
 .footer-brand .brand-word{ color:#fff; }
-.footer-brand .brand-word small{ color:var(--brand-green); }
+.footer-brand .brand-word small{ color:var(--gold-glow); }
 .footer-brand p{ margin-top:var(--sp-4); font-size:.9rem; line-height:1.7; max-width:34ch; color:rgba(255,255,255,.62); }
 .footer-social{ display:flex; gap:var(--sp-3); margin-top:var(--sp-5); }
 .footer-social a{
   width:38px; height:38px; border-radius:50%; border:1px solid rgba(255,255,255,.18); display:flex; align-items:center; justify-content:center;
   transition:background .25s, border-color .25s, transform .25s;
 }
-.footer-social a:hover{ background:var(--brand-green); border-color:var(--brand-green); color:#0a0d02; transform:translateY(-3px); }
+.footer-social a:hover{ background:var(--grad-gold); border-color:var(--gold); color:var(--brand-green); transform:translateY(-3px); }
 .footer-social svg{ width:16px; height:16px; }
 
 .footer-col h4{ color:#fff; font-family:var(--font-sans); font-size:.85rem; letter-spacing:.06em; text-transform:uppercase; margin-bottom:var(--sp-4); font-weight:700; }
 .footer-col ul{ display:flex; flex-direction:column; gap:.7em; }
 .footer-col a{ font-size:.9rem; color:rgba(255,255,255,.62); transition:color .2s, padding-left .2s; }
-.footer-col a:hover{ color:#fff; padding-left:4px; }
+.footer-col a:hover{ color:var(--gold-glow); padding-left:4px; }
 .footer-col .contact-line{ display:flex; gap:.7em; font-size:.88rem; color:rgba(255,255,255,.62); align-items:flex-start; }
-.footer-col .contact-line svg{ width:16px; height:16px; flex:none; margin-top:3px; color:var(--brand-green); }
+.footer-col .contact-line svg{ width:16px; height:16px; flex:none; margin-top:3px; color:var(--gold-glow); }
 
 .footer-bottom{
   border-top:1px solid rgba(255,255,255,.12); padding-block:var(--sp-5);
@@ -708,7 +719,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   background:var(--surface); color:var(--ink-800); transition:border-color .2s, box-shadow .2s;
 }
 .form-field input:focus,.form-field textarea:focus,.form-field select:focus{
-  border-color:var(--brand-green); box-shadow:0 0 0 4px rgba(139,193,19,.14); outline:none;
+  border-color:var(--brand-green); box-shadow:0 0 0 4px rgba(184,147,90,.2); outline:none;
 }
 .form-row{ display:grid; grid-template-columns:1fr 1fr; gap:var(--sp-4); }
 @media (max-width:560px){ .form-row{ grid-template-columns:1fr; } }
@@ -756,7 +767,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .tabs{ display:flex; gap:var(--sp-6); border-bottom:1px solid var(--line); margin-top:var(--sp-12); }
 .tab-btn{ background:none; border:0; padding:1em 0; font-weight:700; color:var(--ink-400); font-size:.98rem; position:relative; }
 .tab-btn.active{ color:var(--heading); }
-.tab-btn.active::after{ content:""; position:absolute; left:0; right:0; bottom:-1px; height:2px; background:var(--brand-green); }
+.tab-btn.active::after{ content:""; position:absolute; left:0; right:0; bottom:-1px; height:2px; background:var(--grad-gold); }
 .tab-panel{ display:none; padding-top:var(--sp-8); }
 .tab-panel.active{ display:block; }
 
@@ -779,7 +790,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .legal-shell h5 a{ color:var(--brand-link-green); text-decoration:underline; }
 .legal-shell h6{
   font-family:var(--font-sans); font-size:1.02rem; text-transform:uppercase; letter-spacing:.04em; color:var(--heading);
-  border-left:4px solid var(--brand-green); padding-left:.8em; margin:var(--sp-8) 0 var(--sp-4);
+  border-left:4px solid var(--gold); padding-left:.8em; margin:var(--sp-8) 0 var(--sp-4);
 }
 .legal-shell p{ font-size:.98rem; line-height:1.85; color:var(--ink-700); margin-bottom:var(--sp-4); }
 .legal-shell a{ color:var(--brand-link-green); text-decoration:underline; text-underline-offset:2px; }
@@ -921,7 +932,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   background:var(--ink-800); transition:transform .25s var(--ease), background .25s;
 }
 .switch input:checked + .switch-track{ background:var(--brand-green); border-color:var(--brand-green); }
-.switch input:checked + .switch-track::before{ transform:translateX(18px); background:#0a0d02; }
+.switch input:checked + .switch-track::before{ transform:translateX(18px); background:var(--paper-50); }
 .switch input:disabled + .switch-track{ background:var(--gold-dim); border-color:var(--line-gold); opacity:.9; }
 .switch input:disabled + .switch-track::before{ background:var(--gold-bright); }
 .switch input:focus-visible + .switch-track{ outline:3px solid var(--brand-green); outline-offset:3px; }

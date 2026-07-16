@@ -14,8 +14,8 @@
       <stop offset="1" stop-color="#6F9E0F"/>
     </linearGradient>
     <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
-      <stop offset="0" stop-color="#8BC113" stop-opacity=".55"/>
-      <stop offset="1" stop-color="#8BC113" stop-opacity="0"/>
+      <stop offset="0" stop-color="#DCB877" stop-opacity=".5"/>
+      <stop offset="1" stop-color="#DCB877" stop-opacity="0"/>
     </radialGradient>
   </defs>
   <rect width="600" height="700" fill="url(#heroBg)"/>
@@ -60,7 +60,7 @@
   </g>
 
   <!-- paper ribbon accent -->
-  <path d="M420 520 C470 480 460 430 410 400 C480 410 510 470 470 530 C520 520 540 460 500 410" fill="none" stroke="#8BC113" stroke-width="7" stroke-linecap="round" opacity=".7"/>
+  <path d="M420 520 C470 480 460 430 410 400 C480 410 510 470 470 530 C520 520 540 460 500 410" fill="none" stroke="#DCB877" stroke-width="7" stroke-linecap="round" opacity=".75"/>
 
   <!-- dotted path suggesting motion / rewinding -->
   <path d="M60 200 C 160 160, 260 160, 340 90" fill="none" stroke="#ffffff" stroke-opacity=".28" stroke-width="2" stroke-dasharray="2 10" stroke-linecap="round"/>
