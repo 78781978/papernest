@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from build import icon, reveal, page
+from build import icon, reveal, page, photo_placeholder, PHONE_TEL, PHONE_DISPLAY, EMAIL
 
 LOCATIONS = [
     dict(ic="user", title="Biuro Sprzedaży",
@@ -17,12 +17,20 @@ LOCATIONS = [
 ]
 
 
+def cline(l):
+    if l == PHONE_DISPLAY:
+        return f'<a class="cline" href="{PHONE_TEL}">{l}</a>'
+    if l == EMAIL:
+        return f'<a class="cline" href="mailto:{l}">{l}</a>'
+    return f'<span class="cline">{l}</span>'
+
+
 def build():
     cards = "".join(reveal(f'''<div class="contact-card">
       <span class="ic">{icon(loc['ic'])}</span>
       <h3>{loc['title']}</h3>
       <p>{loc['text']}</p>
-      {"".join(f'<span class="cline">{l}</span>' for l in loc['lines'])}
+      {"".join(cline(l) for l in loc['lines'])}
     </div>''') for loc in LOCATIONS)
 
     content = f"""
@@ -37,6 +45,16 @@ def build():
 <section class="section">
   <div class="container">
     <div class="contact-grid reveal-stagger" style="grid-template-columns:repeat(4,1fr)">{cards}</div>
+  </div>
+</section>
+
+<section class="section-tight" style="padding-top:0">
+  <div class="container">
+    {reveal(f'''<div class="use-grid" style="grid-template-columns:repeat(3,1fr)">
+      {photo_placeholder("Magazyn PaperNest", cls="wide")}
+      {photo_placeholder("Sklep / punkt odbioru", cls="wide")}
+      {photo_placeholder("Biuro sprzedaży", cls="wide")}
+    </div>''')}
   </div>
 </section>
 
@@ -70,7 +88,7 @@ def build():
         </div>
         <div class="notice-box" style="margin-top:24px">
           {icon('info')}
-          <p><strong>Wysyłki paletowe i zamówienia hurtowe</strong> realizujemy po wcześniejszym ustaleniu terminu — zadzwoń pod numer <strong>538 989 005</strong> lub napisz na <strong>gd@papernest.pl</strong>.</p>
+          <p><strong>Wysyłki paletowe i zamówienia hurtowe</strong> realizujemy po wcześniejszym ustaleniu terminu — zadzwoń pod numer <a href="{PHONE_TEL}" style="color:var(--brand-link-green);font-weight:700;white-space:nowrap">{PHONE_DISPLAY}</a> lub napisz na <a href="mailto:{EMAIL}" style="color:var(--brand-link-green);font-weight:700">{EMAIL}</a>.</p>
         </div>
       </div>''')}
     </div>

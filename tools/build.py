@@ -48,6 +48,7 @@ ICON = {
 "minus": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14"/></svg>',
 "plus": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>',
 "info": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.5M12 8v.01"/></svg>',
+"image": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="15" rx="2"/><circle cx="8.5" cy="10" r="1.6"/><path d="m4 17 5-5 3.5 3.5L17 11l3 3.5"/></svg>',
 }
 
 def icon(name, cls=""):
@@ -148,8 +149,8 @@ def footer():
     <div class="footer-col">
       <h4>Kontakt</h4>
       <div class="contact-line">{icon('pin')}<span>I Brygady Legionów 12-14<br>72-100 Goleniów</span></div>
-      <div class="contact-line" style="margin-top:.7em">{icon('phone')}<span>538 989 005</span></div>
-      <div class="contact-line" style="margin-top:.7em">{icon('mail')}<span>gd@papernest.pl</span></div>
+      <div class="contact-line" style="margin-top:.7em"><a href="{PHONE_TEL}">{icon('phone')}<span>{PHONE_DISPLAY}</span></a></div>
+      <div class="contact-line" style="margin-top:.7em"><a href="mailto:{EMAIL}">{icon('mail')}<span>{EMAIL}</span></a></div>
     </div>
   </div>
   <div class="container footer-bottom">
@@ -252,7 +253,7 @@ HEAD = """<meta charset="UTF-8">
 <meta property="og:locale" content="pl_PL">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
 """
 
@@ -283,3 +284,26 @@ def svg_file(path):
 
 def reveal(content, extra_cls=""):
     return f'<div class="reveal {extra_cls}">{content}</div>'
+
+# ---------------------------------------------------------------- SHARED CONTACT ----
+PHONE_DISPLAY = "538 989 005"
+PHONE_TEL = "tel:+48538989005"
+EMAIL = "gd@papernest.pl"
+
+def product_contact_block():
+    """Stały blok kontaktowy wyświetlany na każdej karcie produktu pod ceną —
+    zastępuje krótki opis, żeby klient od razu widział, do kogo pisać/dzwonić."""
+    return f"""<div class="product-contact">
+      <p>Masz pytania lub potrzebujesz większego zamówienia?<br>Skontaktuj się z nami:</p>
+      <p class="pc-name">Grzegorz Działkowski</p>
+      <a class="pc-line" href="{PHONE_TEL}">{icon('phone')}tel. {PHONE_DISPLAY}</a>
+      <a class="pc-line" href="mailto:{EMAIL}">{icon('mail')}{EMAIL}</a>
+    </div>"""
+
+def photo_placeholder(label, cls=""):
+    """Wizualne miejsce zarezerwowane pod przyszłe zdjęcie — wyraźnie oznaczone,
+    żeby przy podmianie na WordPressie było wiadomo, gdzie wstawić plik."""
+    return f"""<div class="photo-slot {cls}">
+      <span class="photo-slot-ic">{icon('image')}</span>
+      <span class="photo-slot-label">{label}</span>
+    </div>"""

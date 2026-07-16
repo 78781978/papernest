@@ -149,6 +149,31 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
+  /* Testimonials — ruchomy slajder (scroll-snap track + strzałki) */
+  document.querySelectorAll('.testi-slider').forEach(function (slider) {
+    var track = slider.querySelector('[data-testi-track]');
+    var prev = slider.querySelector('[data-testi-prev]');
+    var next = slider.querySelector('[data-testi-next]');
+    if (!track || !prev || !next) return;
+    function step() {
+      var card = track.querySelector('.testi-card');
+      if (!card) return track.clientWidth * 0.9;
+      var style = window.getComputedStyle(track);
+      var gap = parseFloat(style.columnGap || style.gap || '0') || 0;
+      return card.getBoundingClientRect().width + gap;
+    }
+    function updateButtons() {
+      var max = track.scrollWidth - track.clientWidth - 4;
+      prev.disabled = track.scrollLeft <= 4;
+      next.disabled = track.scrollLeft >= max;
+    }
+    prev.addEventListener('click', function () { track.scrollBy({ left: -step(), behavior: 'smooth' }); });
+    next.addEventListener('click', function () { track.scrollBy({ left: step(), behavior: 'smooth' }); });
+    track.addEventListener('scroll', updateButtons, { passive: true });
+    window.addEventListener('resize', updateButtons);
+    updateButtons();
+  });
+
   /* =====================================================================
      System zgód cookie (RODO) — dwuwarstwowy: baner + panel preferencji.
      Zgoda jest granularna (niezbędne / funkcjonalne / analityczne /

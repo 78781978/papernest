@@ -1,13 +1,25 @@
 # -*- coding: utf-8 -*-
 import os, re
-from build import icon, reveal, page, ROOT
+from build import icon, reveal, page, ROOT, photo_placeholder, EMAIL
 
 SRC = os.path.join(ROOT, "tools", "legal_src")
 
 
+def linkify_email(html):
+    """Zamienia wszystkie wystąpienia adresu e-mail w treści (poza już istniejącymi
+    linkami/atrybutami) na klikalne mailto: — dotyczy to całej treści prawnej."""
+    pattern = re.compile(re.escape(EMAIL))
+
+    def repl(m):
+        return f'<a href="mailto:{EMAIL}">{EMAIL}</a>'
+
+    # nie dotykaj wystąpień już wewnątrz atrybutu href="mailto:...."
+    return re.sub(r'(?<!mailto:)' + re.escape(EMAIL), lambda m: f'<a href="mailto:{EMAIL}">{EMAIL}</a>', html)
+
+
 def read(name):
     with open(os.path.join(SRC, name), encoding="utf-8") as f:
-        return f.read()
+        return linkify_email(f.read())
 
 
 def add_anchors(html):
@@ -117,6 +129,7 @@ def build():
           <li>{icon('trend')}<span><strong style="color:var(--heading)">Szybkie przelewy online</strong> — wygodne płatności z większości polskich banków.</span></li>
           <li>{icon('cart')}<span><strong style="color:var(--heading)">Karty płatnicze</strong> — płatność kartą, jeśli metoda będzie dostępna w koszyku.</span></li>
         </ul>
+        <div class="logo-strip">{photo_placeholder("logo paynow", cls="logo-slot")}</div>
       </div>''')}
       {reveal(f'''<div class="card card-pad">
         <span class="eyebrow">Dostawa</span>
@@ -127,6 +140,7 @@ def build():
           <li>{icon('truck')}<span><strong style="color:var(--heading)">Kurier InPost</strong> — dostawa na wskazany adres: firma, dom lub magazyn.</span></li>
           <li>{icon('truck')}<span><strong style="color:var(--heading)">Kurier DPD</strong> — dostawa kurierska zgodnie z zasadami przewoźnika.</span></li>
         </ul>
+        <div class="logo-strip">{photo_placeholder("logo InPost", cls="logo-slot")}{photo_placeholder("logo DPD", cls="logo-slot")}</div>
       </div>''')}
     </div>
   </div>
@@ -181,7 +195,7 @@ def build():
         <h2 style="font-size:1.4rem;margin-bottom:18px">3 kroki do zwrotu</h2>
         <ul class="icon-list">
           <li>{icon('check')}<span><strong style="color:var(--heading)">Krok 1.</strong> Podaj numer zamówienia i e-mail — system znajdzie Twoje zamówienie i przygotuje gotowe oświadczenie.</span></li>
-          <li>{icon('check')}<span><strong style="color:var(--heading)">Krok 2.</strong> Wydrukuj lub prześlij oświadczenie mailowo na adres <strong style="color:var(--heading)">gd@papernest.pl</strong> w ciągu 14 dni.</span></li>
+          <li>{icon('check')}<span><strong style="color:var(--heading)">Krok 2.</strong> Wydrukuj lub prześlij oświadczenie mailowo na adres <a href="mailto:gd@papernest.pl" style="color:var(--brand-link-green);text-decoration:underline;font-weight:700">gd@papernest.pl</a> w ciągu 14 dni.</span></li>
           <li>{icon('check')}<span><strong style="color:var(--heading)">Krok 3.</strong> Odeślij produkt na adres: P.H.U „Bobinex” Grzegorz Działkowski, ul. Szczecińska 1A, 72-100 Goleniów.</span></li>
         </ul>
         <div class="legal-note" style="margin-top:24px">Pełne warunki odstąpienia od umowy — w tym wyjątki i terminy zwrotu płatności — znajdziesz w dokumencie <a href="prawo-do-odstapienia-od-umowy.html" style="color:var(--brand-link-green);text-decoration:underline">Prawo do odstąpienia od umowy</a>.</div>

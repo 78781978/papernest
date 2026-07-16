@@ -30,8 +30,9 @@ def build():
       <span class="text-muted" style="font-size:.85rem">{desc}</span>
     </div>''') for ic, title, desc in VALUES)
 
-    use_cards = "".join(reveal(f'''<div class="use-card">
-      <span class="ic">{icon(ic)}</span><b>{title}</b>
+    use_cards = "".join(reveal(f'''<div class="portfolio-tile">
+      <span class="ph-ic">{icon('image')}</span>
+      <span class="cap">{icon(ic)}{title}</span>
     </div>''') for ic, title in USES)
 
     content = f"""

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from build import icon, reveal, page
+from build import icon, reveal, page, PHONE_TEL, PHONE_DISPLAY, EMAIL
 
 
 def build():
@@ -59,8 +59,8 @@ def build():
         <h5 id="kontakt">Zgłaszanie uwag i problemów z dostępnością</h5>
         <p>Jeśli napotkasz problem z dostępnością treści na tej stronie, skontaktuj się z nami:</p>
         <ul class="icon-list">
-          <li>{icon('mail')}<span>E-mail: <strong>gd@papernest.pl</strong></span></li>
-          <li>{icon('phone')}<span>Telefon: <strong>538 989 005</strong></span></li>
+          <li>{icon('mail')}<span>E-mail: <a href="mailto:{EMAIL}" style="color:var(--brand-link-green);font-weight:700">{EMAIL}</a></span></li>
+          <li>{icon('phone')}<span>Telefon: <a href="{PHONE_TEL}" style="color:var(--brand-link-green);font-weight:700;white-space:nowrap">{PHONE_DISPLAY}</a></span></li>
         </ul>
         <p>Tą samą drogą można składać wnioski o udostępnienie informacji niedostępnej oraz żądania zapewnienia dostępności.</p>
 
@@ -68,7 +68,7 @@ def build():
         <p>Jeżeli zgłoszenie problemu z dostępnością nie zostanie rozpatrzone w sposób satysfakcjonujący, masz prawo złożyć skargę do <strong>Rzecznika Praw Obywatelskich</strong> (<a href="https://www.rpo.gov.pl">www.rpo.gov.pl</a>).</p>
 
         <h5 id="dostep-alternatywny">Dostęp alternatywny</h5>
-        <p>Jeśli nie możesz skorzystać z elektronicznej formy kontaktu, informacje o produktach i ofercie PaperNest uzyskasz telefonicznie pod numerem <strong>538 989 005</strong> (Pon–Pt, 8:00–16:00) lub odwiedzając biuro sprzedaży pod adresem I Brygady Legionów 12-14, 72-100 Goleniów.</p>
+        <p>Jeśli nie możesz skorzystać z elektronicznej formy kontaktu, informacje o produktach i ofercie PaperNest uzyskasz telefonicznie pod numerem <a href="{PHONE_TEL}" style="color:var(--brand-link-green);font-weight:700;white-space:nowrap">{PHONE_DISPLAY}</a> (Pon–Pt, 8:00–16:00) lub odwiedzając biuro sprzedaży pod adresem I Brygady Legionów 12-14, 72-100 Goleniów.</p>
 
       </div>
     </div>

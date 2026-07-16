@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from build import icon, svg_file, reveal, page
+from build import icon, svg_file, reveal, page, product_contact_block
 
 TESTIMONIALS = [
     dict(initials="BP", name="Bracia Pikuła", role="Fermy BKK Pikuła", title="Doskonała Jakość",
@@ -66,35 +66,35 @@ def build():
         <div class="thumb">{svg_file('roll-filler.svg')}<span class="badge">Ekologiczny</span></div>
         <div class="body">
           <h3>Wypełniacz Papierowy</h3>
-          <p>Materiał do pakowania paczek i zabezpieczania przesyłek. 100% papier z recyklingu, w pełni biodegradowalny, zgodny z ideą zero waste.</p>
           <div class="meta"><span class="price">od <span>45 zł</span><small>/ rolka</small></span><a href="produkt-wypelniacz.html" class="btn btn-outline btn-sm">Zobacz {icon('arrow')}</a></div>
+          {product_contact_block()}
         </div>
       </article>''')}
       {reveal(f'''<article class="product-card">
         <div class="thumb">{svg_file('chick-paper.svg')}<span class="badge">Dla hodowców</span></div>
         <div class="body">
           <h3>Papier Dla Piskląt</h3>
-          <p>Sprawdzone podłoże na pierwsze dni odchowu — pomaga pisklętom szybciej odnaleźć paszę i wodę od pierwszych godzin.</p>
           <div class="meta"><span class="price">od <span>51,49 zł</span><small>/ rolka</small></span><a href="produkt-papier-dla-pisklat.html" class="btn btn-outline btn-sm">Zobacz {icon('arrow')}</a></div>
+          {product_contact_block()}
         </div>
       </article>''')}
       {reveal(f'''<article class="product-card">
         <div class="thumb">{svg_file('cardboard.svg')}<span class="badge">Do remontu</span></div>
         <div class="body">
           <h3>Tektura Budowlana</h3>
-          <p>Niezbędne rozwiązanie dla ekip remontowych — chroni podłogi i powierzchnie przed zabrudzeniami i uszkodzeniami mechanicznymi.</p>
           <div class="meta"><span class="price">od <span>26,90 zł</span><small>/ rolka</small></span><a href="produkt-tektura-budowlana.html" class="btn btn-outline btn-sm">Zobacz {icon('arrow')}</a></div>
+          {product_contact_block()}
         </div>
       </article>''')}
     </div>
   </div>
 </section>
 
-<section class="section section-tight">
+<section class="section section-tight" style="padding-top:0">
   <div class="container">
     {reveal(f'''<div class="split">
       <div class="copy">
-        <span class="eyebrow">Usługi przemysłowe</span>
+        <span class="eyebrow" style="font-size:1rem">Usługi przemysłowe</span>
         <h2 class="text-balance">Zainteresowany usługą przewijania papieru?</h2>
         <p style="margin-top:16px;color:var(--ink-600);font-size:1.05rem;line-height:1.75">Oferujemy profesjonalne przewijanie papieru oraz cięcie wzdłużne rolek, dostosowane do indywidualnych wymagań klientów. Realizujemy zamówienia dla branży opakowaniowej, budowlanej, spożywczej i wielu innych.</p>
         <ul class="check-list">
@@ -125,13 +125,19 @@ def build():
       <span class="eyebrow" style="justify-content:center">Opinie</span>
       <h2 class="text-balance">Co mówią o nas klienci?</h2>
     </div>''')}
-    <div class="testimonial-track reveal-stagger">
-      {"".join(reveal(f'''<div class="testi-card">
-        <div class="stars">{icon('star')*5}</div>
-        <b style="color:var(--heading);font-size:.98rem">{t['title']}</b>
-        <blockquote>{t['text']}</blockquote>
-        <div class="who"><span class="avatar">{t['initials']}</span><div><b>{t['name']}</b><span>{t['role']}</span></div></div>
-      </div>''') for t in TESTIMONIALS)}
+    <div class="testi-slider">
+      <div class="testimonial-track reveal-stagger" data-testi-track>
+        {"".join(reveal(f'''<div class="testi-card">
+          <div class="stars">{icon('star')*5}</div>
+          <b style="color:var(--heading);font-size:.98rem">{t['title']}</b>
+          <blockquote>{t['text']}</blockquote>
+          <div class="who"><span class="avatar">{t['initials']}</span><div><b>{t['name']}</b><span>{t['role']}</span></div></div>
+        </div>''') for t in TESTIMONIALS)}
+      </div>
+      <div class="testi-nav">
+        <button type="button" class="prev" data-testi-prev aria-label="Poprzednie opinie">{icon('arrow')}</button>
+        <button type="button" class="next" data-testi-next aria-label="Następne opinie">{icon('arrow')}</button>
+      </div>
     </div>
   </div>
 </section>

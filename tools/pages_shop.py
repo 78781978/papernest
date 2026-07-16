@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from build import icon, svg_file, reveal, page
+from build import icon, svg_file, reveal, page, product_contact_block, photo_placeholder
 
 PRODUCTS = {
     "wypelniacz": dict(
@@ -62,11 +62,11 @@ def build_shop():
           <div class="thumb">{svg_file(p['art'])}<span class="badge">{p['tag']}</span></div>
           <div class="body">
             <h3>{p['name']}</h3>
-            <p>{p['short']}</p>
             <div class="meta">
               <span class="price"><span class="old-price">{v['old']} zł</span>{v['price']} zł<small>/ {v['label'].lower()}</small></span>
               <a href="{p['detail_url']}" class="btn btn-outline btn-sm">Wybierz {icon('arrow')}</a>
             </div>
+            {product_contact_block()}
           </div>
         </article>""")
         for extra in p["variants"][1:]:
@@ -75,11 +75,11 @@ def build_shop():
               <div class="thumb">{svg_file(p['art'])}<span class="badge">{extra['label']}</span></div>
               <div class="body">
                 <h3>{p['name']} — {extra['label']}</h3>
-                <p>{extra['sub']}. {p['short']}</p>
                 <div class="meta">
                   <span class="price">{old_price_html}{extra['price']} zł</span>
                   <a href="{p['detail_url']}" class="btn btn-outline btn-sm">Wybierz {icon('arrow')}</a>
                 </div>
+                {product_contact_block()}
               </div>
             </article>""")
 
@@ -163,6 +163,12 @@ def build_products():
     <div class="pd-grid">
       <div class="pd-gallery reveal">
         <div class="frame">{svg_file(p['art'])}</div>
+        <div class="pd-gallery-thumbs">
+          {photo_placeholder("Zdjęcie 1")}
+          {photo_placeholder("Zdjęcie 2")}
+          {photo_placeholder("Zdjęcie 3")}
+          {photo_placeholder("Zdjęcie 4")}
+        </div>
       </div>
       <div class="pd-info reveal">
         <span class="tag-pill">{p['tag']}</span>
@@ -221,8 +227,8 @@ def build_products():
         <div class="thumb">{svg_file(o["art"])}<span class="badge">{o["tag"]}</span></div>
         <div class="body">
           <h3>{o["name"]}</h3>
-          <p>{o["short"]}</p>
           <div class="meta"><span class="price">od <span>{o["variants"][0]["price"]} zł</span></span><a href="{o["detail_url"]}" class="btn btn-outline btn-sm">Zobacz {icon('arrow')}</a></div>
+          {product_contact_block()}
         </div>
       </article>''' for o in others)}
     </div>
