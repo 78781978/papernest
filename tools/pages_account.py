@@ -12,7 +12,7 @@ def build_cart():
         <td><div class="cart-item"><div class="thumb">{svg_file(it['art'])}</div><div><b>{it['name']}</b><span>{it['variant']}</span></div></div></td>
         <td>{it['price']} zł</td>
         <td><div class="qty-input"><button class="minus" type="button">{icon('minus')}</button><input type="text" value="{it['qty']}"><button class="plus" type="button">{icon('plus')}</button></div></td>
-        <td style="font-weight:700;color:var(--brand-navy)">{it['price']} zł</td>
+        <td style="font-weight:700;color:var(--heading)">{it['price']} zł</td>
         <td><button class="icon-btn" style="width:34px;height:34px" aria-label="Usuń"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 6h16M9 6V4h6v2M6 6l1 14h10l1-14"/></svg></button></td>
       </tr>""" for it in CART_ITEMS)
 
@@ -108,8 +108,8 @@ def build_account():
         <table class="cart-table">
           <thead><tr><th>Zamówienie</th><th>Data</th><th>Status</th><th>Suma</th></tr></thead>
           <tbody>
-            <tr><td><strong style="color:var(--brand-navy)">#PN-10245</strong></td><td>02.07.2026</td><td><span class="tag-pill">Wysłane</span></td><td>210,58 zł</td></tr>
-            <tr><td><strong style="color:var(--brand-navy)">#PN-10198</strong></td><td>18.06.2026</td><td><span class="tag-pill">Zrealizowane</span></td><td>97,99 zł</td></tr>
+            <tr><td><strong style="color:var(--heading)">#PN-10245</strong></td><td>02.07.2026</td><td><span class="tag-pill">Wysłane</span></td><td>210,58 zł</td></tr>
+            <tr><td><strong style="color:var(--heading)">#PN-10198</strong></td><td>18.06.2026</td><td><span class="tag-pill">Zrealizowane</span></td><td>97,99 zł</td></tr>
           </tbody>
         </table>
       </div>

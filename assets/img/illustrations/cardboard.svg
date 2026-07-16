@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 400" preserveAspectRatio="xMidYMid slice">
   <defs>
     <linearGradient id="bgCard" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#F5F6F2"/>
-      <stop offset="1" stop-color="#E8EAE1"/>
+      <stop offset="0" stop-color="#17170f"/>
+      <stop offset="1" stop-color="#0d0d09"/>
     </linearGradient>
     <linearGradient id="rollCard" x1="0" y1="0" x2="1" y2="0">
       <stop offset="0" stop-color="#9B8A6C"/>
@@ -28,7 +28,7 @@
   </g>
 
   <!-- ladder hint (kontekst remontu) -->
-  <g transform="translate(395,150)" opacity=".5" stroke="#0B2345" stroke-width="4" stroke-linecap="round">
+  <g transform="translate(395,150)" opacity=".4" stroke="#8B7A5D" stroke-width="4" stroke-linecap="round">
     <line x1="0" y1="0" x2="-20" y2="150"/>
     <line x1="34" y1="0" x2="14" y2="150"/>
     <line x1="-8" y1="40" x2="26" y2="40"/>

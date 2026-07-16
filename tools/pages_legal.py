@@ -111,11 +111,11 @@ def build():
       {reveal(f'''<div class="card card-pad">
         <span class="eyebrow">Płatności</span>
         <h2 style="font-size:1.4rem;margin-bottom:14px">Metody płatności</h2>
-        <p style="color:var(--ink-600);line-height:1.75;margin-bottom:18px">W sklepie planujemy udostępnić płatności online przez <strong style="color:var(--brand-navy)">paynow</strong> — markę mBanku, który odpowiada za bezpieczeństwo transakcji.</p>
+        <p style="color:var(--ink-600);line-height:1.75;margin-bottom:18px">W sklepie planujemy udostępnić płatności online przez <strong style="color:var(--heading)">paynow</strong> — markę mBanku, który odpowiada za bezpieczeństwo transakcji.</p>
         <ul class="icon-list">
-          <li>{icon('shield')}<span><strong style="color:var(--brand-navy)">BLIK</strong> — szybka płatność kodem BLIK.</span></li>
-          <li>{icon('trend')}<span><strong style="color:var(--brand-navy)">Szybkie przelewy online</strong> — wygodne płatności z większości polskich banków.</span></li>
-          <li>{icon('cart')}<span><strong style="color:var(--brand-navy)">Karty płatnicze</strong> — płatność kartą, jeśli metoda będzie dostępna w koszyku.</span></li>
+          <li>{icon('shield')}<span><strong style="color:var(--heading)">BLIK</strong> — szybka płatność kodem BLIK.</span></li>
+          <li>{icon('trend')}<span><strong style="color:var(--heading)">Szybkie przelewy online</strong> — wygodne płatności z większości polskich banków.</span></li>
+          <li>{icon('cart')}<span><strong style="color:var(--heading)">Karty płatnicze</strong> — płatność kartą, jeśli metoda będzie dostępna w koszyku.</span></li>
         </ul>
       </div>''')}
       {reveal(f'''<div class="card card-pad">
@@ -123,9 +123,9 @@ def build():
         <h2 style="font-size:1.4rem;margin-bottom:14px">Metody dostawy</h2>
         <p style="color:var(--ink-600);line-height:1.75;margin-bottom:18px">Dostępne metody dostawy zależą od rodzaju produktu, gabarytu zamówienia oraz adresu dostawy. Dla standardowych przesyłek korzystamy z usług InPost oraz DPD.</p>
         <ul class="icon-list">
-          <li>{icon('box')}<span><strong style="color:var(--brand-navy)">InPost Paczkomat®</strong> — odbiór w wybranym automacie paczkowym, wygodny dla mniejszych zamówień.</span></li>
-          <li>{icon('truck')}<span><strong style="color:var(--brand-navy)">Kurier InPost</strong> — dostawa na wskazany adres: firma, dom lub magazyn.</span></li>
-          <li>{icon('truck')}<span><strong style="color:var(--brand-navy)">Kurier DPD</strong> — dostawa kurierska zgodnie z zasadami przewoźnika.</span></li>
+          <li>{icon('box')}<span><strong style="color:var(--heading)">InPost Paczkomat®</strong> — odbiór w wybranym automacie paczkowym, wygodny dla mniejszych zamówień.</span></li>
+          <li>{icon('truck')}<span><strong style="color:var(--heading)">Kurier InPost</strong> — dostawa na wskazany adres: firma, dom lub magazyn.</span></li>
+          <li>{icon('truck')}<span><strong style="color:var(--heading)">Kurier DPD</strong> — dostawa kurierska zgodnie z zasadami przewoźnika.</span></li>
         </ul>
       </div>''')}
     </div>
@@ -180,9 +180,9 @@ def build():
         <span class="eyebrow">Jak to działa</span>
         <h2 style="font-size:1.4rem;margin-bottom:18px">3 kroki do zwrotu</h2>
         <ul class="icon-list">
-          <li>{icon('check')}<span><strong style="color:var(--brand-navy)">Krok 1.</strong> Podaj numer zamówienia i e-mail — system znajdzie Twoje zamówienie i przygotuje gotowe oświadczenie.</span></li>
-          <li>{icon('check')}<span><strong style="color:var(--brand-navy)">Krok 2.</strong> Wydrukuj lub prześlij oświadczenie mailowo na adres <strong style="color:var(--brand-navy)">gd@papernest.pl</strong> w ciągu 14 dni.</span></li>
-          <li>{icon('check')}<span><strong style="color:var(--brand-navy)">Krok 3.</strong> Odeślij produkt na adres: P.H.U „Bobinex” Grzegorz Działkowski, ul. Szczecińska 1A, 72-100 Goleniów.</span></li>
+          <li>{icon('check')}<span><strong style="color:var(--heading)">Krok 1.</strong> Podaj numer zamówienia i e-mail — system znajdzie Twoje zamówienie i przygotuje gotowe oświadczenie.</span></li>
+          <li>{icon('check')}<span><strong style="color:var(--heading)">Krok 2.</strong> Wydrukuj lub prześlij oświadczenie mailowo na adres <strong style="color:var(--heading)">gd@papernest.pl</strong> w ciągu 14 dni.</span></li>
+          <li>{icon('check')}<span><strong style="color:var(--heading)">Krok 3.</strong> Odeślij produkt na adres: P.H.U „Bobinex” Grzegorz Działkowski, ul. Szczecińska 1A, 72-100 Goleniów.</span></li>
         </ul>
         <div class="legal-note" style="margin-top:24px">Pełne warunki odstąpienia od umowy — w tym wyjątki i terminy zwrotu płatności — znajdziesz w dokumencie <a href="prawo-do-odstapienia-od-umowy.html" style="color:var(--brand-link-green);text-decoration:underline">Prawo do odstąpienia od umowy</a>.</div>
       </div>''')}

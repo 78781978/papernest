@@ -123,7 +123,7 @@ def build():
     <div class="testimonial-track reveal-stagger">
       {"".join(reveal(f'''<div class="testi-card">
         <div class="stars">{icon('star')*5}</div>
-        <b style="color:var(--brand-navy);font-size:.98rem">{t['title']}</b>
+        <b style="color:var(--heading);font-size:.98rem">{t['title']}</b>
         <blockquote>{t['text']}</blockquote>
         <div class="who"><span class="avatar">{t['initials']}</span><div><b>{t['name']}</b><span>{t['role']}</span></div></div>
       </div>''') for t in TESTIMONIALS)}

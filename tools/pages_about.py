@@ -23,7 +23,7 @@ def build():
       <div class="copy">
         <span class="eyebrow">Od 20+ lat w branży papierniczej</span>
         <p style="font-size:1.05rem;line-height:1.8;color:var(--ink-700);margin-bottom:16px">P.H.U „Bobinex” Grzegorz Działkowski to polska firma z Goleniowa, z wieloletnim doświadczeniem w branży papierniczej, specjalizująca się w przewijaniu papieru oraz cięciu wzdłużnym rolek papierowych. Fundamentem działalności jest ponad 20 lat praktyki i znajomości procesów związanych z przetwórstwem papieru.</p>
-        <p style="font-size:1.05rem;line-height:1.8;color:var(--ink-700);margin-bottom:16px">Z pasji do tworzenia praktycznych i ekologicznych produktów powstała marka <strong style="color:var(--brand-navy)">PaperNest</strong>, której celem jest dostarczanie wysokiej jakości wyrobów papierowych oraz profesjonalnych usług przetwórczych. Firma nieustannie rozwija swoje możliwości produkcyjne, stawiając na niezawodność, terminowość i indywidualne podejście do każdego zamówienia.</p>
+        <p style="font-size:1.05rem;line-height:1.8;color:var(--ink-700);margin-bottom:16px">Z pasji do tworzenia praktycznych i ekologicznych produktów powstała marka <strong style="color:var(--heading)">PaperNest</strong>, której celem jest dostarczanie wysokiej jakości wyrobów papierowych oraz profesjonalnych usług przetwórczych. Firma nieustannie rozwija swoje możliwości produkcyjne, stawiając na niezawodność, terminowość i indywidualne podejście do każdego zamówienia.</p>
         <p style="font-size:1.05rem;line-height:1.8;color:var(--ink-700)">Obecnie PaperNest oferuje trzy główne grupy produktów: wypełniacze papierowe do zabezpieczania przesyłek, papier dla piskląt wykorzystywany w hodowli drobiu oraz tekturę budowlaną przeznaczoną do ochrony powierzchni podczas prac remontowych. Obsługujemy klientów indywidualnych i przedsiębiorstwa w Polsce oraz za granicą.</p>
         <div class="hero-cta" style="margin-top:28px"><a href="kontakt.html" class="btn btn-primary">Skontaktuj się z nami {icon('arrow')}</a></div>
       </div>
@@ -82,7 +82,7 @@ def build():
     <div class="testimonial-track reveal-stagger">
       {"".join(reveal(f'''<div class="testi-card">
         <div class="stars">{icon('star')*5}</div>
-        <b style="color:var(--brand-navy);font-size:.98rem">{t['title']}</b>
+        <b style="color:var(--heading);font-size:.98rem">{t['title']}</b>
         <blockquote>{t['text']}</blockquote>
         <div class="who"><span class="avatar">{t['initials']}</span><div><b>{t['name']}</b><span>{t['role']}</span></div></div>
       </div>''') for t in TESTIMONIALS)}
