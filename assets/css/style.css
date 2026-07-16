@@ -24,13 +24,13 @@
   --gold-dim:    rgba(139,106,53,.10); /* złota poświata w tle kółek ikon na jasnych kartach */
   --grad-gold:   linear-gradient(135deg, #dcb877 0%, #b8935a 45%, #8a6a35 100%);
 
-  /* --- Premium extended palette (jasna, papierowa) --- */
-  --paper-50:  #f7f3ea; /* tło strony — ciepły, papierowy krem */
-  --paper-100: rgba(139,106,53,.10); /* tło kółek ikon / notice-box — złota poświata na kremie */
+  /* --- Premium extended palette (jasna, biała) --- */
+  --paper-50:  #ffffff; /* tło strony — czysta biel */
+  --paper-100: rgba(139,106,53,.10); /* tło kółek ikon / notice-box — złota poświata na bieli */
   --paper-200: rgba(139,106,53,.24); /* obramowania na tej samej poświacie */
-  --cream:     #f7f3ea;
-  --surface:   #ffffff; /* karty / panele — czysta biel unosząca się nad kremowym tłem */
-  --surface-glass: rgba(247,243,234,.82); /* szklana powierzchnia z blur — nagłówek, baner cookie */
+  --cream:     #ffffff;
+  --surface:   #ffffff; /* karty / panele — czysta biel, oddzielona liniami i cieniem */
+  --surface-glass: rgba(255,255,255,.82); /* szklana powierzchnia z blur — nagłówek, baner cookie */
   --ink-900:   #17140f;
   --heading:   #17140f; /* kolor nagłówków — głęboka, ciepła czerń */
   --ink-800:   #2b2620; /* główny tekst */
@@ -277,7 +277,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .site-header::before{
   content:"";
   position:absolute; inset:0;
-  background: rgba(247,243,234,.8);
+  background: rgba(255,255,255,.8);
   backdrop-filter: blur(14px) saturate(140%);
   -webkit-backdrop-filter: blur(14px) saturate(140%);
   opacity:0;
