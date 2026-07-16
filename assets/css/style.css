@@ -1,7 +1,9 @@
 /* =========================================================
-   PaperNest — Premium Design System (wersja dark)
-   Czarne tło, jasny tekst, zielony akcent marki jako jedyny
-   punkt koloru — granat pozostaje jako głębsza warstwa paneli.
+   PaperNest — Premium Design System (wersja exclusive/luxury)
+   Głęboka czerń + szampański złoty jako sygnał luksusu +
+   zielony marki jako akcent funkcjonalny (CTA, rozpoznawalność).
+   Zbudowany zgodnie z WCAG 2.1 AA: kontrast, focus-visible,
+   prefers-reduced-motion, semantyka, pełny system zgód cookie.
    ========================================================= */
 
 :root{
@@ -13,42 +15,54 @@
   --brand-navy-light:   #123561;
   --brand-link-green:   #9bd428; /* linki — czytelne na czarnym tle */
 
+  /* --- Ekskluzywny akcent: szampański złoty --- */
+  --gold:        #d7b56d; /* główny złoty — hairline, obramowania hover, detale premium */
+  --gold-bright: #f0d38f; /* jaśniejszy złoty — tekst/ikony na czarnym, wyższy kontrast */
+  --gold-dim:    rgba(215,181,109,.14); /* złota poświata w tle / obramowania */
+  --grad-gold:   linear-gradient(135deg, #f0d38f 0%, #d7b56d 45%, #a9813f 100%);
+
   /* --- Premium extended palette (dark) --- */
-  --paper-50:  #0a0b08; /* tło strony — niemal czarne, z ledwie wyczuwalnym ciepłym/zielonym podtonem */
+  --paper-50:  #08090a; /* tło strony — głęboka, chłodna czerń (odrobinę grafitowa, nie zielona) */
   --paper-100: rgba(139,193,19,.12); /* tło kółek ikon / notice-box — zielona poświata na czarnym */
   --paper-200: rgba(139,193,19,.24); /* obramowania na tej samej poświacie */
   --cream:     #f8f6ee;
-  --surface:   #15170f; /* karty / panele — ciemna, ciepła powierzchnia uniesiona nad tłem */
-  --ink-900:   #f7f9ef;
-  --heading:   #f7f9ef; /* kolor nagłówków — zastępuje dawny granat na jasny, ciepły odcień */
-  --ink-800:   #e9ede0; /* główny tekst — ciepła jasna biel */
-  --ink-700:   #d3d8c5;
-  --ink-600:   #a3ab90; /* tekst drugorzędny */
-  --ink-500:   #838a72; /* etykiety / meta */
-  --ink-400:   #5a604c; /* tekst wyciszony / placeholder */
-  --line:      rgba(255,255,255,.13);
-  --line-soft: rgba(255,255,255,.07);
-  --gold:      #e0bb5c; /* premium accent, used sparingly */
+  --surface:   #131417; /* karty / panele — chłodna grafitowa powierzchnia uniesiona nad tłem */
+  --surface-glass: rgba(19,20,23,.62); /* szklana powierzchnia z blur — nagłówek, modale */
+  --ink-900:   #f8f7f2;
+  --heading:   #f8f7f2; /* kolor nagłówków — ciepła kość słoniowa zamiast bieli */
+  --ink-800:   #ebe9e2; /* główny tekst */
+  --ink-700:   #d2d1c8;
+  --ink-600:   #a3a599; /* tekst drugorzędny */
+  --ink-500:   #82847a; /* etykiety / meta */
+  --ink-400:   #565850; /* tekst wyciszony / placeholder */
+  --line:      rgba(255,255,255,.12);
+  --line-soft: rgba(255,255,255,.06);
+  --line-gold: rgba(215,181,109,.35);
 
   --white: #ffffff;
 
   /* --- Gradients --- */
-  --grad-hero: radial-gradient(120% 140% at 85% -10%, rgba(139,193,19,.20) 0%, rgba(139,193,19,0) 55%),
-               radial-gradient(90% 120% at 5% 0%, rgba(139,193,19,.06) 0%, rgba(139,193,19,0) 60%);
+  --grad-hero: radial-gradient(120% 140% at 85% -10%, rgba(215,181,109,.14) 0%, rgba(215,181,109,0) 55%),
+               radial-gradient(90% 120% at 5% 0%, rgba(139,193,19,.07) 0%, rgba(139,193,19,0) 60%);
   --grad-green: linear-gradient(135deg, #9ed324 0%, #7cab13 55%, #5c8a0e 100%);
   --grad-navy: linear-gradient(160deg, #101d30 0%, #0a1420 55%, #030507 100%);
-  --grad-sheen: linear-gradient(115deg, rgba(255,255,255,0) 40%, rgba(255,255,255,.22) 50%, rgba(255,255,255,0) 60%);
+  --grad-sheen: linear-gradient(115deg, rgba(255,255,255,0) 40%, rgba(255,255,255,.16) 50%, rgba(255,255,255,0) 60%);
+
+  /* Subtelna ziarnista tekstura (film grain) — dodaje "materiałowej" głębi czerni,
+     bez wpływu na wydajność (jedna mała, powtarzana warstwa SVG). */
+  --noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
 
   /* --- Typography --- */
   --font-display: "Fraunces", "Iowan Old Style", "Georgia", serif;
   --font-sans: "General Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
   /* --- Shadows (na czarnym tle liczy się głębia + subtelna jasna obwódka z --line) --- */
-  --shadow-xs: 0 1px 2px rgba(0,0,0,.45);
-  --shadow-sm: 0 2px 10px rgba(0,0,0,.4), 0 1px 2px rgba(0,0,0,.3);
-  --shadow-md: 0 10px 28px rgba(0,0,0,.45), 0 2px 8px rgba(0,0,0,.3);
-  --shadow-lg: 0 24px 56px rgba(0,0,0,.55), 0 6px 16px rgba(0,0,0,.35);
+  --shadow-xs: 0 1px 2px rgba(0,0,0,.5);
+  --shadow-sm: 0 2px 10px rgba(0,0,0,.45), 0 1px 2px rgba(0,0,0,.35);
+  --shadow-md: 0 10px 28px rgba(0,0,0,.5), 0 2px 8px rgba(0,0,0,.35);
+  --shadow-lg: 0 26px 60px rgba(0,0,0,.6), 0 6px 18px rgba(0,0,0,.4);
   --shadow-green: 0 14px 32px rgba(139,193,19,.32);
+  --shadow-gold: 0 14px 32px rgba(215,181,109,.28);
   --shadow-navy: 0 18px 40px rgba(0,0,0,.5);
 
   /* --- Radii --- */
@@ -71,7 +85,21 @@
   --sp-16: 7rem;
 
   --container: 1240px;
+  --container-wide: 1400px;
   --ease: cubic-bezier(.22,1,.36,1);
+  --dur: .5s;
+}
+
+/* Poszanowanie preferencji systemowej „ogranicz animacje" (WCAG 2.3.3) —
+   wszystkie animacje i przejścia zostają radykalnie skrócone/wyłączone. */
+@media (prefers-reduced-motion: reduce){
+  *, *::before, *::after{
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal{ opacity:1 !important; transform:none !important; }
 }
 
 /* ---------- Reset ---------- */
@@ -85,7 +113,25 @@ body{
   -webkit-font-smoothing:antialiased;
   text-rendering:optimizeLegibility;
   overflow-x:hidden;
+  position:relative;
 }
+/* Ziarnista tekstura na całej stronie — stały, lekki (fixed = nie generuje
+   dodatkowego reflow/scrolla), czysto dekoracyjny (aria-hidden przez pseudo). */
+body::before{
+  content:"";
+  position:fixed; inset:0; z-index:0; pointer-events:none;
+  background-image:var(--noise);
+  mix-blend-mode:overlay;
+  opacity:.5;
+}
+#main, .site-header, .site-footer{ position:relative; z-index:1; }
+
+::selection{ background:var(--gold); color:#1a1400; }
+html{ scrollbar-color: var(--line) transparent; }
+::-webkit-scrollbar{ width:11px; height:11px; }
+::-webkit-scrollbar-track{ background:var(--paper-50); }
+::-webkit-scrollbar-thumb{ background:var(--surface); border-radius:8px; border:3px solid var(--paper-50); }
+::-webkit-scrollbar-thumb:hover{ background:var(--gold); }
 img{ max-width:100%; display:block; }
 a{ color:inherit; text-decoration:none; }
 ul{ margin:0; padding:0; list-style:none; }
@@ -97,8 +143,6 @@ button{ font-family:inherit; cursor:pointer; }
    kontekst nie nadpisze go bardziej szczegółową regułą. */
 svg{ display:block; width:1em; height:1em; }
 .hidden{ display:none !important; }
-
-::selection{ background:var(--brand-green); color:#fff; }
 
 /* focus-visible accessibility, zachowane z oryginału */
 a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible{
@@ -135,13 +179,13 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .section-tight{ padding-block: clamp(40px, 6vw, 80px); }
 
 .eyebrow{
-  display:inline-flex; align-items:center; gap:.5em;
-  font-size:.78rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase;
-  color:var(--brand-link-green);
+  display:inline-flex; align-items:center; gap:.6em;
+  font-size:.76rem; font-weight:700; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--gold-bright);
   margin-bottom:var(--sp-4);
 }
 .eyebrow::before{
-  content:""; width:22px; height:2px; background:var(--brand-green); border-radius:2px;
+  content:""; width:26px; height:1px; background:var(--grad-gold); border-radius:2px;
 }
 
 .section-head{ max-width:640px; margin-bottom:var(--sp-10); }
@@ -168,7 +212,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 
 .btn-primary{
   background:var(--grad-green);
-  color:#fff;
+  color:#0a0d02; /* ciemny tekst — biały na zieleni nie spełnia WCAG AA (kontrast ok. 2:1) */
+  font-weight:700;
   box-shadow:var(--shadow-green);
 }
 .btn-primary:hover{ transform:translateY(-2px); box-shadow:0 20px 38px rgba(139,193,19,.36); }
@@ -195,6 +240,17 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   backdrop-filter: blur(6px);
 }
 .btn-ghost-light:hover{ background:rgba(255,255,255,.2); transform:translateY(-2px); }
+
+/* Wariant do użycia na jasnych/zielonych tłach (np. cta-banner) — biały tekst
+   nie spełniałby tam WCAG AA, więc kontrast zapewnia ciemna, przyciemniona wersja. */
+.btn-ghost-dark{
+  background:rgba(10,13,2,.1);
+  border-color:rgba(10,13,2,.4);
+  color:#0a0d02;
+  font-weight:700;
+  backdrop-filter: blur(6px);
+}
+.btn-ghost-dark:hover{ background:rgba(10,13,2,.18); transform:translateY(-2px); }
 
 .btn-sm{ padding:.75em 1.3em; font-size:.88rem; }
 .btn-block{ width:100%; }
@@ -264,8 +320,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .icon-btn svg{ width:19px; height:19px; }
 .cart-count{
   position:absolute; top:-4px; right:-4px; width:18px; height:18px; border-radius:50%;
-  background:var(--brand-green); color:#fff; font-size:.62rem; font-weight:800;
-  display:flex; align-items:center; justify-content:center; box-shadow:0 0 0 2px #fff;
+  background:var(--brand-green); color:#0a0d02; font-size:.62rem; font-weight:800;
+  display:flex; align-items:center; justify-content:center; box-shadow:0 0 0 2px var(--surface);
 }
 
 .nav-toggle{
@@ -392,6 +448,59 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 }
 @media (max-width: 560px){ .usp-strip{ grid-template-columns:1fr; } }
 
+/* ---------- Bento grid (highlights) — asymetryczny układ kart, jeden
+   z wyróżniających się trendów premium UI 2025/26. Zastępuje prosty
+   4-kolumnowy pasek USP na stronie głównej. ---------- */
+.bento-grid{
+  margin-top:clamp(-56px, -6vw, -36px); position:relative; z-index:3;
+  display:grid; grid-template-columns:repeat(4, 1fr); grid-template-rows:repeat(2, 1fr); gap:var(--sp-5);
+}
+.bento-item{
+  background:var(--surface); border:1px solid var(--line); border-radius:var(--r-xl);
+  padding:var(--sp-6); position:relative; overflow:hidden;
+  box-shadow:var(--shadow-md);
+  transition:transform .45s var(--ease), border-color .45s var(--ease), box-shadow .45s var(--ease);
+  display:flex; flex-direction:column; justify-content:flex-end; gap:var(--sp-3);
+}
+.bento-item:hover{ transform:translateY(-5px); border-color:var(--line-gold); box-shadow:var(--shadow-lg); }
+.bento-item::after{
+  content:""; position:absolute; top:-40%; right:-30%; width:70%; height:70%; border-radius:50%;
+  background:radial-gradient(circle, var(--gold-dim) 0%, transparent 70%); opacity:0; transition:opacity .5s;
+}
+.bento-item:hover::after{ opacity:1; }
+.bento-item .ic{
+  flex:none; width:52px; height:52px; border-radius:16px; position:relative; z-index:1;
+  background:var(--paper-100); color:var(--brand-green-deep);
+  display:flex; align-items:center; justify-content:center;
+}
+.bento-item .ic svg{ width:26px; height:26px; }
+.bento-item b{ display:block; font-size:1.02rem; color:var(--heading); position:relative; z-index:1; }
+.bento-item span{ font-size:.85rem; color:var(--ink-500); position:relative; z-index:1; }
+.bento-item p{ font-size:.92rem; line-height:1.65; color:var(--ink-600); position:relative; z-index:1; max-width:36ch; }
+
+.bento-item.is-feature{
+  grid-column:span 2; grid-row:span 2;
+  background:var(--grad-navy); border-color:var(--line-gold);
+}
+.bento-item.is-feature .ic{ width:64px; height:64px; border-radius:18px; background:var(--gold-dim); color:var(--gold-bright); }
+.bento-item.is-feature .ic svg{ width:30px; height:30px; }
+.bento-item.is-feature b{ font-family:var(--font-display); font-size:1.5rem; font-weight:600; color:#fff; }
+.bento-item.is-feature p{ color:rgba(255,255,255,.72); max-width:34ch; }
+.bento-item.is-feature .tag-pill{ align-self:flex-start; margin-bottom:auto; }
+.bento-item.span-wide{ grid-column:span 2; grid-row:span 1; flex-direction:row; align-items:center; }
+.bento-item.span-wide .ic{ margin-bottom:0; }
+
+@media (max-width:980px){
+  .bento-grid{ grid-template-columns:1fr 1fr; grid-template-rows:auto; margin-top:var(--sp-8); }
+  .bento-item.is-feature{ grid-column:span 2; grid-row:auto; }
+  .bento-item.span-wide{ grid-column:span 2; }
+}
+@media (max-width:620px){
+  .bento-grid{ grid-template-columns:1fr; }
+  .bento-item.is-feature, .bento-item.span-wide{ grid-column:span 1; }
+  .bento-item.span-wide{ flex-direction:column; align-items:flex-start; }
+}
+
 /* ---------- Product cards ---------- */
 .product-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:var(--sp-6); }
 .product-card{
@@ -470,7 +579,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .testi-card blockquote{ margin:0; font-size:.95rem; line-height:1.68; color:var(--ink-700); font-style:normal; }
 .testi-card .who{ display:flex; align-items:center; gap:.8em; margin-top:auto; padding-top:var(--sp-2); }
 .testi-card .avatar{
-  width:42px; height:42px; border-radius:50%; background:var(--grad-green); color:#fff; display:flex; align-items:center; justify-content:center;
+  width:42px; height:42px; border-radius:50%; background:var(--grad-green); color:#0a0d02; display:flex; align-items:center; justify-content:center;
   font-weight:700; font-size:.9rem; flex:none;
 }
 .testi-card .who b{ display:block; font-size:.9rem; color:var(--heading); }
@@ -483,11 +592,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .cta-banner{
   background:var(--grad-green); border-radius:var(--r-xl); padding:clamp(40px,6vw,72px);
   display:flex; align-items:center; justify-content:space-between; gap:var(--sp-8); flex-wrap:wrap;
-  position:relative; overflow:hidden; color:#fff;
+  position:relative; overflow:hidden; color:#0a0d02;
 }
 .cta-banner::before{ content:""; position:absolute; inset:0; background:var(--grad-sheen); opacity:.6; }
-.cta-banner h2{ color:#fff; font-size:clamp(1.7rem,3vw,2.3rem); max-width:22ch; position:relative; }
-.cta-banner p{ color:rgba(255,255,255,.88); margin-top:var(--sp-3); max-width:46ch; position:relative; }
+.cta-banner h2{ color:#0a0d02; font-size:clamp(1.7rem,3vw,2.3rem); max-width:22ch; position:relative; }
+.cta-banner p{ color:rgba(10,13,2,.78); margin-top:var(--sp-3); max-width:46ch; position:relative; }
 .cta-banner .cta-actions{ position:relative; display:flex; gap:var(--sp-3); flex-wrap:wrap; }
 
 /* ---------- Footer ---------- */
@@ -501,7 +610,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   width:38px; height:38px; border-radius:50%; border:1px solid rgba(255,255,255,.18); display:flex; align-items:center; justify-content:center;
   transition:background .25s, border-color .25s, transform .25s;
 }
-.footer-social a:hover{ background:var(--brand-green); border-color:var(--brand-green); transform:translateY(-3px); }
+.footer-social a:hover{ background:var(--brand-green); border-color:var(--brand-green); color:#0a0d02; transform:translateY(-3px); }
 .footer-social svg{ width:16px; height:16px; }
 
 .footer-col h4{ color:#fff; font-family:var(--font-sans); font-size:.85rem; letter-spacing:.06em; text-transform:uppercase; margin-bottom:var(--sp-4); font-weight:700; }
@@ -728,13 +837,92 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .to-top.is-visible{ opacity:1; pointer-events:auto; transform:translateY(0); }
 .to-top svg{ width:18px; height:18px; }
 
-/* Cookie banner (premium restyle, funkcja zachowana) */
+/* ============ System zgód cookie (RODO / WCAG) ============
+   Dwuwarstwowy model: 1) baner z akcją szybką, 2) pełny panel
+   preferencji z granularną kontrolą kategorii — zgodnie z wytycznymi
+   UODO/EDPB (zgoda musi być tak samo łatwa do wycofania jak do wyrażenia). */
 .cookie-banner{
-  position:fixed; left:20px; right:20px; bottom:20px; max-width:560px; margin-inline:auto;
-  background:var(--surface); border-radius:var(--r-lg); box-shadow:var(--shadow-lg); border:1px solid var(--line);
-  padding:var(--sp-5) var(--sp-6); z-index:500; display:flex; flex-direction:column; gap:var(--sp-4);
-  transform:translateY(140%); transition:transform .5s var(--ease);
+  position:fixed; left:20px; right:20px; bottom:20px; max-width:640px; margin-inline:auto;
+  background:var(--surface-glass); backdrop-filter:blur(20px) saturate(140%); -webkit-backdrop-filter:blur(20px) saturate(140%);
+  border-radius:var(--r-lg); box-shadow:var(--shadow-lg); border:1px solid var(--line-gold);
+  padding:var(--sp-5) var(--sp-6); z-index:500; display:flex; gap:var(--sp-4); align-items:flex-start;
+  transform:translateY(140%); opacity:0; transition:transform .6s var(--ease), opacity .6s var(--ease);
 }
-.cookie-banner.is-visible{ transform:translateY(0); }
-.cookie-banner p{ font-size:.85rem; line-height:1.6; color:var(--ink-600); }
-.cookie-banner .row{ display:flex; gap:var(--sp-3); flex-wrap:wrap; }
+.cookie-banner.is-visible{ transform:translateY(0); opacity:1; }
+.cookie-banner-icon{
+  flex:none; width:40px; height:40px; border-radius:50%; background:var(--gold-dim); color:var(--gold-bright);
+  display:flex; align-items:center; justify-content:center;
+}
+.cookie-banner-icon svg{ width:19px; height:19px; }
+.cookie-banner-body{ flex:1; min-width:0; }
+.cookie-banner p{ font-size:.85rem; line-height:1.6; color:var(--ink-600); margin-bottom:.4em; }
+.cookie-banner p strong{ color:var(--heading); }
+.cookie-banner a{ color:var(--gold-bright); text-decoration:underline; text-underline-offset:2px; }
+.cookie-banner .row{ display:flex; gap:var(--sp-3); flex-wrap:wrap; align-items:center; margin-top:var(--sp-3); }
+
+.btn-text{
+  background:none; border:0; color:var(--ink-600); font-size:.85rem; font-weight:600; text-decoration:underline;
+  text-underline-offset:3px; padding:.4em 0;
+}
+.btn-text:hover{ color:var(--gold-bright); }
+
+.link-btn{
+  background:none; border:0; padding:0; font:inherit; font-size:.9rem; color:rgba(255,255,255,.62);
+  text-align:left; cursor:pointer; transition:color .2s, padding-left .2s;
+}
+.link-btn:hover{ color:#fff; padding-left:4px; }
+
+/* Scrim + panel preferencji (pełnoekranowy modal, focus trap w JS) */
+.consent-scrim{
+  position:fixed; inset:0; background:rgba(3,3,2,.72); backdrop-filter:blur(3px); z-index:600;
+  opacity:0; transition:opacity .35s var(--ease);
+}
+.consent-scrim.is-visible{ opacity:1; }
+
+.consent-modal{
+  position:fixed; z-index:601; left:50%; top:50%; width:min(560px, 92vw); max-height:86vh; overflow-y:auto;
+  background:var(--surface); border:1px solid var(--line-gold); border-radius:var(--r-xl); box-shadow:var(--shadow-lg);
+  transform:translate(-50%,-46%) scale(.97); opacity:0; pointer-events:none;
+  transition:transform .4s var(--ease), opacity .35s var(--ease);
+}
+.consent-modal.is-visible{ transform:translate(-50%,-50%) scale(1); opacity:1; pointer-events:auto; }
+.consent-modal-head{
+  display:flex; align-items:center; justify-content:space-between; gap:var(--sp-4);
+  padding:var(--sp-6) var(--sp-6) var(--sp-4); position:sticky; top:0; background:var(--surface);
+  border-bottom:1px solid var(--line-soft); z-index:1;
+}
+.consent-modal-head h2{ font-size:1.4rem; }
+.consent-modal-body{ padding:var(--sp-5) var(--sp-6); }
+.consent-modal-body > p{ font-size:.92rem; line-height:1.7; color:var(--ink-600); margin-bottom:var(--sp-5); }
+.consent-modal-body a{ color:var(--gold-bright); text-decoration:underline; text-underline-offset:2px; }
+.consent-modal-foot{
+  display:flex; gap:var(--sp-3); flex-wrap:wrap; justify-content:flex-end;
+  padding:var(--sp-5) var(--sp-6); border-top:1px solid var(--line-soft); position:sticky; bottom:0; background:var(--surface);
+}
+
+.consent-category{ padding-block:var(--sp-4); border-bottom:1px solid var(--line-soft); }
+.consent-category:last-child{ border-bottom:none; }
+.consent-category-head{ display:flex; align-items:center; justify-content:space-between; gap:var(--sp-4); }
+.consent-category p{ font-size:.86rem; line-height:1.65; color:var(--ink-600); margin-top:.5em; }
+
+/* Przełącznik (toggle) — natywny checkbox pod spodem dla pełnej dostępności
+   klawiaturowej i czytników ekranu, wizualnie stylizowany jako switch. */
+.switch{ display:inline-flex; align-items:center; gap:.7em; cursor:pointer; }
+.switch input{
+  position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden;
+  clip:rect(0,0,0,0); white-space:nowrap; border:0;
+}
+.switch-track{
+  width:42px; height:24px; border-radius:var(--r-pill); background:var(--line); border:1px solid var(--line);
+  position:relative; flex:none; transition:background .25s, border-color .25s;
+}
+.switch-track::before{
+  content:""; position:absolute; top:2px; left:2px; width:18px; height:18px; border-radius:50%;
+  background:var(--ink-800); transition:transform .25s var(--ease), background .25s;
+}
+.switch input:checked + .switch-track{ background:var(--brand-green); border-color:var(--brand-green); }
+.switch input:checked + .switch-track::before{ transform:translateX(18px); background:#0a0d02; }
+.switch input:disabled + .switch-track{ background:var(--gold-dim); border-color:var(--line-gold); opacity:.9; }
+.switch input:disabled + .switch-track::before{ background:var(--gold-bright); }
+.switch input:focus-visible + .switch-track{ outline:3px solid var(--brand-green); outline-offset:3px; }
+.switch-label{ font-weight:700; font-size:.98rem; color:var(--heading); }

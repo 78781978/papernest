@@ -41,11 +41,16 @@ def build():
 </section>
 
 <div class="container">
-  <div class="usp-strip">
-    <div class="usp-item"><span class="ic">{icon('factory')}</span><div><b>Własna Produkcja</b><span>Zakład w Goleniowie</span></div></div>
-    <div class="usp-item"><span class="ic">{icon('sparkle')}</span><div><b>Wysoka Jakość</b><span>Surowiec z recyklingu</span></div></div>
-    <div class="usp-item"><span class="ic">{icon('truck')}</span><div><b>Szybka Realizacja</b><span>InPost i DPD</span></div></div>
-    <div class="usp-item"><span class="ic">{icon('shield')}</span><div><b>Bezpieczna Płatność</b><span>Obsługa przez paynow</span></div></div>
+  <div class="bento-grid">
+    <div class="bento-item is-feature">
+      <span class="tag-pill">{icon('leaf')} Certyfikowany recykling</span>
+      <span class="ic">{icon('factory')}</span>
+      <b>Własna produkcja w Goleniowie</b>
+      <p>Cały proces — od przewijania po pakowanie — odbywa się w jednym miejscu. Pełna kontrola jakości na każdym etapie, bez pośredników.</p>
+    </div>
+    <div class="bento-item span-wide"><span class="ic">{icon('sparkle')}</span><div><b>Wysoka Jakość</b><span>Surowiec w 100% z recyklingu</span></div></div>
+    <div class="bento-item"><span class="ic">{icon('truck')}</span><b>Szybka Realizacja</b><span>InPost i DPD</span></div>
+    <div class="bento-item"><span class="ic">{icon('shield')}</span><b>Bezpieczna Płatność</b><span>Obsługa przez paynow</span></div>
   </div>
 </div>
 
@@ -139,8 +144,8 @@ def build():
         <p>Dołącz do grona naszych klientów i przekonaj się, jak wspólnie możemy tworzyć rozwiązania, które wspierają rozwój Twojej firmy.</p>
       </div>
       <div class="cta-actions">
-        <a href="sklep.html" class="btn" style="background:#fff;color:var(--brand-green-deep);box-shadow:0 14px 30px rgba(11,35,69,.18)">Przejdź do sklepu</a>
-        <a href="kontakt.html" class="btn btn-ghost-light">Skontaktuj się {icon('arrow')}</a>
+        <a href="sklep.html" class="btn" style="background:#fff;color:#3d5708;box-shadow:0 14px 30px rgba(0,0,0,.25)">Przejdź do sklepu</a>
+        <a href="kontakt.html" class="btn btn-ghost-dark">Skontaktuj się {icon('arrow')}</a>
       </div>
     </div>''')}
   </div>

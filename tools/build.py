@@ -51,10 +51,20 @@ ICON = {
 }
 
 def icon(name, cls=""):
+    """Ikony są tu zawsze dekoracyjne (towarzyszą widocznemu tekstowi obok) —
+    aria-hidden chroni przed dublowaniem treści w czytnikach ekranu (WCAG 1.1.1)."""
     svg = ICON[name]
+    attrs = 'aria-hidden="true" focusable="false"'
     if cls:
-        svg = svg.replace("<svg ", f'<svg class="{cls}" ', 1)
+        attrs = f'class="{cls}" ' + attrs
+    svg = svg.replace("<svg ", f"<svg {attrs} ", 1)
     return svg
+
+def logo_mark():
+    """Znak marki, zawsze wyświetlany obok widocznego tekstu "PaperNest" —
+    dekoracyjny z punktu widzenia czytnika ekranu."""
+    svg = open(os.path.join(ROOT, "assets/img/logo/mark.svg"), encoding="utf-8").read()
+    return svg.replace("<svg ", '<svg aria-hidden="true" focusable="false" ', 1)
 
 # ---------------------------------------------------------------- NAV ----
 NAV_ITEMS = [
@@ -75,7 +85,7 @@ def header(active):
 <header class="site-header">
   <div class="container header-row">
     <a href="index.html" class="brand" aria-label="PaperNest — strona główna">
-      <span class="brand-mark">{open(os.path.join(ROOT,"assets/img/logo/mark.svg")).read()}</span>
+      <span class="brand-mark">{logo_mark()}</span>
       <span class="brand-word">PaperNest<small>Producent papieru w rolkach</small></span>
     </a>
     <nav class="main-nav" id="main-nav">
@@ -85,7 +95,7 @@ def header(active):
       <button class="icon-btn" type="button" aria-label="Szukaj">{icon('search')}</button>
       <a class="icon-btn" href="moje-konto.html" aria-label="Moje konto">{icon('user')}</a>
       <a class="icon-btn" href="koszyk.html" aria-label="Koszyk">{icon('cart')}<span class="cart-count">0</span></a>
-      <button class="nav-toggle" id="nav-toggle" aria-label="Otwórz menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Otwórz menu" aria-expanded="false" aria-controls="main-nav"><span></span><span></span><span></span></button>
     </div>
   </div>
 </header>
@@ -98,7 +108,7 @@ def footer():
   <div class="container footer-top">
     <div class="footer-brand">
       <a href="index.html" class="brand">
-        <span class="brand-mark">{open(os.path.join(ROOT,"assets/img/logo/mark.svg")).read()}</span>
+        <span class="brand-mark">{logo_mark()}</span>
         <span class="brand-word">PaperNest<small>Producent papieru w rolkach</small></span>
       </a>
       <p>PaperNest to producent z 25-letnim doświadczeniem na rynku. Oferujemy wypełniacze papierowe na rolkach, papiery do kurników oraz papiery remontowe – dla firm z całej Polski.</p>
@@ -114,6 +124,8 @@ def footer():
         <li><a href="reklamacje.html">Reklamacje</a></li>
         <li><a href="odstapienie.html">Odstąpienie od umowy</a></li>
         <li><a href="platnosc-i-dostawa.html">Płatność i Dostawa</a></li>
+        <li><a href="dostepnosc.html">Deklaracja dostępności</a></li>
+        <li><button type="button" class="link-btn" data-open-consent>Zarządzaj zgodami</button></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -148,11 +160,82 @@ def footer():
   </div>
 </footer>
 <button class="to-top" aria-label="Wróć na górę">{icon('chevronUp')}</button>
-<div class="cookie-banner" role="dialog" aria-label="Zgoda na pliki cookie">
-  <p><strong>Dbamy o Twoją prywatność.</strong> Używamy plików cookies, aby zapewnić prawidłowe działanie strony, analizować ruch oraz — za Twoją zgodą — dopasowywać treści i działania marketingowe. Zgodę możesz w każdej chwili zmienić.</p>
-  <div class="row">
-    <button class="btn btn-primary btn-sm" data-cookie-action="accept-all">Akceptuję wszystkie</button>
-    <button class="btn btn-outline btn-sm" data-cookie-action="reject">Odrzucam</button>
+
+<!-- ============ Baner zgody na cookies (pierwsza warstwa RODO) ============ -->
+<div class="cookie-banner" role="dialog" aria-modal="false" aria-labelledby="cookie-title" aria-describedby="cookie-desc" aria-hidden="true">
+  <div class="cookie-banner-icon" aria-hidden="true">{icon('shield')}</div>
+  <div class="cookie-banner-body">
+    <p id="cookie-title"><strong>Dbamy o Twoją prywatność.</strong></p>
+    <p id="cookie-desc">Używamy plików cookies, aby zapewnić prawidłowe działanie strony, analizować ruch oraz — za Twoją zgodą — dopasowywać treści i działania marketingowe. Szczegóły znajdziesz w <a href="polityka-prywatnosci.html">Polityce prywatności</a>. Zgodę możesz wycofać lub zmienić w każdej chwili w stopce strony.</p>
+    <div class="row">
+      <button class="btn btn-primary btn-sm" type="button" data-cookie-action="accept-all">Akceptuję wszystkie</button>
+      <button class="btn btn-outline btn-sm" type="button" data-cookie-action="reject">Odrzuć opcjonalne</button>
+      <button class="btn-text" type="button" data-open-consent>Dostosuj ustawienia</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ Pełny panel preferencji (druga warstwa RODO) ============ -->
+<div class="consent-scrim" data-consent-scrim hidden></div>
+<div class="consent-modal" role="dialog" aria-modal="true" aria-labelledby="consent-modal-title" hidden>
+  <div class="consent-modal-head">
+    <h2 id="consent-modal-title">Ustawienia prywatności</h2>
+    <button class="icon-btn" type="button" aria-label="Zamknij ustawienia prywatności" data-close-consent>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 5l14 14M19 5 5 19"/></svg>
+    </button>
+  </div>
+  <div class="consent-modal-body">
+    <p>Wybierz, na jakie kategorie plików cookie się zgadzasz. Niezbędne pliki cookie są zawsze aktywne, ponieważ bez nich strona nie działałaby prawidłowo. Więcej informacji znajdziesz w <a href="polityka-prywatnosci.html">Polityce prywatności</a>.</p>
+
+    <div class="consent-category">
+      <div class="consent-category-head">
+        <label class="switch">
+          <input type="checkbox" checked disabled aria-describedby="c-necessary-desc">
+          <span class="switch-track" aria-hidden="true"></span>
+          <span class="switch-label">Niezbędne</span>
+        </label>
+        <span class="tag-pill">Zawsze aktywne</span>
+      </div>
+      <p id="c-necessary-desc">Umożliwiają podstawowe działanie strony: bezpieczeństwo, zapamiętanie zgód, obsługę koszyka. Nie można ich wyłączyć.</p>
+    </div>
+
+    <div class="consent-category">
+      <div class="consent-category-head">
+        <label class="switch">
+          <input type="checkbox" data-consent-cat="functional" aria-describedby="c-functional-desc">
+          <span class="switch-track" aria-hidden="true"></span>
+          <span class="switch-label">Funkcjonalne</span>
+        </label>
+      </div>
+      <p id="c-functional-desc">Umożliwiają dodatkowe funkcje strony, np. zapamiętanie preferencji czy osadzone treści (mapa, czat).</p>
+    </div>
+
+    <div class="consent-category">
+      <div class="consent-category-head">
+        <label class="switch">
+          <input type="checkbox" data-consent-cat="analytics" aria-describedby="c-analytics-desc">
+          <span class="switch-track" aria-hidden="true"></span>
+          <span class="switch-label">Analityczne</span>
+        </label>
+      </div>
+      <p id="c-analytics-desc">Pomagają zrozumieć, jak odwiedzający korzystają ze strony — liczbę odwiedzin, źródła ruchu, popularność podstron.</p>
+    </div>
+
+    <div class="consent-category">
+      <div class="consent-category-head">
+        <label class="switch">
+          <input type="checkbox" data-consent-cat="marketing" aria-describedby="c-marketing-desc">
+          <span class="switch-track" aria-hidden="true"></span>
+          <span class="switch-label">Marketingowe</span>
+        </label>
+      </div>
+      <p id="c-marketing-desc">Służą do dopasowania reklam i mierzenia skuteczności działań reklamowych na tej i innych stronach.</p>
+    </div>
+  </div>
+  <div class="consent-modal-foot">
+    <button class="btn btn-outline btn-sm" type="button" data-cookie-action="reject">Odrzuć opcjonalne</button>
+    <button class="btn btn-outline btn-sm" type="button" data-cookie-action="accept-all">Akceptuj wszystkie</button>
+    <button class="btn btn-primary btn-sm" type="button" data-cookie-action="save">Zapisz preferencje</button>
   </div>
 </div>
 """
@@ -193,7 +276,10 @@ def page(slug, title, desc, active, content, extra_head=""):
     print("built", slug)
 
 def svg_file(path):
-    return open(os.path.join(ROOT, "assets/img/illustrations", path), encoding="utf-8").read()
+    """Duże ilustracje są czysto dekoracyjne — produkt/sekcja jest już opisana
+    tekstem obok, więc czytnik ekranu ma je pomijać (WCAG 1.1.1)."""
+    svg = open(os.path.join(ROOT, "assets/img/illustrations", path), encoding="utf-8").read()
+    return svg.replace("<svg ", '<svg aria-hidden="true" focusable="false" ', 1)
 
 def reveal(content, extra_cls=""):
     return f'<div class="reveal {extra_cls}">{content}</div>'

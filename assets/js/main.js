@@ -18,22 +18,25 @@ document.addEventListener('DOMContentLoaded', function () {
   var toggle = document.querySelector('.nav-toggle');
   var nav = document.querySelector('.main-nav');
   var scrim = document.querySelector('.nav-scrim');
-  function closeNav() {
+  function setNavState(open) {
     if (!toggle || !nav) return;
-    toggle.classList.remove('is-active');
-    nav.classList.remove('is-open');
-    if (scrim) scrim.classList.remove('is-open');
-    document.body.style.overflow = '';
+    toggle.classList.toggle('is-active', open);
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    toggle.setAttribute('aria-label', open ? 'Zamknij menu' : 'Otwórz menu');
+    nav.classList.toggle('is-open', open);
+    if (scrim) scrim.classList.toggle('is-open', open);
+    document.body.style.overflow = open ? 'hidden' : '';
   }
+  function closeNav() { setNavState(false); }
   if (toggle && nav) {
     toggle.addEventListener('click', function () {
-      var open = nav.classList.toggle('is-open');
-      toggle.classList.toggle('is-active', open);
-      if (scrim) scrim.classList.toggle('is-open', open);
-      document.body.style.overflow = open ? 'hidden' : '';
+      setNavState(!nav.classList.contains('is-open'));
     });
     if (scrim) scrim.addEventListener('click', closeNav);
     nav.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', closeNav); });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && nav.classList.contains('is-open')) { closeNav(); toggle.focus(); }
+    });
   }
 
   /* Scroll reveal — z siatką bezpieczeństwa: treść nigdy nie może zostać trwale ukryta,
@@ -146,19 +149,131 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  /* Cookie banner (funkcja zachowana z oryginału, premium restyle) */
+  /* =====================================================================
+     System zgód cookie (RODO) — dwuwarstwowy: baner + panel preferencji.
+     Zgoda jest granularna (niezbędne / funkcjonalne / analityczne /
+     marketingowe), zapisywana lokalnie, i równie łatwa do wycofania co do
+     wyrażenia (link "Zarządzaj zgodami" w stopce dostępny zawsze).
+     ===================================================================== */
+  var CONSENT_KEY = 'papernest_consent_v1';
   var cookieBanner = document.querySelector('.cookie-banner');
-  if (cookieBanner) {
-    var stored = null;
-    try { stored = localStorage.getItem('papernest_cookie_choice'); } catch (e) {}
-    if (!stored) {
-      setTimeout(function () { cookieBanner.classList.add('is-visible'); }, 600);
-    }
-    cookieBanner.querySelectorAll('[data-cookie-action]').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        try { localStorage.setItem('papernest_cookie_choice', btn.getAttribute('data-cookie-action')); } catch (e) {}
-        cookieBanner.classList.remove('is-visible');
-      });
+  var consentModal = document.querySelector('.consent-modal');
+  var consentScrim = document.querySelector('[data-consent-scrim]');
+  var consentToggles = document.querySelectorAll('[data-consent-cat]');
+  var lastFocusedEl = null;
+
+  function readConsent() {
+    try {
+      var raw = localStorage.getItem(CONSENT_KEY);
+      return raw ? JSON.parse(raw) : null;
+    } catch (e) { return null; }
+  }
+
+  function writeConsent(prefs) {
+    prefs.necessary = true;
+    prefs.decided = true;
+    prefs.timestamp = new Date().toISOString();
+    try { localStorage.setItem(CONSENT_KEY, JSON.stringify(prefs)); } catch (e) {}
+    // Miejsce na realne wdrożenie: tu odpalałyby się/wyłączały skrypty
+    // analityczne i marketingowe w zależności od prefs.analytics / prefs.marketing.
+    document.dispatchEvent(new CustomEvent('papernest:consent-updated', { detail: prefs }));
+  }
+
+  function applyTogglesFromConsent(prefs) {
+    consentToggles.forEach(function (input) {
+      var cat = input.getAttribute('data-consent-cat');
+      input.checked = !!(prefs && prefs[cat]);
     });
+  }
+
+  function hideBanner() {
+    if (cookieBanner) {
+      cookieBanner.classList.remove('is-visible');
+      cookieBanner.setAttribute('aria-hidden', 'true');
+    }
+  }
+  function showBanner() {
+    if (cookieBanner) {
+      cookieBanner.classList.add('is-visible');
+      cookieBanner.setAttribute('aria-hidden', 'false');
+    }
+  }
+
+  function trapFocus(e) {
+    if (!consentModal || !consentModal.classList.contains('is-visible')) return;
+    if (e.key === 'Escape') { closeConsentModal(); return; }
+    if (e.key !== 'Tab') return;
+    var focusables = consentModal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+    if (!focusables.length) return;
+    var first = focusables[0], last = focusables[focusables.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  }
+
+  function openConsentModal() {
+    if (!consentModal) return;
+    lastFocusedEl = document.activeElement;
+    var existing = readConsent();
+    applyTogglesFromConsent(existing || { functional: false, analytics: false, marketing: false });
+    hideBanner();
+    if (consentScrim) { consentScrim.hidden = false; requestAnimationFrame(function () { consentScrim.classList.add('is-visible'); }); }
+    consentModal.hidden = false;
+    requestAnimationFrame(function () { consentModal.classList.add('is-visible'); });
+    document.body.style.overflow = 'hidden';
+    document.addEventListener('keydown', trapFocus);
+    var closeBtn = consentModal.querySelector('[data-close-consent]');
+    if (closeBtn) closeBtn.focus();
+  }
+
+  function closeConsentModal() {
+    if (!consentModal) return;
+    consentModal.classList.remove('is-visible');
+    if (consentScrim) consentScrim.classList.remove('is-visible');
+    document.removeEventListener('keydown', trapFocus);
+    setTimeout(function () {
+      consentModal.hidden = true;
+      if (consentScrim) consentScrim.hidden = true;
+    }, 350);
+    document.body.style.overflow = '';
+    if (lastFocusedEl && typeof lastFocusedEl.focus === 'function') lastFocusedEl.focus();
+    if (!readConsent()) showBanner();
+  }
+
+  // Otwieranie panelu: przycisk "Dostosuj ustawienia" w banerze + link
+  // "Zarządzaj zgodami" w stopce (dostępny zawsze, na każdej podstronie).
+  document.querySelectorAll('[data-open-consent]').forEach(function (btn) {
+    btn.addEventListener('click', openConsentModal);
+  });
+  document.querySelectorAll('[data-close-consent]').forEach(function (btn) {
+    btn.addEventListener('click', closeConsentModal);
+  });
+  if (consentScrim) consentScrim.addEventListener('click', closeConsentModal);
+
+  // Akcje: akceptuj wszystkie / odrzuć opcjonalne / zapisz wybrane w panelu.
+  document.querySelectorAll('[data-cookie-action]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var action = btn.getAttribute('data-cookie-action');
+      var prefs;
+      if (action === 'accept-all') {
+        prefs = { functional: true, analytics: true, marketing: true };
+      } else if (action === 'reject') {
+        prefs = { functional: false, analytics: false, marketing: false };
+      } else { // 'save' — z panelu preferencji, bierze aktualny stan przełączników
+        prefs = {};
+        consentToggles.forEach(function (input) {
+          prefs[input.getAttribute('data-consent-cat')] = input.checked;
+        });
+      }
+      writeConsent(prefs);
+      applyTogglesFromConsent(prefs);
+      hideBanner();
+      if (consentModal && consentModal.classList.contains('is-visible')) closeConsentModal();
+    });
+  });
+
+  // Pierwsza wizyta: pokaż baner z opóźnieniem (nie blokuje pierwszego renderu).
+  var existingConsent = readConsent();
+  if (!existingConsent) {
+    setTimeout(showBanner, 700);
   }
 });

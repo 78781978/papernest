@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Moje konto | PaperNest</title>
-<meta name="description" content="Zaloguj się do swojego konta PaperNest, sprawdź historię zamówień i dane dostawy.">
+<title>Deklaracja dostępności | PaperNest</title>
+<meta name="description" content="Deklaracja dostępności cyfrowej serwisu PaperNest zgodnie z WCAG 2.1 i ustawą o dostępności cyfrowej.">
 <link rel="icon" href="assets/img/logo/mark.svg" type="image/svg+xml">
-<link rel="canonical" href="https://papernest.pl/moje-konto.html">
-<meta property="og:title" content="Moje konto | PaperNest">
-<meta property="og:description" content="Zaloguj się do swojego konta PaperNest, sprawdź historię zamówień i dane dostawy.">
+<link rel="canonical" href="https://papernest.pl/dostepnosc.html">
+<meta property="og:title" content="Deklaracja dostępności | PaperNest">
+<meta property="og:description" content="Deklaracja dostępności cyfrowej serwisu PaperNest zgodnie z WCAG 2.1 i ustawą o dostępności cyfrowej.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="pl_PL">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -48,56 +48,70 @@
 
 <section class="page-hero" style="padding-block:56px 40px">
   <div class="container">
-    <div class="crumbs"><a href="index.html">Strona główna</a> <span>/</span> <span>Moje konto</span></div>
-    <h1>Moje konto</h1>
+    <div class="crumbs"><a href="index.html">Strona główna</a> <span>/</span> <span>Deklaracja dostępności</span></div>
+    <h1>Deklaracja dostępności</h1>
+    <p>P.H.U „Bobinex" Grzegorz Działkowski zobowiązuje się zapewnić dostępność serwisu papernest.pl zgodnie z ustawą z dnia 4 kwietnia 2019 r. o dostępności cyfrowej stron internetowych i aplikacji mobilnych podmiotów publicznych oraz wytycznymi WCAG 2.1.</p>
   </div>
 </section>
 
 <section class="section">
   <div class="container">
-    <div class="notice-box">
-      <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.5M12 8v.01"/></svg>
-      <p><strong>Podgląd funkcji konta klienta.</strong> Logowanie, rejestracja i historia zamówień będą obsługiwane przez WooCommerce po wdrożeniu na WordPressie. Poniżej — docelowy układ ekranu logowania oraz panelu klienta.</p>
-    </div>
+    <div class="two-col" style="grid-template-columns:.7fr 2fr;align-items:start">
+      <aside class="legal-toc reveal" style="position:sticky;top:110px">
+        <h4>Spis treści</h4>
+        <a href="#status">Status zgodności</a>
+        <a href="#ulatwienia">Zastosowane ułatwienia</a>
+        <a href="#ograniczenia">Znane ograniczenia</a>
+        <a href="#przygotowanie">Przygotowanie deklaracji</a>
+        <a href="#kontakt">Zgłaszanie uwag</a>
+        <a href="#procedura">Procedura odwoławcza</a>
+        <a href="#dostep-alternatywny">Dostęp alternatywny</a>
+      </aside>
+      <div class="legal-shell reveal" style="max-width:none">
 
-    <div class="two-col" style="margin-bottom:64px">
-      <div class="reveal "><div class="card card-pad">
-        <h2 style="font-size:1.3rem;margin-bottom:18px">Zaloguj się</h2>
-        <form onsubmit="event.preventDefault(); alert('Logowanie zostanie podłączone do WooCommerce po wdrożeniu na WordPressie.');">
-          <div class="form-field"><label for="l-user">Login lub e-mail</label><input id="l-user" type="text" required></div>
-          <div class="form-field"><label for="l-pass">Hasło</label><input id="l-pass" type="password" required></div>
-          <button class="btn btn-primary btn-block" type="submit">Zaloguj się</button>
-        </form>
-        <a href="#" style="display:block;text-align:center;margin-top:14px;font-size:.85rem;color:var(--ink-500)">Nie pamiętasz hasła?</a>
-      </div></div>
-      <div class="reveal "><div class="card card-pad">
-        <h2 style="font-size:1.3rem;margin-bottom:18px">Zarejestruj się</h2>
-        <form onsubmit="event.preventDefault(); alert('Rejestracja zostanie podłączona do WooCommerce po wdrożeniu na WordPressie.');">
-          <div class="form-field"><label for="r-email">Adres e-mail</label><input id="r-email" type="email" required></div>
-          <button class="btn btn-outline btn-block" type="submit">Utwórz konto</button>
-        </form>
-        <p class="text-muted" style="font-size:.82rem;margin-top:14px;line-height:1.6">Link do ustawienia hasła zostanie wysłany na Twój adres e-mail.</p>
-      </div></div>
-    </div>
+        <div class="legal-note">
+          Ten serwis jest <strong>statycznym prototypem projektowym</strong> przygotowanym do akceptacji wyglądu. Poniższa deklaracja opisuje stan dostępności prototypu i intencje wdrożeniowe — po uruchomieniu docelowej strony na WordPressie deklaracja zostanie zaktualizowana i opublikowana pod stałym adresem.
+        </div>
 
-    <div class="reveal "><div class="section-head"><span class="eyebrow">Panel klienta</span><h2 style="font-size:1.6rem">Podgląd panelu po zalogowaniu</h2></div></div>
-    <div class="two-col reveal" style="grid-template-columns:.9fr 2.5fr;align-items:start">
-      <nav class="card card-pad account-tabs">
-        <a href="#" class="active"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 20c1.4-3.4 4.3-5 7.5-5s6.1 1.6 7.5 5"/></svg> Pulpit</a>
-        <a href="#"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5 12 4l9 4.5-9 4.5-9-4.5Z"/><path d="M3 8.5V17l9 4.5 9-4.5V8.5"/><path d="M12 13v8.5"/></svg> Zamówienia</a>
-        <a href="#"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.6 7-11.5A7 7 0 0 0 5 9.5C5 14.4 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg> Adresy</a>
-        <a href="#"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 7.7-7 9-4-1.3-7-4.5-7-9V6l7-3Z"/><path d="m9 12 2 2 4-4.2"/></svg> Dane konta</a>
-        <a href="#">Wyloguj się</a>
-      </nav>
-      <div class="card card-pad">
-        <h3 style="font-size:1.1rem;margin-bottom:16px">Ostatnie zamówienia</h3>
-        <table class="cart-table">
-          <thead><tr><th>Zamówienie</th><th>Data</th><th>Status</th><th>Suma</th></tr></thead>
-          <tbody>
-            <tr><td><strong style="color:var(--heading)">#PN-10245</strong></td><td>02.07.2026</td><td><span class="tag-pill">Wysłane</span></td><td>210,58 zł</td></tr>
-            <tr><td><strong style="color:var(--heading)">#PN-10198</strong></td><td>18.06.2026</td><td><span class="tag-pill">Zrealizowane</span></td><td>97,99 zł</td></tr>
-          </tbody>
-        </table>
+        <h5 id="status">Status zgodności</h5>
+        <p>Serwis jest <strong>częściowo zgodny</strong> z ustawą o dostępności cyfrowej z powodu niezgodności lub wyłączeń wymienionych poniżej. Projekt został przygotowany z myślą o spełnieniu wytycznych <strong>WCAG 2.1 na poziomie AA</strong>.</p>
+
+        <h5 id="ulatwienia">Zastosowane ułatwienia</h5>
+        <ul class="icon-list">
+          <li><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5 9.5 18 20 6"/></svg><span>Kontrast tekstu do tła zweryfikowany matematycznie — minimum 4,5:1 dla tekstu podstawowego (WCAG 1.4.3), a w większości przypadków ponad 7:1 (poziom AAA).</span></li>
+          <li><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5 9.5 18 20 6"/></svg><span>Pełna obsługa klawiatury — nawigacja, menu mobilne, warianty produktów, panel preferencji cookie i formularze działają bez użycia myszy.</span></li>
+          <li><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5 9.5 18 20 6"/></svg><span>Widoczny wskaźnik fokusu (focus-visible) na wszystkich elementach interaktywnych.</span></li>
+          <li><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5 9.5 18 20 6"/></svg><span>Link „Przejdź do treści" (skip link) pozwalający pominąć powtarzalną nawigację.</span></li>
+          <li><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5 9.5 18 20 6"/></svg><span>Poszanowanie systemowego ustawienia „ogranicz animacje" (prefers-reduced-motion) — wszystkie animacje są wtedy wyłączane.</span></li>
+          <li><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5 9.5 18 20 6"/></svg><span>Semantyczna struktura nagłówków (h1–h6), punkty orientacyjne (nav, main, footer) i etykiety pól formularzy powiązane z opisami (label, aria-describedby).</span></li>
+          <li><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5 9.5 18 20 6"/></svg><span>Panel zgód na cookies zbudowany na natywnych, dostępnych komponentach (checkbox jako switch) z pułapką fokusu (focus trap) i obsługą klawisza Esc.</span></li>
+          <li><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5 9.5 18 20 6"/></svg><span>Elementy czysto dekoracyjne (ikony SVG przy tekście) są ukryte przed czytnikami ekranu, aby nie dublować treści.</span></li>
+        </ul>
+
+        <h5 id="ograniczenia">Znane ograniczenia</h5>
+        <ul class="icon-list">
+          <li><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.5M12 8v.01"/></svg><span>Mapa na stronie Kontakt (osadzona z OpenStreetMap) nie posiada w pełni dostępnej alternatywy tekstowej — adres znajduje się jednak w pełni w tekście obok mapy.</span></li>
+          <li><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.5M12 8v.01"/></svg><span>Ilustracje produktowe SVG są dekoracyjne (produkty opisane są tekstowo w kartach) — nie zastępują one zdjęć rzeczywistych produktów.</span></li>
+          <li><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.5M12 8v.01"/></svg><span>Formularze (kontakt, logowanie, koszyk) są w tej wersji statyczne/demonstracyjne — pełna walidacja i komunikaty błędów zostaną wdrożone wraz z podłączeniem do WordPressa/WooCommerce.</span></li>
+        </ul>
+
+        <h5 id="przygotowanie">Przygotowanie deklaracji dostępności</h5>
+        <p>Deklarację sporządzono dnia <strong>16 lipca 2026 r.</strong> Deklarację sporządzono na podstawie samooceny przeprowadzonej metodą przeglądu eksperckiego (analiza kontrastu, nawigacji klawiaturą i struktury semantycznej) oraz automatycznych narzędzi wspierających audyt dostępności.</p>
+
+        <h5 id="kontakt">Zgłaszanie uwag i problemów z dostępnością</h5>
+        <p>Jeśli napotkasz problem z dostępnością treści na tej stronie, skontaktuj się z nami:</p>
+        <ul class="icon-list">
+          <li><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 6.5h17v11h-17z"/><path d="m4 7 8 6 8-6"/></svg><span>E-mail: <strong>gd@papernest.pl</strong></span></li>
+          <li><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5.5c0-1.1.9-2 2-2h2.1c.5 0 1 .4 1.1.9l.9 3.7c.1.4 0 .9-.3 1.2L7.4 10.7a13.7 13.7 0 0 0 5.9 5.9l1.4-1.4c.3-.3.8-.4 1.2-.3l3.7.9c.5.1.9.6.9 1.1V19c0 1.1-.9 2-2 2h-1C9.8 21 3 14.2 3 6.5v-1Z"/></svg><span>Telefon: <strong>538 989 005</strong></span></li>
+        </ul>
+        <p>Tą samą drogą można składać wnioski o udostępnienie informacji niedostępnej oraz żądania zapewnienia dostępności.</p>
+
+        <h5 id="procedura">Procedura odwoławcza</h5>
+        <p>Jeżeli zgłoszenie problemu z dostępnością nie zostanie rozpatrzone w sposób satysfakcjonujący, masz prawo złożyć skargę do <strong>Rzecznika Praw Obywatelskich</strong> (<a href="https://www.rpo.gov.pl">www.rpo.gov.pl</a>).</p>
+
+        <h5 id="dostep-alternatywny">Dostęp alternatywny</h5>
+        <p>Jeśli nie możesz skorzystać z elektronicznej formy kontaktu, informacje o produktach i ofercie PaperNest uzyskasz telefonicznie pod numerem <strong>538 989 005</strong> (Pon–Pt, 8:00–16:00) lub odwiedzając biuro sprzedaży pod adresem I Brygady Legionów 12-14, 72-100 Goleniów.</p>
+
       </div>
     </div>
   </div>
