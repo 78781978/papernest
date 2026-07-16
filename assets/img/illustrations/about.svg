@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="aboutBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#EEF3E2"/>
+      <stop offset="1" stop-color="#F6FAF0"/>
+    </linearGradient>
+    <linearGradient id="hallRoof" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#123561"/>
+      <stop offset="1" stop-color="#0B2345"/>
+    </linearGradient>
+  </defs>
+  <rect width="500" height="500" fill="url(#aboutBg)"/>
+  <rect x="0" y="380" width="500" height="120" fill="#0B2345" opacity=".06"/>
+
+  <!-- hala produkcyjna -->
+  <g transform="translate(90,180)">
+    <polygon points="0,60 160,0 320,60 320,260 0,260" fill="#fff" stroke="#DCE3D2" stroke-width="2"/>
+    <polygon points="0,60 160,0 320,60 160,110" fill="url(#hallRoof)"/>
+    <rect x="30" y="120" width="60" height="60" fill="#8BC113" opacity=".85"/>
+    <rect x="110" y="120" width="60" height="60" fill="#DCE3D2"/>
+    <rect x="190" y="120" width="60" height="60" fill="#DCE3D2"/>
+    <rect x="130" y="200" width="60" height="60" fill="#0B2345"/>
+    <circle cx="160" cy="230" r="18" fill="#8BC113"/>
+  </g>
+
+  <!-- roll pallet z boku -->
+  <g transform="translate(30,330)">
+    <rect x="0" y="60" width="120" height="16" rx="4" fill="#B9C2A8"/>
+    <g transform="translate(10,0)">
+      <ellipse cx="20" cy="40" rx="20" ry="40" fill="#EDE7D3"/>
+      <ellipse cx="20" cy="40" rx="9" ry="18" fill="#B9B296"/>
+    </g>
+    <g transform="translate(52,10)">
+      <ellipse cx="20" cy="50" rx="20" ry="50" fill="#A9D64B"/>
+      <ellipse cx="20" cy="50" rx="9" ry="22" fill="#6F9E0F"/>
+    </g>
+    <g transform="translate(92,20)">
+      <ellipse cx="10" cy="45" rx="14" ry="45" fill="#C9C2A5"/>
+    </g>
+  </g>
+
+  <circle cx="420" cy="90" r="34" fill="#8BC113" opacity=".18"/>
+  <circle cx="440" cy="420" r="22" fill="#0B2345" opacity=".08"/>
+</svg>

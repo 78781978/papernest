@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 700" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="heroBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#123561"/>
+      <stop offset=".55" stop-color="#0B2345"/>
+      <stop offset="1" stop-color="#071730"/>
+    </linearGradient>
+    <linearGradient id="rollA" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#EDE7D3"/>
+      <stop offset="1" stop-color="#C9C2A5"/>
+    </linearGradient>
+    <linearGradient id="rollB" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#A9D64B"/>
+      <stop offset="1" stop-color="#6F9E0F"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#8BC113" stop-opacity=".55"/>
+      <stop offset="1" stop-color="#8BC113" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="600" height="700" fill="url(#heroBg)"/>
+  <circle cx="470" cy="120" r="220" fill="url(#glow)"/>
+
+  <!-- soft grid lines -->
+  <g stroke="#ffffff" stroke-opacity=".05">
+    <line x1="0" y1="150" x2="600" y2="150"/>
+    <line x1="0" y1="330" x2="600" y2="330"/>
+    <line x1="0" y1="510" x2="600" y2="510"/>
+  </g>
+
+  <!-- stacked rolls, isometric-ish -->
+  <g transform="translate(150,430)">
+    <ellipse cx="0" cy="0" rx="120" ry="26" fill="#000" opacity=".25"/>
+    <g transform="translate(-70,-40)">
+      <ellipse cx="0" cy="0" rx="34" ry="70" fill="url(#rollA)"/>
+      <rect x="0" y="-70" width="150" height="140" fill="url(#rollA)"/>
+      <ellipse cx="150" cy="0" rx="34" ry="70" fill="#DAD4BC"/>
+      <ellipse cx="150" cy="0" rx="15" ry="30" fill="#B9B296"/>
+    </g>
+  </g>
+
+  <g transform="translate(300,270)">
+    <ellipse cx="0" cy="0" rx="100" ry="22" fill="#000" opacity=".22"/>
+    <g transform="translate(-58,-34)">
+      <ellipse cx="0" cy="0" rx="28" ry="58" fill="url(#rollB)"/>
+      <rect x="0" y="-58" width="120" height="116" fill="url(#rollB)"/>
+      <ellipse cx="120" cy="0" rx="28" ry="58" fill="#8BC113"/>
+      <ellipse cx="120" cy="0" rx="12" ry="25" fill="#4F7309"/>
+    </g>
+  </g>
+
+  <g transform="translate(120,610)">
+    <ellipse cx="0" cy="0" rx="140" ry="30" fill="#000" opacity=".28"/>
+    <g transform="translate(-80,-46)">
+      <ellipse cx="0" cy="0" rx="40" ry="82" fill="url(#rollA)"/>
+      <rect x="0" y="-82" width="180" height="164" fill="url(#rollA)"/>
+      <ellipse cx="180" cy="0" rx="40" ry="82" fill="#DAD4BC"/>
+      <ellipse cx="180" cy="0" rx="18" ry="36" fill="#B9B296"/>
+    </g>
+  </g>
+
+  <!-- paper ribbon accent -->
+  <path d="M420 520 C470 480 460 430 410 400 C480 410 510 470 470 530 C520 520 540 460 500 410" fill="none" stroke="#8BC113" stroke-width="7" stroke-linecap="round" opacity=".7"/>
+
+  <!-- dotted path suggesting motion / rewinding -->
+  <path d="M60 200 C 160 160, 260 160, 340 90" fill="none" stroke="#ffffff" stroke-opacity=".28" stroke-width="2" stroke-dasharray="2 10" stroke-linecap="round"/>
+</svg>
