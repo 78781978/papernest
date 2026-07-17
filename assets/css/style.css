@@ -1067,20 +1067,4 @@ a.cline:hover{ color:var(--brand-green-deep); text-decoration:underline; }
 .switch input:disabled + .switch-track{ background:var(--gold-dim); border-color:var(--line-gold); opacity:.9; }
 .switch input:disabled + .switch-track::before{ background:var(--gold-bright); }
 .switch input:focus-visible + .switch-track{ outline:3px solid var(--brand-navy); outline-offset:3px; }
-
-/* ---------- Złoty akcent na granatowych panelach ----------
-   Metaliczna, 3D złota "ramka" — echo złotego obramowania z logo
-   (przy literze N i wokół kółka). Zaczyna się wtopiona w 1/3
-   szerokości u góry, opływa lewy róg, grubieje na lewej krawędzi,
-   po czym zjeżdża w dół i wygasza się w 2/3 szerokości na dole —
-   celowo nie zamyka pełnego obrysu kafelka. */
-.page-hero::after,
-.stat-band::after,
-.bento-item.is-feature::before,
-.hero-visual .frame::after,
-.site-footer::before{
-  content:""; position:absolute; inset:0; z-index:2; pointer-events:none;
-  background-image:url("../img/textures/gold-frame.svg");
-  background-size:100% 100%; background-repeat:no-repeat;
-}
 .switch-label{ font-weight:700; font-size:.98rem; color:var(--heading); }
