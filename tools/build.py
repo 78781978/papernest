@@ -63,11 +63,12 @@ def icon(name, cls=""):
     svg = svg.replace("<svg ", f"<svg {attrs} ", 1)
     return svg
 
-def logo_mark():
-    """Znak marki, zawsze wyświetlany obok widocznego tekstu "PaperNest" —
-    dekoracyjny z punktu widzenia czytnika ekranu."""
-    svg = open(os.path.join(ROOT, "assets/img/logo/mark.svg"), encoding="utf-8").read()
-    return svg.replace("<svg ", '<svg aria-hidden="true" focusable="false" ', 1)
+def brand_logo(cls=""):
+    """Pełne logo PaperNest (znak + nazwa + dane kontaktowe) dostarczone przez
+    klienta — używane zamiast osobnego znaku + tekstu w nagłówku i stopce."""
+    extra = f' {cls}' if cls else ""
+    return (f'<img class="brand-logo{extra}" src="assets/img/logo/papernest-lockup.png" '
+            f'alt="PaperNest — Producent papieru w rolkach" width="288" height="192" loading="eager">')
 
 # ---------------------------------------------------------------- NAV ----
 NAV_ITEMS = [
@@ -88,8 +89,7 @@ def header(active):
 <header class="site-header">
   <div class="container header-row">
     <a href="index.html" class="brand" aria-label="PaperNest — strona główna">
-      <span class="brand-mark">{logo_mark()}</span>
-      <span class="brand-word">PaperNest<small>Producent papieru w rolkach</small></span>
+      {brand_logo()}
     </a>
     <nav class="main-nav" id="main-nav">
       <ul>{links}</ul>
@@ -111,8 +111,7 @@ def footer():
   <div class="container footer-top">
     <div class="footer-brand">
       <a href="index.html" class="brand">
-        <span class="brand-mark">{logo_mark()}</span>
-        <span class="brand-word">PaperNest<small>Producent papieru w rolkach</small></span>
+        <span class="brand-logo-plate">{brand_logo("footer-logo")}</span>
       </a>
       <p>PaperNest to producent z 25-letnim doświadczeniem na rynku. Oferujemy wypełniacze papierowe na rolkach, papiery do kurników oraz papiery remontowe – dla firm z całej Polski.</p>
       <div class="footer-social">
@@ -247,7 +246,7 @@ HEAD = """<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{title}</title>
 <meta name="description" content="{desc}">
-<link rel="icon" href="assets/img/logo/mark.svg" type="image/svg+xml">
+<link rel="icon" href="assets/img/logo/mark.png" type="image/png">
 <link rel="canonical" href="https://papernest.pl/{slug}">
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
