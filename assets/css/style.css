@@ -274,7 +274,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 /* ---------- Header (powiększony o ok. 60%) ---------- */
 .site-header{
   position:sticky; top:0; z-index:200;
-  padding-block: 35px;
+  padding-block: 16px;
   transition: background .4s var(--ease), box-shadow .4s var(--ease), padding .4s var(--ease), border-color .4s var(--ease);
   border-bottom:1px solid transparent;
 }
@@ -289,7 +289,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   z-index:-1;
 }
 .site-header.is-scrolled::before{ opacity:1; }
-.site-header.is-scrolled{ box-shadow:var(--shadow-sm); border-color:var(--line); padding-block:22px; }
+.site-header.is-scrolled{ box-shadow:var(--shadow-sm); border-color:var(--line); padding-block:10px; }
 
 .site-header .container{ max-width:var(--container-wide); }
 .header-row{
@@ -297,7 +297,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 }
 
 .brand{ display:flex; align-items:center; }
-.brand-logo{ display:block; height:86px; width:auto; flex:none; }
+.brand-logo{ display:block; height:258px; width:auto; flex:none; }
 .brand-logo-plate{
   display:inline-flex; align-items:center; background:#fff; border-radius:var(--r-md);
   padding:10px 16px; box-shadow:var(--shadow-sm);
@@ -354,7 +354,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   .site-header{ padding-block:16px; }
   .site-header.is-scrolled{ padding-block:12px; }
   .header-row{ gap:.75rem; }
-  .brand-logo{ height:44px; }
+  .brand-logo{ height:76px; }
   .brand-logo-plate{ padding:6px 10px; }
   .brand-logo-plate .brand-logo.footer-logo{ height:38px; }
   .header-actions{ gap:.5rem; }
