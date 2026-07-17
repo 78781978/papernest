@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+  <defs>
+    <linearGradient id="g1" x1="50" y1="-25" x2="50" y2="125" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#c9a24b" stop-opacity="0"/>
+      <stop offset="0.16" stop-color="#a9822f" stop-opacity=".85"/>
+      <stop offset="0.32" stop-color="#f3dba3" stop-opacity="1"/>
+      <stop offset="0.5" stop-color="#8a6a35" stop-opacity="1"/>
+      <stop offset="0.68" stop-color="#f3dba3" stop-opacity="1"/>
+      <stop offset="0.84" stop-color="#a9822f" stop-opacity=".85"/>
+      <stop offset="1" stop-color="#c9a24b" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="g2" x1="50" y1="-15" x2="50" y2="115" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="0.2" stop-color="#ffffff" stop-opacity=".55"/>
+      <stop offset="0.5" stop-color="#fff6df" stop-opacity=".9"/>
+      <stop offset="0.8" stop-color="#ffffff" stop-opacity=".55"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="soft" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="1.6"/>
+    </filter>
+  </defs>
+  <!-- glowing shadow pass (blurred, wide, low opacity) -->
+  <path d="M33,0 L8,0 A8,8 0 0 0 0,8 L0,92 A8,8 0 0 0 8,100 L66,100"
+        fill="none" stroke="url(#g1)" stroke-width="5.5" stroke-linecap="round" filter="url(#soft)" opacity=".55"/>
+  <!-- main thick gold segment: corner + left edge -->
+  <path d="M8,0 A8,8 0 0 0 0,8 L0,92 A8,8 0 0 0 8,100"
+        fill="none" stroke="url(#g1)" stroke-width="3.2" stroke-linecap="round"/>
+  <!-- thin tapering tails along top/bottom -->
+  <path d="M33,0 L8,0" fill="none" stroke="url(#g1)" stroke-width="1.6" stroke-linecap="round"/>
+  <path d="M8,100 L66,100" fill="none" stroke="url(#g1)" stroke-width="1.6" stroke-linecap="round"/>
+  <!-- bright metallic highlight line (3D bevel) -->
+  <path d="M9,1 A7,7 0 0 0 1,9 L1,91 A7,7 0 0 0 9,99"
+        fill="none" stroke="url(#g2)" stroke-width="1" stroke-linecap="round"/>
+</svg>

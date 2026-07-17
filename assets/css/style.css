@@ -50,10 +50,6 @@
   --grad-green: linear-gradient(135deg, #9ed324 0%, #7cab13 55%, #5c8a0e 100%);
   --grad-navy: linear-gradient(160deg, #123561 0%, #0b2345 55%, #071730 100%); /* granatowe panele głębi */
   --grad-sheen: linear-gradient(115deg, rgba(255,255,255,0) 40%, rgba(255,255,255,.55) 50%, rgba(255,255,255,0) 60%);
-  /* Cienka złota linia — echo złotego obramowania w logo (przy literze N i
-     wokół kółka). Używana jako subtelny akcent na granatowych panelach —
-     nigdy jako pełna obwódka dookoła. */
-  --gold-edge: linear-gradient(90deg, transparent 0%, var(--gold) 22%, #e6c583 50%, var(--gold) 78%, transparent 100%);
 
   /* Subtelna ziarnista tekstura (film grain) — na jasnym tle bardzo delikatna,
      dodaje "papierowej" faktury bez przyciemniania kompozycji. */
@@ -1073,17 +1069,18 @@ a.cline:hover{ color:var(--brand-green-deep); text-decoration:underline; }
 .switch input:focus-visible + .switch-track{ outline:3px solid var(--brand-navy); outline-offset:3px; }
 
 /* ---------- Złoty akcent na granatowych panelach ----------
-   Subtelne echo złotego obramowania z logo (przy literze N i wokół
-   kółka) — cienka, gasnąca na krawędziach złota linia u góry
-   wybranych granatowych elementów. Celowo NIE otacza całego kafelka —
-   tylko delikatny akcent, żeby złoto "oddychało", a nie przytłaczało. */
+   Metaliczna, 3D złota "ramka" — echo złotego obramowania z logo
+   (przy literze N i wokół kółka). Zaczyna się wtopiona w 1/3
+   szerokości u góry, opływa lewy róg, grubieje na lewej krawędzi,
+   po czym zjeżdża w dół i wygasza się w 2/3 szerokości na dole —
+   celowo nie zamyka pełnego obrysu kafelka. */
 .page-hero::after,
 .stat-band::after,
 .bento-item.is-feature::before,
 .hero-visual .frame::after,
 .site-footer::before{
-  content:""; position:absolute; z-index:2; pointer-events:none;
-  top:0; left:10%; right:10%; height:3px;
-  background:var(--gold-edge); opacity:.9;
+  content:""; position:absolute; inset:0; z-index:2; pointer-events:none;
+  background-image:url("../img/textures/gold-frame.svg");
+  background-size:100% 100%; background-repeat:no-repeat;
 }
 .switch-label{ font-weight:700; font-size:.98rem; color:var(--heading); }
