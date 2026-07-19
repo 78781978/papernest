@@ -68,7 +68,7 @@ def brand_logo(cls=""):
     klienta — używane zamiast osobnego znaku + tekstu w nagłówku i stopce."""
     extra = f' {cls}' if cls else ""
     return (f'<img class="brand-logo{extra}" src="assets/img/logo/papernest-lockup.png" '
-            f'alt="PaperNest — Producent papieru w rolkach" width="288" height="192" loading="eager">')
+            f'alt="PaperNest — Producent wyrobów z papieru" width="288" height="192" loading="eager">')
 
 # ---------------------------------------------------------------- NAV ----
 NAV_ITEMS = [

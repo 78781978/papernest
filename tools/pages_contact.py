@@ -97,7 +97,7 @@ def build():
 """
     page(
         "kontakt.html",
-        "Kontakt | PaperNest — producent papieru w rolkach",
+        "Kontakt | PaperNest — producent wyrobów z papieru",
         "Skontaktuj się z PaperNest — biuro sprzedaży, produkcja i magazyn w Goleniowie. Telefon: 538 989 005, e-mail: gd@papernest.pl.",
         "kontakt.html",
         content,

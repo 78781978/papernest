@@ -100,7 +100,7 @@ def build():
     page(
         "o-nas.html",
         "O nas | Producent papieru PaperNest",
-        "PaperNest to polski producent papieru w rolkach, wypełniaczy papierowych, papieru dla piskląt i tektury budowlanej. Oferujemy przewijanie i cięcie papieru.",
+        "PaperNest to polski producent wyrobów z papieru — wypełniaczy papierowych, papieru dla piskląt i tektury budowlanej. Oferujemy przewijanie i cięcie papieru.",
         "o-nas.html",
         content,
     )
