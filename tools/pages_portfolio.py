@@ -40,7 +40,7 @@ def build():
   <div class="container">
     <div class="crumbs"><a href="index.html">Strona główna</a> <span>/</span> <span>Portfolio</span></div>
     <h1>Zobacz nasze produkty w różnych zastosowaniach</h1>
-    <p>PaperNest w różnych zastosowaniach — odkryj, gdzie nasz papier w rolkach sprawdza się najlepiej.</p>
+    <p>PaperNest w różnych zastosowaniach — odkryj, gdzie nasze wyroby z papieru sprawdzają się najlepiej.</p>
   </div>
 </section>
 
@@ -78,7 +78,7 @@ def build():
     page(
         "portfolio.html",
         "Portfolio | Zastosowania produktów PaperNest",
-        "Zobacz, w jakich branżach i zastosowaniach sprawdza się papier w rolkach PaperNest — od e-commerce po weterynarię.",
+        "Zobacz, w jakich branżach i zastosowaniach sprawdzają się wyroby z papieru PaperNest — od e-commerce po weterynarię.",
         "portfolio.html",
         content,
     )

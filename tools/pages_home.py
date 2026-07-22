@@ -169,7 +169,7 @@ def build():
     page(
         "index.html",
         "PaperNest | Producent wyrobów z papieru i wypełniaczy papierowych",
-        "PaperNest produkuje papier w rolkach, wypełniacze papierowe, tekturę budowlaną i papier dla piskląt. Oferujemy przewijanie i cięcie papieru.",
+        "PaperNest produkuje wyroby z papieru: wypełniacze papierowe, tekturę budowlaną i papier dla piskląt. Oferujemy przewijanie i cięcie papieru.",
         "index.html",
         content,
     )

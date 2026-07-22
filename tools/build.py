@@ -113,7 +113,7 @@ def footer():
       <a href="index.html" class="brand">
         <span class="brand-logo-plate">{brand_logo("footer-logo")}</span>
       </a>
-      <p>PaperNest to producent z 25-letnim doświadczeniem na rynku. Oferujemy wypełniacze papierowe na rolkach, papiery do kurników oraz papiery remontowe – dla firm z całej Polski.</p>
+      <p>PaperNest to producent wyrobów z papieru z 25-letnim doświadczeniem na rynku. Oferujemy wypełniacze papierowe, papiery do kurników oraz papiery remontowe – dla firm z całej Polski.</p>
       <div class="footer-social">
         <a href="https://pl-pl.facebook.com/Papernestapp/" aria-label="Facebook" target="_blank" rel="noopener">{icon('facebook')}</a>
       </div>
