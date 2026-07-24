@@ -230,10 +230,10 @@ function papernest_import_testimonials() {
 	}
 
 	$testimonials = array(
-		array( 'Bracia Pikuła', 'Fermy BKK Pikuła', 'Doskonała Jakość', 'Jesteśmy bardzo zadowoleni z jakości papieru dla piskląt. Produkt jest wytrzymały, dobrze spełnia swoją funkcję i sprawdza się w codziennej pracy na fermie. Doceniamy również terminowe dostawy oraz profesjonalną obsługę.' ),
-		array( 'J. Bednarczyk', 'Jar-Pol', 'Skuteczna ochrona', 'Tektura budowlana doskonale sprawdza się podczas prac wykończeniowych i remontowych. Skutecznie zabezpiecza podłogi oraz inne powierzchnie przed uszkodzeniami i zabrudzeniami. Doceniamy wysoką jakość!' ),
-		array( 'Adam Ilnicki', 'Agrofirma Witkowo', 'Rzetelna Obsługa', 'Papier dla piskląt spełnił nasze oczekiwania pod względem jakości i funkcjonalności. Produkt jest trwały, wygodny w użytkowaniu i doskonale sprawdza się podczas odchowu piskląt.' ),
-		array( 'W. Pazdańska', 'PaperNest Professional', 'Przyjazna obsługa, świetny wypełniacz', 'Bardzo miła i pomocna obsługa. Wypełniacz papierowy jest wysokiej jakości, skutecznie chroni produkty podczas transportu i świetnie sprawdza się podczas pakowania zamówień z naszego sklepu internetowego.' ),
+		array( 'Wiola Pazdańska', 'Siima Professional', 'Przyjazna Obsługa, Świetny Wypełniacz', 'Bardzo miła i pomocna obsługa. Wypełniacz papierowy jest wysokiej jakości, skutecznie chroni produkty podczas transportu i świetnie sprawdza się podczas pakowania zamówień z naszego sklepu internetowego. Polecam!' ),
+		array( 'Adam Ilnicki', 'Agrofirma Witkowo', 'Rzetelna Obsługa', 'Papier dla piskląt spełnił nasze oczekiwania pod względem jakości i funkcjonalności. Produkt jest trwały, wygodny w użytkowaniu i doskonale sprawdza się podczas odchowu piskląt. Cenimy sobie rzetelną obsługę. Polecamy współpracę z PaperNest.' ),
+		array( 'J. Bednarczyk', 'Jar-Pol', 'Skuteczna Ochrona', 'Tektura budowlana doskonale sprawdza się podczas prac wykończeniowych i remontowych. Skutecznie zabezpiecza podłogi oraz inne powierzchnie przed uszkodzeniami i zabrudzeniami. Doceniamy wysoką jakość! Polecam - dobra cena!' ),
+		array( 'Bracia Pikuła', 'Fermy BKK Pikuła', 'Doskonała Jakość', 'Jesteśmy bardzo zadowoleni z jakości papieru dla piskląt. Produkt jest wytrzymały, dobrze spełnia swoją funkcję i sprawdza się w codziennej pracy na fermie. Doceniamy również terminowe dostawy oraz profesjonalną obsługę. Bracia Pikuła pozdrawiają!' ),
 	);
 
 	foreach ( $testimonials as $i => $t ) {
