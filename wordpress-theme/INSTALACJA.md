@@ -27,9 +27,11 @@ edytować z panelu wp-admin, a sklep działa na WooCommerce.
 
 ## 4. Treść startowa (strony, przykładowe produkty, opinie, portfolio)
 
-Motyw sam wypełnia się treścią startową przy pierwszej aktywacji. Jeśli
-WooCommerce zostało zainstalowane **po** aktywacji motywu (co jest normalną
-kolejnością — patrz punkty 2 i 3 powyżej), dokończ import ręcznie:
+Motyw **nie** importuje niczego automatycznie — celowo, żeby aktywacja
+motywu na stronie, na której jest już jakaś treść, niczego nie namieszała.
+Import startowy uruchamiasz ręcznie, kiedy sama/sam zdecydujesz, że jest
+odpowiedni moment (zwykle: po instalacji WooCommerce, patrz punkty 2 i 3
+powyżej):
 
 **Wygląd → Treść startowa → Importuj / uzupełnij treść startową**
 

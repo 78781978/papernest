@@ -1,11 +1,17 @@
 <?php
 /**
- * One-time demo content import — runs once when the theme is activated (and
- * can be re-run from Wygląd > PaperNest > Treść startowa), so the site isn't
- * empty on day one: creates the core pages, sample WooCommerce products,
+ * Demo content import — creates the core pages, sample WooCommerce products,
  * portfolio tiles and testimonials with the same copy as the static
  * prototype. Everything it creates is normal, editable WordPress content —
  * the client can rewrite or delete any of it afterwards.
+ *
+ * Deliberately NOT hooked to theme activation: running this automatically on
+ * activation is risky on a site that isn't empty (e.g. re-activating the
+ * theme, or switching to it on a site that already has real pages/products)
+ * — it could create confusing duplicate/placeholder content next to real
+ * content. Instead it only runs when explicitly triggered from
+ * Wygląd > Treść startowa, so whoever installs the site decides if and when
+ * to seed it with starter content.
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -23,18 +29,9 @@ function papernest_run_demo_import() {
 	update_option( 'papernest_demo_imported', 1 );
 }
 
-function papernest_maybe_run_demo_import() {
-	if ( get_option( 'papernest_demo_imported' ) ) {
-		return;
-	}
-	papernest_run_demo_import();
-}
-add_action( 'after_switch_theme', 'papernest_maybe_run_demo_import' );
-
 /**
- * Wygląd > Treść startowa — lets the client (or us, while testing) re-run
- * the import by hand, e.g. right after activating WooCommerce if it wasn't
- * active yet when the theme was first switched on.
+ * Wygląd > Treść startowa — the only way this import runs. See the note
+ * above for why it's not tied to theme activation.
  */
 function papernest_demo_import_admin_menu() {
 	add_theme_page(
