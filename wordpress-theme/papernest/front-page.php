@@ -68,37 +68,47 @@ $contact_url = papernest_page_link( 'kontakt' );
     <div class="product-grid reveal-stagger">
       <?php
       if ( class_exists( 'WooCommerce' ) ) {
-          $featured_products = wc_get_products(
+          // One tile per product category (not per product — the catalog has
+          // multiple products per category, e.g. different pack sizes of the
+          // same item), so this stays "3 different things" regardless of how
+          // many product listings exist within each category.
+          $categories = get_terms(
               array(
-                  'limit'   => 3,
-                  'status'  => 'publish',
-                  'orderby' => 'menu_order',
-                  'order'   => 'ASC',
+                  'taxonomy'   => 'product_cat',
+                  'hide_empty' => true,
+                  'exclude'    => array( get_option( 'default_product_cat', 0 ) ),
+                  'number'     => 3,
               )
           );
-          foreach ( $featured_products as $product ) {
-              $badge = '';
-              $terms = get_the_terms( $product->get_id(), 'product_cat' );
-              if ( $terms && ! is_wp_error( $terms ) ) {
-                  $badge = $terms[0]->name;
+          if ( $categories && ! is_wp_error( $categories ) ) {
+              foreach ( $categories as $cat ) {
+                  $sample = wc_get_products(
+                      array(
+                          'category' => array( $cat->slug ),
+                          'limit'    => 1,
+                          'status'   => 'publish',
+                          'orderby'  => 'menu_order',
+                          'order'    => 'ASC',
+                      )
+                  );
+                  if ( empty( $sample ) ) {
+                      continue;
+                  }
+                  $product   = $sample[0];
+                  $cat_link  = get_term_link( $cat );
+                  ob_start();
+                  ?>
+                  <article class="product-card">
+                    <a href="<?php echo esc_url( $cat_link ); ?>" class="thumb">
+                      <?php echo $product->get_image( 'medium' ); // phpcs:ignore ?>
+                    </a>
+                    <div class="body">
+                      <h3><a href="<?php echo esc_url( $cat_link ); ?>"><?php echo esc_html( $cat->name ); ?></a></h3>
+                    </div>
+                  </article>
+                  <?php
+                  echo papernest_reveal( ob_get_clean() );
               }
-              ob_start();
-              ?>
-              <article class="product-card">
-                <a href="<?php echo esc_url( $product->get_permalink() ); ?>" class="thumb">
-                  <?php echo $product->get_image( 'medium' ); // phpcs:ignore ?>
-                  <?php if ( $badge ) : ?><span class="badge"><?php echo esc_html( $badge ); ?></span><?php endif; ?>
-                </a>
-                <div class="body">
-                  <h3><a href="<?php echo esc_url( $product->get_permalink() ); ?>"><?php echo esc_html( $product->get_name() ); ?></a></h3>
-                  <div class="meta">
-                    <span class="price">od <?php echo $product->get_price_html(); // phpcs:ignore ?></span>
-                    <a href="<?php echo esc_url( $product->get_permalink() ); ?>" class="btn btn-outline btn-sm">Zobacz <?php echo papernest_icon( 'arrow' ); ?></a>
-                  </div>
-                </div>
-              </article>
-              <?php
-              echo papernest_reveal( ob_get_clean() );
           }
       } else {
           ?>
