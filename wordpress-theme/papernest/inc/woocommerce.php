@@ -29,9 +29,45 @@ add_action( 'woocommerce_after_main_content', 'papernest_wc_wrapper_end', 10 );
 
 function papernest_wc_wrapper_start() {
 	echo '<section class="section"><div class="container">';
+	if ( is_shop() || is_product_taxonomy() ) {
+		echo '<div class="two-col cols-toc" style="align-items:start">';
+		papernest_shop_category_sidebar();
+		echo '<div>';
+	}
 }
 function papernest_wc_wrapper_end() {
+	if ( is_shop() || is_product_taxonomy() ) {
+		echo '</div></div>';
+	}
 	echo '</div></section>';
+}
+
+/**
+ * Product category list on the shop/category archive — same visual style as
+ * the legal pages' table-of-contents sidebar (.legal-toc), replacing the
+ * default WooCommerce category widget this theme otherwise has no sidebar
+ * mechanism to show at all (see the removed woocommerce_sidebar hook above).
+ */
+function papernest_shop_category_sidebar() {
+	$categories = get_terms(
+		array(
+			'taxonomy'   => 'product_cat',
+			'hide_empty' => true,
+			'exclude'    => array( get_option( 'default_product_cat', 0 ) ),
+		)
+	);
+	if ( empty( $categories ) || is_wp_error( $categories ) ) {
+		return;
+	}
+	?>
+	<aside class="legal-toc reveal" style="position:sticky;top:110px">
+		<h4>Kategorie</h4>
+		<a href="<?php echo esc_url( get_permalink( wc_get_page_id( 'shop' ) ) ); ?>" <?php echo is_shop() ? 'style="color:var(--brand-green-deep);font-weight:700"' : ''; ?>>Wszystkie produkty</a>
+		<?php foreach ( $categories as $cat ) : ?>
+			<a href="<?php echo esc_url( get_term_link( $cat ) ); ?>" <?php echo is_tax( 'product_cat', $cat->slug ) ? 'style="color:var(--brand-green-deep);font-weight:700"' : ''; ?>><?php echo esc_html( $cat->name ); ?> (<?php echo esc_html( $cat->count ); ?>)</a>
+		<?php endforeach; ?>
+	</aside>
+	<?php
 }
 
 // 4 products per row on the shop grid, matching the static prototype's cols-4.
