@@ -162,13 +162,16 @@ $contact_url = papernest_page_link( 'kontakt' );
 <section class="section">
   <div class="container">
     <?php
-    echo papernest_reveal(
-        '<div class="section-head center">
+    $testimonials_html = papernest_testimonial_marquee();
+    if ( $testimonials_html ) {
+        echo papernest_reveal(
+            '<div class="section-head center">
       <span class="eyebrow" style="justify-content:center">Opinie</span>
       <h2 class="text-balance">Co mówią o nas klienci?</h2>
     </div>'
-    );
-    echo papernest_testimonial_marquee();
+        );
+        echo $testimonials_html; // phpcs:ignore
+    }
     ?>
   </div>
 </section>
