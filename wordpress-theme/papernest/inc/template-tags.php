@@ -115,15 +115,10 @@ function papernest_default_nav() {
 }
 
 function papernest_shop_link() {
+	if ( class_exists( 'WooCommerce' ) ) {
+		return get_permalink( wc_get_page_id( 'shop' ) );
+	}
 	return papernest_page_link( 'sklep' );
-}
-
-function papernest_cart_link() {
-	return papernest_page_link( 'koszyk' );
-}
-
-function papernest_checkout_link() {
-	return papernest_page_link( 'zamowienie' );
 }
 
 /* ------------------------------------------------------------- Contact info ---- */

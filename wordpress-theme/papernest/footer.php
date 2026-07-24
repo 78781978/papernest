@@ -33,9 +33,17 @@ if ( ! defined( 'ABSPATH' ) ) {
     <div class="footer-col">
       <h4>Konto</h4>
       <ul>
-        <li><a href="<?php echo esc_url( papernest_page_link( 'moje-konto' ) ); ?>">Status zamówienia</a></li>
-        <li><a href="<?php echo esc_url( papernest_cart_link() ); ?>">Koszyk</a></li>
-        <li><a href="<?php echo esc_url( papernest_shop_link() ); ?>">Sklep</a></li>
+        <?php if ( class_exists( 'WooCommerce' ) ) : ?>
+        <li><a href="<?php echo esc_url( get_permalink( get_option( 'woocommerce_myaccount_page_id' ) ) ); ?>">Moje Konto</a></li>
+        <li><a href="<?php echo esc_url( get_permalink( get_option( 'woocommerce_myaccount_page_id' ) ) ); ?>">Zamówienia</a></li>
+        <li><a href="<?php echo esc_url( wc_get_cart_url() ); ?>">Koszyk</a></li>
+        <li><a href="<?php echo esc_url( get_permalink( wc_get_page_id( 'shop' ) ) ); ?>">Sklep</a></li>
+        <?php else : ?>
+        <li><a href="<?php echo esc_url( papernest_page_link( 'moje-konto' ) ); ?>">Moje Konto</a></li>
+        <li><a href="<?php echo esc_url( papernest_page_link( 'moje-konto' ) ); ?>">Zamówienia</a></li>
+        <li><a href="<?php echo esc_url( papernest_page_link( 'koszyk' ) ); ?>">Koszyk</a></li>
+        <li><a href="<?php echo esc_url( papernest_page_link( 'sklep' ) ); ?>">Sklep</a></li>
+        <?php endif; ?>
       </ul>
     </div>
     <div class="footer-col">

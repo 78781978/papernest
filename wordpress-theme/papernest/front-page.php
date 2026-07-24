@@ -2,15 +2,15 @@
 /**
  * Homepage — ported from the static prototype's pages_home.py build().
  * Hero copy/stats stay editable via the Customizer; products pull live from
- * the papernest_product CPT; testimonials pull from the papernest_review CPT.
+ * WooCommerce; testimonials pull from the papernest_testimonial CPT.
  */
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 get_header();
 
-$shop_url    = papernest_shop_link();
-$about_url   = papernest_page_link( 'o-nas' );
+$shop_url = class_exists( 'WooCommerce' ) ? get_permalink( wc_get_page_id( 'shop' ) ) : papernest_page_link( 'sklep' );
+$about_url = papernest_page_link( 'o-nas' );
 $contact_url = papernest_page_link( 'kontakt' );
 ?>
 
@@ -67,47 +67,44 @@ $contact_url = papernest_page_link( 'kontakt' );
     ?>
     <div class="product-grid reveal-stagger">
       <?php
-      $featured_products = new WP_Query(
-          array(
-              'post_type'      => 'papernest_product',
-              'posts_per_page' => 3,
-              'orderby'        => 'menu_order date',
-              'order'          => 'ASC',
-          )
-      );
-      if ( $featured_products->have_posts() ) :
-          while ( $featured_products->have_posts() ) :
-              $featured_products->the_post();
-              $badge      = papernest_product_badge( get_the_ID() );
-              $from_price = papernest_product_from_price( get_the_ID() );
+      if ( class_exists( 'WooCommerce' ) ) {
+          $featured_products = wc_get_products(
+              array(
+                  'limit'   => 3,
+                  'status'  => 'publish',
+                  'orderby' => 'menu_order',
+                  'order'   => 'ASC',
+              )
+          );
+          foreach ( $featured_products as $product ) {
+              $badge = '';
+              $terms = get_the_terms( $product->get_id(), 'product_cat' );
+              if ( $terms && ! is_wp_error( $terms ) ) {
+                  $badge = $terms[0]->name;
+              }
               ob_start();
               ?>
               <article class="product-card">
-                <a href="<?php the_permalink(); ?>" class="thumb">
-                  <?php if ( has_post_thumbnail() ) : ?>
-                    <?php the_post_thumbnail( 'medium' ); ?>
-                  <?php endif; ?>
+                <a href="<?php echo esc_url( $product->get_permalink() ); ?>" class="thumb">
+                  <?php echo $product->get_image( 'medium' ); // phpcs:ignore ?>
                   <?php if ( $badge ) : ?><span class="badge"><?php echo esc_html( $badge ); ?></span><?php endif; ?>
                 </a>
                 <div class="body">
-                  <h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+                  <h3><a href="<?php echo esc_url( $product->get_permalink() ); ?>"><?php echo esc_html( $product->get_name() ); ?></a></h3>
                   <div class="meta">
-                    <?php if ( null !== $from_price ) : ?>
-                      <span class="price">od <span><?php echo esc_html( papernest_format_price( $from_price ) ); ?></span></span>
-                    <?php endif; ?>
-                    <a href="<?php the_permalink(); ?>" class="btn btn-outline btn-sm">Zobacz <?php echo papernest_icon( 'arrow' ); ?></a>
+                    <span class="price">od <?php echo $product->get_price_html(); // phpcs:ignore ?></span>
+                    <a href="<?php echo esc_url( $product->get_permalink() ); ?>" class="btn btn-outline btn-sm">Zobacz <?php echo papernest_icon( 'arrow' ); ?></a>
                   </div>
                 </div>
               </article>
               <?php
               echo papernest_reveal( ob_get_clean() );
-          endwhile;
-          wp_reset_postdata();
-      else :
+          }
+      } else {
           ?>
-          <div class="notice-box"><?php echo papernest_icon( 'info' ); ?><p><strong>Brak produktów.</strong> Dodaj produkty w Produkty → Dodaj produkt, a pojawią się tutaj automatycznie.</p></div>
+          <div class="notice-box"><?php echo papernest_icon( 'info' ); ?><p><strong>WooCommerce nie jest aktywne.</strong> Zainstaluj i aktywuj wtyczkę WooCommerce, a następnie dodaj produkty — pojawią się tutaj automatycznie.</p></div>
           <?php
-      endif;
+      }
       ?>
     </div>
   </div>

@@ -37,8 +37,13 @@ if ( ! defined( 'ABSPATH' ) ) {
     </nav>
     <div class="header-actions">
       <button class="icon-btn" type="button" aria-label="Szukaj"><?php echo papernest_icon( 'search' ); ?></button>
-      <a class="icon-btn" href="<?php echo esc_url( papernest_page_link( 'moje-konto' ) ); ?>" aria-label="Status zamówienia"><?php echo papernest_icon( 'user' ); ?></a>
-      <a class="icon-btn" href="<?php echo esc_url( papernest_cart_link() ); ?>" aria-label="Koszyk"><?php echo papernest_icon( 'cart' ); ?><span class="cart-count"><?php echo absint( papernest_cart_count() ); ?></span></a>
+      <?php if ( class_exists( 'WooCommerce' ) ) : ?>
+        <a class="icon-btn" href="<?php echo esc_url( get_permalink( get_option( 'woocommerce_myaccount_page_id' ) ) ); ?>" aria-label="Moje konto"><?php echo papernest_icon( 'user' ); ?></a>
+        <a class="icon-btn" href="<?php echo esc_url( wc_get_cart_url() ); ?>" aria-label="Koszyk"><?php echo papernest_icon( 'cart' ); ?><span class="cart-count"><?php echo absint( WC()->cart ? WC()->cart->get_cart_contents_count() : 0 ); ?></span></a>
+      <?php else : ?>
+        <a class="icon-btn" href="<?php echo esc_url( papernest_page_link( 'moje-konto' ) ); ?>" aria-label="Moje konto"><?php echo papernest_icon( 'user' ); ?></a>
+        <a class="icon-btn" href="<?php echo esc_url( papernest_page_link( 'koszyk' ) ); ?>" aria-label="Koszyk"><?php echo papernest_icon( 'cart' ); ?><span class="cart-count">0</span></a>
+      <?php endif; ?>
       <button class="nav-toggle" id="nav-toggle" aria-label="Otwórz menu" aria-expanded="false" aria-controls="main-nav"><span></span><span></span><span></span></button>
     </div>
   </div>

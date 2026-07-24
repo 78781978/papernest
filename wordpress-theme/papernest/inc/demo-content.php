@@ -1,9 +1,9 @@
 <?php
 /**
- * Demo content import — creates the core pages, sample products, portfolio
- * tiles and testimonials with the same copy as the static prototype.
- * Everything it creates is normal, editable WordPress content — the client
- * can rewrite or delete any of it afterwards.
+ * Demo content import — creates the core pages, sample WooCommerce products,
+ * portfolio tiles and testimonials with the same copy as the static
+ * prototype. Everything it creates is normal, editable WordPress content —
+ * the client can rewrite or delete any of it afterwards.
  *
  * Deliberately NOT hooked to theme activation: running this automatically on
  * activation is risky on a site that isn't empty (e.g. re-activating the
@@ -23,7 +23,10 @@ function papernest_run_demo_import() {
 	papernest_import_menu();
 	papernest_import_testimonials();
 	papernest_import_usecases();
-	papernest_import_products();
+	if ( class_exists( 'WooCommerce' ) ) {
+		papernest_import_products();
+		papernest_setup_wc_payment_gateways();
+	}
 	update_option( 'papernest_demo_imported', 1 );
 }
 
@@ -51,7 +54,7 @@ function papernest_demo_import_admin_page() {
 	?>
 	<div class="wrap">
 		<h1><?php esc_html_e( 'Treść startowa PaperNest', 'papernest' ); ?></h1>
-		<p><?php esc_html_e( 'Tworzy przykładowe strony (O nas, Sklep, Koszyk, Zamówienie, Portfolio, Kontakt, dokumenty prawne), menu główne, opinie klientów, kafelki portfolio oraz trzy przykładowe produkty z wariantami cenowymi. Bezpiecznie uruchamiać wielokrotnie: istniejące produkty/strony nie zostaną zdublowane.', 'papernest' ); ?></p>
+		<p><?php esc_html_e( 'Tworzy przykładowe strony (O nas, Portfolio, Kontakt, dokumenty prawne), menu główne, opinie klientów, kafelki portfolio oraz — jeśli WooCommerce jest aktywne — trzy przykładowe produkty z wariantami cenowymi. Bezpiecznie uruchamiać wielokrotnie: istniejące produkty/strony nie zostaną zdublowane.', 'papernest' ); ?></p>
 		<p><strong><?php esc_html_e( 'Uruchomiono wcześniej:', 'papernest' ); ?></strong> <?php echo esc_html( $already ); ?></p>
 		<form method="post">
 			<?php wp_nonce_field( 'papernest_run_import', 'papernest_import_nonce' ); ?>
@@ -77,10 +80,6 @@ function papernest_import_pages() {
 
 	$pages = array(
 		array( 'title' => 'Home', 'slug' => 'home', 'template' => '', 'content' => '' ),
-		array( 'title' => 'Sklep', 'slug' => 'sklep', 'template' => 'page-sklep.php', 'content' => '' ),
-		array( 'title' => 'Koszyk', 'slug' => 'koszyk', 'template' => 'page-koszyk.php', 'content' => '' ),
-		array( 'title' => 'Zamówienie', 'slug' => 'zamowienie', 'template' => 'page-zamowienie.php', 'content' => '' ),
-		array( 'title' => 'Status zamówienia', 'slug' => 'moje-konto', 'template' => 'page-moje-konto.php', 'content' => '' ),
 		array( 'title' => 'O nas', 'slug' => 'o-nas', 'template' => 'page-o-nas.php', 'content' => papernest_default_about_content() ),
 		array( 'title' => 'Portfolio', 'slug' => 'portfolio', 'template' => 'page-portfolio.php', 'content' => '' ),
 		array( 'title' => 'Kontakt', 'slug' => 'kontakt', 'template' => 'page-kontakt.php', 'content' => '' ),
@@ -128,18 +127,6 @@ function papernest_import_pages() {
 		$existing = get_page_by_path( $p['slug'] );
 		if ( $existing ) {
 			$ids[ $p['slug'] ] = $existing->ID;
-			// A page already exists at this slug (from an earlier import, or
-			// created some other way) — never touch its content, but make
-			// sure it actually uses this theme's template if nothing more
-			// specific was deliberately chosen, otherwise e.g. an existing
-			// "sklep" page would silently render as a blank generic page
-			// instead of the shop.
-			if ( $p['template'] ) {
-				$current_template = get_post_meta( $existing->ID, '_wp_page_template', true );
-				if ( ! $current_template || 'default' === $current_template ) {
-					update_post_meta( $existing->ID, '_wp_page_template', $p['template'] );
-				}
-			}
 			continue;
 		}
 		$page_id = wp_insert_post(
@@ -188,17 +175,17 @@ function papernest_import_menu() {
 	}
 	$menu_id = wp_create_nav_menu( 'Menu główne' );
 
-	$home_id   = get_option( 'page_on_front' );
-	$sklep     = get_page_by_path( 'sklep' );
-	$onas      = get_page_by_path( 'o-nas' );
-	$portfolio = get_page_by_path( 'portfolio' );
-	$kontakt   = get_page_by_path( 'kontakt' );
+	$home_id      = get_option( 'page_on_front' );
+	$shop_page_id = class_exists( 'WooCommerce' ) ? wc_get_page_id( 'shop' ) : 0;
+	$onas         = get_page_by_path( 'o-nas' );
+	$portfolio    = get_page_by_path( 'portfolio' );
+	$kontakt      = get_page_by_path( 'kontakt' );
 
 	$items = array(
 		array( 'title' => 'Home', 'object_id' => $home_id, 'type' => 'post_type', 'object' => 'page' ),
 	);
-	if ( $sklep ) {
-		$items[] = array( 'title' => 'Sklep', 'object_id' => $sklep->ID, 'type' => 'post_type', 'object' => 'page' );
+	if ( $shop_page_id && $shop_page_id > 0 ) {
+		$items[] = array( 'title' => 'Sklep', 'object_id' => $shop_page_id, 'type' => 'post_type', 'object' => 'page' );
 	}
 	if ( $onas ) {
 		$items[] = array( 'title' => 'O Nas', 'object_id' => $onas->ID, 'type' => 'post_type', 'object' => 'page' );
@@ -302,7 +289,7 @@ function papernest_import_usecases() {
 /* ----------------------------------------------------------------- Products ---- */
 
 function papernest_import_products() {
-	if ( ! empty( get_posts( array( 'post_type' => 'papernest_product', 'numberposts' => 1, 'post_status' => 'any' ) ) ) ) {
+	if ( ! empty( get_posts( array( 'post_type' => 'product', 'numberposts' => 1, 'post_status' => 'any' ) ) ) ) {
 		return;
 	}
 
@@ -346,38 +333,81 @@ function papernest_import_products() {
 	);
 
 	foreach ( $products as $p ) {
-		$term = term_exists( $p['category'], 'papernest_product_cat' );
+		$term = term_exists( $p['category'], 'product_cat' );
 		if ( ! $term ) {
-			$term = wp_insert_term( $p['category'], 'papernest_product_cat' );
+			$term = wp_insert_term( $p['category'], 'product_cat' );
 		}
 		$term_id = is_array( $term ) ? $term['term_id'] : $term;
 
-		$product_id = wp_insert_post(
-			array(
-				'post_type'    => 'papernest_product',
-				'post_title'   => $p['name'],
-				'post_content' => $p['desc'],
-				'post_excerpt' => $p['short'],
-				'post_status'  => 'publish',
-			)
-		);
-		if ( is_wp_error( $product_id ) || ! $product_id ) {
-			continue;
-		}
+		$product = new WC_Product_Variable();
+		$product->set_name( $p['name'] );
+		$product->set_status( 'publish' );
+		$product->set_catalog_visibility( 'visible' );
+		$product->set_description( $p['desc'] );
+		$product->set_short_description( $p['short'] );
+		$product->set_category_ids( array( $term_id ) );
 
-		wp_set_object_terms( $product_id, array( (int) $term_id ), 'papernest_product_cat' );
-		update_post_meta( $product_id, '_papernest_badge', $p['category'] );
+		$attribute = new WC_Product_Attribute();
+		$attribute->set_id( 0 );
+		$attribute->set_name( 'Wariant' );
+		$attribute->set_options( wp_list_pluck( $p['variants'], 0 ) );
+		$attribute->set_position( 0 );
+		$attribute->set_visible( true );
+		$attribute->set_variation( true );
+		$product->set_attributes( array( $attribute ) );
 
-		$variants = array();
+		$product_id = $product->save();
+
 		foreach ( $p['variants'] as $v ) {
 			list( $label, $sub, $price, $old ) = $v;
-			$variants[] = array(
-				'label'     => $label,
-				'sub'       => $sub,
-				'price'     => (float) $price,
-				'old_price' => $old ? (float) $old : null,
-			);
+			$variation = new WC_Product_Variation();
+			$variation->set_parent_id( $product_id );
+			$variation->set_attributes( array( 'wariant' => $label ) );
+			if ( $old ) {
+				$variation->set_regular_price( $old );
+				$variation->set_sale_price( $price );
+			} else {
+				$variation->set_regular_price( $price );
+			}
+			$variation->set_description( $sub );
+			$variation->save();
 		}
-		update_post_meta( $product_id, '_papernest_variants', $variants );
+
+		// Keep the parent product purchasable with a sane default price range.
+		$product = wc_get_product( $product_id );
+		$product->set_price( $p['variants'][0][2] );
+		$product->save();
+	}
+}
+
+/**
+ * Turns on WooCommerce's two built-in payment methods that need no external
+ * account or API keys — bank transfer and cash on delivery — so the shop is
+ * actually orderable immediately. Real online payments (BLIK, card, fast
+ * bank transfer) need a payment provider account (e.g. paynow) and its own
+ * plugin/API keys, which only the site owner can set up; these two are a
+ * working starting point until that's in place. Never overrides settings
+ * the client already changed.
+ */
+function papernest_setup_wc_payment_gateways() {
+	if ( ! get_option( 'woocommerce_bacs_settings' ) ) {
+		update_option(
+			'woocommerce_bacs_settings',
+			array(
+				'enabled'     => 'yes',
+				'title'       => 'Przelew tradycyjny',
+				'description' => 'Dane do przelewu wyślemy w mailu z potwierdzeniem zamówienia.',
+			)
+		);
+	}
+	if ( ! get_option( 'woocommerce_cod_settings' ) ) {
+		update_option(
+			'woocommerce_cod_settings',
+			array(
+				'enabled'     => 'yes',
+				'title'       => 'Za pobraniem',
+				'description' => 'Zapłacisz gotówką lub kartą kurierowi przy odbiorze.',
+			)
+		);
 	}
 }

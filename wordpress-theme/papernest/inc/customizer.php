@@ -63,6 +63,7 @@ function papernest_customize_register( $wp_customize ) {
 		'papernest_photo_warehouse' => __( 'Kontakt — zdjęcie magazynu', 'papernest' ),
 		'papernest_photo_shop'      => __( 'Kontakt — zdjęcie sklepu / punktu odbioru', 'papernest' ),
 		'papernest_photo_office'    => __( 'Kontakt — zdjęcie biura sprzedaży', 'papernest' ),
+		'papernest_logo_paynow'     => __( 'Logo paynow (Płatność i Dostawa)', 'papernest' ),
 		'papernest_logo_inpost'     => __( 'Logo InPost (Płatność i Dostawa)', 'papernest' ),
 		'papernest_logo_dpd'        => __( 'Logo DPD (Płatność i Dostawa)', 'papernest' ),
 	);
