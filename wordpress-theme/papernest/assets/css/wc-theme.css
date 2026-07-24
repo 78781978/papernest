@@ -59,11 +59,22 @@
 .woocommerce ul.products li.product { list-style: none; }
 
 /* Single product summary */
-.woocommerce div.product .product_title { font-family: var(--font-display); color: var(--heading); }
+.woocommerce div.product .product_title,
+.woocommerce div.product h1.product_title.entry-title {
+	font-family: var(--font-display) !important;
+	color: var(--heading) !important;
+	font-weight: 700;
+	line-height: 1.2;
+}
 .woocommerce div.product p.price,
 .woocommerce div.product span.price { font-size: 1.6rem; }
 .woocommerce div.product .stock { color: var(--brand-link-green); font-weight: 700; }
 .woocommerce div.product .out-of-stock { color: #b3261e; font-weight: 700; }
+
+/* Sale badge vs. gallery zoom icon both sit in the image's top-left by
+   default and overlap — keep the badge clear of it. */
+.woocommerce div.product .onsale { top: 12px; left: 12px; right: auto; }
+.woocommerce div.product .woocommerce-product-gallery__trigger { top: 12px; right: 12px; left: auto; }
 
 /* Quantity input */
 .woocommerce div.product form.cart .quantity {
