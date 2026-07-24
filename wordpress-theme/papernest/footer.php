@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?>
 </main>
 <footer class="site-footer">
-  <div class="container footer-top">
+  <div class="container footer-top reveal">
     <div class="footer-brand">
       <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="brand">
         <span class="brand-logo-plate"><?php echo papernest_logo( 'footer-logo' ); ?></span>
