@@ -86,6 +86,7 @@ $contact_url = papernest_page_link( 'kontakt' );
               )
           );
           if ( $categories && ! is_wp_error( $categories ) ) {
+              $tile_index = 0;
               foreach ( $categories as $cat ) {
                   $sample = wc_get_products(
                       array(
@@ -101,11 +102,21 @@ $contact_url = papernest_page_link( 'kontakt' );
                   }
                   $product   = $sample[0];
                   $cat_link  = get_term_link( $cat );
+                  $tile_index++;
+                  // Editable straight from the Customizer, so the client can
+                  // swap this tile's photo without touching the WooCommerce
+                  // product itself; falls back to the product's own featured
+                  // image when nothing has been uploaded here.
+                  $custom_image = get_theme_mod( 'papernest_home_product_' . $tile_index, '' );
                   ob_start();
                   ?>
                   <article class="product-card">
                     <a href="<?php echo esc_url( $cat_link ); ?>" class="thumb">
-                      <?php echo $product->get_image( 'medium' ); // phpcs:ignore ?>
+                      <?php if ( $custom_image ) : ?>
+                        <img src="<?php echo esc_url( $custom_image ); ?>" alt="<?php echo esc_attr( $cat->name ); ?>" loading="lazy">
+                      <?php else : ?>
+                        <?php echo $product->get_image( 'medium' ); // phpcs:ignore ?>
+                      <?php endif; ?>
                     </a>
                     <div class="body">
                       <h3><a href="<?php echo esc_url( $cat_link ); ?>"><?php echo esc_html( $cat->name ); ?></a></h3>

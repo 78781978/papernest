@@ -104,6 +104,9 @@ function papernest_customize_register( $wp_customize ) {
 		'papernest_illustration_hero'     => __( 'Strona główna — duża ilustracja (sekcja hero)', 'papernest' ),
 		'papernest_illustration_about'    => __( 'O nas — duża ilustracja', 'papernest' ),
 		'papernest_illustration_services' => __( 'Usługi przemysłowe — ilustracja (strona główna i O nas)', 'papernest' ),
+		'papernest_home_product_1'        => __( 'Strona główna — zdjęcie produktu 1 (sekcja "Trzy produkty")', 'papernest' ),
+		'papernest_home_product_2'        => __( 'Strona główna — zdjęcie produktu 2 (sekcja "Trzy produkty")', 'papernest' ),
+		'papernest_home_product_3'        => __( 'Strona główna — zdjęcie produktu 3 (sekcja "Trzy produkty")', 'papernest' ),
 	);
 
 	foreach ( $illustration_fields as $id => $label ) {
