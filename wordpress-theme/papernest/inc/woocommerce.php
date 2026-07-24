@@ -75,17 +75,20 @@ function papernest_shop_category_sidebar() {
 	<?php
 }
 
-// 4 products per row on the shop grid, matching the static prototype's cols-4.
+// The static prototype's cols-4 assumed a full-width grid; once this theme
+// added the category sidebar (papernest_shop_category_sidebar() above), the
+// content column is narrower, and 4 columns made cards too cramped for their
+// price/button/title. 3 columns matches the space actually available.
 add_filter(
 	'loop_shop_columns',
 	function () {
-		return 4;
+		return 3;
 	}
 );
 add_filter(
 	'woocommerce_product_loop_start',
 	function ( $html ) {
-		return '<div class="product-grid cols-4 reveal-stagger">';
+		return '<div class="product-grid reveal-stagger">';
 	}
 );
 add_filter(

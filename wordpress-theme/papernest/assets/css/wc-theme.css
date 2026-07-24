@@ -56,7 +56,47 @@
 /* Product grid (archive/related) — the .product-grid wrapper comes from our
    loop_shop_columns hook; product-card comes from content-product.php. */
 .woocommerce ul.products { display: contents; }
-.woocommerce ul.products li.product { list-style: none; }
+.woocommerce ul.products li.product {
+	list-style: none;
+	background: var(--surface);
+	border: 1px solid var(--line);
+	border-radius: var(--r-lg);
+	overflow: hidden;
+	box-shadow: var(--shadow-sm);
+	transition: transform .4s var(--ease), box-shadow .4s var(--ease), border-color .4s;
+	padding: 0 0 var(--sp-5);
+}
+.woocommerce ul.products li.product:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: transparent; }
+.woocommerce ul.products li.product a img {
+	width: 100%;
+	aspect-ratio: 4/3.1;
+	object-fit: cover;
+	border-radius: 0;
+	margin-bottom: 0;
+}
+/* Card title — the grid card is much narrower than a page heading, so this
+   needs its own (much smaller) size instead of inheriting the global h2/h3
+   scale meant for section headings. */
+.woocommerce ul.products li.product .woocommerce-loop-product__title {
+	font-family: var(--font-display);
+	color: var(--heading);
+	font-size: 1.05rem;
+	font-weight: 700;
+	line-height: 1.35;
+	margin: var(--sp-3) var(--sp-5) .3em;
+}
+.woocommerce ul.products li.product .price {
+	font-size: 1.05rem;
+	margin: 0 var(--sp-5);
+}
+/* Add-to-cart / "Wybierz opcję" button — full width on its own row so it
+   never gets squeezed next to the price and clipped by the card's overflow. */
+.woocommerce ul.products li.product .button {
+	display: block;
+	width: calc(100% - 2 * var(--sp-5));
+	margin: var(--sp-3) var(--sp-5) 0;
+	text-align: center;
+}
 
 /* Single product summary */
 .woocommerce div.product .product_title,
