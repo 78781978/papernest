@@ -341,6 +341,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .nav-toggle{
   display:none; width:44px; height:44px; border-radius:50%; border:1px solid var(--line);
   background:var(--surface); align-items:center; justify-content:center; flex-direction:column; gap:5px;
+  position:relative; z-index:160; /* stay above .main-nav (150) so it's still tappable to close once open */
 }
 .nav-toggle span{ width:18px; height:2px; background:var(--heading); border-radius:2px; transition:transform .3s, opacity .3s; }
 .nav-toggle.is-active span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
@@ -565,6 +566,16 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .product-contact .pc-line{ display:flex; align-items:center; gap:.5em; font-size:1.7rem; font-weight:600; color:var(--brand-link-green); padding-block:.15em; transition:color .2s; }
 .product-contact .pc-line:hover{ color:var(--brand-green-deep); text-decoration:underline; }
 .product-contact .pc-line svg{ width:32px; height:32px; flex:none; }
+/* The 2x desktop size reads fine at 1440px, but on a narrow phone screen it
+   dominates the whole page above the fold (bigger than the price or the
+   add-to-cart button) — scale back for narrow viewports, still visibly
+   bigger than the original size. */
+@media (max-width:640px){
+  .product-contact p{ font-size:1.05rem; }
+  .product-contact .pc-name{ font-size:1.1rem; }
+  .product-contact .pc-line{ font-size:1.1rem; }
+  .product-contact .pc-line svg{ width:22px; height:22px; }
+}
 
 /* Shop/category grid product cards (woocommerce/content-product.php): the
    default cropped, serif-titled card read poorly at this size — bigger
