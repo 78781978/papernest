@@ -39,6 +39,19 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  /* Footer accordion (mobile only — the toggle buttons are inert on desktop,
+     where CSS keeps every .footer-col-body always open regardless of
+     is-open/aria-expanded state). */
+  document.querySelectorAll('.footer-col-toggle').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var col = btn.closest('.footer-col');
+      if (!col) return;
+      var open = !col.classList.contains('is-open');
+      col.classList.toggle('is-open', open);
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  });
+
   /* Scroll reveal — z siatką bezpieczeństwa: treść nigdy nie może zostać trwale ukryta,
      nawet jeśli IntersectionObserver nie zdąży zareagować (bardzo szybkie przewijanie,
      nietypowe przeglądarki, itp.). */

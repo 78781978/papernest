@@ -107,6 +107,10 @@
 /* ---------- Reset ---------- */
 *,*::before,*::after{ box-sizing:border-box; }
 html{ scroll-behavior:smooth; }
+/* iOS Safari auto-zooms the whole page in on focus for any text input/select
+   whose computed font-size is under 16px — easy to trip accidentally through
+   inherited/plugin styles. Force it everywhere as cheap, permanent insurance. */
+input, select, textarea{ font-size:16px; }
 body{
   margin:0;
   font-family:var(--font-sans);
@@ -725,15 +729,15 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   from{ background-position: 32% 40%; background-size:174% auto; }
   to{ background-position: 62% 56%; background-size:190% auto; }
 }
-/* The texture's own aspect ratio doesn't stretch to cover the taller
-   footer that a stacked mobile layout produces (even the 2-column layout
-   above 560px) — repeat it vertically below that point instead of leaving
-   the plain background-color exposed past the texture's bottom edge. */
+/* repeat-y produced a visible seam where the texture tiled — not
+   acceptable. The footer columns collapse to accordions below 560px (see
+   .footer-col-body), which keeps the whole footer short enough that one
+   enlarged, non-repeating copy of the texture can still cover it. */
 @media (max-width: 560px){
-  .site-footer{ background-size:220% auto; background-repeat:repeat-y; background-position:38% top; }
+  .site-footer{ background-size:260% auto; background-position:38% top; }
   @keyframes satin-drift{
-    from{ background-position: 32% top; }
-    to{ background-position: 62% top; }
+    from{ background-position: 30% top; }
+    to{ background-position: 66% top; }
   }
 }
 /* Stopka zmniejszona o ok. 30% względem poprzedniej wersji (padding/odstępy). */
@@ -748,6 +752,29 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .footer-social svg{ width:21px; height:21px; }
 
 .footer-col h4{ color:#fff; font-family:var(--font-sans); font-size:.85rem; letter-spacing:.06em; text-transform:uppercase; margin-bottom:var(--sp-4); font-weight:700; }
+.footer-col-toggle{
+  display:block; width:100%; text-align:left; background:none; border:0; padding:0; margin:0;
+  color:inherit; font:inherit; letter-spacing:inherit; text-transform:inherit; cursor:default;
+}
+.footer-col-chevron{ display:none; }
+/* Informacje/Konto/Firma/Kontakt collapse to accordions on mobile — the
+   footer used to just be all 4 lists stacked open, several screens tall. */
+@media (max-width:560px){
+  .footer-col-toggle{
+    cursor:pointer; display:flex; align-items:center; justify-content:space-between; gap:1em;
+    padding:.9em 0; margin-bottom:0; border-bottom:1px solid rgba(255,255,255,.12);
+  }
+  .footer-col-chevron{
+    display:block; flex:none; width:10px; height:10px; border-right:2px solid rgba(255,255,255,.6); border-bottom:2px solid rgba(255,255,255,.6);
+    transform:rotate(45deg); transition:transform .25s var(--ease);
+  }
+  .footer-col-toggle[aria-expanded="true"] .footer-col-chevron{ transform:rotate(-135deg); }
+  .footer-col-body{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .3s var(--ease); }
+  .footer-col-body > *{ overflow:hidden; min-height:0; }
+  .footer-col.is-open .footer-col-body{ grid-template-rows:1fr; }
+  .footer-col-body ul{ padding-top:.9em; }
+  .footer-col-body .contact-line:first-child{ margin-top:.9em; }
+}
 .footer-col ul{ display:flex; flex-direction:column; gap:.7em; }
 .footer-col a{ font-size:.9rem; color:rgba(255,255,255,.62); transition:color .2s, padding-left .2s; }
 .footer-col a:hover{ color:var(--gold-glow); padding-left:4px; }
@@ -987,6 +1014,14 @@ a.cline:hover{ color:var(--brand-green-deep); text-decoration:underline; }
 .legal-toc a{ display:block; padding:.5em 0; font-size:.88rem; color:var(--ink-600); border-bottom:1px solid var(--line-soft); }
 .legal-toc a:hover{ color:var(--brand-green-deep); }
 .legal-toc a:last-child{ border-bottom:none; }
+/* legal-toc gets position:sticky inline (page.php) so it tracks the page
+   while its sibling column scrolls on desktop — but .two-col.cols-toc
+   collapses to a single stacked column at the same 860px breakpoint the
+   grid itself uses, and a still-sticky TOC then pins itself on top of the
+   article text stacked right below it instead of just scrolling normally. */
+@media (max-width:860px){
+  .legal-toc{ position:static !important; top:auto !important; }
+}
 
 /* ---------- Account/cart mock pages ---------- */
 .notice-box{

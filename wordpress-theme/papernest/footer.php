@@ -19,7 +19,8 @@ if ( ! defined( 'ABSPATH' ) ) {
       </div>
     </div>
     <div class="footer-col">
-      <h4>Informacje</h4>
+      <h4><button type="button" class="footer-col-toggle" aria-expanded="false">Informacje<span class="footer-col-chevron" aria-hidden="true"></span></button></h4>
+      <div class="footer-col-body">
       <ul>
         <li><a href="<?php echo esc_url( papernest_page_link( 'regulamin' ) ); ?>">Regulamin</a></li>
         <li><a href="<?php echo esc_url( papernest_page_link( 'polityka-prywatnosci' ) ); ?>">Polityka prywatności</a></li>
@@ -29,9 +30,11 @@ if ( ! defined( 'ABSPATH' ) ) {
         <li><a href="<?php echo esc_url( papernest_page_link( 'dostepnosc' ) ); ?>">Deklaracja dostępności</a></li>
         <li><button type="button" class="link-btn" data-open-consent>Zarządzaj zgodami</button></li>
       </ul>
+      </div>
     </div>
     <div class="footer-col">
-      <h4>Konto</h4>
+      <h4><button type="button" class="footer-col-toggle" aria-expanded="false">Konto<span class="footer-col-chevron" aria-hidden="true"></span></button></h4>
+      <div class="footer-col-body">
       <ul>
         <?php if ( class_exists( 'WooCommerce' ) ) : ?>
         <li><a href="<?php echo esc_url( get_permalink( get_option( 'woocommerce_myaccount_page_id' ) ) ); ?>">Moje Konto</a></li>
@@ -45,27 +48,31 @@ if ( ! defined( 'ABSPATH' ) ) {
         <li><a href="<?php echo esc_url( papernest_page_link( 'sklep' ) ); ?>">Sklep</a></li>
         <?php endif; ?>
       </ul>
+      </div>
     </div>
     <div class="footer-col">
-      <h4>Firma</h4>
+      <h4><button type="button" class="footer-col-toggle" aria-expanded="false">Firma<span class="footer-col-chevron" aria-hidden="true"></span></button></h4>
+      <div class="footer-col-body">
       <ul>
         <li><a href="<?php echo esc_url( papernest_page_link( 'o-nas' ) ); ?>">O nas</a></li>
         <li><a href="<?php echo esc_url( papernest_page_link( 'portfolio' ) ); ?>">Portfolio</a></li>
         <li><a href="<?php echo esc_url( papernest_page_link( 'kontakt' ) ); ?>">Kontakt</a></li>
       </ul>
+      </div>
     </div>
     <div class="footer-col">
-      <h4>Kontakt</h4>
+      <h4><button type="button" class="footer-col-toggle" aria-expanded="false">Kontakt<span class="footer-col-chevron" aria-hidden="true"></span></button></h4>
+      <div class="footer-col-body">
+      <div>
       <div class="contact-line"><?php echo papernest_icon( 'pin' ); ?><span><?php echo esc_html( papernest_address_line() ); ?></span></div>
       <div class="contact-line" style="margin-top:.7em"><a href="<?php echo esc_url( papernest_phone_tel() ); ?>"><?php echo papernest_icon( 'phone' ); ?><span><?php echo esc_html( papernest_phone_display() ); ?></span></a></div>
       <div class="contact-line" style="margin-top:.7em"><a href="mailto:<?php echo esc_attr( papernest_email() ); ?>"><?php echo papernest_icon( 'mail' ); ?><span><?php echo esc_html( papernest_email() ); ?></span></a></div>
+      </div>
+      </div>
     </div>
   </div>
   <div class="container footer-bottom">
     <span><?php echo esc_html( gmdate( 'Y' ) ); ?> © Copyright by PaperNest — P.H.U „Bobinex” Grzegorz Działkowski</span>
-    <div class="langs">
-      <span class="active">Polski</span><span>English</span><span>Deutsch</span><span>Español</span><span>Français</span>
-    </div>
   </div>
 </footer>
 <button class="to-top" aria-label="Wróć na górę"><?php echo papernest_icon( 'chevronUp' ); ?></button>
