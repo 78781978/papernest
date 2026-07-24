@@ -87,5 +87,43 @@ function papernest_customize_register( $wp_customize ) {
 			)
 		);
 	}
+
+	// Decorative illustrations (hero graphic, "O nas" graphic, industrial
+	// services graphic) — these ship with a built-in SVG drawing, but the
+	// client can replace any of them with her own photo/graphic here.
+	$wp_customize->add_section(
+		'papernest_illustrations',
+		array(
+			'title'    => __( 'Ilustracje', 'papernest' ),
+			'priority' => 32,
+			'description' => __( 'Te grafiki mają domyślną ilustrację wbudowaną w motyw — wgraj tu zdjęcie lub grafikę, żeby ją podmienić.', 'papernest' ),
+		)
+	);
+
+	$illustration_fields = array(
+		'papernest_illustration_hero'     => __( 'Strona główna — duża ilustracja (sekcja hero)', 'papernest' ),
+		'papernest_illustration_about'    => __( 'O nas — duża ilustracja', 'papernest' ),
+		'papernest_illustration_services' => __( 'Usługi przemysłowe — ilustracja (strona główna i O nas)', 'papernest' ),
+	);
+
+	foreach ( $illustration_fields as $id => $label ) {
+		$wp_customize->add_setting(
+			$id,
+			array(
+				'default'           => '',
+				'sanitize_callback' => 'esc_url_raw',
+			)
+		);
+		$wp_customize->add_control(
+			new WP_Customize_Image_Control(
+				$wp_customize,
+				$id,
+				array(
+					'label'   => $label,
+					'section' => 'papernest_illustrations',
+				)
+			)
+		);
+	}
 }
 add_action( 'customize_register', 'papernest_customize_register' );

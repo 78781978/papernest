@@ -28,7 +28,7 @@ while ( have_posts() ) :
     ?>
     <div class="history-block">
       <div class="history-media">
-        <div class="frame"><?php echo papernest_svg_file( 'about.svg' ); ?></div>
+        <div class="frame"><?php papernest_illustration( 'papernest_illustration_about', 'about.svg', 'O nas — PaperNest' ); ?></div>
         <div class="badge-ring"><b>25+</b><span>lat na rynku</span></div>
       </div>
       <div class="copy">
@@ -64,7 +64,7 @@ while ( have_posts() ) :
     ?>
     <div class="split">
       <div class="media">
-        <div class="art"><?php echo papernest_svg_file( 'services.svg' ); ?></div>
+        <div class="art"><?php papernest_illustration( 'papernest_illustration_services', 'services.svg', 'Usługi przemysłowe' ); ?></div>
         <div class="stat-pill"><span class="ic" style="width:44px;height:44px;border-radius:12px;background:var(--paper-100);display:flex;align-items:center;justify-content:center;color:var(--brand-green-deep)"><?php echo papernest_icon( 'trend' ); ?></span><div><b>e-commerce</b><span>Nowy kanał sprzedaży</span></div></div>
       </div>
       <div class="copy">

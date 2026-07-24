@@ -212,6 +212,26 @@ function papernest_theme_product_contact_block() {
 }
 
 /**
+ * Large decorative illustration (hero, "O nas", industrial-services art) —
+ * renders the client-uploaded Customizer image if one has been set,
+ * otherwise falls back to the theme's own built-in SVG artwork, so these
+ * spots stay swappable without needing a placeholder state (unlike
+ * papernest_photo_slot(), the default here is never empty).
+ */
+function papernest_illustration( $mod_key, $svg_file, $label = '' ) {
+	$image_url = get_theme_mod( $mod_key, '' );
+	if ( $image_url ) {
+		printf(
+			'<img src="%1$s" alt="%2$s" loading="lazy">',
+			esc_url( $image_url ),
+			esc_attr( $label )
+		);
+		return;
+	}
+	echo papernest_svg_file( $svg_file ); // phpcs:ignore
+}
+
+/**
  * A named photo slot: renders the client-uploaded Customizer image if one has
  * been set, otherwise the same "reserved photo spot" placeholder markup the
  * static prototype used, so it's obvious in wp-admin where to add a picture.

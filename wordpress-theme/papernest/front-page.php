@@ -32,7 +32,7 @@ $contact_url = papernest_page_link( 'kontakt' );
         </div>
       </div>
       <div class="hero-visual">
-        <div class="frame"><?php echo papernest_svg_file( 'hero.svg' ); ?></div>
+        <div class="frame"><?php papernest_illustration( 'papernest_illustration_hero', 'hero.svg', 'PaperNest' ); ?></div>
         <div class="float-card c1"><span class="ic"><?php echo papernest_icon( 'leaf' ); ?></span><div><b>100% recykling</b><span>Ekologiczny surowiec</span></div></div>
         <div class="float-card c2"><span class="ic"><?php echo papernest_icon( 'shield' ); ?></span><div><b>Bezpieczna płatność</b><span>BLIK, karta, przelew</span></div></div>
       </div>
@@ -137,7 +137,7 @@ $contact_url = papernest_page_link( 'kontakt' );
         </ul>
         <div class="hero-cta" style="margin-top:32px"><a href="<?php echo esc_url( $contact_url ); ?>" class="btn btn-navy">Dowiedz się więcej <?php echo papernest_icon( 'arrow' ); ?></a></div>
       </div>
-      <div class="media"><div class="art"><?php echo papernest_svg_file( 'services.svg' ); ?></div></div>
+      <div class="media"><div class="art"><?php papernest_illustration( 'papernest_illustration_services', 'services.svg', 'Usługi przemysłowe' ); ?></div></div>
     </div>
     <?php
     echo papernest_reveal( ob_get_clean() );
