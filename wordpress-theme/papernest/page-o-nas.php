@@ -72,7 +72,7 @@ while ( have_posts() ) :
         <h2 class="text-balance">Tradycja produkcji, nowoczesna sprzedaż</h2>
         <p style="margin-top:16px;font-size:1.02rem;line-height:1.8;color:var(--ink-600)">W odpowiedzi na zmieniające się potrzeby rynku oraz dynamiczny rozwój handlu internetowego, PaperNest zdecydował się rozszerzyć swoją działalność o sprzedaż online. Uruchomienie kanału e-commerce otworzyło firmę na nowych klientów i umożliwiło jeszcze łatwiejszy dostęp do oferowanych produktów.</p>
         <p style="margin-top:14px;font-size:1.02rem;line-height:1.8;color:var(--ink-600)">Dziś PaperNest łączy wieloletnie doświadczenie produkcyjne z nowoczesnym podejściem do sprzedaży i obsługi klienta.</p>
-        <div class="hero-cta" style="margin-top:28px"><a href="<?php echo esc_url( class_exists( 'WooCommerce' ) ? get_permalink( wc_get_page_id( 'shop' ) ) : papernest_page_link( 'sklep' ) ); ?>" class="btn btn-navy">Przejdź do sklepu <?php echo papernest_icon( 'arrow' ); ?></a></div>
+        <div class="hero-cta" style="margin-top:28px"><a href="<?php echo esc_url( papernest_shop_link() ); ?>" class="btn btn-navy">Przejdź do sklepu <?php echo papernest_icon( 'arrow' ); ?></a></div>
       </div>
     </div>
     <?php

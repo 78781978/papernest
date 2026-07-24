@@ -2,12 +2,15 @@
 
 Ten katalog zawiera gotowy motyw WordPress (`papernest/`) zbudowany na
 podstawie zaakceptowanego prototypu — ten sam wygląd, ale wszystko można już
-edytować z panelu wp-admin, a sklep działa na WooCommerce.
+edytować z panelu wp-admin. Sklep (produkty, koszyk, zamówienia) jest
+**własnym, wbudowanym w motyw rozwiązaniem — bez WooCommerce**: prościej,
+lżej i bez ryzyka niedopasowania stylu, które WooCommerce potrafi wprowadzać.
 
 ## 1. Wymagania
 
 - WordPress (najnowsza wersja, hosting z PHP 7.4+)
-- Wtyczka **WooCommerce** (darmowa, z katalogu wtyczek WordPress)
+- Żadnych dodatkowych wtyczek e-commerce nie trzeba instalować — sklep
+  działa od razu po aktywacji motywu.
 
 ## 2. Instalacja motywu
 
@@ -16,37 +19,60 @@ edytować z panelu wp-admin, a sklep działa na WooCommerce.
 2. W panelu WordPress: **Wygląd → Motywy → Dodaj nowy → Wyślij motyw** →
    wybierz `papernest.zip` → **Zainstaluj** → **Aktywuj**.
 
-## 3. Instalacja WooCommerce (sklep)
-
-1. **Wtyczki → Dodaj nową** → wyszukaj „WooCommerce” → **Zainstaluj** →
-   **Aktywuj**.
-2. WooCommerce zapyta o mały kreator konfiguracji (adres firmy, waluta PLN,
-   metody wysyłki/płatności) — możesz go przejść lub pominąć, dane da się
-   zmienić później w **WooCommerce → Ustawienia**.
-3. WooCommerce sam utworzy strony Sklep, Koszyk, Zamówienie i Moje konto.
-
-## 4. Treść startowa (strony, przykładowe produkty, opinie, portfolio)
+## 3. Treść startowa (strony, przykładowe produkty, opinie, portfolio)
 
 Motyw **nie** importuje niczego automatycznie — celowo, żeby aktywacja
 motywu na stronie, na której jest już jakaś treść, niczego nie namieszała.
-Import startowy uruchamiasz ręcznie, kiedy sama/sam zdecydujesz, że jest
-odpowiedni moment (zwykle: po instalacji WooCommerce, patrz punkty 2 i 3
-powyżej):
+Import startowy uruchamiasz ręcznie, kiedy sama/sam zdecydujesz:
 
 **Wygląd → Treść startowa → Importuj / uzupełnij treść startową**
 
 Przycisk można kliknąć bezpiecznie wielokrotnie — nic nie zduplikuje.
 Utworzy/uzupełni:
 
-- strony: O nas, Portfolio, Kontakt, Płatność i Dostawa, Regulamin, Politykę
-  prywatności, Reklamacje, Prawo do odstąpienia od umowy, Deklarację
-  dostępności, Odstąpienie od umowy,
+- strony: Sklep, Koszyk, Zamówienie, Status zamówienia, O nas, Portfolio,
+  Kontakt, Płatność i Dostawa, Regulamin, Politykę prywatności, Reklamacje,
+  Prawo do odstąpienia od umowy, Deklarację dostępności, Odstąpienie od
+  umowy,
 - menu główne (Home, Sklep, O Nas, Portfolio, Kontakt),
-- 3 przykładowe produkty w WooCommerce (Wypełniacz Papierowy, Papier Dla
-  Piskląt, Tektura Budowlana) — każdy z 4 wariantami cenowymi (1 rolka, 2
-  rolki, 4 rolki, paleta), tak jak w prototypie,
+- 3 przykładowe produkty (Wypełniacz Papierowy, Papier Dla Piskląt, Tektura
+  Budowlana) — każdy z 4 wariantami cenowymi (1 rolka, 2 rolki, 4 rolki,
+  paleta), tak jak w prototypie,
 - 4 przykładowe opinie klientów,
 - 12 kafelków portfolio („zastosowania”).
+
+## 4. Jak działa sklep (bez WooCommerce)
+
+- **Produkty** — osobna sekcja „Produkty” w menu wp-admin. Każdy produkt ma
+  nazwę, opis, zdjęcie główne, do 4 dodatkowych zdjęć w galerii oraz dowolną
+  liczbę wariantów cenowych (nazwa, podtytuł, cena, opcjonalna cena przed
+  obniżką) — edytowane w tabelce na stronie produktu, bez żadnego
+  dodatkowego panelu.
+- **Koszyk** — po stronie serwera (sesja), klient dodaje produkty, zmienia
+  ilości i usuwa pozycje; ceny zawsze liczone od nowa z aktualnych danych
+  produktu (nikt nie może „podmienić” ceny w przeglądarce).
+- **Zamówienie** — klient podaje dane, wybiera dostawę (Paczkomat InPost /
+  kurier DPD) i płatność (**przelew tradycyjny** lub **za pobraniem** — tylko
+  przy kurierze). Po złożeniu zamówienia system wysyła e-mail z
+  potwierdzeniem do klienta i powiadomienie do Ciebie.
+- **Zamówienia** — osobna sekcja w menu wp-admin: lista wszystkich zamówień
+  z danymi klienta, sumą, sposobem płatności/dostawy i statusem, który
+  zmienisz jednym kliknięciem wprost z listy (Nowe → W realizacji → Wysłane
+  → Zrealizowane / Anulowane). Zmiana statusu na „Wysłane” automatycznie
+  wysyła klientowi e-mail.
+- **Ustawienia sklepu** (Produkty → Ustawienia sklepu) — numer konta do
+  przelewów, koszt wysyłki Paczkomatem i kurierem, próg darmowej dostawy,
+  włącz/wyłącz płatność za pobraniem.
+
+### Płatności online (BLIK, karta, szybki przelew)
+
+Na start klienci płacą **przelewem tradycyjnym** (dane do przelewu w mailu
+z potwierdzeniem) albo **za pobraniem**. Prawdziwe płatności online wymagają
+konta u dostawcy płatności (np. paynow, Przelewy24, PayU, Tpay) i jego
+kluczy API — to zawsze wymaga działania właściciela konta, żadne
+rozwiązanie (WooCommerce też) nie obejdzie tego kroku. Gdy założysz takie
+konto, podłączenie go do tego sklepu to już tylko dopisanie jednej
+integracji — z przyjemnością to zrobimy.
 
 ## 5. Co można edytować i gdzie
 
@@ -54,25 +80,23 @@ Utworzy/uzupełni:
 |---|---|
 | Logo | Wygląd → Dostosuj → Identyfikacja strony |
 | Telefon, e-mail, adres, godziny, link do Facebooka | Wygląd → Dostosuj → Dane kontaktowe PaperNest |
-| Zdjęcia (magazyn, sklep, biuro, karty „O nas”, logotypy płatności/kurierów) | Wygląd → Dostosuj → Zdjęcia na stronie |
-| Produkty, ceny wariantów, zdjęcia produktów, opisy | Produkty |
+| Zdjęcia (magazyn, sklep, biuro, karty „O nas”, logotypy kurierów) | Wygląd → Dostosuj → Zdjęcia na stronie |
+| Produkty, warianty i ceny, zdjęcia produktów, opisy | Produkty |
+| Ustawienia sklepu (konto bankowe, koszty wysyłki) | Produkty → Ustawienia sklepu |
+| Zamówienia i ich status | Zamówienia |
 | Opinie klientów | Opinie klientów (menu boczne) |
 | Kafelki portfolio + zdjęcia | Portfolio / Zastosowania (menu boczne) |
 | Treść stron (O nas, Regulamin, Polityka prywatności, itd.) | Strony → edytuj dowolną |
 | Menu | Wygląd → Menu |
 
-Zdjęcia produktów w sklepie i galeria na stronie produktu to standardowe pola
-WooCommerce („Obraz produktu” i „Galeria zdjęć produktu”) — nie trzeba nic
-dodatkowo konfigurować.
+## 6. Formularze (kontakt i zamówienia)
 
-## 6. Formularz kontaktowy
-
-Formularz na stronie Kontakt wysyła e-mail przez wbudowaną funkcję WordPressa
-(`wp_mail`) na adres ustawiony w Dane kontaktowe PaperNest. Wiele hostingów
-domyślnie dobrze obsługuje wysyłkę maili, ale jeśli wiadomości nie będą
-docierać, zalecamy doinstalować darmową wtyczkę **WP Mail SMTP** i podłączyć
-ją pod prawdziwą skrzynkę e-mail (np. Gmail/Office 365) — to najczęstsza
-przyczyna „znikających” maili z formularzy na WordPressie.
+Formularz kontaktowy i potwierdzenia zamówień wysyłają e-mail przez
+wbudowaną funkcję WordPressa (`wp_mail`). Wiele hostingów domyślnie dobrze
+obsługuje wysyłkę maili, ale jeśli wiadomości nie będą docierać, zalecamy
+doinstalować darmową wtyczkę **WP Mail SMTP** i podłączyć ją pod prawdziwą
+skrzynkę e-mail (np. Gmail/Office 365) — to najczęstsza przyczyna
+„znikających” maili z formularzy na WordPressie.
 
 ## 7. Bezpośrednie odnośniki (permalinki)
 
@@ -81,12 +105,9 @@ stron wyglądały ładnie (np. `papernest.pl/o-nas/`).
 
 ## 8. Uwaga dot. testów
 
-Motyw został przetestowany lokalnie na WordPressie (strony, menu, opinie,
-portfolio, formularze, RWD na telefonie) i wygląda identycznie jak
-zaakceptowany prototyp. Integracja z WooCommerce (sklep, koszyk, płatność,
-warianty produktów) została napisana zgodnie ze standardowym, udokumentowanym
-sposobem integrowania motywów z WooCommerce, ale ze względu na ograniczenia
-środowiska, w którym motyw powstawał, nie dało się samego WooCommerce
-zainstalować i przeklikać na miejscu. Prosimy o rzucenie okiem na stronę
-sklepu, produktu, koszyka i zamówienia po instalacji — jeśli coś będzie nie
-tak, szybko to poprawimy.
+Cały sklep (produkty, koszyk, wybór dostawy/płatności, składanie zamówienia,
+e-maile, panel zamówień w wp-admin) został zbudowany i **realnie przetestowany
+od początku do końca na działającym WordPressie** — łącznie z edycją produktu
+i zapisem zmian w panelu administracyjnym. To jest inaczej niż przy
+poprzedniej wersji z WooCommerce, której nie dało się uruchomić w środowisku,
+w którym motyw powstawał — tym razem nie ma tego ograniczenia.

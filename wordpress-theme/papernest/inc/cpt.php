@@ -26,7 +26,9 @@ function papernest_register_cpts() {
 			'menu_icon'    => 'dashicons-images-alt2',
 			'supports'     => array( 'title', 'thumbnail', 'page-attributes' ),
 			'rewrite'      => array( 'slug' => 'zastosowanie' ),
-			'show_in_rest' => true,
+			// Classic editor: simpler and more reliable for the custom
+			// meta boxes below than the block editor.
+			'show_in_rest' => false,
 		)
 	);
 
@@ -45,7 +47,9 @@ function papernest_register_cpts() {
 			'menu_icon'    => 'dashicons-format-quote',
 			'supports'     => array( 'title', 'editor', 'page-attributes' ),
 			'rewrite'      => array( 'slug' => 'opinia' ),
-			'show_in_rest' => true,
+			// Classic editor: simpler and more reliable for the custom
+			// meta boxes below than the block editor.
+			'show_in_rest' => false,
 		)
 	);
 }
