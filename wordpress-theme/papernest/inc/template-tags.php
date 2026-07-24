@@ -198,7 +198,7 @@ function papernest_logo( $class = '' ) {
  * Fixed contact block shown on every product page under the price —
  * matches the static prototype's product_contact_block().
  */
-function papernest_product_contact_block() {
+function papernest_theme_product_contact_block() {
 	ob_start();
 	?>
 	<div class="product-contact">

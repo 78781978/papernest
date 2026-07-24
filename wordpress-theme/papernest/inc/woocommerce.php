@@ -61,7 +61,7 @@ remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20 )
 add_action(
 	'woocommerce_single_product_summary',
 	function () {
-		echo papernest_product_contact_block();
+		echo papernest_theme_product_contact_block();
 	},
 	11
 );
