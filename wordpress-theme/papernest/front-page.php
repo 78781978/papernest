@@ -72,11 +72,16 @@ $contact_url = papernest_page_link( 'kontakt' );
           // multiple products per category, e.g. different pack sizes of the
           // same item), so this stays "3 different things" regardless of how
           // many product listings exist within each category.
+          // childless => true skips umbrella/parent categories (e.g. a
+          // "Nasze Produkty" wrapper containing the real categories as its
+          // children) so the 3 tiles are the actual product families, not
+          // a mix of a parent and its own children.
           $categories = get_terms(
               array(
                   'taxonomy'   => 'product_cat',
                   'hide_empty' => true,
                   'exclude'    => array( get_option( 'default_product_cat', 0 ) ),
+                  'childless'  => true,
                   'number'     => 3,
               )
           );

@@ -49,11 +49,16 @@ function papernest_wc_wrapper_end() {
  * mechanism to show at all (see the removed woocommerce_sidebar hook above).
  */
 function papernest_shop_category_sidebar() {
+	// childless => true skips umbrella/parent categories (e.g. a "Nasze
+	// Produkty" wrapper containing the real categories as its children) —
+	// "Wszystkie produkty" above already covers that, so listing the parent
+	// too is a redundant near-duplicate link.
 	$categories = get_terms(
 		array(
 			'taxonomy'   => 'product_cat',
 			'hide_empty' => true,
 			'exclude'    => array( get_option( 'default_product_cat', 0 ) ),
+			'childless'  => true,
 		)
 	);
 	if ( empty( $categories ) || is_wp_error( $categories ) ) {
