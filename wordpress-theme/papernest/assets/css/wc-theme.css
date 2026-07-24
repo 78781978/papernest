@@ -111,10 +111,20 @@
 .woocommerce div.product .stock { color: var(--brand-link-green); font-weight: 700; }
 .woocommerce div.product .out-of-stock { color: #b3261e; font-weight: 700; }
 
-/* Sale badge vs. gallery zoom icon both sit in the image's top-left by
-   default and overlap — keep the badge clear of it. */
-.woocommerce div.product .onsale { top: 12px; left: 12px; right: auto; }
-.woocommerce div.product .woocommerce-product-gallery__trigger { top: 12px; right: 12px; left: auto; }
+/* The gallery frame itself was plain white (WC's default), same as the page
+   background behind it — gives product photos on a white background no
+   visible edge at all. Matches the same subtle paper tint used everywhere
+   else product photos sit (.thumb, .shop-product-card). */
+.woocommerce div.product .woocommerce-product-gallery__wrapper,
+.woocommerce div.product .woocommerce-product-gallery__image { background: var(--paper-100); border-radius: var(--r-lg); }
+/* The onsale badge and the gallery zoom trigger are both absolutely
+   positioned relative to div.product (not the gallery image itself, since
+   WooCommerce renders the sale flash before the gallery markup) — !important
+   guards against a longer/wider custom sale badge (e.g. "Promo" text instead
+   of a short "-10%") still landing correctly in the corner instead of
+   drifting into the zoom trigger's spot. */
+.woocommerce div.product .onsale { top: 12px !important; left: 12px !important; right: auto !important; }
+.woocommerce div.product .woocommerce-product-gallery__trigger { top: 12px !important; right: 12px !important; left: auto !important; }
 
 /* Quantity input */
 .woocommerce div.product form.cart .quantity {
@@ -149,8 +159,12 @@
 .woocommerce div.product .woocommerce-variation-price .price { color: var(--brand-link-green); }
 
 /* Tabs */
-.woocommerce div.product .woocommerce-tabs ul.tabs { border-bottom: 1px solid var(--line); padding-left: 0; margin-top: var(--sp-12, 3rem); }
-.woocommerce div.product .woocommerce-tabs ul.tabs li { background: none; border: 0; padding: 0 1.5em 0 0; }
+.woocommerce div.product .woocommerce-tabs ul.tabs { border-bottom: 1px solid var(--line); padding-left: 0; margin-top: var(--sp-12, 3rem); overflow: visible; }
+/* WooCommerce's own margin: 0 -5px on each li (a folder-tab overlap hack we
+   don't need, since ours has no background/border) pushes the first tab
+   ("Opis") a few px past the list's left edge — combined with the list's
+   own overflow:hidden that clips it, cutting off its first letter. */
+.woocommerce div.product .woocommerce-tabs ul.tabs li { background: none; border: 0; padding: 0 1.5em 0 0; margin: 0; }
 .woocommerce div.product .woocommerce-tabs ul.tabs li a { font-weight: 700; color: var(--ink-400); padding: 1em 0; }
 .woocommerce div.product .woocommerce-tabs ul.tabs li.active a { color: var(--heading); }
 
@@ -187,9 +201,31 @@
 }
 .woocommerce div.product .woocommerce-tabs .panel p:last-child { margin-bottom: 0; }
 .woocommerce div.product .woocommerce-tabs .panel strong { color: var(--heading); }
-.woocommerce div.product .woocommerce-tabs .panel ul,
 .woocommerce div.product .woocommerce-tabs .panel ol { padding-left: 1.3em; margin: 0 0 1em; }
 .woocommerce div.product .woocommerce-tabs .panel li { margin-bottom: .4em; }
+/* Pasted-in content (tables, centered text from other editors) reads as
+   messy/uneven — force everything in the description panel to a consistent
+   left alignment. */
+.woocommerce div.product .woocommerce-tabs .panel,
+.woocommerce div.product .woocommerce-tabs .panel * { text-align: left !important; }
+.woocommerce div.product .woocommerce-tabs .panel table { width: 100%; border-collapse: collapse; margin: 0 0 1em; }
+.woocommerce div.product .woocommerce-tabs .panel table td,
+.woocommerce div.product .woocommerce-tabs .panel table th {
+	padding: .6em .4em; border-bottom: 1px solid var(--line-soft);
+}
+/* Bullet lists (e.g. a product's list of advantages) get a green check
+   instead of a default bullet, matching .check-list used elsewhere. */
+.woocommerce div.product .woocommerce-tabs .panel ul {
+	list-style: none; padding-left: 0; margin: 0 0 1em;
+}
+.woocommerce div.product .woocommerce-tabs .panel ul li {
+	position: relative; padding-left: 1.7em;
+}
+.woocommerce div.product .woocommerce-tabs .panel ul li::before {
+	content: "✓";
+	position: absolute; left: 0; top: 0;
+	color: var(--brand-green-deep); font-weight: 800;
+}
 .woocommerce table.shop_attributes { border: 0; }
 .woocommerce table.shop_attributes td, .woocommerce table.shop_attributes th { border: 0; border-bottom: 1px solid var(--line-soft); padding: .85em .2em; }
 .woocommerce table.shop_attributes th { color: var(--ink-500); font-weight: 600; }
