@@ -293,15 +293,25 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 /* The logo's full 258px height is fine for a page that opens on it, but on a
    sticky header it keeps eating a third of the screen on any page with real
    content below (e.g. a product page) — shrink it once scrolled. */
-.site-header.is-scrolled .brand-logo{ height:64px; }
+.site-header.is-scrolled .brand-logo{ height:110px; }
 
 .site-header .container{ max-width:var(--container-wide); }
 .header-row{
   display:flex; align-items:center; justify-content:space-between; gap:var(--sp-5);
 }
+/* Below 1200px .main-nav (with its own "Sklep" link) collapses into the
+   hamburger panel — this keeps a quick "Sklep" link visible in the header
+   itself at all times. Hidden above that width since the full nav already
+   shows it there (would otherwise duplicate it). */
+.header-shop-link{
+  display:none; font-weight:700; color:var(--heading); white-space:nowrap;
+  padding:.6em 1.2em; border-radius:var(--r-pill); background:var(--paper-100);
+  transition:background .2s;
+}
+.header-shop-link:hover{ background:var(--brand-green); }
 
 .brand{ display:flex; align-items:center; }
-.brand-logo{ display:block; height:258px; width:auto; flex:none; transition:height .35s var(--ease); }
+.brand-logo{ display:block; height:180px; width:auto; flex:none; transition:height .35s var(--ease); }
 .brand-logo-plate{
   display:inline-flex; align-items:center; background:#fff; border-radius:var(--r-md);
   padding:10px 16px; box-shadow:var(--shadow-sm);
@@ -358,8 +368,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
      tego progu wracamy do zwartego układu z chowanym menu (bezpieczny margines). */
   .site-header{ padding-block:16px; }
   .site-header.is-scrolled{ padding-block:12px; }
-  .header-row{ gap:.75rem; }
-  .brand-logo{ height:76px; }
+  .header-row{ gap:.75rem; justify-content:flex-start; }
+  .header-shop-link{ display:inline-flex; align-items:center; }
+  .header-actions{ margin-left:auto; }
+  .brand-logo{ height:64px; }
+  .site-header.is-scrolled .brand-logo{ height:44px; }
   .brand-logo-plate{ padding:6px 10px; }
   .brand-logo-plate .brand-logo.footer-logo{ height:38px; }
   .header-actions{ gap:.5rem; }
@@ -565,31 +578,26 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 
 /* Stały blok kontaktowy na karcie produktu (pod ceną, zamiast opisu) */
 .product-contact{ border-top:1px dashed var(--line); margin-top:var(--sp-3); padding-top:var(--sp-3); }
-.product-contact p{ font-size:1.64rem; line-height:1.5; color:var(--ink-500); margin-bottom:.5em; }
-.product-contact .pc-name{ font-weight:700; color:var(--heading); font-size:1.7rem; margin-bottom:.3em; }
-.product-contact .pc-line{ display:flex; align-items:center; gap:.5em; font-size:1.7rem; font-weight:600; color:var(--brand-link-green); padding-block:.15em; transition:color .2s; }
+.product-contact p{ font-size:.82rem; line-height:1.5; color:var(--ink-500); margin-bottom:.5em; }
+.product-contact .pc-name{ font-weight:700; color:var(--heading); font-size:.85rem; margin-bottom:.3em; }
+.product-contact .pc-line{ display:flex; align-items:center; gap:.5em; font-size:.85rem; font-weight:600; color:var(--brand-link-green); padding-block:.15em; transition:color .2s; }
 .product-contact .pc-line:hover{ color:var(--brand-green-deep); text-decoration:underline; }
-.product-contact .pc-line svg{ width:32px; height:32px; flex:none; }
-/* The 2x desktop size reads fine at 1440px, but on a narrow phone screen it
-   dominates the whole page above the fold (bigger than the price or the
-   add-to-cart button) — scale back for narrow viewports, still visibly
-   bigger than the original size. */
+.product-contact .pc-line svg{ width:16px; height:16px; flex:none; }
 @media (max-width:640px){
-  .product-contact p{ font-size:1.05rem; }
-  .product-contact .pc-name{ font-size:1.1rem; }
-  .product-contact .pc-line{ font-size:1.1rem; }
-  .product-contact .pc-line svg{ width:22px; height:22px; }
+  .product-contact p{ font-size:.52rem; }
+  .product-contact .pc-name{ font-size:.55rem; }
+  .product-contact .pc-line{ font-size:.55rem; }
+  .product-contact .pc-line svg{ width:11px; height:11px; }
 }
 
 /* Shop/category grid product cards (woocommerce/content-product.php): the
    default cropped, serif-titled card read poorly at this size — bigger
-   uncropped image, readable sans-serif title, clearer net-price suffix. */
+   uncropped image, readable sans-serif title. Net-price suffix styling
+   lives in wc-theme.css (.woocommerce-price-suffix), shared with the
+   single-product page. */
 .shop-product-card .thumb{ aspect-ratio:4/3.6; }
 .shop-product-card .thumb img{ object-fit:contain; }
 .shop-product-card h3{ font-family:var(--font-sans); font-size:1.05rem; font-weight:700; }
-.shop-product-card .price .woocommerce-price-suffix{
-  display:block; color:var(--ink-600); font-size:.82rem; font-weight:600; margin-top:.2em;
-}
 
 /* Miejsce zarezerwowane pod przyszłe zdjęcie (WordPress) */
 .photo-slot{
@@ -717,28 +725,25 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .cta-banner .cta-actions{ position:relative; display:flex; gap:var(--sp-3); flex-wrap:wrap; }
 
 /* ---------- Footer ---------- */
+/* background-size:cover guarantees the texture always fully fills the
+   footer regardless of its height (which varies with content: collapsed
+   accordions on mobile vs. open columns on desktop, different amounts of
+   footer link text, etc.) — percentage-based sizes kept needing re-tuning
+   every time the footer's height changed and left the plain background-color
+   exposed below the texture whenever it fell short. Only background-position
+   animates now (cover keeps size constant), so the drift is horizontal-only
+   but never breaks coverage. */
 .site-footer{
   background-image:url("../img/textures/satin-navy.svg");
-  background-size:174% auto; background-position:38% 45%; background-repeat:no-repeat;
+  background-size:cover; background-position:38% 45%; background-repeat:no-repeat;
   background-color:#0b2345;
   color:rgba(255,255,255,.72); margin-top:4.9rem; border-top:1px solid var(--line-soft);
   position:relative; overflow:hidden;
   animation: satin-drift 26s ease-in-out infinite alternate;
 }
 @keyframes satin-drift{
-  from{ background-position: 32% 40%; background-size:174% auto; }
-  to{ background-position: 62% 56%; background-size:190% auto; }
-}
-/* repeat-y produced a visible seam where the texture tiled — not
-   acceptable. The footer columns collapse to accordions below 560px (see
-   .footer-col-body), which keeps the whole footer short enough that one
-   enlarged, non-repeating copy of the texture can still cover it. */
-@media (max-width: 560px){
-  .site-footer{ background-size:260% auto; background-position:38% top; }
-  @keyframes satin-drift{
-    from{ background-position: 30% top; }
-    to{ background-position: 66% top; }
-  }
+  from{ background-position: 28% 35%; }
+  to{ background-position: 64% 58%; }
 }
 /* Stopka zmniejszona o ok. 30% względem poprzedniej wersji (padding/odstępy). */
 .footer-top{ padding-block:clamp(39px,5vw,62px); display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr 1.1fr; gap:2.1rem; }

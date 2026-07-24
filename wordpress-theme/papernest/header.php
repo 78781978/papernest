@@ -23,6 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="brand" aria-label="PaperNest — strona główna">
       <?php echo papernest_logo(); ?>
     </a>
+    <a href="<?php echo esc_url( papernest_shop_link() ); ?>" class="header-shop-link">Sklep</a>
     <nav class="main-nav" id="main-nav">
       <?php
       wp_nav_menu(
