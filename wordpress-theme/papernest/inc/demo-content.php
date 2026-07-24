@@ -127,6 +127,9 @@ function papernest_import_pages() {
 		$existing = get_page_by_path( $p['slug'] );
 		if ( $existing ) {
 			$ids[ $p['slug'] ] = $existing->ID;
+			if ( $p['template'] ) {
+				update_post_meta( $existing->ID, '_wp_page_template', $p['template'] );
+			}
 			continue;
 		}
 		$page_id = wp_insert_post(

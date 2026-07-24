@@ -123,6 +123,31 @@ function papernest_force_own_templates( $template ) {
 		}
 	}
 	if ( is_page() ) {
+		// Known content pages always use the theme's own template, by slug,
+		// regardless of what a page builder plugin has set as this page's
+		// _wp_page_template — on pages that existed before this theme (built
+		// with Elementor) that meta points at a page-builder "canvas"
+		// template, which would otherwise keep winning here even though the
+		// theme is active.
+		$slug_templates = array(
+			'o-nas'                         => 'page-o-nas.php',
+			'portfolio'                     => 'page-portfolio.php',
+			'kontakt'                       => 'page-kontakt.php',
+			'platnosc-i-dostawa'            => 'page-platnosc.php',
+			'odstapienie'                   => 'page-odstapienie.php',
+			'regulamin'                     => 'page.php',
+			'polityka-prywatnosci'          => 'page.php',
+			'reklamacje'                    => 'page.php',
+			'prawo-do-odstapienia-od-umowy' => 'page.php',
+			'dostepnosc'                    => 'page.php',
+		);
+		$slug = get_post_field( 'post_name', get_queried_object_id() );
+		if ( isset( $slug_templates[ $slug ] ) ) {
+			$file = PAPERNEST_DIR . '/' . $slug_templates[ $slug ];
+			if ( file_exists( $file ) ) {
+				return $file;
+			}
+		}
 		$page_template = get_page_template_slug( get_queried_object_id() );
 		if ( $page_template ) {
 			$file = PAPERNEST_DIR . '/' . $page_template;
