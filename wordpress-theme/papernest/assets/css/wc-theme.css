@@ -153,7 +153,43 @@
 .woocommerce div.product .woocommerce-tabs ul.tabs li { background: none; border: 0; padding: 0 1.5em 0 0; }
 .woocommerce div.product .woocommerce-tabs ul.tabs li a { font-weight: 700; color: var(--ink-400); padding: 1em 0; }
 .woocommerce div.product .woocommerce-tabs ul.tabs li.active a { color: var(--heading); }
-.woocommerce div.product .woocommerce-tabs .panel { padding-top: var(--sp-8, 2rem); color: var(--ink-600); line-height: 1.75; }
+
+/* Description panel — WooCommerce's own <h2>Opis</h2> + raw the_content()
+   had no framing at all (just floating text), and copy pasted in from
+   elsewhere mixes <p> and manual line breaks inconsistently, which read as
+   randomly uneven spacing. Giving it a real card + normalizing spacing
+   fixes both. */
+.woocommerce div.product .woocommerce-tabs .panel {
+	margin-top: var(--sp-8, 2rem);
+	padding: var(--sp-8, 2rem);
+	background: var(--surface);
+	border: 1px solid var(--line);
+	border-radius: var(--r-lg);
+	box-shadow: var(--shadow-sm);
+	color: var(--ink-600);
+	line-height: 1.75;
+}
+.woocommerce div.product .woocommerce-tabs .panel > h2:first-child {
+	font-family: var(--font-display);
+	color: var(--heading);
+	font-size: 1.6rem;
+	margin-bottom: var(--sp-5, 1.25rem);
+}
+.woocommerce div.product .woocommerce-tabs .panel h3,
+.woocommerce div.product .woocommerce-tabs .panel h4 {
+	font-family: var(--font-display);
+	color: var(--heading);
+	font-size: 1.2rem;
+	margin: 1.4em 0 .5em;
+}
+.woocommerce div.product .woocommerce-tabs .panel p {
+	margin: 0 0 1em;
+}
+.woocommerce div.product .woocommerce-tabs .panel p:last-child { margin-bottom: 0; }
+.woocommerce div.product .woocommerce-tabs .panel strong { color: var(--heading); }
+.woocommerce div.product .woocommerce-tabs .panel ul,
+.woocommerce div.product .woocommerce-tabs .panel ol { padding-left: 1.3em; margin: 0 0 1em; }
+.woocommerce div.product .woocommerce-tabs .panel li { margin-bottom: .4em; }
 .woocommerce table.shop_attributes { border: 0; }
 .woocommerce table.shop_attributes td, .woocommerce table.shop_attributes th { border: 0; border-bottom: 1px solid var(--line-soft); padding: .85em .2em; }
 .woocommerce table.shop_attributes th { color: var(--ink-500); font-weight: 600; }

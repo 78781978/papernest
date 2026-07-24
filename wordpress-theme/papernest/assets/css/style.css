@@ -286,6 +286,10 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 }
 .site-header.is-scrolled::before{ opacity:1; }
 .site-header.is-scrolled{ box-shadow:var(--shadow-sm); border-color:var(--line); padding-block:10px; }
+/* The logo's full 258px height is fine for a page that opens on it, but on a
+   sticky header it keeps eating a third of the screen on any page with real
+   content below (e.g. a product page) — shrink it once scrolled. */
+.site-header.is-scrolled .brand-logo{ height:64px; }
 
 .site-header .container{ max-width:var(--container-wide); }
 .header-row{
@@ -293,7 +297,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 }
 
 .brand{ display:flex; align-items:center; }
-.brand-logo{ display:block; height:258px; width:auto; flex:none; }
+.brand-logo{ display:block; height:258px; width:auto; flex:none; transition:height .35s var(--ease); }
 .brand-logo-plate{
   display:inline-flex; align-items:center; background:#fff; border-radius:var(--r-md);
   padding:10px 16px; box-shadow:var(--shadow-sm);
@@ -556,11 +560,21 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 
 /* Stały blok kontaktowy na karcie produktu (pod ceną, zamiast opisu) */
 .product-contact{ border-top:1px dashed var(--line); margin-top:var(--sp-3); padding-top:var(--sp-3); }
-.product-contact p{ font-size:.82rem; line-height:1.5; color:var(--ink-500); margin-bottom:.5em; }
-.product-contact .pc-name{ font-weight:700; color:var(--heading); font-size:.85rem; margin-bottom:.3em; }
-.product-contact .pc-line{ display:flex; align-items:center; gap:.5em; font-size:.85rem; font-weight:600; color:var(--brand-link-green); padding-block:.15em; transition:color .2s; }
+.product-contact p{ font-size:1.64rem; line-height:1.5; color:var(--ink-500); margin-bottom:.5em; }
+.product-contact .pc-name{ font-weight:700; color:var(--heading); font-size:1.7rem; margin-bottom:.3em; }
+.product-contact .pc-line{ display:flex; align-items:center; gap:.5em; font-size:1.7rem; font-weight:600; color:var(--brand-link-green); padding-block:.15em; transition:color .2s; }
 .product-contact .pc-line:hover{ color:var(--brand-green-deep); text-decoration:underline; }
-.product-contact .pc-line svg{ width:16px; height:16px; flex:none; }
+.product-contact .pc-line svg{ width:32px; height:32px; flex:none; }
+
+/* Shop/category grid product cards (woocommerce/content-product.php): the
+   default cropped, serif-titled card read poorly at this size — bigger
+   uncropped image, readable sans-serif title, clearer net-price suffix. */
+.shop-product-card .thumb{ aspect-ratio:4/3.6; }
+.shop-product-card .thumb img{ object-fit:contain; }
+.shop-product-card h3{ font-family:var(--font-sans); font-size:1.05rem; font-weight:700; }
+.shop-product-card .price .woocommerce-price-suffix{
+  display:block; color:var(--ink-600); font-size:.82rem; font-weight:600; margin-top:.2em;
+}
 
 /* Miejsce zarezerwowane pod przyszłe zdjęcie (WordPress) */
 .photo-slot{

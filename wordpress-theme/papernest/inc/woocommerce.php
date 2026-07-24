@@ -29,30 +29,21 @@ add_action( 'woocommerce_after_main_content', 'papernest_wc_wrapper_end', 10 );
 
 function papernest_wc_wrapper_start() {
 	echo '<section class="section"><div class="container">';
-	if ( is_shop() || is_product_taxonomy() ) {
-		echo '<div class="two-col cols-toc" style="align-items:start">';
-		papernest_shop_category_sidebar();
-		echo '<div>';
-	}
 }
 function papernest_wc_wrapper_end() {
-	if ( is_shop() || is_product_taxonomy() ) {
-		echo '</div></div>';
-	}
 	echo '</div></section>';
 }
 
 /**
- * Product category list on the shop/category archive — same visual style as
- * the legal pages' table-of-contents sidebar (.legal-toc), replacing the
- * default WooCommerce category widget this theme otherwise has no sidebar
- * mechanism to show at all (see the removed woocommerce_sidebar hook above).
+ * Product category pills for the shop toolbar — replaces the earlier
+ * sidebar-style category list (too narrow a content column for a
+ * comfortable product grid); this renders inline in .shop-filters instead.
  */
-function papernest_shop_category_sidebar() {
+function papernest_shop_category_filters() {
 	// childless => true skips umbrella/parent categories (e.g. a "Nasze
 	// Produkty" wrapper containing the real categories as its children) —
-	// "Wszystkie produkty" above already covers that, so listing the parent
-	// too is a redundant near-duplicate link.
+	// "Wszystkie produkty" already covers that, so listing the parent too
+	// is a redundant near-duplicate link.
 	$categories = get_terms(
 		array(
 			'taxonomy'   => 'product_cat',
@@ -65,13 +56,10 @@ function papernest_shop_category_sidebar() {
 		return;
 	}
 	?>
-	<aside class="legal-toc reveal" style="position:sticky;top:110px">
-		<h4>Kategorie</h4>
-		<a href="<?php echo esc_url( get_permalink( wc_get_page_id( 'shop' ) ) ); ?>" <?php echo is_shop() ? 'style="color:var(--brand-green-deep);font-weight:700"' : ''; ?>>Wszystkie produkty</a>
-		<?php foreach ( $categories as $cat ) : ?>
-			<a href="<?php echo esc_url( get_term_link( $cat ) ); ?>" <?php echo is_tax( 'product_cat', $cat->slug ) ? 'style="color:var(--brand-green-deep);font-weight:700"' : ''; ?>><?php echo esc_html( $cat->name ); ?> (<?php echo esc_html( $cat->count ); ?>)</a>
-		<?php endforeach; ?>
-	</aside>
+	<a class="filter-chip<?php echo is_shop() ? ' active' : ''; ?>" href="<?php echo esc_url( get_permalink( wc_get_page_id( 'shop' ) ) ); ?>">Wszystkie produkty</a>
+	<?php foreach ( $categories as $cat ) : ?>
+		<a class="filter-chip<?php echo is_tax( 'product_cat', $cat->slug ) ? ' active' : ''; ?>" href="<?php echo esc_url( get_term_link( $cat ) ); ?>"><?php echo esc_html( $cat->name ); ?></a>
+	<?php endforeach; ?>
 	<?php
 }
 
@@ -136,7 +124,9 @@ add_action( 'woocommerce_before_shop_loop', 'papernest_shop_toolbar_start', 15 )
 add_action( 'woocommerce_before_shop_loop', 'papernest_shop_toolbar_end', 31 );
 
 function papernest_shop_toolbar_start() {
-	echo '<div class="shop-toolbar"><div class="shop-filters"></div><div class="shop-sort">Sortuj: ';
+	echo '<div class="shop-toolbar"><div class="shop-filters">';
+	papernest_shop_category_filters();
+	echo '</div><div class="shop-sort">Sortuj: ';
 }
 function papernest_shop_toolbar_end() {
 	woocommerce_catalog_ordering();
