@@ -102,3 +102,34 @@ function papernest_cart_count_fragment( $fragments ) {
 if ( class_exists( 'WooCommerce' ) ) {
 	add_filter( 'woocommerce_add_to_cart_fragments', 'papernest_cart_count_fragment' );
 }
+
+/**
+ * Page builders (e.g. Elementor) can hook template_include at high priority
+ * to fully replace the theme's template on pages they've "taken over"
+ * editing — even when this theme's own template is assigned to that page —
+ * which is why a page could keep showing an old page-builder design after
+ * switching to this theme. This runs last and forces our own front-page.php
+ * and page-*.php templates to win for the pages this theme controls,
+ * without touching or deleting whatever page-builder data already exists;
+ * it's purely about which template renders, so it's fully reversible by
+ * removing this filter.
+ */
+add_filter( 'template_include', 'papernest_force_own_templates', PHP_INT_MAX );
+function papernest_force_own_templates( $template ) {
+	if ( is_front_page() && ! is_home() ) {
+		$front = PAPERNEST_DIR . '/front-page.php';
+		if ( file_exists( $front ) ) {
+			return $front;
+		}
+	}
+	if ( is_page() ) {
+		$page_template = get_page_template_slug( get_queried_object_id() );
+		if ( $page_template ) {
+			$file = PAPERNEST_DIR . '/' . $page_template;
+			if ( file_exists( $file ) ) {
+				return $file;
+			}
+		}
+	}
+	return $template;
+}
