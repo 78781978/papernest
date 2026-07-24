@@ -170,10 +170,13 @@ function papernest_default_accessibility_content() {
 /* -------------------------------------------------------------------- Menu ---- */
 
 function papernest_import_menu() {
-	if ( wp_get_nav_menu_object( 'Menu główne' ) ) {
+	$existing_menu = wp_get_nav_menu_object( 'Menu główne' );
+	if ( $existing_menu && ! empty( wp_get_nav_menu_items( $existing_menu->term_id ) ) ) {
+		// Menu already has items (from a previous import or manual edits in
+		// Wygląd > Menu) — leave it alone rather than risk duplicating items.
 		return;
 	}
-	$menu_id = wp_create_nav_menu( 'Menu główne' );
+	$menu_id = $existing_menu ? $existing_menu->term_id : wp_create_nav_menu( 'Menu główne' );
 
 	$home_id      = get_option( 'page_on_front' );
 	$shop_page_id = class_exists( 'WooCommerce' ) ? wc_get_page_id( 'shop' ) : 0;
