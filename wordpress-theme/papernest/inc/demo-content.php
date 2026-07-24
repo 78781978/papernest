@@ -128,6 +128,18 @@ function papernest_import_pages() {
 		$existing = get_page_by_path( $p['slug'] );
 		if ( $existing ) {
 			$ids[ $p['slug'] ] = $existing->ID;
+			// A page already exists at this slug (from an earlier import, or
+			// created some other way) — never touch its content, but make
+			// sure it actually uses this theme's template if nothing more
+			// specific was deliberately chosen, otherwise e.g. an existing
+			// "sklep" page would silently render as a blank generic page
+			// instead of the shop.
+			if ( $p['template'] ) {
+				$current_template = get_post_meta( $existing->ID, '_wp_page_template', true );
+				if ( ! $current_template || 'default' === $current_template ) {
+					update_post_meta( $existing->ID, '_wp_page_template', $p['template'] );
+				}
+			}
 			continue;
 		}
 		$page_id = wp_insert_post(
