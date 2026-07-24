@@ -715,15 +715,26 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 /* ---------- Footer ---------- */
 .site-footer{
   background-image:url("../img/textures/satin-navy.svg");
-  background-size:145% auto; background-position:38% 45%; background-repeat:no-repeat;
+  background-size:174% auto; background-position:38% 45%; background-repeat:no-repeat;
   background-color:#0b2345;
   color:rgba(255,255,255,.72); margin-top:4.9rem; border-top:1px solid var(--line-soft);
   position:relative; overflow:hidden;
   animation: satin-drift 26s ease-in-out infinite alternate;
 }
 @keyframes satin-drift{
-  from{ background-position: 32% 40%; background-size:145% auto; }
-  to{ background-position: 62% 56%; background-size:158% auto; }
+  from{ background-position: 32% 40%; background-size:174% auto; }
+  to{ background-position: 62% 56%; background-size:190% auto; }
+}
+/* The texture's own aspect ratio doesn't stretch to cover the taller
+   footer that a stacked mobile layout produces (even the 2-column layout
+   above 560px) — repeat it vertically below that point instead of leaving
+   the plain background-color exposed past the texture's bottom edge. */
+@media (max-width: 560px){
+  .site-footer{ background-size:220% auto; background-repeat:repeat-y; background-position:38% top; }
+  @keyframes satin-drift{
+    from{ background-position: 32% top; }
+    to{ background-position: 62% top; }
+  }
 }
 /* Stopka zmniejszona o ok. 30% względem poprzedniej wersji (padding/odstępy). */
 .footer-top{ padding-block:clamp(39px,5vw,62px); display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr 1.1fr; gap:2.1rem; }
@@ -754,8 +765,16 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .footer-bottom .langs span{ cursor:default; }
 .footer-bottom .langs .active{ color:#fff; font-weight:700; }
 
-@media (max-width: 980px){ .footer-top{ grid-template-columns:1fr 1fr; } }
-@media (max-width: 560px){ .footer-top{ grid-template-columns:1fr; } .footer-bottom{ flex-direction:column; align-items:flex-start; } }
+/* Below 980px the brand block spans the full row so it doesn't get squeezed
+   into one narrow grid cell next to a link column; the 4 link columns stay
+   a 2x2 grid all the way down to phone width instead of collapsing into one
+   very long single-file stack (which used to make the footer several
+   screens tall on mobile). */
+@media (max-width: 980px){
+  .footer-top{ grid-template-columns:1fr 1fr; }
+  .footer-brand{ grid-column:1 / -1; }
+}
+@media (max-width: 560px){ .footer-bottom{ flex-direction:column; align-items:flex-start; } }
 
 /* ---------- Breadcrumb / page header (subpages) ---------- */
 .page-hero{
