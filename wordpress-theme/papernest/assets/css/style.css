@@ -636,12 +636,18 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .split .media .art{
   border-radius:var(--r-xl); overflow:hidden; box-shadow:var(--shadow-lg); aspect-ratio:5/4.3;
 }
+/* Same round-badge treatment as .history-media .badge-ring (was a wide
+   rectangular pill that covered too much of the image underneath it) — same
+   position as before (bottom-left), just circular now instead of a wide bar. */
 .split .stat-pill{
-  position:absolute; bottom:-24px; left:-24px; background:var(--surface); border-radius:var(--r-lg); box-shadow:var(--shadow-lg);
-  padding:var(--sp-5); display:flex; gap:var(--sp-4); align-items:center;
+  position:absolute; bottom:-24px; left:-24px; width:112px; height:112px; border-radius:50%;
+  background:var(--surface); box-shadow:var(--shadow-lg);
+  display:flex; align-items:center; justify-content:center; flex-direction:column; gap:.2em; text-align:center; padding:8px;
 }
-.split .stat-pill b{ font-family:var(--font-display); font-size:1.7rem; color:var(--brand-green-deep); display:block; }
-.split .stat-pill span{ font-size:.78rem; color:var(--ink-500); }
+.split .stat-pill .ic{ width:30px!important; height:30px!important; border-radius:9px!important; }
+.split .stat-pill .ic svg{ width:16px; height:16px; }
+.split .stat-pill b{ font-family:var(--font-display); font-size:.92rem; color:var(--brand-green-deep); display:block; line-height:1.15; }
+.split .stat-pill span{ font-size:.6rem; color:var(--ink-500); font-weight:700; text-transform:uppercase; letter-spacing:.03em; }
 .split ul.check-list{ margin-top:var(--sp-6); display:flex; flex-direction:column; gap:var(--sp-3); }
 .split ul.check-list li{ display:flex; gap:.8em; align-items:flex-start; font-size:.98rem; color:var(--ink-700); }
 .split ul.check-list .tick{

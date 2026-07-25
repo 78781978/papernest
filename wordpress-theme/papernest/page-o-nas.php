@@ -76,7 +76,7 @@ while ( have_posts() ) :
     <div class="split">
       <div class="media">
         <div class="art"><?php papernest_illustration( 'papernest_illustration_about_growth', 'cardboard.svg', 'Rozwój firmy — sprzedaż online' ); ?></div>
-        <div class="stat-pill"><span class="ic" style="width:44px;height:44px;border-radius:12px;background:var(--paper-100);display:flex;align-items:center;justify-content:center;color:var(--brand-green-deep)"><?php echo papernest_icon( 'trend' ); ?></span><div><b>e-commerce</b><span>Nowy kanał sprzedaży</span></div></div>
+        <div class="stat-pill"><span class="ic" style="background:var(--paper-100);display:flex;align-items:center;justify-content:center;color:var(--brand-green-deep)"><?php echo papernest_icon( 'trend' ); ?></span><b>e-commerce</b><span>Nowy kanał</span></div>
       </div>
       <div class="copy">
         <span class="eyebrow">Rozwój firmy</span>
