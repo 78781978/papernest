@@ -143,7 +143,7 @@ $contact_url = papernest_page_link( 'kontakt' );
     ?>
     <div class="split">
       <div class="copy">
-        <span class="eyebrow" style="font-size:1rem">Usługi przemysłowe</span>
+        <span class="eyebrow">Usługi przemysłowe</span>
         <h2 class="text-balance">Zainteresowany usługą przewijania papieru?</h2>
         <p style="margin-top:16px;color:var(--ink-600);font-size:1.05rem;line-height:1.75">Oferujemy profesjonalne przewijanie papieru oraz cięcie wzdłużne rolek, dostosowane do indywidualnych wymagań klientów. Realizujemy zamówienia dla branży opakowaniowej, budowlanej, spożywczej i wielu innych.</p>
         <ul class="check-list">

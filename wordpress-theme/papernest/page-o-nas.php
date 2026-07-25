@@ -32,7 +32,8 @@ while ( have_posts() ) :
         <div class="badge-ring"><b>25+</b><span>lat na rynku</span></div>
       </div>
       <div class="copy">
-        <span class="eyebrow">Od 20+ lat w branży papierniczej</span>
+        <span class="eyebrow">Od 20+ lat w&nbsp;branży papierniczej</span>
+        <h2 class="text-balance">Nasza Historia</h2>
         <?php the_content(); ?>
         <div class="hero-cta" style="margin-top:28px"><a href="<?php echo esc_url( papernest_page_link( 'kontakt' ) ); ?>" class="btn btn-primary">Skontaktuj się z nami <?php echo papernest_icon( 'arrow' ); ?></a></div>
       </div>
