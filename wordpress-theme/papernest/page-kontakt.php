@@ -18,7 +18,7 @@ while ( have_posts() ) :
 	$hours       = papernest_hours();
 
 	$locations = array(
-		array( 'user', 'Biuro Sprzedaży', 'Nasz zespół chętnie doradzi, odpowie na pytania i pomoże dobrać najlepsze rozwiązania dopasowane do potrzeb Twojej firmy.', array( $address, $phone, $email, 'Godziny otwarcia: ' . $hours ) ),
+		array( 'user', 'Biuro Sprzedaży', 'Nasz zespół chętnie doradzi, odpowie na pytania i pomoże dobrać najlepsze rozwiązania dopasowane do potrzeb Twojej firmy.', array( $address, $phone, $email ) ),
 		array( 'factory', 'Produkcja i Magazyn', 'Wysyłki paletowe i odbiory hurtowe — po wcześniejszym ustaleniu terminu.', array( $address, $phone, $email ) ),
 		array( 'pin', 'Odbiory osobiste', 'P.H.U "BOBINEX" w Centrum Wędkarskim "OKOŃ".', array( 'ul. Szczecińska 1A, 72-100 Goleniów', $phone, $email ) ),
 		array( 'cart', 'Zamówienia online', 'Zamówienia online realizuje P.H.U "BOBINEX" w Centrum Wędkarskim "OKOŃ".', array( 'ul. Szczecińska 1A, 72-100 Goleniów', $phone, $email ) ),
@@ -37,6 +37,7 @@ while ( have_posts() ) :
 
 <section class="section">
   <div class="container">
+    <p style="text-align:center;font-weight:700;color:var(--heading);margin-bottom:var(--sp-6)">Godziny otwarcia: <?php echo esc_html( $hours ); ?></p>
     <div class="contact-grid cols-4 reveal-stagger">
       <?php
       foreach ( $locations as $loc ) :
@@ -49,7 +50,7 @@ while ( have_posts() ) :
             <div class="cline-group">
               <?php foreach ( $loc[3] as $line ) : ?>
                 <?php if ( $line === $phone ) : ?>
-                  <a class="cline cline-nowrap" href="<?php echo esc_url( $phone_tel ); ?>"><?php echo esc_html( $line ); ?></a>
+                  <a class="cline" href="<?php echo esc_url( $phone_tel ); ?>"><?php echo esc_html( $line ); ?></a>
                 <?php elseif ( $line === $email ) : ?>
                   <a class="cline" href="mailto:<?php echo esc_attr( $email ); ?>"><?php echo esc_html( $line ); ?></a>
                 <?php else : ?>

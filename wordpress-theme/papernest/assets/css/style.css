@@ -959,9 +959,12 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .contact-card h3{ font-size:1.05rem; margin-bottom:var(--sp-2); }
 .contact-card address,.contact-card p{ font-style:normal; font-size:.9rem; line-height:1.7; color:var(--ink-600); }
 .contact-card .cline-group{ margin-top:auto; padding-top:var(--sp-4); }
-.contact-card .cline{ display:block; margin-top:var(--sp-2); font-weight:700; color:var(--heading); transition:color .2s; }
+/* None of phone/email/address are meant to wrap — was only applied to
+   phone (via .cline-nowrap), so the address line (the longest one, with a
+   postal code at the end) would wrap and strand "72-100 Goleniów" onto its
+   own line, splitting the code from the city. */
+.contact-card .cline{ display:block; margin-top:var(--sp-2); font-weight:700; color:var(--heading); transition:color .2s; white-space:nowrap; }
 .contact-card .cline:first-child{ margin-top:0; }
-.contact-card .cline-nowrap{ white-space:nowrap; }
 a.cline:hover{ color:var(--brand-green-deep); text-decoration:underline; }
 
 .form-field{ display:flex; flex-direction:column; gap:.5em; margin-bottom:var(--sp-4); }
