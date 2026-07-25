@@ -918,7 +918,9 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .use-card .ic{ width:58px; height:58px; border-radius:14px; background:var(--paper-100); color:var(--brand-green-deep); display:flex; align-items:center; justify-content:center; }
 .use-card .ic svg{ width:28px; height:28px; }
 .use-card b{ font-size:.95rem; color:var(--heading); }
-.use-card .photo-slot{ aspect-ratio:16/10; margin-bottom:var(--sp-1); }
+/* Same tile proportions as the homepage's "Trzy produkty" cards
+   (.product-card .thumb) — was a shorter 16/10 landscape crop. */
+.use-card .photo-slot{ aspect-ratio:4/4.03; margin-bottom:var(--sp-1); }
 
 /* Portfolio — kafelki kwadratowe z miejscem na zdjęcie i podpisem w białej ramce */
 .portfolio-tile{
