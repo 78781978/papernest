@@ -35,32 +35,16 @@ while ( have_posts() ) :
         <span class="eyebrow">Od 20+ lat w&nbsp;branży papierniczej</span>
         <h2 class="text-balance">Nasza Historia</h2>
         <?php
-        // The heading above is always shown by the template. If the page's
-        // own editable content happens to start with its own "Nasza
-        // Historia" heading too (easy to end up with when editing the page
-        // directly), that would print the title twice — strip a leading
-        // heading here so it can never duplicate the one above regardless
-        // of what's been typed into the content editor.
-        $history_content = trim( get_the_content() );
-        if ( '' === $history_content ) {
-            // Falls back to the original history copy if the page content
-            // has been emptied out (e.g. while editing in Elementor, which
-            // replaces the page entirely and leaves the normal WordPress
-            // content — the the_content() this template reads — blank).
-            $history_content = papernest_default_about_content();
-        }
-        $history_content = apply_filters( 'the_content', $history_content );
-        // Matches even if the heading has nested formatting tags inside it
-        // (e.g. a bolded word) — strips tags from the heading's own inner
-        // HTML before comparing, rather than requiring an exact literal match.
-        if ( preg_match( '/^\s*<(h[1-6])[^>]*>(.*?)<\/\1>\s*/is', $history_content, $m ) ) {
-            $heading_text = trim( wp_strip_all_tags( $m[2] ) );
-            if ( 0 === strcasecmp( $heading_text, 'Nasza Historia' ) ) {
-                $history_content = substr( $history_content, strlen( $m[0] ) );
-            }
-        }
-        echo $history_content; // phpcs:ignore
+        // Hardcoded (not pulled from the page's own WordPress content editor
+        // like before) so it always matches the styling of the "e-commerce"
+        // section below it and can never again go missing or duplicate its
+        // own heading when the page is edited in Elementor instead of the
+        // normal WordPress editor.
         ?>
+        <p style="margin-top:16px;font-size:1.02rem;line-height:1.8;color:var(--ink-600)">PaperNest to polska marka z&nbsp;Goleniowa, powstała na bazie ponad 20 lat doświadczenia w&nbsp;branży papierniczej. Naszą specjalnością jest profesjonalne przewijanie i&nbsp;cięcie wzdłużne rolek papierowych oraz produkcja praktycznych, ekologicznych wyrobów papierowych dla firm i&nbsp;klientów indywidualnych.</p>
+        <p style="margin-top:14px;font-size:1.02rem;line-height:1.8;color:var(--ink-600)">Marka PaperNest została stworzona z&nbsp;pasji do jakości, funkcjonalności i&nbsp;odpowiedzialnej produkcji. Dzięki wieloletniej znajomości procesów przetwórstwa papieru oferujemy produkty dopracowane pod względem trwałości, wydajności i&nbsp;zastosowania.</p>
+        <p style="margin-top:14px;font-size:1.02rem;line-height:1.8;color:var(--ink-600)">W&nbsp;naszej ofercie znajdują się przede wszystkim: wypełniacze papierowe do zabezpieczania przesyłek, papier dla piskląt wykorzystywany w&nbsp;hodowli drobiu oraz tektura budowlana do ochrony podłóg i&nbsp;innych powierzchni podczas remontów, prac wykończeniowych i&nbsp;budowlanych.</p>
+        <p style="margin-top:14px;font-size:1.02rem;line-height:1.8;color:var(--ink-600)">Obsługujemy klientów detalicznych i&nbsp;biznesowych w&nbsp;całej Polsce, zapewniając wysoką jakość produktów, fachową obsługę oraz sprawną realizację zamówień. PaperNest to połączenie doświadczenia, nowoczesnego podejścia i&nbsp;ekologicznych rozwiązań dla branży e-commerce, budowlanej i&nbsp;hodowlanej.</p>
         <div class="hero-cta" style="margin-top:28px"><a href="<?php echo esc_url( papernest_page_link( 'kontakt' ) ); ?>" class="btn btn-primary">Skontaktuj się z nami <?php echo papernest_icon( 'arrow' ); ?></a></div>
       </div>
     </div>
@@ -91,7 +75,7 @@ while ( have_posts() ) :
     ?>
     <div class="split">
       <div class="media">
-        <div class="art"><?php papernest_illustration( 'papernest_illustration_services', 'services.svg', 'Usługi przemysłowe' ); ?></div>
+        <div class="art"><?php papernest_illustration( 'papernest_illustration_about_growth', 'cardboard.svg', 'Rozwój firmy — sprzedaż online' ); ?></div>
         <div class="stat-pill"><span class="ic" style="width:44px;height:44px;border-radius:12px;background:var(--paper-100);display:flex;align-items:center;justify-content:center;color:var(--brand-green-deep)"><?php echo papernest_icon( 'trend' ); ?></span><div><b>e-commerce</b><span>Nowy kanał sprzedaży</span></div></div>
       </div>
       <div class="copy">
