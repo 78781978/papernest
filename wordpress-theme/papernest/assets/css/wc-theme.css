@@ -72,8 +72,13 @@
 	font-weight: 800;
 	font-family: var(--font-sans);
 }
-.woocommerce .price del { color: var(--ink-400); opacity: 1; font-weight: 500; }
-.woocommerce .price ins { text-decoration: none; }
+/* white-space:nowrap keeps each amount (old and new price) intact as one
+   unit — without it, a 4-digit price like "2 490,00 zł" (space as the
+   thousands separator) could break its OWN line right after the "2",
+   stranding it next to the old price instead of wrapping the whole new
+   price down together. */
+.woocommerce .price del { color: var(--ink-400); opacity: 1; font-weight: 500; white-space: nowrap; }
+.woocommerce .price ins { text-decoration: none; white-space: nowrap; }
 
 /* Star ratings */
 .woocommerce .star-rating span::before,
