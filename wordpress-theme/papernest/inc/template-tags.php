@@ -176,21 +176,25 @@ function papernest_logo( $class = '' ) {
 	if ( $logo_id ) {
 		$img = wp_get_attachment_image(
 			$logo_id,
-			'full',
+			// Registered right above (220x150, uncropped) instead of 'full' —
+			// the logo never displays above 180px tall, so requesting the
+			// original upload's own resolution (whatever a client happens to
+			// upload, e.g. 600x400) served that many more pixels than needed
+			// at every single size down to 44px on scrolled mobile.
+			'papernest-logo',
 			false,
 			array(
-				'class'   => $classes,
-				'loading' => 'eager',
+				'class'         => $classes,
+				'loading'       => 'eager',
+				'decoding'      => 'async',
+				'fetchpriority' => 'high',
 				// wp_get_attachment_image() always builds a full srcset (every
 				// registered size up to the original), but without an explicit
 				// `sizes` override it guesses one from the requested size's own
-				// width — 600px for 'full' here — telling browsers this logo
-				// might render up to 600px wide. It never does (180px is the
-				// largest it's ever shown, on desktop before scrolling), so
-				// browsers were always picking the biggest, least-necessary
-				// srcset candidate. This lets them correctly pick something
-				// close to the ~300px "medium" size instead.
-				'sizes'   => '180px',
+				// width, telling browsers this logo might render much wider
+				// than it ever does (180px, on desktop before scrolling) and
+				// so picking a needlessly large srcset candidate.
+				'sizes'         => '180px',
 			)
 		);
 		if ( $img ) {

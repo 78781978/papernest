@@ -48,8 +48,44 @@ function papernest_setup() {
 
 	add_image_size( 'papernest-portfolio', 800, 800, true );
 	add_image_size( 'papernest-wide', 1600, 900, true );
+	// Logo is a simple graphic, never displayed above 180px tall — this is
+	// plenty for a sharp retina image without serving the full-resolution
+	// upload (which could be any size a client happens to upload) everywhere.
+	add_image_size( 'papernest-logo', 220, 150, false );
 }
 add_action( 'after_setup_theme', 'papernest_setup' );
+
+/**
+ * A newly add_image_size()'d size only gets generated for images uploaded
+ * from now on — the client's logo was already uploaded before
+ * 'papernest-logo' existed, so without this, wp_get_attachment_image()
+ * would silently fall back to the full-resolution original anyway (WP does
+ * not backfill missing intermediate sizes on its own) and this optimization
+ * would do nothing until she happened to re-upload the logo. Regenerates
+ * just once per logo attachment.
+ */
+add_action(
+	'init',
+	function () {
+		$logo_id = get_theme_mod( 'custom_logo' );
+		if ( ! $logo_id || ! wp_attachment_is_image( $logo_id ) ) {
+			return;
+		}
+		$meta = wp_get_attachment_metadata( $logo_id );
+		if ( isset( $meta['sizes']['papernest-logo'] ) ) {
+			return;
+		}
+		$file = get_attached_file( $logo_id );
+		if ( ! $file || ! file_exists( $file ) ) {
+			return;
+		}
+		require_once ABSPATH . 'wp-admin/includes/image.php';
+		$new_meta = wp_generate_attachment_metadata( $logo_id, $file );
+		if ( $new_meta ) {
+			wp_update_attachment_metadata( $logo_id, $new_meta );
+		}
+	}
+);
 
 /**
  * Default the primary menu to the site's real pages the first time the
@@ -83,6 +119,50 @@ function papernest_assets() {
 	wp_enqueue_script( 'papernest-main', PAPERNEST_URI . '/assets/js/main.js', array(), PAPERNEST_VERSION, true );
 }
 add_action( 'wp_enqueue_scripts', 'papernest_assets' );
+
+/**
+ * WooCommerce's own CSS/JS (cart fragments, add-to-cart, product gallery,
+ * checkout, etc.) is only actually needed on shop/product/cart/checkout/
+ * account pages — but WooCommerce enqueues it on every single front-end
+ * page by default. On the homepage or a plain content page like O nas, none
+ * of it does anything (the homepage's product tiles use this theme's own
+ * .product-card styling from style.css, not WooCommerce's), so it's pure
+ * unused CSS/JS weight — exactly what PageSpeed's "unused CSS/JS" and
+ * render-blocking audits were flagging.
+ */
+function papernest_is_commerce_page() {
+	return class_exists( 'WooCommerce' ) && (
+		is_shop() || is_product() || is_product_category() || is_product_tag() ||
+		is_cart() || is_checkout() || is_account_page()
+	);
+}
+add_action(
+	'wp_enqueue_scripts',
+	function () {
+		if ( papernest_is_commerce_page() ) {
+			return;
+		}
+		foreach ( array( 'wc-cart-fragments', 'wc-add-to-cart', 'woocommerce', 'wc-single-product', 'wc-checkout', 'wc-cart', 'sourcebuster-js', 'wc-order-attribution' ) as $handle ) {
+			wp_dequeue_script( $handle );
+		}
+		foreach ( array( 'woocommerce-general', 'woocommerce-layout', 'woocommerce-smallscreen', 'wc-blocks-style', 'wc-blocks-packages-style', 'wc-blocks-style-all-products', 'papernest-wc-theme' ) as $handle ) {
+			wp_dequeue_style( $handle );
+		}
+	},
+	100
+);
+
+// Dashicons is admin-toolbar iconography — irrelevant to anyone who isn't
+// logged in, but loaded on every front-end page for everyone by default.
+add_action(
+	'wp_enqueue_scripts',
+	function () {
+		if ( ! is_user_logged_in() ) {
+			wp_deregister_style( 'dashicons' );
+		}
+	},
+	100
+);
 
 /**
  * Preload the above-the-fold font files (Inter + Playfair Display) so the
@@ -124,6 +204,16 @@ add_action(
  * so it doesn't need to load on the front end.
  */
 remove_action( 'wp_head', 'wp_generator' );
+
+/**
+ * The site doesn't embed emoji as images (native emoji font rendering is
+ * fine) or use WordPress's oEmbed auto-discovery — both add extra
+ * render-blocking-ish script/link tags to every page for nothing.
+ */
+remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
+remove_action( 'wp_print_styles', 'print_emoji_styles' );
+remove_action( 'wp_head', 'wp_oembed_add_discovery_links' );
+remove_action( 'wp_head', 'wp_oembed_add_host_js' );
 
 /**
  * /llms.txt — an emerging convention (same idea as robots.txt, but a plain
