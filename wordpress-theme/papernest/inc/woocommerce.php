@@ -161,7 +161,7 @@ function papernest_wc_page_hero() {
 			<div class="crumbs"><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Strona główna</a> <span>/</span> <span>Sklep</span></div>
 			<h1><?php woocommerce_page_title(); ?></h1>
 			<?php if ( is_shop() && ! is_search() ) : ?>
-				<p>Papier w rolkach prosto od producenta — wypełniacz do paczek, papier dla piskląt i tektura budowlana.</p>
+				<p>Papier w&nbsp;rolkach prosto od producenta — wypełniacz do paczek, papier dla piskląt i&nbsp;tektura budowlana.</p>
 			<?php endif; ?>
 		</div>
 	</section>

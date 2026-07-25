@@ -23,7 +23,7 @@ while ( have_posts() ) :
   <div class="container">
     <div class="crumbs"><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Strona główna</a> <span>/</span> <span>Portfolio</span></div>
     <h1><?php the_title(); ?></h1>
-    <p>PaperNest w różnych zastosowaniach — odkryj, gdzie nasze wyroby z papieru sprawdzają się najlepiej.</p>
+    <p>PaperNest w&nbsp;różnych zastosowaniach — odkryj, gdzie nasze wyroby z&nbsp;papieru sprawdzają się najlepiej.</p>
   </div>
 </section>
 

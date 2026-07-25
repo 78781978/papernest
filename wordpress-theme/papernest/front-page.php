@@ -20,7 +20,7 @@ $contact_url = papernest_page_link( 'kontakt' );
       <div class="hero-copy">
         <span class="hero-kicker"><span class="dot"></span>Polski producent od 2001 roku</span>
         <h1>Nikt nie kręci rolek <em>tak dobrze</em> jak my.</h1>
-        <p class="lead">Od ponad 25 lat produkujemy wyroby papierowe i świadczymy usługi przewijania papieru. Zapewniamy najwyższą jakość, elastyczne możliwości produkcyjne oraz terminową realizację zamówień dla firm z różnych branż.</p>
+        <p class="lead">Od ponad 25 lat produkujemy wyroby papierowe i&nbsp;świadczymy usługi przewijania papieru. Zapewniamy najwyższą jakość, elastyczne możliwości produkcyjne oraz terminową realizację zamówień dla firm z&nbsp;różnych branż.</p>
         <div class="hero-cta">
           <a href="<?php echo esc_url( $shop_url ); ?>" class="btn btn-primary">Zobacz Nasze Produkty <?php echo papernest_icon( 'arrow' ); ?></a>
           <a href="<?php echo esc_url( $about_url ); ?>" class="btn btn-outline">Poznaj naszą historię</a>
@@ -45,11 +45,11 @@ $contact_url = papernest_page_link( 'kontakt' );
     <div class="bento-item is-feature">
       <span class="tag-pill"><?php echo papernest_icon( 'leaf' ); ?> Certyfikowany recykling</span>
       <span class="ic"><?php echo papernest_icon( 'factory' ); ?></span>
-      <b>Własna produkcja w Goleniowie</b>
-      <p>Cały proces — od przewijania po pakowanie — odbywa się w jednym miejscu. Pełna kontrola jakości na każdym etapie, bez pośredników.</p>
+      <b>Własna produkcja w&nbsp;Goleniowie</b>
+      <p>Cały proces — od przewijania po pakowanie — odbywa się w&nbsp;jednym miejscu. Pełna kontrola jakości na każdym etapie, bez pośredników.</p>
     </div>
-    <div class="bento-item span-wide"><span class="ic"><?php echo papernest_icon( 'sparkle' ); ?></span><div><b>Wysoka Jakość</b><span>Surowiec w 100% z recyklingu</span></div></div>
-    <div class="bento-item"><span class="ic"><?php echo papernest_icon( 'truck' ); ?></span><b>Szybka Realizacja</b><span>InPost i DPD</span></div>
+    <div class="bento-item span-wide"><span class="ic"><?php echo papernest_icon( 'sparkle' ); ?></span><div><b>Wysoka Jakość</b><span>Surowiec w&nbsp;100% z&nbsp;recyklingu</span></div></div>
+    <div class="bento-item"><span class="ic"><?php echo papernest_icon( 'truck' ); ?></span><b>Szybka Realizacja</b><span>InPost i&nbsp;DPD</span></div>
     <div class="bento-item"><span class="ic"><?php echo papernest_icon( 'shield' ); ?></span><b>Bezpieczna Płatność</b><span>Obsługa przez paynow</span></div>
   </div>
 </div>

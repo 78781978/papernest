@@ -93,7 +93,7 @@ function papernest_svg_file( $path ) {
 }
 
 function papernest_reveal( $content, $extra_class = '' ) {
-	return '<div class="reveal ' . esc_attr( $extra_class ) . '">' . $content . '</div>';
+	return '<div class="reveal ' . esc_attr( $extra_class ) . '">' . papernest_no_orphans( $content ) . '</div>';
 }
 
 /**

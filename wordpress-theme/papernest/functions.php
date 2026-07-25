@@ -53,6 +53,7 @@ add_action( 'after_setup_theme', 'papernest_setup' );
  * theme is activated, so navigation isn't empty before the client sets one up.
  */
 require_once PAPERNEST_DIR . '/inc/customizer.php';
+require_once PAPERNEST_DIR . '/inc/typography.php';
 require_once PAPERNEST_DIR . '/inc/template-tags.php';
 require_once PAPERNEST_DIR . '/inc/cpt.php';
 require_once PAPERNEST_DIR . '/inc/legal-toc.php';

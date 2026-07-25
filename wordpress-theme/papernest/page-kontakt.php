@@ -31,7 +31,7 @@ while ( have_posts() ) :
   <div class="container">
     <div class="crumbs"><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Strona główna</a> <span>/</span> <span>Kontakt</span></div>
     <h1><?php the_title(); ?></h1>
-    <p>Masz pytanie o produkty, wycenę hurtową lub usługę przewijania papieru? Napisz, zadzwoń lub odwiedź nas w Goleniowie.</p>
+    <p>Masz pytanie o&nbsp;produkty, wycenę hurtową lub usługę przewijania papieru? Napisz, zadzwoń lub odwiedź nas w&nbsp;Goleniowie.</p>
   </div>
 </section>
 

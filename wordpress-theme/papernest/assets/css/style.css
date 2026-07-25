@@ -819,12 +819,12 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .page-hero::before{
   content:""; position:absolute; inset:0; background:var(--grad-sheen); opacity:.25; mix-blend-mode:overlay;
 }
-.page-hero .container{ position:relative; z-index:1; }
-.page-hero .crumbs{ display:flex; gap:.5em; align-items:center; font-size:.85rem; color:rgba(255,255,255,.6); margin-bottom:var(--sp-4); position:relative; }
+.page-hero .container{ position:relative; z-index:1; text-align:center; }
+.page-hero .crumbs{ display:flex; gap:.5em; align-items:center; justify-content:center; font-size:.85rem; color:rgba(255,255,255,.6); margin-bottom:var(--sp-4); position:relative; }
 .page-hero .crumbs a{ color:rgba(255,255,255,.75); }
 .page-hero .crumbs a:hover{ color:#fff; }
-.page-hero h1{ color:#fff; font-size:clamp(2.1rem,4vw,3.2rem); position:relative; max-width:22ch; }
-.page-hero p{ color:rgba(255,255,255,.72); margin-top:var(--sp-4); max-width:56ch; font-size:1.05rem; line-height:1.7; position:relative; }
+.page-hero h1{ color:#fff; font-size:clamp(2.1rem,4vw,3.2rem); position:relative; max-width:22ch; margin-inline:auto; }
+.page-hero p{ color:rgba(255,255,255,.72); margin-top:var(--sp-4); max-width:56ch; margin-inline:auto; font-size:1.05rem; line-height:1.7; position:relative; }
 
 /* ---------- Generic content blocks reused across pages ---------- */
 .two-col{ display:grid; grid-template-columns:1fr 1fr; gap:var(--sp-8); }
@@ -972,9 +972,12 @@ a.cline:hover{ color:var(--brand-green-deep); text-decoration:underline; }
 .qty-input button:hover{ background:var(--paper-100); }
 .qty-input input{ width:46px; text-align:center; border:0; font-weight:700; color:var(--heading); font-size:.95rem; }
 
-.trust-row{ display:flex; gap:var(--sp-6); margin-top:var(--sp-8); flex-wrap:wrap; }
+.trust-row{ display:flex; gap:var(--sp-6); margin-top:var(--sp-10); margin-bottom:var(--sp-8); flex-wrap:wrap; }
 .trust-row .item{ display:flex; align-items:center; gap:.6em; font-size:.85rem; color:var(--ink-500); font-weight:600; }
 .trust-row svg{ width:24px; height:24px; color:var(--brand-green-deep); }
+/* WooCommerce's own .product_meta (SKU/category/tag line) has no margin of
+   its own — space it clearly away from the trust row above it. */
+.woocommerce div.product .product_meta{ margin-top:var(--sp-6); display:block; }
 
 .tabs{ display:flex; gap:var(--sp-6); border-bottom:1px solid var(--line); margin-top:var(--sp-12); }
 .tab-btn{ background:none; border:0; padding:1em 0; font-weight:700; color:var(--ink-400); font-size:.98rem; position:relative; }
