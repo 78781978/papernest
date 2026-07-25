@@ -174,8 +174,10 @@ function papernest_wc_page_hero() {
 add_filter(
 	'woocommerce_output_related_products_args',
 	function ( $args ) {
-		$args['posts_count'] = 3;
-		$args['columns']     = 3;
+		// WC's own arg key is posts_per_page, not posts_count — the wrong
+		// key silently did nothing and left the default of 4 in place.
+		$args['posts_per_page'] = 3;
+		$args['columns']        = 3;
 		return $args;
 	}
 );

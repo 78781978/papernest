@@ -38,10 +38,11 @@
 	box-shadow: var(--shadow-navy);
 }
 
-/* Price */
+/* Price — a vivid, clean green (not the muddy teal of --brand-link-green,
+   nor plain navy heading text) so prices read clearly as prices. */
 .woocommerce .price,
 .woocommerce ul.products li.product .price {
-	color: var(--heading);
+	color: var(--brand-green-deep);
 	font-weight: 800;
 	font-family: var(--font-display);
 }
@@ -110,15 +111,23 @@
 .woocommerce div.product span.price { font-size: 1.6rem; }
 /* Net-price suffix ("(netto: X zł)") — WooCommerce's default renders this
    very faint/small everywhere it appears (single product price, grid
-   cards); still visibly secondary to the main price, but readable now. */
+   cards); still visibly secondary to the main price, but readable now.
+   font-family is set explicitly because it otherwise inherits .price's
+   display serif, which reads oddly at this size for a parenthetical. */
 .woocommerce .price .woocommerce-price-suffix,
 .woocommerce-price-suffix {
 	display: block;
+	font-family: var(--font-sans) !important;
 	color: var(--ink-700) !important;
 	font-size: .95rem !important;
 	font-weight: 700 !important;
 	opacity: 1 !important;
 	margin-top: .25em;
+}
+/* On the shop/category grid tiles specifically, 30% larger than the base
+   .95rem above. */
+.shop-product-card .woocommerce-price-suffix {
+	font-size: 1.235rem !important;
 }
 .woocommerce div.product .stock { color: var(--brand-link-green); font-weight: 700; }
 .woocommerce div.product .out-of-stock { color: #b3261e; font-weight: 700; }
@@ -164,7 +173,7 @@
 	font-family: var(--font-sans);
 	color: var(--ink-800);
 }
-.woocommerce div.product .woocommerce-variation-price .price { color: var(--brand-link-green); }
+.woocommerce div.product .woocommerce-variation-price .price { color: var(--brand-green-deep); }
 
 /* Tabs */
 .woocommerce div.product .woocommerce-tabs ul.tabs { border-bottom: 1px solid var(--line); padding-left: 0; margin-top: var(--sp-12, 3rem); overflow: visible; }
