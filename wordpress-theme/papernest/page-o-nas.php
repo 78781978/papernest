@@ -34,7 +34,33 @@ while ( have_posts() ) :
       <div class="copy">
         <span class="eyebrow">Od 20+ lat w&nbsp;branży papierniczej</span>
         <h2 class="text-balance">Nasza Historia</h2>
-        <?php the_content(); ?>
+        <?php
+        // The heading above is always shown by the template. If the page's
+        // own editable content happens to start with its own "Nasza
+        // Historia" heading too (easy to end up with when editing the page
+        // directly), that would print the title twice — strip a leading
+        // heading here so it can never duplicate the one above regardless
+        // of what's been typed into the content editor.
+        $history_content = trim( get_the_content() );
+        if ( '' === $history_content ) {
+            // Falls back to the original history copy if the page content
+            // has been emptied out (e.g. while editing in Elementor, which
+            // replaces the page entirely and leaves the normal WordPress
+            // content — the the_content() this template reads — blank).
+            $history_content = papernest_default_about_content();
+        }
+        $history_content = apply_filters( 'the_content', $history_content );
+        // Matches even if the heading has nested formatting tags inside it
+        // (e.g. a bolded word) — strips tags from the heading's own inner
+        // HTML before comparing, rather than requiring an exact literal match.
+        if ( preg_match( '/^\s*<(h[1-6])[^>]*>(.*?)<\/\1>\s*/is', $history_content, $m ) ) {
+            $heading_text = trim( wp_strip_all_tags( $m[2] ) );
+            if ( 0 === strcasecmp( $heading_text, 'Nasza Historia' ) ) {
+                $history_content = substr( $history_content, strlen( $m[0] ) );
+            }
+        }
+        echo $history_content; // phpcs:ignore
+        ?>
         <div class="hero-cta" style="margin-top:28px"><a href="<?php echo esc_url( papernest_page_link( 'kontakt' ) ); ?>" class="btn btn-primary">Skontaktuj się z nami <?php echo papernest_icon( 'arrow' ); ?></a></div>
       </div>
     </div>
