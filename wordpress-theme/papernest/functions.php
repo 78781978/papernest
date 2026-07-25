@@ -85,23 +85,36 @@ function papernest_assets() {
 add_action( 'wp_enqueue_scripts', 'papernest_assets' );
 
 /**
- * Preload the two above-the-fold font files (Inter + Playfair Display,
- * regular Latin subset) so the browser fetches them immediately instead of
- * discovering them only after parsing fonts.css — cuts the delay before
- * text renders in its final font, which is what drives both LCP and the
- * layout shift caused by the fallback-to-webfont swap.
+ * Preload the above-the-fold font files (Inter + Playfair Display) so the
+ * browser fetches them immediately instead of discovering them only after
+ * parsing fonts.css — cuts the delay before text renders in its final font,
+ * which is what drives both LCP and the layout shift caused by the
+ * fallback-to-webfont swap.
+ *
+ * Both the "latin" and "latin-ext" subsets are needed, not just latin: the
+ * hero heading is Polish and contains diacritics (ą, ę, ć, ł, ń, ó, ś, ź,
+ * ż), which live in the latin-ext Unicode range — a real Polish sentence
+ * needs both files to render fully. Preloading only "latin" (the first
+ * version of this fix) left latin-ext to be discovered the slow way, after
+ * fonts.css downloaded and was parsed — PageSpeed's network dependency tree
+ * showed it as the single longest link in the whole critical path (1067ms).
  */
 add_action(
 	'wp_head',
 	function () {
-		printf(
-			'<link rel="preload" href="%1$s/assets/fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin>' . "\n",
-			esc_url( PAPERNEST_URI )
+		$fonts = array(
+			'UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2',   // Inter, latin
+			'UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa25L7SUc.woff2', // Inter, latin-ext
+			'nuFiD-vYSZviVYUb_rj3ij__anPXDTzYgA.woff2',      // Playfair Display, latin
+			'nuFiD-vYSZviVYUb_rj3ij__anPXDTLYgFE_.woff2',    // Playfair Display, latin-ext
 		);
-		printf(
-			'<link rel="preload" href="%1$s/assets/fonts/nuFiD-vYSZviVYUb_rj3ij__anPXDTzYgA.woff2" as="font" type="font/woff2" crossorigin>' . "\n",
-			esc_url( PAPERNEST_URI )
-		);
+		foreach ( $fonts as $font ) {
+			printf(
+				'<link rel="preload" href="%1$s/assets/fonts/%2$s" as="font" type="font/woff2" crossorigin>' . "\n",
+				esc_url( PAPERNEST_URI ),
+				esc_attr( $font )
+			);
+		}
 	},
 	1
 );
@@ -111,6 +124,70 @@ add_action(
  * so it doesn't need to load on the front end.
  */
 remove_action( 'wp_head', 'wp_generator' );
+
+/**
+ * /llms.txt — an emerging convention (same idea as robots.txt, but a plain
+ * Markdown summary for AI agents/crawlers) that PageSpeed's new "agentic
+ * browsing" checks look for. Served virtually the same way WordPress itself
+ * serves /robots.txt when there's no physical file — no filesystem access
+ * to the site root is needed, and it always reflects the live site name/URL.
+ */
+add_action(
+	'init',
+	function () {
+		add_rewrite_rule( '^llms\.txt$', 'index.php?papernest_llms_txt=1', 'top' );
+	}
+);
+add_filter(
+	'query_vars',
+	function ( $vars ) {
+		$vars[] = 'papernest_llms_txt';
+		return $vars;
+	}
+);
+// Without this, WordPress's own redirect_canonical() sees "/llms.txt" as an
+// unrecognized path and 301s it to "/llms.txt/" before our handler below
+// ever runs (the same reason WP core's is_robots() check exists for
+// /robots.txt) — bypass it specifically for this one request.
+add_filter(
+	'redirect_canonical',
+	function ( $redirect_url ) {
+		return get_query_var( 'papernest_llms_txt' ) ? false : $redirect_url;
+	}
+);
+add_action(
+	'template_redirect',
+	function () {
+		if ( ! get_query_var( 'papernest_llms_txt' ) ) {
+			return;
+		}
+		header( 'Content-Type: text/markdown; charset=utf-8' );
+		echo "# " . get_bloginfo( 'name' ) . "\n\n"; // phpcs:ignore
+		echo esc_html( get_bloginfo( 'description' ) ) . "\n\n";
+		echo "> " . esc_html__( 'Producent wyrobów z papieru — wypełniacze papierowe, papier dla piskląt i tektura budowlana.', 'papernest' ) . "\n\n"; // phpcs:ignore
+		echo "- [" . esc_html__( 'Sklep', 'papernest' ) . '](' . esc_url( papernest_shop_link() ) . ")\n"; // phpcs:ignore
+		echo "- [" . esc_html__( 'O nas', 'papernest' ) . '](' . esc_url( home_url( '/o-nas/' ) ) . ")\n"; // phpcs:ignore
+		echo "- [" . esc_html__( 'Kontakt', 'papernest' ) . '](' . esc_url( home_url( '/kontakt/' ) ) . ")\n"; // phpcs:ignore
+		exit;
+	}
+);
+/**
+ * The rewrite rule above only takes effect after WordPress's rewrite rules
+ * are flushed once — normally that happens on theme activation, but this
+ * theme's already active on the live site, so flush on the very next load
+ * after an update introduces a new rule instead of waiting for a manual
+ * Wygląd > Bezpośrednie odnośniki > Zapisz.
+ */
+add_action(
+	'init',
+	function () {
+		if ( get_option( 'papernest_llms_txt_rewrite_flushed' ) !== PAPERNEST_VERSION ) {
+			flush_rewrite_rules();
+			update_option( 'papernest_llms_txt_rewrite_flushed', PAPERNEST_VERSION );
+		}
+	},
+	20
+);
 
 /**
  * A link to /kontakt/ somewhere on the site (not from this theme's own
