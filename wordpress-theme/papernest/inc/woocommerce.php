@@ -15,6 +15,16 @@ if ( ! class_exists( 'WooCommerce' ) ) {
 	return;
 }
 
+// Default shop/category sorting to price, low to high — instead of
+// WooCommerce's own default (menu order) — until a customer picks a
+// different option from the sorting dropdown themselves.
+add_filter(
+	'woocommerce_default_catalog_orderby',
+	function () {
+		return 'price';
+	}
+);
+
 // Theme wraps shop/product content in the same .section > .container used everywhere else.
 remove_action( 'woocommerce_before_main_content', 'woocommerce_output_content_wrapper', 10 );
 remove_action( 'woocommerce_after_main_content', 'woocommerce_output_content_wrapper_end', 10 );
