@@ -1095,28 +1095,6 @@ a.cline:hover{ color:var(--brand-green-deep); text-decoration:underline; }
 .to-top.is-visible{ opacity:1; pointer-events:auto; transform:translateY(0); }
 .to-top svg{ width:23px; height:23px; }
 
-/* This theme's cookie banner (below) is a complete, self-contained RODO
-   consent system. If a separate cookie-consent PLUGIN is also active
-   (CookieYes/GDPR Cookie Consent, Complianz, Cookie Notice, Borlabs Cookie,
-   Iubenda, Real Cookie Banner), its banner shows on top of/alongside this
-   one — two popups at once — and unlike this theme's banner (position:
-   fixed, so it can never affect layout), most plugin banners reserve real
-   space in the page and are exactly the kind of late-appearing element that
-   drives Cumulative Layout Shift. Hiding it here is a safe, purely visual
-   fix — it doesn't touch the plugin's own consent-recording logic — but the
-   plugin should still be deactivated in Wtyczki once identified, since
-   hidden-but-active JS/CSS from it is still unnecessary weight on every
-   page load. */
-#cookie-law-info-bar, .cli-modal-backdrop, #cookie-law-info-again, #cky-consent-container, #cookiescript_injected,
-#cmplz-cookiebanner-container, #cmplz-manage-consent-container,
-#cookie-notice, #cn-notice-bar,
-#BorlabsCookieBox, ._brlbs-bar, ._brlbs-box,
-#iubenda-cs-banner,
-#real-cookie-banner, #rcb-consent-banner,
-#moove_gdpr_cookie_info_bar {
-  display:none !important;
-}
-
 /* ============ System zgód cookie (RODO / WCAG) ============
    Dwuwarstwowy model: 1) baner z akcją szybką, 2) pełny panel
    preferencji z granularną kontrolą kategorii — zgodnie z wytycznymi
