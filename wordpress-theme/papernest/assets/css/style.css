@@ -12,6 +12,11 @@
   --brand-green:        #8bc113; /* jaskrawa zieleń — tła przycisków, plakietek, aktywnych stanów */
   --brand-green-dark:   #6f9e0f;
   --brand-green-deep:   #4f7309; /* stonowana zieleń do ikon/tekstu na JASNYCH powierzchniach */
+  /* Sam odcień co --brand-green, ale przyciemniony tak, by tekst na białym
+     tle spełniał WCAG AA (4.5:1) — --brand-green samo w sobie ma ok. 2.15:1
+     na bielu i nie przechodzi audytu kontrastu; jako tło pod białym tekstem
+     (przyciski/plakietki) nie ma tego problemu, więc tam zostaje bez zmian. */
+  --price-green:        #55800c;
   --brand-navy:         #0b2345; /* granatowe panele (stopka, hero-panel) */
   --brand-navy-light:   #123561;
   --brand-link-green:   #0b7a4b; /* linki — czytelne na białym tle */
@@ -311,7 +316,12 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .header-shop-link:hover{ background:var(--brand-green); }
 
 .brand{ display:flex; align-items:center; }
-.brand-logo{ display:block; height:180px !important; width:auto; flex:none; transition:height .35s var(--ease); }
+/* aspect-ratio is a defensive backstop: with height fixed and width:auto,
+   the browser should already preserve the logo's real 3:2 ratio, but the
+   client's uploaded logo has shown up squished on at least one page from
+   an unidentified external CSS source — this makes that impossible even if
+   something else's rule interferes with just one of the two dimensions. */
+.brand-logo{ display:block; height:180px !important; width:auto; aspect-ratio:3/2 !important; flex:none; transition:height .35s var(--ease); }
 .brand-logo-plate{
   display:inline-flex; align-items:center; background:#fff; border-radius:var(--r-md);
   padding:10px 16px; box-shadow:var(--shadow-sm);
@@ -572,7 +582,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .product-card h3{ font-size:1.25rem; }
 .product-card p{ color:var(--ink-600); font-size:.92rem; line-height:1.6; flex:1; }
 .product-card .meta{ display:flex; align-items:center; justify-content:space-between; margin-top:var(--sp-3); }
-.product-card .price{ font-family:var(--font-sans); font-weight:800; color:var(--brand-green); font-size:1.2rem; }
+.product-card .price{ font-family:var(--font-sans); font-weight:800; color:var(--price-green); font-size:1.2rem; }
 .product-card .price small{ font-family:var(--font-sans); font-weight:600; color:var(--ink-400); font-size:.75rem; margin-left:.3em; }
 .product-card .old-price{ text-decoration:line-through; color:var(--ink-400); font-size:.85rem; margin-right:.4em; }
 
@@ -753,7 +763,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .footer-social a:hover{ background:var(--brand-green); border-color:var(--brand-green); transform:translateY(-3px); }
 .footer-social svg{ width:21px; height:21px; }
 
-.footer-col h4{ color:#fff; font-family:var(--font-sans); font-size:.85rem; letter-spacing:.06em; text-transform:uppercase; margin-bottom:var(--sp-4); font-weight:700; }
+.footer-col h3{ color:#fff; font-family:var(--font-sans); font-size:.85rem; letter-spacing:.06em; text-transform:uppercase; margin-bottom:var(--sp-4); font-weight:700; }
 .footer-col-toggle{
   display:block; width:100%; text-align:left; background:none; border:0; padding:0; margin:0;
   color:inherit; font:inherit; letter-spacing:inherit; text-transform:inherit; cursor:default;
@@ -1014,10 +1024,10 @@ a.cline:hover{ color:var(--brand-green-deep); text-decoration:underline; }
 
 /* ---------- Legal pages ---------- */
 .legal-shell{ max-width:840px; margin-inline:auto; }
-.legal-shell h5{ font-family:var(--font-display); font-size:1.5rem; color:var(--heading); margin-top:var(--sp-10); }
-.legal-shell h5:first-child{ margin-top:0; }
-.legal-shell h5 a{ color:var(--brand-link-green); text-decoration:underline; }
-.legal-shell h6{
+.legal-shell h2{ font-family:var(--font-display); font-size:1.5rem; color:var(--heading); margin-top:var(--sp-10); }
+.legal-shell h2:first-child{ margin-top:0; }
+.legal-shell h2 a{ color:var(--brand-link-green); text-decoration:underline; }
+.legal-shell h3{
   font-family:var(--font-sans); font-size:1.02rem; text-transform:uppercase; letter-spacing:.04em; color:var(--heading);
   border-left:4px solid var(--gold); padding-left:.8em; margin:var(--sp-8) 0 var(--sp-4);
 }
@@ -1029,7 +1039,7 @@ a.cline:hover{ color:var(--brand-green-deep); text-decoration:underline; }
   margin:var(--sp-8) 0; font-size:.92rem; color:var(--ink-700); line-height:1.7;
 }
 .legal-toc{ background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg); padding:var(--sp-5); box-shadow:var(--shadow-sm); }
-.legal-toc h4{ font-family:var(--font-sans); font-size:.82rem; text-transform:uppercase; letter-spacing:.06em; color:var(--ink-500); margin-bottom:var(--sp-3); }
+.legal-toc h2{ font-family:var(--font-sans); font-size:.82rem; text-transform:uppercase; letter-spacing:.06em; color:var(--ink-500); margin-bottom:var(--sp-3); font-weight:600; }
 .legal-toc a{ display:block; padding:.5em 0; font-size:.88rem; color:var(--ink-600); border-bottom:1px solid var(--line-soft); }
 .legal-toc a:hover{ color:var(--brand-green-deep); }
 .legal-toc a:last-child{ border-bottom:none; }

@@ -56,7 +56,11 @@
 }
 
 /* Price — the theme's bright/light brand green everywhere, consistently
-   (single product and grid tiles alike). !important is needed here: WC's
+   (single product and grid tiles alike). Uses --price-green rather than the
+   raw --brand-green: the raw color is only ~2.15:1 against white (fails
+   WCAG AA, flagged by Lighthouse's contrast audit), so this is the same hue
+   darkened just enough to clear 4.5:1 while still reading as vivid green,
+   not the old muddy --brand-green-deep. !important is needed here: WC's
    own core CSS has a same-page rule (div.product p.price, wrapped in a
    zero-specificity :where() so it looks harmless) that is actually one
    specificity point higher than a plain ".woocommerce .price" and was
@@ -64,7 +68,7 @@
    WooCommerce's own default olive "highlight" color instead of ours. */
 .woocommerce .price,
 .woocommerce ul.products li.product .price {
-	color: var(--brand-green) !important;
+	color: var(--price-green) !important;
 	font-weight: 800;
 	font-family: var(--font-sans);
 }
@@ -208,7 +212,7 @@
 	font-family: var(--font-sans);
 	color: var(--ink-800);
 }
-.woocommerce div.product .woocommerce-variation-price .price { color: var(--brand-green) !important; }
+.woocommerce div.product .woocommerce-variation-price .price { color: var(--price-green) !important; }
 
 /* Tabs */
 .woocommerce div.product .woocommerce-tabs ul.tabs { border-bottom: 1px solid var(--line); padding-left: 0; margin-top: var(--sp-12, 3rem); overflow: visible; }

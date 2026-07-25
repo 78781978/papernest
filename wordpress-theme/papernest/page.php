@@ -35,7 +35,7 @@ while ( have_posts() ) :
 			<?php if ( $has_toc ) : ?>
 				<div class="two-col cols-toc" style="align-items:start">
 					<aside class="legal-toc reveal" style="position:sticky;top:110px">
-						<h4>Spis paragrafów</h4>
+						<h2>Spis paragrafów</h2>
 						<?php foreach ( $toc as $item ) : ?>
 							<a href="#<?php echo esc_attr( $item[0] ); ?>"><?php echo esc_html( $item[1] ); ?></a>
 						<?php endforeach; ?>

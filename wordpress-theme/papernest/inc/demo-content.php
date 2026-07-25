@@ -18,6 +18,42 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/**
+ * One-time fixup for sites where the legal pages were already seeded before
+ * the heading levels changed from <h5>/<h6> to <h2>/<h3> (accessibility/SEO
+ * fix — h6 straight after h1 with nothing in between skips 4 heading
+ * levels). Editing legal-content/*.html only affects pages seeded from now
+ * on; already-created pages keep whatever was written to the database at
+ * seed time, so this rewrites just those literal tags in place. Guarded so
+ * it only ever touches content that still has the exact old <h6> markup —
+ * anything the client has since edited by hand in the block editor won't
+ * contain that tag anymore and is left untouched.
+ */
+function papernest_migrate_legal_headings() {
+	if ( get_option( 'papernest_legal_headings_migrated' ) ) {
+		return;
+	}
+	foreach ( array( 'odstapienie', 'regulamin', 'polityka-prywatnosci', 'reklamacje', 'prawo-do-odstapienia-od-umowy' ) as $slug ) {
+		$page = get_page_by_path( $slug );
+		if ( ! $page || false === strpos( $page->post_content, '<h6' ) ) {
+			continue;
+		}
+		$content = str_replace(
+			array( '<h5>', '</h5>', '<h6>', '</h6>' ),
+			array( '<h2>', '</h2>', '<h3>', '</h3>' ),
+			$page->post_content
+		);
+		wp_update_post(
+			array(
+				'ID'           => $page->ID,
+				'post_content' => $content,
+			)
+		);
+	}
+	update_option( 'papernest_legal_headings_migrated', 1 );
+}
+add_action( 'init', 'papernest_migrate_legal_headings' );
+
 function papernest_run_demo_import() {
 	papernest_import_pages();
 	papernest_import_menu();

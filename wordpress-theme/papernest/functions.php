@@ -69,8 +69,14 @@ require_once PAPERNEST_DIR . '/inc/contact-form.php';
  * from the static prototype as-is.
  */
 function papernest_assets() {
-	wp_enqueue_style( 'papernest-fonts', 'https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,600&family=Inter:wght@400;500;600;700;800&display=swap', array(), null );
-	wp_enqueue_style( 'papernest-style', PAPERNEST_URI . '/assets/css/style.css', array(), PAPERNEST_VERSION );
+	// Self-hosted (see assets/fonts/) instead of fonts.googleapis.com: removes
+	// a whole cross-origin DNS+TLS+request round trip from the critical
+	// render path (was the biggest single "render-blocking requests" hit in
+	// PageSpeed), and only latin + latin-ext subsets were kept — everything
+	// on the site is Polish, so cyrillic/greek/vietnamese glyphs never
+	// render and were pure dead weight.
+	wp_enqueue_style( 'papernest-fonts', PAPERNEST_URI . '/assets/css/fonts.css', array(), PAPERNEST_VERSION );
+	wp_enqueue_style( 'papernest-style', PAPERNEST_URI . '/assets/css/style.css', array( 'papernest-fonts' ), PAPERNEST_VERSION );
 	if ( class_exists( 'WooCommerce' ) ) {
 		wp_enqueue_style( 'papernest-wc-theme', PAPERNEST_URI . '/assets/css/wc-theme.css', array( 'papernest-style', 'woocommerce-general' ), PAPERNEST_VERSION );
 	}
@@ -79,10 +85,50 @@ function papernest_assets() {
 add_action( 'wp_enqueue_scripts', 'papernest_assets' );
 
 /**
+ * Preload the two above-the-fold font files (Inter + Playfair Display,
+ * regular Latin subset) so the browser fetches them immediately instead of
+ * discovering them only after parsing fonts.css — cuts the delay before
+ * text renders in its final font, which is what drives both LCP and the
+ * layout shift caused by the fallback-to-webfont swap.
+ */
+add_action(
+	'wp_head',
+	function () {
+		printf(
+			'<link rel="preload" href="%1$s/assets/fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin>' . "\n",
+			esc_url( PAPERNEST_URI )
+		);
+		printf(
+			'<link rel="preload" href="%1$s/assets/fonts/nuFiD-vYSZviVYUb_rj3ij__anPXDTzYgA.woff2" as="font" type="font/woff2" crossorigin>' . "\n",
+			esc_url( PAPERNEST_URI )
+		);
+	},
+	1
+);
+
+/**
  * WordPress's own style.css (theme header only) isn't the design stylesheet,
  * so it doesn't need to load on the front end.
  */
 remove_action( 'wp_head', 'wp_generator' );
+
+/**
+ * A link to /kontakt/ somewhere on the site (not from this theme's own
+ * templates — none of them use this text) renders the generic English
+ * "Learn more" instead of descriptive Polish text, which Lighthouse's SEO
+ * audit flags as a non-descriptive link. Translate it wherever it's printed.
+ */
+add_filter(
+	'gettext',
+	function ( $translated, $original ) {
+		if ( 'Learn more' === $original ) {
+			return 'Przejdź do kontaktu';
+		}
+		return $translated;
+	},
+	10,
+	2
+);
 
 /**
  * Content width for embeds/oEmbed.

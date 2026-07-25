@@ -21,7 +21,7 @@ get_header();
             the_post();
             ?>
             <article <?php post_class( 'card card-pad' ); ?>>
-              <h3><a href="<?php the_permalink(); ?>" style="color:var(--heading)"><?php the_title(); ?></a></h3>
+              <h2><a href="<?php the_permalink(); ?>" style="color:var(--heading)"><?php the_title(); ?></a></h2>
               <p style="color:var(--ink-600)"><?php the_excerpt(); ?></p>
             </article>
             <?php
