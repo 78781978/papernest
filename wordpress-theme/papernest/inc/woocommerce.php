@@ -15,6 +15,24 @@ if ( ! class_exists( 'WooCommerce' ) ) {
 	return;
 }
 
+/**
+ * WooCommerce's "Order Attribution" tracking (sourcebuster-js +
+ * wc-order-attribution) loads on every single front-end page — not just
+ * checkout — to record marketing-source data ("how did this customer find
+ * us") shown in WooCommerce Analytics. Nobody's using that report, and
+ * PageSpeed flags both scripts among the render-blocking requests on every
+ * page load. Dequeued site-wide. If the "Origin" column in Analytics >
+ * Orders is ever wanted, this needs removing.
+ */
+add_action(
+	'wp_enqueue_scripts',
+	function () {
+		wp_dequeue_script( 'sourcebuster-js' );
+		wp_dequeue_script( 'wc-order-attribution' );
+	},
+	20
+);
+
 // Default shop/category sorting to price, low to high — instead of
 // WooCommerce's own default (menu order) — until a customer picks a
 // different option from the sorting dropdown themselves.

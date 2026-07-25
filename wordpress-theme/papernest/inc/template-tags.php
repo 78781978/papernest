@@ -181,6 +181,16 @@ function papernest_logo( $class = '' ) {
 			array(
 				'class'   => $classes,
 				'loading' => 'eager',
+				// wp_get_attachment_image() always builds a full srcset (every
+				// registered size up to the original), but without an explicit
+				// `sizes` override it guesses one from the requested size's own
+				// width — 600px for 'full' here — telling browsers this logo
+				// might render up to 600px wide. It never does (180px is the
+				// largest it's ever shown, on desktop before scrolling), so
+				// browsers were always picking the biggest, least-necessary
+				// srcset candidate. This lets them correctly pick something
+				// close to the ~300px "medium" size instead.
+				'sizes'   => '180px',
 			)
 		);
 		if ( $img ) {
@@ -218,14 +228,28 @@ function papernest_theme_product_contact_block() {
  * spots stay swappable without needing a placeholder state (unlike
  * papernest_photo_slot(), the default here is never empty).
  */
-function papernest_illustration( $mod_key, $svg_file, $label = '' ) {
+function papernest_illustration( $mod_key, $svg_file, $label = '', $priority = false ) {
 	$image_url = get_theme_mod( $mod_key, '' );
 	if ( $image_url ) {
-		printf(
-			'<img src="%1$s" alt="%2$s" loading="lazy">',
-			esc_url( $image_url ),
-			esc_attr( $label )
-		);
+		if ( $priority ) {
+			// The hero image is the page's Largest Contentful Paint element —
+			// loading="lazy" was making the browser defer even discovering it,
+			// which PageSpeed measured as ~2.4s of pure added delay on mobile
+			// (990ms render delay + 1380ms load delay). It's the first thing
+			// visible on the page, so it must load eagerly and with priority
+			// instead of being treated like a below-the-fold image.
+			printf(
+				'<img src="%1$s" alt="%2$s" loading="eager" fetchpriority="high">',
+				esc_url( $image_url ),
+				esc_attr( $label )
+			);
+		} else {
+			printf(
+				'<img src="%1$s" alt="%2$s" loading="lazy">',
+				esc_url( $image_url ),
+				esc_attr( $label )
+			);
+		}
 		return;
 	}
 	echo papernest_svg_file( $svg_file ); // phpcs:ignore
