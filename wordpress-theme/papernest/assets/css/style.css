@@ -576,19 +576,16 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .product-card .price small{ font-family:var(--font-sans); font-weight:600; color:var(--ink-400); font-size:.75rem; margin-left:.3em; }
 .product-card .old-price{ text-decoration:line-through; color:var(--ink-400); font-size:.85rem; margin-right:.4em; }
 
-/* Stały blok kontaktowy na karcie produktu (pod ceną, zamiast opisu) */
+/* Stały blok kontaktowy na karcie produktu (pod ceną, zamiast opisu) —
+   sized just under the "(netto: X zł) z VAT" price-suffix text (.95rem,
+   see .woocommerce-price-suffix in wc-theme.css) at every width, so it's
+   consistently smaller than that, not just at one breakpoint. */
 .product-contact{ border-top:1px dashed var(--line); margin-top:var(--sp-3); padding-top:var(--sp-3); }
-.product-contact p{ font-size:.82rem; line-height:1.5; color:var(--ink-500); margin-bottom:.5em; }
-.product-contact .pc-name{ font-weight:700; color:var(--heading); font-size:.85rem; margin-bottom:.3em; }
-.product-contact .pc-line{ display:flex; align-items:center; gap:.5em; font-size:.85rem; font-weight:600; color:var(--brand-link-green); padding-block:.15em; transition:color .2s; }
+.product-contact p{ font-size:.9rem; line-height:1.5; color:var(--ink-500); margin-bottom:.5em; }
+.product-contact .pc-name{ font-weight:700; color:var(--heading); font-size:.9rem; margin-bottom:.3em; }
+.product-contact .pc-line{ display:flex; align-items:center; gap:.5em; font-size:.9rem; font-weight:600; color:var(--brand-link-green); padding-block:.15em; transition:color .2s; }
 .product-contact .pc-line:hover{ color:var(--brand-green-deep); text-decoration:underline; }
 .product-contact .pc-line svg{ width:16px; height:16px; flex:none; }
-@media (max-width:640px){
-  .product-contact p{ font-size:.52rem; }
-  .product-contact .pc-name{ font-size:.55rem; }
-  .product-contact .pc-line{ font-size:.55rem; }
-  .product-contact .pc-line svg{ width:11px; height:11px; }
-}
 
 /* Shop/category grid product cards (woocommerce/content-product.php): the
    default cropped, serif-titled card read poorly at this size — bigger

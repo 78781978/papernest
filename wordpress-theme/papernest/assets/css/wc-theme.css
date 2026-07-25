@@ -99,13 +99,15 @@
 	text-align: center;
 }
 
-/* Single product summary */
+/* Single product summary — sans-serif, matching the shop-grid title fix
+   (.shop-product-card h3); the display serif read poorly for product names
+   full of numbers/units ("64 cm x 200 mb"). */
 .woocommerce div.product .product_title,
 .woocommerce div.product h1.product_title.entry-title {
-	font-family: var(--font-display) !important;
+	font-family: var(--font-sans) !important;
 	color: var(--heading) !important;
 	font-weight: 700;
-	line-height: 1.2;
+	line-height: 1.3;
 }
 .woocommerce div.product p.price,
 .woocommerce div.product span.price { font-size: 1.6rem; }
