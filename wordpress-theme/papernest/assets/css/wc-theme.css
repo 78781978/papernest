@@ -165,6 +165,10 @@
    placement still collides with it even pinned to the opposite corner. */
 .woocommerce div.product .woocommerce-product-gallery__trigger { top: 64px !important; right: 12px !important; left: auto !important; }
 
+/* Extra breathing room below the contact block (phone/email) so the
+   quantity + add-to-cart row doesn't sit right under the email address. */
+.woocommerce div.product form.cart { margin-top: var(--sp-6, 1.5rem); }
+
 /* Quantity input */
 .woocommerce div.product form.cart .quantity {
 	display: inline-flex;
