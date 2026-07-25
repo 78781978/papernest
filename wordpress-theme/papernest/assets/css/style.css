@@ -790,9 +790,15 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:var(--sp-3);
   font-size:.82rem; color:rgba(255,255,255,.5);
 }
-.footer-bottom .langs{ display:flex; gap:1.2em; }
-.footer-bottom .langs span{ cursor:default; }
-.footer-bottom .langs .active{ color:#fff; font-weight:700; }
+.footer-credit a{
+  font-weight:700; background:linear-gradient(90deg, rgba(255,255,255,.5) 0%, #fff 50%, rgba(255,255,255,.5) 100%);
+  background-size:220% 100%; -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent;
+  animation:footer-credit-shine 4s linear infinite;
+}
+@keyframes footer-credit-shine{
+  0%{ background-position:200% 0; }
+  100%{ background-position:-200% 0; }
+}
 
 /* Below 980px the brand block spans the full row so it doesn't get squeezed
    into one narrow grid cell next to a link column; the 4 link columns stay

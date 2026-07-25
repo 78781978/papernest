@@ -73,6 +73,7 @@ if ( ! defined( 'ABSPATH' ) ) {
   </div>
   <div class="container footer-bottom">
     <span><?php echo esc_html( gmdate( 'Y' ) ); ?> © Copyright by PaperNest — P.H.U „Bobinex” Grzegorz Działkowski</span>
+    <span class="footer-credit">Projekt i&nbsp;realizacja: <a href="https://www.facebook.com/profile.php?id=61591915780293" target="_blank" rel="noopener">VERO STUDIO</a></span>
   </div>
 </footer>
 <button class="to-top" aria-label="Wróć na górę"><?php echo papernest_icon( 'chevronUp' ); ?></button>
