@@ -7,7 +7,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'PAPERNEST_VERSION', '1.0.0' );
+// Tied to style.css's Version header so every asset URL (and therefore any
+// browser/server cache keyed on it) automatically changes on each release,
+// instead of relying on a second version number that's easy to forget to bump.
+define( 'PAPERNEST_VERSION', wp_get_theme()->get( 'Version' ) );
 define( 'PAPERNEST_DIR', get_template_directory() );
 define( 'PAPERNEST_URI', get_template_directory_uri() );
 

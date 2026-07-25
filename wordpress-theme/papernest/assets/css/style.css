@@ -572,7 +572,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .product-card h3{ font-size:1.25rem; }
 .product-card p{ color:var(--ink-600); font-size:.92rem; line-height:1.6; flex:1; }
 .product-card .meta{ display:flex; align-items:center; justify-content:space-between; margin-top:var(--sp-3); }
-.product-card .price{ font-family:var(--font-display); font-weight:700; color:var(--heading); font-size:1.2rem; }
+.product-card .price{ font-family:var(--font-sans); font-weight:800; color:var(--brand-green-deep); font-size:1.2rem; }
 .product-card .price small{ font-family:var(--font-sans); font-weight:600; color:var(--ink-400); font-size:.75rem; margin-left:.3em; }
 .product-card .old-price{ text-decoration:line-through; color:var(--ink-400); font-size:.85rem; margin-right:.4em; }
 
