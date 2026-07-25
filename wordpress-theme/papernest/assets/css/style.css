@@ -293,7 +293,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 /* The logo's full 258px height is fine for a page that opens on it, but on a
    sticky header it keeps eating a third of the screen on any page with real
    content below (e.g. a product page) — shrink it once scrolled. */
-.site-header.is-scrolled .brand-logo{ height:110px; }
+.site-header.is-scrolled .brand-logo{ height:110px !important; }
 
 .site-header .container{ max-width:var(--container-wide); }
 .header-row{
@@ -311,7 +311,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .header-shop-link:hover{ background:var(--brand-green); }
 
 .brand{ display:flex; align-items:center; }
-.brand-logo{ display:block; height:180px; width:auto; flex:none; transition:height .35s var(--ease); }
+.brand-logo{ display:block; height:180px !important; width:auto; flex:none; transition:height .35s var(--ease); }
 .brand-logo-plate{
   display:inline-flex; align-items:center; background:#fff; border-radius:var(--r-md);
   padding:10px 16px; box-shadow:var(--shadow-sm);
@@ -371,10 +371,10 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   .header-row{ gap:.75rem; justify-content:flex-start; }
   .header-shop-link{ display:inline-flex; align-items:center; }
   .header-actions{ margin-left:auto; }
-  .brand-logo{ height:64px; }
-  .site-header.is-scrolled .brand-logo{ height:44px; }
+  .brand-logo{ height:64px !important; }
+  .site-header.is-scrolled .brand-logo{ height:44px !important; }
   .brand-logo-plate{ padding:6px 10px; }
-  .brand-logo-plate .brand-logo.footer-logo{ height:38px; }
+  .brand-logo-plate .brand-logo.footer-logo{ height:38px !important; }
   .header-actions{ gap:.5rem; }
   .header-actions .icon-btn[aria-label="Szukaj"]{ display:none; }
   .icon-btn{ width:40px; height:40px; }

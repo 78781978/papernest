@@ -6,6 +6,12 @@
 
 .woocommerce { color: var(--ink-800); font-family: var(--font-sans); }
 
+/* WooCommerce's own default theme color is purple (--woocommerce/--wc-primary
+   both #720eec) — WC Blocks components (buttons, focus rings, etc.) read
+   these custom properties directly, so any purple showing through on hover
+   despite the .button:hover override below comes from here. */
+:root { --woocommerce: var(--brand-green-deep); --wc-primary: var(--brand-green-deep); }
+
 /* Buttons */
 .woocommerce a.button,
 .woocommerce button.button,
@@ -37,6 +43,17 @@
 	color: #fff;
 	box-shadow: var(--shadow-navy);
 }
+/* "Dodaj do koszyka" (.single_add_to_cart_button carries both .button and
+   .alt) — needs its own :hover since .alt's own rule above has equal
+   specificity to the plain .button:hover rule and was winning on source
+   order, and WooCommerce's default theme color (--wc-primary) is purple. */
+.woocommerce a.button.alt:hover,
+.woocommerce button.button.alt:hover,
+.woocommerce #respond input#submit.alt:hover {
+	background: var(--grad-green) !important;
+	color: #0b2345 !important;
+	box-shadow: 0 20px 38px rgba(139,193,19,.36);
+}
 
 /* Price — a vivid, clean green (not the muddy teal of --brand-link-green,
    nor plain navy heading text) so prices read clearly as prices. */
@@ -44,7 +61,7 @@
 .woocommerce ul.products li.product .price {
 	color: var(--brand-green-deep);
 	font-weight: 800;
-	font-family: var(--font-display);
+	font-family: var(--font-sans);
 }
 .woocommerce .price del { color: var(--ink-400); opacity: 1; font-weight: 500; }
 .woocommerce .price ins { text-decoration: none; }
@@ -143,7 +160,10 @@
    of a short "-10%") still landing correctly in the corner instead of
    drifting into the zoom trigger's spot. */
 .woocommerce div.product .onsale { top: 12px !important; left: 12px !important; right: auto !important; }
-.woocommerce div.product .woocommerce-product-gallery__trigger { top: 12px !important; right: 12px !important; left: auto !important; }
+/* Lower than the onsale badge (top:12px) — a longer/custom badge (e.g.
+   "Promocja" instead of a short "-10%") is tall/wide enough that same-row
+   placement still collides with it even pinned to the opposite corner. */
+.woocommerce div.product .woocommerce-product-gallery__trigger { top: 64px !important; right: 12px !important; left: auto !important; }
 
 /* Quantity input */
 .woocommerce div.product form.cart .quantity {
@@ -152,7 +172,11 @@
 	border: 1px solid var(--line);
 	border-radius: var(--r-pill);
 	overflow: hidden;
-	margin-right: 1em;
+	/* WooCommerce's own rule is form.cart div.quantity — one more
+	   element-type selector than ours, so it silently outranked this on
+	   specificity despite loading first; !important guards against that
+	   class of trap generally. */
+	margin-right: 1.75em !important;
 }
 .woocommerce div.product form.cart .quantity .qty {
 	width: 56px;
