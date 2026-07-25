@@ -181,3 +181,149 @@ add_filter(
 		return $args;
 	}
 );
+
+/**
+ * Legally-required "obligation to pay" wording on the checkout submit button
+ * (Art. 12 ust. 1 pkt 21 ustawy o prawach konsumenta). Covers the classic
+ * checkout template.
+ */
+add_filter(
+	'woocommerce_order_button_text',
+	function () {
+		return 'Zamawiam z obowiązkiem zapłaty';
+	}
+);
+
+/**
+ * Checkout consent text (classic template): hyperlink Regulamin and
+ * Polityka Prywatności instead of leaving them as plain text.
+ */
+add_filter(
+	'woocommerce_get_privacy_policy_text',
+	function ( $text, $type ) {
+		if ( 'checkout' !== $type ) {
+			return $text;
+		}
+
+		$regulamin = get_page_by_path( 'regulamin' );
+		$polityka  = get_page_by_path( 'polityka-prywatnosci' );
+
+		$terms_link   = $regulamin
+			? '<a href="' . esc_url( get_permalink( $regulamin ) ) . '" target="_blank" rel="noopener">Warunkami i&nbsp;zasadami</a>'
+			: 'Warunkami i&nbsp;zasadami';
+		$privacy_link = $polityka
+			? '<a href="' . esc_url( get_permalink( $polityka ) ) . '" target="_blank" rel="noopener">Polityką Prywatności</a>'
+			: 'Polityką Prywatności';
+
+		return 'Kontynuując zamówienie wyrażasz zgodę na nasze ' . $terms_link . ' oraz ' . $privacy_link . '.';
+	},
+	10,
+	2
+);
+
+/**
+ * The checkout page uses the WooCommerce Checkout block, which links its
+ * own "terms" text to whatever pages are configured as the Terms and
+ * Conditions / Privacy Policy pages. Point those at our real Regulamin and
+ * Polityka Prywatności pages so the block's built-in text becomes clickable
+ * instead of two words with no target.
+ */
+add_action(
+	'init',
+	function () {
+		$regulamin = get_page_by_path( 'regulamin' );
+		if ( $regulamin && (int) get_option( 'woocommerce_terms_page_id' ) !== $regulamin->ID ) {
+			update_option( 'woocommerce_terms_page_id', $regulamin->ID );
+		}
+
+		$polityka = get_page_by_path( 'polityka-prywatnosci' );
+		if ( $polityka && (int) get_option( 'wp_page_for_privacy_policy' ) !== $polityka->ID ) {
+			update_option( 'wp_page_for_privacy_policy', $polityka->ID );
+		}
+	}
+);
+
+/**
+ * A marketing-emails opt-in checkbox on checkout (from a plugin, not this
+ * theme) renders untranslated English text. Translate it wherever it's
+ * rendered server-side via PHP.
+ */
+add_filter(
+	'gettext',
+	function ( $translated, $original ) {
+		if ( 'I would like to receive exclusive emails with discounts and product information' === $original ) {
+			return 'Chcę otrzymywać ekskluzywne wiadomości e-mail z rabatami i informacjami o produktach';
+		}
+		return $translated;
+	},
+	10,
+	2
+);
+
+/**
+ * The Checkout block's "Place order" button label is a JS-translated
+ * string, not something a PHP filter can reach — WooCommerce's own Polish
+ * translation renders it as "Kupuję i płacę", which doesn't meet the legal
+ * "obligation to pay" wording. Rewrite it client-side once the block
+ * mounts (it renders asynchronously, so a MutationObserver is needed).
+ * The same pass also catches the marketing opt-in checkbox text above, in
+ * case that plugin renders it client-side rather than via PHP.
+ */
+add_action(
+	'wp_footer',
+	function () {
+		if ( ! function_exists( 'is_checkout' ) || ! is_checkout() ) {
+			return;
+		}
+		?>
+		<script>
+		(function () {
+			var BUTTON_LABEL = 'Zamawiam z obowiązkiem zapłaty';
+			var TEXT_MAP = {
+				'I would like to receive exclusive emails with discounts and product information':
+					'Chcę otrzymywać ekskluzywne wiadomości e-mail z rabatami i informacjami o produktach'
+			};
+
+			function fixButton() {
+				document.querySelectorAll( '.wc-block-components-checkout-place-order-button__text' ).forEach( function ( el ) {
+					if ( el.textContent.trim() !== BUTTON_LABEL ) {
+						el.textContent = BUTTON_LABEL;
+					}
+				} );
+			}
+
+			function fixTextNodes( root ) {
+				var walker = document.createTreeWalker( root, NodeFilter.SHOW_TEXT );
+				var node;
+				while ( ( node = walker.nextNode() ) ) {
+					var text = node.textContent.trim();
+					if ( TEXT_MAP[ text ] ) {
+						node.textContent = node.textContent.replace( text, TEXT_MAP[ text ] );
+					}
+				}
+			}
+
+			function run() {
+				fixButton();
+				fixTextNodes( document.body );
+			}
+
+			var scheduled = false;
+			function scheduleRun() {
+				if ( scheduled ) {
+					return;
+				}
+				scheduled = true;
+				requestAnimationFrame( function () {
+					scheduled = false;
+					run();
+				} );
+			}
+
+			run();
+			new MutationObserver( scheduleRun ).observe( document.body, { childList: true, subtree: true } );
+		})();
+		</script>
+		<?php
+	}
+);
