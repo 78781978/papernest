@@ -123,12 +123,8 @@
 .woocommerce div.product .stock { color: var(--brand-link-green); font-weight: 700; }
 .woocommerce div.product .out-of-stock { color: #b3261e; font-weight: 700; }
 
-/* The gallery frame itself was plain white (WC's default), same as the page
-   background behind it — gives product photos on a white background no
-   visible edge at all. Matches the same subtle paper tint used everywhere
-   else product photos sit (.thumb, .shop-product-card). */
 .woocommerce div.product .woocommerce-product-gallery__wrapper,
-.woocommerce div.product .woocommerce-product-gallery__image { background: var(--paper-100); border-radius: var(--r-lg); }
+.woocommerce div.product .woocommerce-product-gallery__image { background: #fff; border-radius: var(--r-lg); }
 /* The onsale badge and the gallery zoom trigger are both absolutely
    positioned relative to div.product (not the gallery image itself, since
    WooCommerce renders the sale flash before the gallery markup) — !important
