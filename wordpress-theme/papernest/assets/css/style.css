@@ -193,8 +193,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   margin-inline:auto;
   padding-inline:clamp(20px, 4vw, 40px);
 }
-.section{ padding-block: clamp(64px, 9vw, 128px); position:relative; }
-.section-tight{ padding-block: clamp(40px, 6vw, 80px); }
+/* Halved sitewide — two adjacent sections (most pages stack several) were
+   compounding their top+bottom padding into very large gaps between
+   unrelated blocks of content on every page. */
+.section{ padding-block: clamp(32px, 4.5vw, 64px); position:relative; }
+.section-tight{ padding-block: clamp(20px, 3vw, 40px); }
 
 .eyebrow{
   display:inline-flex; align-items:center; gap:.6em;
