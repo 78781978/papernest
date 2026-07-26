@@ -205,14 +205,9 @@
 	padding: .9em 0;
 }
 
-/* Variations -- the "Wariant" dropdown itself is hidden: the green quantity
-   tiles above (.variant-tiles, see style.css) replace it as the way to pick
-   a quantity. The <select> stays in the markup (just visually hidden) since
-   WooCommerce's own JS still reads its preselected value -- set from the
-   tile link's ?attribute_wariant= query var -- to show the right price and
-   enable Add to cart. */
+/* Variations */
 .woocommerce div.product form.variations_form { margin-top: var(--sp-6, 1.5rem); }
-.woocommerce div.product table.variations { display: none; }
+.woocommerce div.product table.variations { width: 100%; margin-bottom: var(--sp-4, 1rem); }
 .woocommerce div.product table.variations td.label { font-weight: 700; color: var(--heading); padding-bottom: .4em; }
 .woocommerce div.product table.variations select {
 	width: 100%;

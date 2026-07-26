@@ -156,67 +156,97 @@ function papernest_is_wide_shop_page() {
 }
 
 /**
- * Short tile label for a variation's attribute value, e.g. "2 rolki" -> "2 szt",
- * "Paleta 62 szt." -> "Paleta" -- used on the shop-grid product card so the
- * quantity tiles stay compact instead of showing the full variation text.
+ * Short tile label + sort weight from a sibling product's title, e.g.
+ * "2 x Tektura budowlana ..." -> "2 szt", "Paleta 96 szt. - tektura ..." ->
+ * "Paleta", "Tektura budowlana ..." (no prefix) -> "1 szt". Quantities on
+ * this site aren't WooCommerce variations -- each is its own simple product,
+ * named with this prefix convention (confirmed against the real catalog).
  */
-function papernest_variant_tile_label( $value ) {
-	$value = trim( $value );
-	if ( stripos( $value, 'paleta' ) !== false ) {
-		return 'Paleta';
+function papernest_variant_tile_from_title( $title ) {
+	$title = trim( $title );
+	if ( 0 === stripos( $title, 'paleta' ) ) {
+		return array(
+			'label' => 'Paleta',
+			'sort'  => PHP_INT_MAX,
+		);
 	}
-	if ( preg_match( '/\d+/', $value, $matches ) ) {
-		return $matches[0] . ' szt';
+	if ( preg_match( '/^(\d+)\s*x\s+/i', $title, $matches ) ) {
+		return array(
+			'label' => $matches[1] . ' szt',
+			'sort'  => (int) $matches[1],
+		);
 	}
-	return $value;
+	return array(
+		'label' => '1 szt',
+		'sort'  => 1,
+	);
 }
 
 /**
- * Quantity-variant quick links for a variable product's single-product page:
- * every OTHER quantity than the one currently showing (the one picked via
- * ?attribute_wariant=..., or the first/lowest quantity when nothing's in the
- * URL yet, since that's the one auto-selected on load -- see the script in
- * the hook below). Each tile is the variation's own permalink, which
- * WooCommerce appends with ?attribute_wariant=... -- the variation form
- * already reads that query var and preselects the option.
+ * Quantity-variant quick links for a product's single-product page. Different
+ * quantities of the same item aren't WooCommerce variations here -- they're
+ * separate simple products (own page, own URL), grouped only by sharing one
+ * product category that contains nothing but those quantities. So "the other
+ * quantities" = the other published products in this product's own category,
+ * sorted by quantity with Paleta last, excluding the product being viewed.
  */
 function papernest_product_variant_tiles( $product ) {
-	if ( ! $product || ! $product->is_type( 'variable' ) ) {
+	if ( ! $product ) {
 		return '';
 	}
-	$variation_ids = $product->get_children();
-	if ( empty( $variation_ids ) ) {
+	$terms = get_the_terms( $product->get_id(), 'product_cat' );
+	if ( ! $terms || is_wp_error( $terms ) ) {
 		return '';
 	}
-	$current_value = isset( $_GET['attribute_wariant'] ) ? wc_clean( wp_unslash( $_GET['attribute_wariant'] ) ) : null; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-	$tiles         = array();
-	$is_first      = true;
-	foreach ( $variation_ids as $variation_id ) {
-		$variation = wc_get_product( $variation_id );
-		if ( ! $variation || ! $variation->exists() || ! $variation->is_purchasable() ) {
+	$siblings = get_posts(
+		array(
+			'post_type'      => 'product',
+			'post_status'    => 'publish',
+			'posts_per_page' => -1,
+			'orderby'        => 'title',
+			'order'          => 'ASC',
+			'tax_query'      => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
+				array(
+					'taxonomy' => 'product_cat',
+					'field'    => 'term_id',
+					'terms'    => wp_list_pluck( $terms, 'term_id' ),
+				),
+			),
+		)
+	);
+	if ( count( $siblings ) < 2 ) {
+		return '';
+	}
+	$tiles = array();
+	foreach ( $siblings as $sibling ) {
+		if ( $sibling->ID === $product->get_id() ) {
 			continue;
 		}
-		$attributes = $variation->get_variation_attributes();
-		$value      = $attributes ? reset( $attributes ) : '';
-		if ( ! $value ) {
+		$sibling_product = wc_get_product( $sibling->ID );
+		if ( ! $sibling_product || ! $sibling_product->is_purchasable() ) {
 			continue;
 		}
-		$is_current = ( null !== $current_value ) ? ( $value === $current_value ) : $is_first;
-		$is_first   = false;
-		if ( $is_current ) {
-			continue;
-		}
-		$tiles[] = sprintf(
-			'<a href="%1$s" class="variant-tile" title="%2$s">%3$s</a>',
-			esc_url( get_permalink( $variation_id ) ),
-			esc_attr( $value ),
-			esc_html( papernest_variant_tile_label( $value ) )
+		$tile    = papernest_variant_tile_from_title( $sibling->post_title );
+		$tiles[] = array(
+			'sort' => $tile['sort'],
+			'html' => sprintf(
+				'<a href="%1$s" class="variant-tile" title="%2$s">%3$s</a>',
+				esc_url( get_permalink( $sibling->ID ) ),
+				esc_attr( $sibling->post_title ),
+				esc_html( $tile['label'] )
+			),
 		);
 	}
 	if ( empty( $tiles ) ) {
 		return '';
 	}
-	return '<div class="variant-tiles">' . implode( '', $tiles ) . '</div>';
+	usort(
+		$tiles,
+		function ( $a, $b ) {
+			return $a['sort'] <=> $b['sort'];
+		}
+	);
+	return '<div class="variant-tiles">' . implode( '', wp_list_pluck( $tiles, 'html' ) ) . '</div>';
 }
 
 function papernest_wc_wrapper_start() {
@@ -291,31 +321,7 @@ add_action(
 	'woocommerce_single_product_summary',
 	function () {
 		global $product;
-		$tiles_html = papernest_product_variant_tiles( $product );
-		echo $tiles_html; // phpcs:ignore
-		if ( ! $tiles_html ) {
-			return;
-		}
-		// Auto-select the first (lowest) quantity when the page loads with no
-		// ?attribute_wariant= in the URL, so price + Add to cart are ready
-		// immediately instead of sitting on "Choose an option" / disabled.
-		?>
-		<script>
-		document.addEventListener('DOMContentLoaded', function(){
-			// The add-to-cart form (with the "Wariant" select) renders further
-			// down the page than this script, so wait for the full DOM.
-			var form = document.querySelector('.variations_form');
-			if(!form){return;}
-			var select = form.querySelector('select[name^="attribute_"]');
-			if(!select || select.value){return;}
-			for(var i=0;i<select.options.length;i++){
-				if(select.options[i].value){ select.value = select.options[i].value; break; }
-			}
-			if(window.jQuery){ window.jQuery(select).trigger('change'); }
-			else { select.dispatchEvent(new Event('change',{bubbles:true})); }
-		});
-		</script>
-		<?php
+		echo papernest_product_variant_tiles( $product ); // phpcs:ignore
 	},
 	10
 );
