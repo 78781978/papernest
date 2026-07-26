@@ -183,19 +183,42 @@ function papernest_variant_tile_from_title( $title ) {
 }
 
 /**
+ * The most specific product category a product belongs to. Every product on
+ * this site sits in a specific line category (e.g. "Tektura Budowlana") that
+ * is itself a child of the broad "Nasze Produkty" umbrella shared by every
+ * product line -- and some products are tagged with BOTH. Grouping quantity
+ * siblings on any assigned category (including the umbrella) wrongly mixes
+ * different product lines together, so only a childless (leaf) category
+ * counts here.
+ */
+function papernest_product_variant_category_id( $product_id ) {
+	$terms = get_the_terms( $product_id, 'product_cat' );
+	if ( ! $terms || is_wp_error( $terms ) ) {
+		return 0;
+	}
+	foreach ( $terms as $term ) {
+		if ( ! get_term_children( $term->term_id, 'product_cat' ) ) {
+			return $term->term_id;
+		}
+	}
+	return 0;
+}
+
+/**
  * Quantity-variant quick links for a product's single-product page. Different
  * quantities of the same item aren't WooCommerce variations here -- they're
  * separate simple products (own page, own URL), grouped only by sharing one
- * product category that contains nothing but those quantities. So "the other
- * quantities" = the other published products in this product's own category,
- * sorted by quantity with Paleta last, excluding the product being viewed.
+ * specific (leaf) product category that contains nothing but those
+ * quantities. So "the other quantities" = the other published products in
+ * this product's own leaf category, sorted by quantity with Paleta last,
+ * excluding the product being viewed.
  */
 function papernest_product_variant_tiles( $product ) {
 	if ( ! $product ) {
 		return '';
 	}
-	$terms = get_the_terms( $product->get_id(), 'product_cat' );
-	if ( ! $terms || is_wp_error( $terms ) ) {
+	$category_id = papernest_product_variant_category_id( $product->get_id() );
+	if ( ! $category_id ) {
 		return '';
 	}
 	$siblings = get_posts(
@@ -209,7 +232,7 @@ function papernest_product_variant_tiles( $product ) {
 				array(
 					'taxonomy' => 'product_cat',
 					'field'    => 'term_id',
-					'terms'    => wp_list_pluck( $terms, 'term_id' ),
+					'terms'    => $category_id,
 				),
 			),
 		)
