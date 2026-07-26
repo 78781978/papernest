@@ -637,6 +637,17 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .product-card .price small{ font-family:var(--font-sans); font-weight:600; color:var(--ink-400); font-size:.75rem; margin-left:.3em; }
 .product-card .old-price{ text-decoration:line-through; color:var(--ink-400); font-size:.85rem; margin-right:.4em; }
 
+/* Quantity-variant quick links on the shop-grid card (e.g. "1" / "2" / "4" /
+   "Paleta") so a shopper can jump straight to another quantity of the same
+   product without opening it first. */
+.variant-tiles{ display:flex; flex-wrap:wrap; gap:.4em; margin-top:var(--sp-3); }
+.variant-tile{
+  display:inline-flex; align-items:center; justify-content:center; min-width:2.2em; height:2.2em; padding-inline:.6em;
+  border:1px solid var(--line); border-radius:var(--r-md); background:var(--surface-alt,#f6f7f3);
+  font-size:.8rem; font-weight:700; color:var(--ink-600); transition:border-color .2s, color .2s, background .2s;
+}
+.variant-tile:hover{ border-color:var(--brand-green); color:var(--brand-green-deep); background:#fff; }
+
 /* Stały blok kontaktowy na karcie produktu (pod ceną, zamiast opisu) —
    sized just under the "(netto: X zł) z VAT" price-suffix text (.95rem,
    see .woocommerce-price-suffix in wc-theme.css) at every width, so it's

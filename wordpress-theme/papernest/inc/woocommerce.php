@@ -155,6 +155,62 @@ function papernest_is_wide_shop_page() {
 	return is_shop() || is_product_category() || is_product_tag();
 }
 
+/**
+ * Short tile label for a variation's attribute value, e.g. "2 rolki" -> "2",
+ * "Paleta 62 szt." -> "Paleta" -- used on the shop-grid product card so the
+ * quantity tiles stay compact instead of showing the full variation text.
+ */
+function papernest_variant_tile_label( $value ) {
+	$value = trim( $value );
+	if ( stripos( $value, 'paleta' ) !== false ) {
+		return 'Paleta';
+	}
+	if ( preg_match( '/\d+/', $value, $matches ) ) {
+		return $matches[0];
+	}
+	return $value;
+}
+
+/**
+ * Quantity-variant quick links for a variable product's shop-grid card, so
+ * a shopper can jump straight from the card to e.g. the "Paleta" variation
+ * of the same product without opening the product page first and hunting
+ * for the dropdown. Each link is the variation's own permalink, which
+ * WooCommerce appends with ?attribute_wariant=... -- the single-product
+ * variation form already reads that query var and preselects the option.
+ */
+function papernest_product_variant_tiles( $product ) {
+	if ( ! $product || ! $product->is_type( 'variable' ) ) {
+		return '';
+	}
+	$variation_ids = $product->get_children();
+	if ( empty( $variation_ids ) ) {
+		return '';
+	}
+	$tiles = array();
+	foreach ( $variation_ids as $variation_id ) {
+		$variation = wc_get_product( $variation_id );
+		if ( ! $variation || ! $variation->exists() || ! $variation->is_purchasable() ) {
+			continue;
+		}
+		$attributes = $variation->get_variation_attributes();
+		$value      = $attributes ? reset( $attributes ) : '';
+		if ( ! $value ) {
+			continue;
+		}
+		$tiles[] = sprintf(
+			'<a href="%1$s" class="variant-tile" title="%2$s">%3$s</a>',
+			esc_url( get_permalink( $variation_id ) ),
+			esc_attr( $value ),
+			esc_html( papernest_variant_tile_label( $value ) )
+		);
+	}
+	if ( empty( $tiles ) ) {
+		return '';
+	}
+	return '<div class="variant-tiles">' . implode( '', $tiles ) . '</div>';
+}
+
 function papernest_wc_wrapper_start() {
 	$class = papernest_is_wide_shop_page() ? 'container container-wide-shop' : 'container';
 	echo '<section class="section"><div class="' . esc_attr( $class ) . '">';

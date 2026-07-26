@@ -28,5 +28,6 @@ if ( ! $product || ! $product->is_visible() ) {
 			<span class="price"><?php echo $product->get_price_html(); // phpcs:ignore ?></span>
 			<a href="<?php the_permalink(); ?>" class="btn btn-outline btn-sm">Wybierz <?php echo papernest_icon( 'arrow' ); ?></a>
 		</div>
+		<?php echo papernest_product_variant_tiles( $product ); // phpcs:ignore ?>
 	</div>
 </article>
