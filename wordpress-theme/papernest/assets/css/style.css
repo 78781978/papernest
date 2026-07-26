@@ -503,10 +503,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   .hero-grid{ grid-template-columns:1fr; }
   .hero-visual{ order:-1; max-width:420px; margin-inline:auto; }
   .hero-stats{ flex-wrap:wrap; row-gap:var(--sp-4); }
-  /* Client asked for the whole hero column (badge, heading, text, buttons,
-     stats) centered once it stacks under the illustration instead of
-     staying left-aligned like it is in the two-column desktop layout. */
-  .hero-copy{ text-align:center; }
+  /* Only the CTA buttons and the stats row center on mobile; the badge,
+     heading and lead paragraph stay left-aligned. */
   .hero-cta{ justify-content:center; }
   .hero-stats{ justify-content:center; }
 }
