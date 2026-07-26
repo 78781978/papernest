@@ -1146,6 +1146,17 @@ a.cline:hover{ color:var(--brand-green-deep); text-decoration:underline; }
    its own — space it clearly away from the trust row above it. */
 .woocommerce div.product .product_meta{ margin-top:var(--sp-6); display:block; }
 
+.product-share{ display:flex; align-items:center; gap:var(--sp-4); margin-top:var(--sp-6); flex-wrap:wrap; }
+.product-share-label{ font-size:.85rem; font-weight:600; color:var(--ink-500); }
+.product-share-links{ display:flex; gap:.6em; }
+.product-share-btn{
+  width:38px; height:38px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  border:1px solid var(--line); color:var(--heading); background:var(--surface);
+  transition:background .2s, border-color .2s, transform .2s;
+}
+.product-share-btn:hover{ background:var(--brand-green); border-color:var(--brand-green); transform:translateY(-2px); }
+.product-share-btn svg{ width:18px; height:18px; }
+
 .tabs{ display:flex; gap:var(--sp-6); border-bottom:1px solid var(--line); margin-top:var(--sp-12); }
 .tab-btn{ background:none; border:0; padding:1em 0; font-weight:700; color:var(--ink-400); font-size:.98rem; position:relative; }
 .tab-btn.active{ color:var(--heading); }

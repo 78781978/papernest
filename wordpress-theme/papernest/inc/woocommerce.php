@@ -33,6 +33,72 @@ add_action(
 	20
 );
 
+/**
+ * Product page "share with a friend" buttons -- WhatsApp, Facebook,
+ * Messenger, e-mail. Hooks into WooCommerce's own woocommerce_share action
+ * (single-product/share.php already calls do_action('woocommerce_share')
+ * after the add-to-cart form; it's just unused by default since core
+ * dropped its old AddThis integration years ago), so no template override
+ * is needed and it always renders in the right spot even if WooCommerce
+ * updates that template.
+ *
+ * All four are plain outbound links a browser opens directly -- no API
+ * keys, no Facebook App ID, nothing that can start failing later. Messenger
+ * uses its mobile deep link (fb-messenger://), which only does something on
+ * a phone with Messenger installed; a real "Send to Messenger" dialog needs
+ * a registered Facebook App ID, which the site doesn't have. On desktop the
+ * button simply does nothing when clicked, same as tapping a WhatsApp link
+ * with no WhatsApp installed.
+ */
+add_action( 'woocommerce_share', 'papernest_product_share_buttons', 10 );
+function papernest_product_share_buttons() {
+	global $product;
+	if ( ! $product ) {
+		return;
+	}
+	$url     = get_permalink( $product->get_id() );
+	$title   = $product->get_name();
+	$message = $title . ' - ' . $url;
+
+	$links = array(
+		'whatsapp'  => array(
+			'label' => 'WhatsApp',
+			'href'  => 'https://wa.me/?text=' . rawurlencode( $message ),
+		),
+		'facebook'  => array(
+			'label' => 'Facebook',
+			'href'  => 'https://www.facebook.com/sharer/sharer.php?u=' . rawurlencode( $url ),
+		),
+		'messenger' => array(
+			'label' => 'Messenger',
+			'href'  => 'fb-messenger://share/?link=' . rawurlencode( $url ),
+		),
+		'mail'      => array(
+			'label' => 'E-mail',
+			'href'  => 'mailto:?subject=' . rawurlencode( $title ) . '&body=' . rawurlencode( $message ),
+		),
+	);
+	?>
+	<div class="product-share">
+		<span class="product-share-label">Poleć znajomemu:</span>
+		<div class="product-share-links">
+			<?php
+			// esc_url()'s default protocol whitelist doesn't include
+			// fb-messenger:// (an app deep link, not a real URI scheme
+			// browsers register) -- without passing it explicitly here,
+			// esc_url() silently strips the whole Messenger href down to
+			// an empty string instead of erroring, so the button would
+			// just quietly do nothing when clicked.
+			$allowed_protocols = array_merge( wp_allowed_protocols(), array( 'fb-messenger' ) );
+			foreach ( $links as $key => $link ) :
+				?>
+				<a class="product-share-btn" href="<?php echo esc_url( $link['href'], $allowed_protocols ); ?>" target="_blank" rel="noopener" aria-label="<?php echo esc_attr( $link['label'] ); ?>"><?php echo papernest_icon( $key ); ?></a>
+			<?php endforeach; ?>
+		</div>
+	</div>
+	<?php
+}
+
 // Default shop/category sorting to price, low to high — instead of
 // WooCommerce's own default (menu order) — until a customer picks a
 // different option from the sorting dropdown themselves.
