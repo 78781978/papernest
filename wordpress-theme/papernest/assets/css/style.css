@@ -693,7 +693,15 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 }
 .split ul.check-list .tick svg{ width:16px; height:16px; }
 
-@media (max-width: 860px){ .split{ grid-template-columns:1fr; } .split .stat-pill{ left:16px; bottom:-20px; } }
+@media (max-width: 860px){
+  .split{ grid-template-columns:1fr; }
+  /* Client asked for this moved to the top-right corner on mobile -- it was
+     bottom-left, overlapping the illustration's own text underneath it.
+     Tucked just inside the corner (not hanging above the image like the
+     original bottom overhang did) so it can never get scrolled under the
+     sticky site header. */
+  .split .stat-pill{ left:auto; right:16px; bottom:auto; top:16px; }
+}
 
 /* ---------- Stat band ---------- */
 .stat-band{
