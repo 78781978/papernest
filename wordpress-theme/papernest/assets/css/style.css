@@ -796,6 +796,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .cta-banner h2{ color:var(--heading); font-size:clamp(1.7rem,3vw,2.3rem); max-width:22ch; position:relative; }
 .cta-banner p{ color:rgba(11,35,69,.78); margin-top:var(--sp-3); max-width:46ch; position:relative; }
 .cta-banner .cta-actions{ position:relative; display:flex; gap:var(--sp-3); flex-wrap:wrap; }
+@media (max-width: 620px){
+  .cta-banner{ flex-direction:column; text-align:center; }
+  .cta-banner p{ margin-inline:auto; }
+  .cta-banner .cta-actions{ justify-content:center; }
+}
 
 /* ---------- Footer ---------- */
 /* background-size:cover guarantees the texture always fully fills the
@@ -906,7 +911,9 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
    screens tall on mobile). */
 @media (max-width: 980px){
   .footer-top{ grid-template-columns:1fr 1fr; }
-  .footer-brand{ grid-column:1 / -1; }
+  .footer-brand{ grid-column:1 / -1; text-align:center; }
+  .footer-brand .brand{ justify-content:center; }
+  .footer-brand p{ margin-inline:auto; }
 }
 @media (max-width: 560px){ .footer-bottom{ flex-direction:column; align-items:flex-start; } }
 
