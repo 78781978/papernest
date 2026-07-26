@@ -176,11 +176,12 @@ function papernest_logo( $class = '' ) {
 	if ( $logo_id ) {
 		$img = wp_get_attachment_image(
 			$logo_id,
-			// Registered right above (220x150, uncropped) instead of 'full' —
-			// the logo never displays above 180px tall, so requesting the
+			// Registered right above (540x360, uncropped) instead of 'full' —
+			// the logo never displays above 270px wide (180px tall at its
+			// CSS-forced 3:2 ratio) even on desktop, so requesting the
 			// original upload's own resolution (whatever a client happens to
-			// upload, e.g. 600x400) served that many more pixels than needed
-			// at every single size down to 44px on scrolled mobile.
+			// upload, e.g. 600x400) served more pixels than needed at every
+			// single size down to 66px on scrolled mobile.
 			'papernest-logo',
 			false,
 			array(
@@ -197,10 +198,11 @@ function papernest_logo( $class = '' ) {
 				// wp_get_attachment_image() always builds a full srcset (every
 				// registered size up to the original), but without an explicit
 				// `sizes` override it guesses one from the requested size's own
-				// width, telling browsers this logo might render much wider
-				// than it ever does (180px, on desktop before scrolling) and
-				// so picking a needlessly large srcset candidate.
-				'sizes'         => '180px',
+				// width. The real display width is 270px on desktop but only
+				// 96px below the 1200px breakpoint where the header shrinks
+				// (see .brand-logo in style.css) — a flat "180px" hint had
+				// mobile picking a candidate sized for neither.
+				'sizes'         => '(max-width: 1200px) 96px, 270px',
 			)
 		);
 		if ( $img ) {
@@ -211,6 +213,42 @@ function papernest_logo( $class = '' ) {
 		'<img class="%1$s" src="%2$s/assets/img/logo/papernest-lockup.png" alt="PaperNest — Producent wyrobów z papieru" width="288" height="192" loading="eager" data-no-lazy="1">',
 		esc_attr( $classes ),
 		PAPERNEST_URI
+	);
+}
+
+/**
+ * The round footer badge (papernest_footer_logo_round Customizer field)
+ * stores a raw uploaded URL, not an attachment ID, so — same issue as
+ * papernest_illustration()/papernest_photo_slot() — a plain <img src="...">
+ * was serving whatever resolution the client uploaded (e.g. a 512x512
+ * favicon-style mark) to a badge that never renders above 64px. Resolves it
+ * back to an attachment and uses WP's own 'thumbnail' size (150x150,
+ * cropped) — already generated for every upload regardless of when this
+ * field was added, so no backfill hook is needed here the way the header
+ * logo needed one. Falls back to the raw <img> if the URL doesn't resolve.
+ */
+function papernest_footer_round_logo( $url ) {
+	$attachment_id = attachment_url_to_postid( $url );
+	if ( $attachment_id ) {
+		$img = wp_get_attachment_image(
+			$attachment_id,
+			'thumbnail',
+			false,
+			array(
+				'class'        => 'brand-logo footer-logo',
+				'alt'          => 'PaperNest',
+				'loading'      => 'eager',
+				'decoding'     => 'async',
+				'data-no-lazy' => '1',
+			)
+		);
+		if ( $img ) {
+			return $img;
+		}
+	}
+	return sprintf(
+		'<img class="brand-logo footer-logo" src="%1$s" alt="PaperNest" loading="eager" data-no-lazy="1">',
+		esc_url( $url )
 	);
 }
 

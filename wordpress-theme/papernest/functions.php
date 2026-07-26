@@ -48,10 +48,16 @@ function papernest_setup() {
 
 	add_image_size( 'papernest-portfolio', 800, 800, true );
 	add_image_size( 'papernest-wide', 1600, 900, true );
-	// Logo is a simple graphic, never displayed above 180px tall — this is
-	// plenty for a sharp retina image without serving the full-resolution
-	// upload (which could be any size a client happens to upload) everywhere.
-	add_image_size( 'papernest-logo', 220, 150, false );
+	// The logo's tallest real on-screen size is 180px high (desktop header,
+	// unscrolled) at its CSS-forced 3:2 ratio -- 270px wide -- so 540x360 is
+	// exactly a 2x/retina candidate for that. (220x150, tried first, was
+	// actually SMALLER than the 1x desktop need and forced the browser to
+	// upscale it -- a real, if minor, quality regression nobody had flagged
+	// yet.) Still far below a typical raw upload (600x400+).
+	add_image_size( 'papernest-logo', 540, 360, false );
+	// Small square badges (the round footer logo) never render above 64px --
+	// WP's own 'thumbnail' size (150x150, cropped) already covers that at 2x
+	// retina with room to spare, so no dedicated size is needed for those.
 }
 add_action( 'after_setup_theme', 'papernest_setup' );
 
@@ -61,8 +67,11 @@ add_action( 'after_setup_theme', 'papernest_setup' );
  * 'papernest-logo' existed, so without this, wp_get_attachment_image()
  * would silently fall back to the full-resolution original anyway (WP does
  * not backfill missing intermediate sizes on its own) and this optimization
- * would do nothing until she happened to re-upload the logo. Regenerates
- * just once per logo attachment.
+ * would do nothing until she happened to re-upload the logo. Also re-runs if
+ * the generated size's width doesn't match the current registration (e.g.
+ * this went from 220x150 to 540x360 for retina sharpness) — otherwise a
+ * stale, already-generated size from before that change would look "done"
+ * and never get regenerated.
  */
 add_action(
 	'init',
@@ -71,8 +80,16 @@ add_action(
 		if ( ! $logo_id || ! wp_attachment_is_image( $logo_id ) ) {
 			return;
 		}
-		$meta = wp_get_attachment_metadata( $logo_id );
-		if ( isset( $meta['sizes']['papernest-logo'] ) ) {
+		$meta         = wp_get_attachment_metadata( $logo_id );
+		$global_sizes = wp_get_registered_image_subsizes();
+		$expected_w   = $global_sizes['papernest-logo']['width'] ?? 0;
+		$original_w   = $meta['width'] ?? 0;
+		$generated_w  = $meta['sizes']['papernest-logo']['width'] ?? 0;
+		if ( $generated_w === $expected_w || $original_w <= $expected_w ) {
+			// Either already generated at the current target width, or the
+			// original upload is smaller than the target and WP correctly
+			// declines to generate an upscaled copy — either way, nothing to
+			// do, and importantly nothing to keep retrying on every page load.
 			return;
 		}
 		$file = get_attached_file( $logo_id );

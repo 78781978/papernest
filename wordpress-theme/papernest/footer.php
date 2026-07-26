@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
         <?php $footer_round_logo = get_theme_mod( 'papernest_footer_logo_round', '' ); ?>
         <span class="brand-logo-plate is-round">
           <?php if ( $footer_round_logo ) : ?>
-            <img class="brand-logo footer-logo" src="<?php echo esc_url( $footer_round_logo ); ?>" alt="PaperNest" loading="eager">
+            <?php echo papernest_footer_round_logo( $footer_round_logo ); ?>
           <?php else : ?>
             <?php echo papernest_logo( 'footer-logo' ); ?>
           <?php endif; ?>
