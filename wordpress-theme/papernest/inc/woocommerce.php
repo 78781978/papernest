@@ -172,12 +172,13 @@ function papernest_variant_tile_label( $value ) {
 }
 
 /**
- * Quantity-variant quick links for a variable product's shop-grid card, so
- * a shopper can jump straight from the card to e.g. the "Paleta" variation
- * of the same product without opening the product page first and hunting
- * for the dropdown. Each link is the variation's own permalink, which
- * WooCommerce appends with ?attribute_wariant=... -- the single-product
- * variation form already reads that query var and preselects the option.
+ * Quantity-variant quick links for a variable product's single-product page:
+ * every OTHER quantity than the one currently showing (the one picked via
+ * ?attribute_wariant=..., or the first/lowest quantity when nothing's in the
+ * URL yet, since that's the one auto-selected on load -- see the script in
+ * the hook below). Each tile is the variation's own permalink, which
+ * WooCommerce appends with ?attribute_wariant=... -- the variation form
+ * already reads that query var and preselects the option.
  */
 function papernest_product_variant_tiles( $product ) {
 	if ( ! $product || ! $product->is_type( 'variable' ) ) {
@@ -187,7 +188,9 @@ function papernest_product_variant_tiles( $product ) {
 	if ( empty( $variation_ids ) ) {
 		return '';
 	}
-	$tiles = array();
+	$current_value = isset( $_GET['attribute_wariant'] ) ? wc_clean( wp_unslash( $_GET['attribute_wariant'] ) ) : null; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+	$tiles         = array();
+	$is_first      = true;
 	foreach ( $variation_ids as $variation_id ) {
 		$variation = wc_get_product( $variation_id );
 		if ( ! $variation || ! $variation->exists() || ! $variation->is_purchasable() ) {
@@ -196,6 +199,11 @@ function papernest_product_variant_tiles( $product ) {
 		$attributes = $variation->get_variation_attributes();
 		$value      = $attributes ? reset( $attributes ) : '';
 		if ( ! $value ) {
+			continue;
+		}
+		$is_current = ( null !== $current_value ) ? ( $value === $current_value ) : $is_first;
+		$is_first   = false;
+		if ( $is_current ) {
 			continue;
 		}
 		$tiles[] = sprintf(
@@ -283,7 +291,31 @@ add_action(
 	'woocommerce_single_product_summary',
 	function () {
 		global $product;
-		echo papernest_product_variant_tiles( $product ); // phpcs:ignore
+		$tiles_html = papernest_product_variant_tiles( $product );
+		echo $tiles_html; // phpcs:ignore
+		if ( ! $tiles_html ) {
+			return;
+		}
+		// Auto-select the first (lowest) quantity when the page loads with no
+		// ?attribute_wariant= in the URL, so price + Add to cart are ready
+		// immediately instead of sitting on "Choose an option" / disabled.
+		?>
+		<script>
+		document.addEventListener('DOMContentLoaded', function(){
+			// The add-to-cart form (with the "Wariant" select) renders further
+			// down the page than this script, so wait for the full DOM.
+			var form = document.querySelector('.variations_form');
+			if(!form){return;}
+			var select = form.querySelector('select[name^="attribute_"]');
+			if(!select || select.value){return;}
+			for(var i=0;i<select.options.length;i++){
+				if(select.options[i].value){ select.value = select.options[i].value; break; }
+			}
+			if(window.jQuery){ window.jQuery(select).trigger('change'); }
+			else { select.dispatchEvent(new Event('change',{bubbles:true})); }
+		});
+		</script>
+		<?php
 	},
 	10
 );
