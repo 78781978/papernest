@@ -735,17 +735,28 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 @media (prefers-reduced-motion: reduce){
   .testi-rail{ animation:none; }
 }
-/* Decorative animations (floating hero cards, testimonial marquee, footer
-   texture drift, footer credit shine) cost real CPU/GPU on phones without
-   adding much anyone actually notices at that size — off below 767px, same
-   as they already are for prefers-reduced-motion. */
+/* Decorative animations (floating hero cards, footer texture drift, footer
+   credit shine) cost real CPU/GPU on phones without adding much anyone
+   actually notices at that size — off below 767px, same as they already
+   are for prefers-reduced-motion. The testimonial marquee is NOT purely
+   decorative though: .testimonial-track has overflow:hidden and the rail
+   only ever moves via this animation, so turning the animation off without
+   another way to move it left mobile visitors stuck looking at the first
+   card with no way to read the rest. Swapped that one for native
+   touch-swipe instead of just re-enabling the animation. */
 @media (max-width: 767px){
   .hero-visual .float-card,
-  .testi-rail,
   .site-footer,
   .footer-credit a{
     animation: none !important;
   }
+  .testimonial-track{
+    overflow-x:auto; -webkit-overflow-scrolling:touch; scroll-snap-type:x proximity; scroll-padding-inline:20px;
+    scrollbar-width:none;
+  }
+  .testimonial-track::-webkit-scrollbar{ display:none; }
+  .testi-rail{ animation:none !important; }
+  .testi-card{ scroll-snap-align:start; }
 }
 .testi-card{
   background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg); padding:var(--sp-6);
