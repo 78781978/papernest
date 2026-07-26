@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
       </div>
     </div>
     <div class="footer-col">
-      <h3><button type="button" class="footer-col-toggle" aria-expanded="false">Informacje<span class="footer-col-chevron" aria-hidden="true"></span></button></h3>
+      <h3><button type="button" class="footer-col-toggle" aria-expanded="false"><span class="footer-col-ic"><?php echo papernest_icon( 'info' ); ?></span>Informacje<span class="footer-col-chevron" aria-hidden="true"></span></button></h3>
       <div class="footer-col-body">
       <ul>
         <li><a href="<?php echo esc_url( papernest_page_link( 'regulamin' ) ); ?>">Regulamin</a></li>
@@ -33,7 +33,7 @@ if ( ! defined( 'ABSPATH' ) ) {
       </div>
     </div>
     <div class="footer-col">
-      <h3><button type="button" class="footer-col-toggle" aria-expanded="false">Konto<span class="footer-col-chevron" aria-hidden="true"></span></button></h3>
+      <h3><button type="button" class="footer-col-toggle" aria-expanded="false"><span class="footer-col-ic"><?php echo papernest_icon( 'user' ); ?></span>Konto<span class="footer-col-chevron" aria-hidden="true"></span></button></h3>
       <div class="footer-col-body">
       <ul>
         <?php if ( class_exists( 'WooCommerce' ) ) : ?>
@@ -51,7 +51,7 @@ if ( ! defined( 'ABSPATH' ) ) {
       </div>
     </div>
     <div class="footer-col">
-      <h3><button type="button" class="footer-col-toggle" aria-expanded="false">Firma<span class="footer-col-chevron" aria-hidden="true"></span></button></h3>
+      <h3><button type="button" class="footer-col-toggle" aria-expanded="false"><span class="footer-col-ic"><?php echo papernest_icon( 'factory' ); ?></span>Firma<span class="footer-col-chevron" aria-hidden="true"></span></button></h3>
       <div class="footer-col-body">
       <ul>
         <li><a href="<?php echo esc_url( papernest_page_link( 'o-nas' ) ); ?>">O nas</a></li>
@@ -61,7 +61,7 @@ if ( ! defined( 'ABSPATH' ) ) {
       </div>
     </div>
     <div class="footer-col">
-      <h3><button type="button" class="footer-col-toggle" aria-expanded="false">Kontakt<span class="footer-col-chevron" aria-hidden="true"></span></button></h3>
+      <h3><button type="button" class="footer-col-toggle" aria-expanded="false"><span class="footer-col-ic"><?php echo papernest_icon( 'pin' ); ?></span>Kontakt<span class="footer-col-chevron" aria-hidden="true"></span></button></h3>
       <div class="footer-col-body">
       <div>
       <div class="contact-line"><?php echo papernest_icon( 'pin' ); ?><span><?php echo esc_html( papernest_address_line() ); ?></span></div>
