@@ -796,16 +796,16 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 /* Stopka zmniejszona o ok. 30% względem poprzedniej wersji (padding/odstępy). */
 /* Reduced ~20% further (padding-block and gap) on top of the earlier ~30%
    reduction already applied — client asked for a shorter, tighter footer. */
-/* The middle three columns (Informacje/Konto/Firma) were equal 1fr tracks,
-   so they were the same WIDTH regardless of how much of that width their
-   own heading/links actually used — "Konto" and "Firma" are short words
-   that left a lot of unused space in their column before the next one
-   started, while "Informacje" filled most of its column, making the gap
-   after it look noticeably tighter than the gap after "Konto"/"Firma" even
-   though the underlying grid gap was identical everywhere. auto sizes each
-   column to its own content instead, so the visual gap is the same gap
-   value everywhere. */
-.footer-top{ padding-block:clamp(31px,4vw,50px); display:grid; grid-template-columns:1.4fr auto auto auto 1.1fr; gap:1.7rem; }
+/* Informacje/Konto/Firma/Kontakt are equal 1fr tracks so each whole column
+   — heading AND its links together, moving as one unit — starts at an
+   evenly spaced position; auto-sizing each column to its own longest link
+   was tried instead, but that made the heading words themselves (which sit
+   above links of very different lengths) end up unevenly spaced, while
+   detaching the heading from its own list to space the words alone made
+   the heading and its list drift apart from each other. Equal-width columns
+   is the one option that keeps heading+list together AND reads as evenly
+   spaced. */
+.footer-top{ padding-block:clamp(31px,4vw,50px); display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr 1fr; gap:1.7rem; }
 .footer-brand p{ margin-top:var(--sp-4); font-size:.82rem; line-height:1.65; max-width:34ch; color:rgba(255,255,255,.62); }
 .footer-social{ display:flex; gap:var(--sp-3); margin-top:var(--sp-4); }
 .footer-social a{
