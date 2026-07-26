@@ -494,6 +494,14 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   .hero-visual{ order:-1; max-width:420px; margin-inline:auto; }
   .hero-stats{ flex-wrap:wrap; row-gap:var(--sp-4); }
 }
+/* On phones the 3 stats (25+ / 100+ / 100 000+) were wrapping to 2 rows
+   (2+1) at the default font size -- client asked for one line, shrinking
+   the numbers if that's what it takes to fit. */
+@media (max-width: 560px){
+  .hero-stats{ flex-wrap:nowrap; gap:var(--sp-3); }
+  .hero-stats .stat b{ font-size:1.3rem; }
+  .hero-stats .stat span{ font-size:.68rem; }
+}
 
 /* ---------- USP strip ---------- */
 .usp-strip{
