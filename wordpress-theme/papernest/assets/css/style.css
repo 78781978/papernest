@@ -193,6 +193,12 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   margin-inline:auto;
   padding-inline:clamp(20px, 4vw, 40px);
 }
+/* Shop listing (category grid) goes full viewport width instead of the
+   normal ~1240px container -- just a comfortable side gutter, no cap. Only
+   the shop/category grid uses this, not single-product pages, which keep
+   the normal container width (a full-width product page reads worse, not
+   better -- text lines/photos get lost). */
+.container-wide-shop{ max-width:none; padding-inline:clamp(20px, 3vw, 56px); }
 /* Halved sitewide — two adjacent sections (most pages stack several) were
    compounding their top+bottom padding into very large gaps between
    unrelated blocks of content on every page. */
@@ -666,6 +672,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 
 @media (max-width: 940px){ .product-grid, .product-grid.cols-4{ grid-template-columns:1fr 1fr; } }
 @media (max-width: 620px){ .product-grid, .product-grid.cols-4{ grid-template-columns:1fr; } }
+/* The wide shop container has no max-width, so 3 fixed columns would
+   stretch each product card huge on a big monitor -- add more columns as
+   there's genuinely more room, instead of just inflating card size. */
+@media (min-width: 1500px){ .container-wide-shop .product-grid{ grid-template-columns:repeat(4,1fr); } }
+@media (min-width: 1900px){ .container-wide-shop .product-grid{ grid-template-columns:repeat(5,1fr); } }
 
 /* ---------- Split section (services / about teaser) ---------- */
 .split{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(32px,6vw,80px); align-items:center; }

@@ -146,7 +146,9 @@ add_action( 'woocommerce_before_main_content', 'papernest_wc_wrapper_start', 10 
 add_action( 'woocommerce_after_main_content', 'papernest_wc_wrapper_end', 10 );
 
 function papernest_wc_wrapper_start() {
-	echo '<section class="section"><div class="container">';
+	$is_listing = is_shop() || is_product_category() || is_product_tag();
+	$class      = $is_listing ? 'container container-wide-shop' : 'container';
+	echo '<section class="section"><div class="' . esc_attr( $class ) . '">';
 }
 function papernest_wc_wrapper_end() {
 	echo '</div></section>';
@@ -327,7 +329,7 @@ function papernest_wc_page_hero() {
 	}
 	?>
 	<section class="page-hero">
-		<div class="container">
+		<div class="container container-wide-shop">
 			<div class="crumbs"><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Strona główna</a> <span>/</span> <span>Sklep</span></div>
 			<h1><?php woocommerce_page_title(); ?></h1>
 			<?php if ( is_shop() && ! is_search() ) : ?>
