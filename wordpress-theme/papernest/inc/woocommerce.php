@@ -43,6 +43,30 @@ add_filter(
 	}
 );
 
+// WooCommerce ships the checkout phone field as optional by default -- the
+// client needs a phone number on every order (delivery/courier contact), so
+// it has to actually block checkout, not just be a suggestion. The site
+// uses the newer block-based checkout, which reads this from its own
+// option instead of the classic woocommerce_checkout_fields filter (kept
+// below too, in case anything ever renders the classic checkout shortcode).
+add_action(
+	'init',
+	function () {
+		if ( get_option( 'woocommerce_checkout_phone_field' ) !== 'required' ) {
+			update_option( 'woocommerce_checkout_phone_field', 'required' );
+		}
+	}
+);
+add_filter(
+	'woocommerce_checkout_fields',
+	function ( $fields ) {
+		if ( isset( $fields['billing']['billing_phone'] ) ) {
+			$fields['billing']['billing_phone']['required'] = true;
+		}
+		return $fields;
+	}
+);
+
 // Theme wraps shop/product content in the same .section > .container used everywhere else.
 remove_action( 'woocommerce_before_main_content', 'woocommerce_output_content_wrapper', 10 );
 remove_action( 'woocommerce_after_main_content', 'woocommerce_output_content_wrapper_end', 10 );
