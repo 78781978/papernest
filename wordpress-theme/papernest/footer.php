@@ -14,9 +14,6 @@ if ( ! defined( 'ABSPATH' ) ) {
         <span class="brand-logo-plate"><?php echo papernest_logo( 'footer-logo' ); ?></span>
       </a>
       <p>PaperNest to producent wyrobów z&nbsp;papieru z&nbsp;25-letnim doświadczeniem na rynku. Oferujemy wypełniacze papierowe, papiery do kurników oraz papiery remontowe – dla firm z&nbsp;całej Polski.</p>
-      <div class="footer-social">
-        <a href="<?php echo esc_url( papernest_facebook_url() ); ?>" aria-label="Facebook" target="_blank" rel="noopener"><?php echo papernest_icon( 'facebook' ); ?></a>
-      </div>
     </div>
     <div class="footer-col">
       <h3><button type="button" class="footer-col-toggle" aria-expanded="false"><span class="footer-col-ic"><?php echo papernest_icon( 'info' ); ?></span>Informacje<span class="footer-col-chevron" aria-hidden="true"></span></button></h3>
@@ -67,6 +64,9 @@ if ( ! defined( 'ABSPATH' ) ) {
       <div class="contact-line"><?php echo papernest_icon( 'pin' ); ?><span><?php echo esc_html( papernest_address_line() ); ?></span></div>
       <div class="contact-line" style="margin-top:.7em"><a href="<?php echo esc_url( papernest_phone_tel() ); ?>"><?php echo papernest_icon( 'phone' ); ?><span><?php echo esc_html( papernest_phone_display() ); ?></span></a></div>
       <div class="contact-line" style="margin-top:.7em"><a href="mailto:<?php echo esc_attr( papernest_email() ); ?>"><?php echo papernest_icon( 'mail' ); ?><span><?php echo esc_html( papernest_email() ); ?></span></a></div>
+      <div class="footer-social" style="margin-top:1em">
+        <a href="<?php echo esc_url( papernest_facebook_url() ); ?>" aria-label="Facebook" target="_blank" rel="noopener"><?php echo papernest_icon( 'facebook' ); ?></a>
+      </div>
       </div>
       </div>
     </div>

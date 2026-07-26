@@ -329,7 +329,14 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   display:inline-flex; align-items:center; background:#fff; border-radius:var(--r-md);
   padding:10px 16px; box-shadow:var(--shadow-sm);
 }
-.brand-logo-plate .brand-logo.footer-logo{ height:60px; }
+/* !important is required here: the general .brand-logo height rule above
+   also carries !important (added earlier to defensively fight an unrelated
+   header-logo sizing bug), and since !important always outranks a plain
+   rule regardless of selector specificity, that general rule was silently
+   winning here too — forcing the small footer logo up to the header's full
+   180px, which is exactly why it looked oversized and square instead of a
+   small wide plate. */
+.brand-logo-plate .brand-logo.footer-logo{ height:60px !important; }
 
 .main-nav{ display:flex; align-items:center; gap:2rem; }
 .main-nav ul{ display:flex; align-items:center; gap:2rem; }
