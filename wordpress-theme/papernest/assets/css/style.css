@@ -794,6 +794,47 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 
 @media (max-width: 620px){ .testi-card{ flex-basis:82vw; width:82vw; } }
 
+/* ---------- Blog ---------- */
+.blog-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:var(--sp-6); }
+.blog-card{
+  background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg); overflow:hidden;
+  box-shadow:var(--shadow-sm); transition:transform .4s var(--ease), box-shadow .4s var(--ease), border-color .4s;
+  display:flex; flex-direction:column;
+}
+.blog-card:hover{ transform:translateY(-6px); box-shadow:var(--shadow-lg); border-color:transparent; }
+.blog-card .thumb{ display:block; aspect-ratio:16/10; overflow:hidden; background:var(--paper-100); }
+.blog-card .thumb img,.blog-card .thumb svg{ width:100%; height:100%; object-fit:cover; transition:transform .6s var(--ease); }
+.blog-card:hover .thumb img,.blog-card:hover .thumb svg{ transform:scale(1.06); }
+.blog-card-body{ padding:var(--sp-5); display:flex; flex-direction:column; gap:var(--sp-2); flex:1; }
+.blog-card-date{ font-size:.78rem; font-weight:700; color:var(--brand-green-deep); text-transform:uppercase; letter-spacing:.03em; }
+.blog-card-body h2{ font-size:1.15rem; margin:0; }
+.blog-card-body h2 a{ color:var(--heading); }
+.blog-card-body h2 a:hover{ color:var(--brand-link-green); }
+.blog-card-body p{ font-size:.92rem; line-height:1.6; color:var(--ink-600); flex:1; }
+.blog-card-more{
+  display:inline-flex; align-items:center; gap:.5em; font-weight:700; font-size:.88rem; color:var(--brand-link-green);
+  margin-top:var(--sp-2);
+}
+.blog-card-more svg{ width:16px; height:16px; }
+.blog-card-more:hover{ text-decoration:underline; }
+
+.blog-pagination{ display:flex; justify-content:center; gap:var(--sp-3); margin-top:var(--sp-10); }
+.blog-pagination .nav-links{ display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:.5em; }
+.blog-pagination a, .blog-pagination span{
+  display:inline-flex; align-items:center; justify-content:center; min-width:42px; height:42px; padding-inline:.8em;
+  border-radius:var(--r-pill); border:1px solid var(--line); font-weight:700; font-size:.9rem; color:var(--heading);
+  transition:border-color .2s, background .2s;
+}
+.blog-pagination a:hover{ border-color:var(--brand-green); background:var(--paper-100); }
+.blog-pagination span.current{ background:var(--grad-green); border-color:transparent; }
+.blog-pagination span.dots{ border:0; }
+
+.single-post-thumb{ border-radius:var(--r-xl); overflow:hidden; box-shadow:var(--shadow-md); aspect-ratio:16/8; }
+.single-post-thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
+
+@media (max-width: 980px){ .blog-grid{ grid-template-columns:1fr 1fr; } }
+@media (max-width: 620px){ .blog-grid{ grid-template-columns:1fr; } }
+
 /* ---------- CTA banner ---------- */
 .cta-banner{
   background:var(--grad-green); border-radius:var(--r-xl); padding:clamp(40px,6vw,72px);
@@ -1136,6 +1177,18 @@ a.cline:hover{ color:var(--brand-green-deep); text-decoration:underline; }
 .legal-shell p{ font-size:.98rem; line-height:1.85; color:var(--ink-700); margin-bottom:var(--sp-4); }
 .legal-shell a{ color:var(--brand-link-green); text-decoration:underline; text-underline-offset:2px; }
 .legal-shell strong{ color:var(--heading); }
+/* The sitewide ul{list-style:none} reset strips bullets everywhere by
+   default (other components draw their own icons instead) -- editorial
+   content (legal pages, blog posts) still needs real bullets/numbers. */
+.legal-shell ul, .legal-shell ol{ margin:0 0 var(--sp-4); padding-left:1.4em; }
+.legal-shell ul{ list-style:disc; }
+.legal-shell ol{ list-style:decimal; }
+.legal-shell li{ font-size:.98rem; line-height:1.85; color:var(--ink-700); margin-bottom:.4em; }
+.legal-shell img{ max-width:100%; height:auto; border-radius:var(--r-lg); margin-block:var(--sp-4); }
+.legal-shell blockquote{
+  border-left:4px solid var(--brand-green); padding-left:var(--sp-5); margin:var(--sp-6) 0;
+  font-style:italic; color:var(--ink-600);
+}
 .legal-note{
   background:var(--paper-100); border:1px solid var(--paper-200); border-radius:var(--r-md); padding:var(--sp-5);
   margin:var(--sp-8) 0; font-size:.92rem; color:var(--ink-700); line-height:1.7;

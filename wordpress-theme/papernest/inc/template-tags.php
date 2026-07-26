@@ -107,6 +107,10 @@ function papernest_default_nav() {
 		papernest_page_link( 'portfolio' ) => 'Portfolio',
 		papernest_page_link( 'kontakt' )   => 'Kontakt',
 	);
+	$blog_page_id = (int) get_option( 'page_for_posts' );
+	if ( $blog_page_id ) {
+		$items[ get_permalink( $blog_page_id ) ] = 'Blog';
+	}
 	echo '<ul>';
 	foreach ( $items as $url => $label ) {
 		printf( '<li><a href="%1$s">%2$s</a></li>', esc_url( $url ), esc_html( $label ) );

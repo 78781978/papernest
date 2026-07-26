@@ -105,6 +105,40 @@ add_action(
 );
 
 /**
+ * Blog needs a real "posts page" for /blog/ to work at all -- unlike
+ * demo-content.php's sample pages/products (deliberately manual-trigger
+ * only, since seeding placeholder content onto a live site is risky), this
+ * is required plumbing, not sample content, so it's safe to create
+ * automatically. Only acts if nothing's already configured, so it won't
+ * fight a client who already set up a different posts page by hand.
+ */
+add_action(
+	'init',
+	function () {
+		if ( get_option( 'page_for_posts' ) ) {
+			return;
+		}
+		$blog_page = get_page_by_path( 'blog' );
+		if ( ! $blog_page ) {
+			$page_id = wp_insert_post(
+				array(
+					'post_title'  => 'Blog',
+					'post_name'   => 'blog',
+					'post_status' => 'publish',
+					'post_type'   => 'page',
+				)
+			);
+			if ( ! $page_id || is_wp_error( $page_id ) ) {
+				return;
+			}
+		} else {
+			$page_id = $blog_page->ID;
+		}
+		update_option( 'page_for_posts', $page_id );
+	}
+);
+
+/**
  * Default the primary menu to the site's real pages the first time the
  * theme is activated, so navigation isn't empty before the client sets one up.
  */
