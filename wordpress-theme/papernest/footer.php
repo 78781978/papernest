@@ -26,8 +26,6 @@ if ( ! defined( 'ABSPATH' ) ) {
         <li><a href="<?php echo esc_url( papernest_page_link( 'polityka-prywatnosci' ) ); ?>">Polityka prywatności</a></li>
         <li><a href="<?php echo esc_url( papernest_page_link( 'reklamacje' ) ); ?>">Reklamacje</a></li>
         <li><a href="<?php echo esc_url( papernest_page_link( 'odstapienie' ) ); ?>">Odstąpienie od umowy</a></li>
-        <li><a href="<?php echo esc_url( papernest_page_link( 'platnosc-i-dostawa' ) ); ?>">Płatność i Dostawa</a></li>
-        <li><a href="<?php echo esc_url( papernest_page_link( 'dostepnosc' ) ); ?>">Deklaracja dostępności</a></li>
         <li><button type="button" class="link-btn" data-open-consent>Zarządzaj zgodami</button></li>
       </ul>
       </div>
@@ -57,6 +55,8 @@ if ( ! defined( 'ABSPATH' ) ) {
         <li><a href="<?php echo esc_url( papernest_page_link( 'o-nas' ) ); ?>">O nas</a></li>
         <li><a href="<?php echo esc_url( papernest_page_link( 'portfolio' ) ); ?>">Portfolio</a></li>
         <li><a href="<?php echo esc_url( papernest_page_link( 'kontakt' ) ); ?>">Kontakt</a></li>
+        <li><a href="<?php echo esc_url( papernest_page_link( 'platnosc-i-dostawa' ) ); ?>">Płatność i Dostawa</a></li>
+        <li><a href="<?php echo esc_url( papernest_page_link( 'dostepnosc' ) ); ?>">Deklaracja dostępności</a></li>
       </ul>
       </div>
     </div>
