@@ -23,7 +23,7 @@ while ( have_posts() ) :
   <div class="container">
     <div class="crumbs"><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Strona główna</a> <span>/</span> <span>Portfolio</span></div>
     <h1><?php the_title(); ?></h1>
-    <p>PaperNest w&nbsp;różnych zastosowaniach — odkryj, gdzie nasze wyroby z&nbsp;papieru sprawdzają się najlepiej.</p>
+    <p>PaperNest w&nbsp;różnych zastosowaniach - odkryj, gdzie nasze wyroby z&nbsp;papieru sprawdzają się najlepiej.</p>
   </div>
 </section>
 
@@ -53,7 +53,7 @@ while ( have_posts() ) :
         '<div class="section-head center">
       <span class="eyebrow" style="justify-content:center">Przykłady zastosowań</span>
       <h2 class="text-balance">Jeden papier, dziesiątki możliwości</h2>
-      <p>Od logistyki e-commerce po pracownie kreatywne i gabinety weterynaryjne — nasze rolki dopasowują się do branży klienta.</p>
+      <p>Od logistyki e-commerce po pracownie kreatywne i gabinety weterynaryjne, nasze rolki dopasowują się do branży klienta.</p>
     </div>'
     );
     ?>
@@ -71,7 +71,7 @@ while ( have_posts() ) :
     <div class="cta-banner">
       <div>
         <h2>Nie znalazłeś swojego zastosowania?</h2>
-        <p>Doradzimy, który papier PaperNest najlepiej sprawdzi się w Twojej branży — napisz do nas lub zadzwoń.</p>
+        <p>Doradzimy, który papier PaperNest najlepiej sprawdzi się w Twojej branży - napisz do nas lub zadzwoń.</p>
       </div>
       <div class="cta-actions">
         <a href="<?php echo esc_url( papernest_page_link( 'kontakt' ) ); ?>" class="btn" style="background:#fff;color:#4f7309;box-shadow:0 14px 30px rgba(0,0,0,.35)">Skontaktuj się <?php echo papernest_icon( 'arrow' ); ?></a>

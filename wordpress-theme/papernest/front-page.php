@@ -46,7 +46,7 @@ $contact_url = papernest_page_link( 'kontakt' );
       <span class="tag-pill"><?php echo papernest_icon( 'leaf' ); ?> Certyfikowany recykling</span>
       <span class="ic"><?php echo papernest_icon( 'factory' ); ?></span>
       <b>Własna produkcja w&nbsp;Goleniowie</b>
-      <p>Cały proces — od przewijania po pakowanie — odbywa się w&nbsp;jednym miejscu. Pełna kontrola jakości na każdym etapie, bez pośredników.</p>
+      <p>Cały proces - od przewijania po pakowanie - odbywa się w&nbsp;jednym miejscu. Pełna kontrola jakości na każdym etapie, bez pośredników.</p>
     </div>
     <div class="bento-item span-wide"><span class="ic"><?php echo papernest_icon( 'sparkle' ); ?></span><div><b>Wysoka Jakość</b><span>Surowiec w&nbsp;100% z&nbsp;recyklingu</span></div></div>
     <div class="bento-item"><span class="ic"><?php echo papernest_icon( 'truck' ); ?></span><b>Szybka Realizacja</b><span>InPost i&nbsp;DPD</span></div>
@@ -128,7 +128,7 @@ $contact_url = papernest_page_link( 'kontakt' );
           }
       } else {
           ?>
-          <div class="notice-box"><?php echo papernest_icon( 'info' ); ?><p><strong>WooCommerce nie jest aktywne.</strong> Zainstaluj i aktywuj wtyczkę WooCommerce, a następnie dodaj produkty — pojawią się tutaj automatycznie.</p></div>
+          <div class="notice-box"><?php echo papernest_icon( 'info' ); ?><p><strong>WooCommerce nie jest aktywne.</strong> Zainstaluj i aktywuj wtyczkę WooCommerce, a następnie dodaj produkty - pojawią się tutaj automatycznie.</p></div>
           <?php
       }
       ?>

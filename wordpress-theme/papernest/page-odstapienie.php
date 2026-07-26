@@ -12,7 +12,7 @@ get_header();
 while ( have_posts() ) :
 	the_post();
 	$email     = papernest_email();
-	$mailto    = 'mailto:' . $email . '?subject=' . rawurlencode( 'Odstąpienie od umowy — numer zamówienia' );
+	$mailto    = 'mailto:' . $email . '?subject=' . rawurlencode( 'Odstąpienie od umowy - numer zamówienia' );
 	?>
 
 <section class="page-hero" style="padding-block:56px 40px">
@@ -48,7 +48,7 @@ while ( have_posts() ) :
         <span class="eyebrow">Pełne warunki</span>
         <h2 style="font-size:1.4rem;margin-bottom:18px">Prawo do odstąpienia</h2>
         <?php the_content(); ?>
-        <div class="legal-note" style="margin-top:24px">Pełne warunki odstąpienia od umowy — w tym wyjątki i terminy zwrotu płatności — znajdziesz w dokumencie <a href="<?php echo esc_url( papernest_page_link( 'prawo-do-odstapienia-od-umowy' ) ); ?>" style="color:var(--brand-link-green);text-decoration:underline">Prawo do odstąpienia od umowy</a>.</div>
+        <div class="legal-note" style="margin-top:24px">Pełne warunki odstąpienia od umowy, w tym wyjątki i terminy zwrotu płatności, znajdziesz w dokumencie <a href="<?php echo esc_url( papernest_page_link( 'prawo-do-odstapienia-od-umowy' ) ); ?>" style="color:var(--brand-link-green);text-decoration:underline">Prawo do odstąpienia od umowy</a>.</div>
       </div>
       <?php
       echo papernest_reveal( ob_get_clean() );

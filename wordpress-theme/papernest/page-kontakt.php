@@ -19,7 +19,7 @@ while ( have_posts() ) :
 
 	$locations = array(
 		array( 'user', 'Biuro Sprzedaży', 'Nasz zespół chętnie doradzi, odpowie na pytania i pomoże dobrać najlepsze rozwiązania dopasowane do potrzeb Twojej firmy.', array( $address, $phone, $email ) ),
-		array( 'factory', 'Produkcja i Magazyn', 'Wysyłki paletowe i odbiory hurtowe — po wcześniejszym ustaleniu terminu.', array( $address, $phone, $email ) ),
+		array( 'factory', 'Produkcja i Magazyn', 'Wysyłki paletowe i odbiory hurtowe - po wcześniejszym ustaleniu terminu.', array( $address, $phone, $email ) ),
 		array( 'pin', 'Odbiory osobiste', 'P.H.U "BOBINEX" w Centrum Wędkarskim "OKOŃ".', array( 'ul. Szczecińska 1A, 72-100 Goleniów', $phone, $email ) ),
 		array( 'cart', 'Zamówienia online', 'Zamówienia online realizuje P.H.U "BOBINEX" w Centrum Wędkarskim "OKOŃ".', array( 'ul. Szczecińska 1A, 72-100 Goleniów', $phone, $email ) ),
 	);
@@ -104,7 +104,7 @@ while ( have_posts() ) :
         <span class="eyebrow">Napisz do nas</span>
         <h2 style="font-size:1.6rem;margin-bottom:20px">Formularz kontaktowy</h2>
         <?php if ( 'sent' === $submit_status ) : ?>
-          <div class="notice-box"><?php echo papernest_icon( 'check' ); ?><p><strong>Dziękujemy!</strong> Twoja wiadomość została wysłana — odpowiemy najszybciej, jak to możliwe.</p></div>
+          <div class="notice-box"><?php echo papernest_icon( 'check' ); ?><p><strong>Dziękujemy!</strong> Twoja wiadomość została wysłana - odpowiemy najszybciej, jak to możliwe.</p></div>
         <?php elseif ( 'error' === $submit_status ) : ?>
           <div class="notice-box"><?php echo papernest_icon( 'info' ); ?><p><strong>Coś poszło nie tak.</strong> Uzupełnij wymagane pola i spróbuj ponownie, albo zadzwoń pod <?php echo esc_html( $phone ); ?>.</p></div>
         <?php endif; ?>
@@ -134,12 +134,12 @@ while ( have_posts() ) :
         <span class="eyebrow">Znajdź nas</span>
         <h2 style="font-size:1.6rem;margin-bottom:20px">ul. <?php echo esc_html( $address ); ?></h2>
         <div class="map-wrap">
-          <iframe title="Mapa — PaperNest, Goleniów" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          <iframe title="Mapa - PaperNest, Goleniów" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
             src="https://www.openstreetmap.org/export/embed.html?bbox=14.822%2C53.552%2C14.862%2C53.572&amp;layer=mapnik&amp;marker=53.562%2C14.842"></iframe>
         </div>
         <div class="notice-box" style="margin-top:24px">
           <?php echo papernest_icon( 'info' ); ?>
-          <p><strong>Wysyłki paletowe i zamówienia hurtowe</strong> realizujemy po wcześniejszym ustaleniu terminu — zadzwoń pod numer <a href="<?php echo esc_url( $phone_tel ); ?>" style="color:var(--brand-link-green);font-weight:700;white-space:nowrap"><?php echo esc_html( $phone ); ?></a> lub napisz na <a href="mailto:<?php echo esc_attr( $email ); ?>" style="color:var(--brand-link-green);font-weight:700"><?php echo esc_html( $email ); ?></a></p>
+          <p><strong>Wysyłki paletowe i zamówienia hurtowe</strong> realizujemy po wcześniejszym ustaleniu terminu - zadzwoń pod numer <a href="<?php echo esc_url( $phone_tel ); ?>" style="color:var(--brand-link-green);font-weight:700;white-space:nowrap"><?php echo esc_html( $phone ); ?></a> lub napisz na <a href="mailto:<?php echo esc_attr( $email ); ?>" style="color:var(--brand-link-green);font-weight:700"><?php echo esc_html( $email ); ?></a></p>
         </div>
       </div>
       <?php

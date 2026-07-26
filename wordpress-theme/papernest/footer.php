@@ -79,7 +79,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     </div>
   </div>
   <div class="container footer-bottom">
-    <span><?php echo esc_html( gmdate( 'Y' ) ); ?> © Copyright by PaperNest — P.H.U „Bobinex” Grzegorz Działkowski</span>
+    <span><?php echo esc_html( gmdate( 'Y' ) ); ?> © Copyright by PaperNest, P.H.U „Bobinex” Grzegorz Działkowski</span>
     <span class="footer-credit">Projekt i&nbsp;realizacja: <a href="https://www.facebook.com/profile.php?id=61591915780293" target="_blank" rel="noopener">VERO STUDIO</a></span>
   </div>
 </footer>
@@ -90,7 +90,7 @@ if ( ! defined( 'ABSPATH' ) ) {
   <div class="cookie-banner-icon" aria-hidden="true"><?php echo papernest_icon( 'shield' ); ?></div>
   <div class="cookie-banner-body">
     <p id="cookie-title"><strong>Dbamy o Twoją prywatność.</strong></p>
-    <p id="cookie-desc">Używamy plików cookies, aby zapewnić prawidłowe działanie strony, analizować ruch oraz — za Twoją zgodą — dopasowywać treści i działania marketingowe. Szczegóły znajdziesz w <a href="<?php echo esc_url( papernest_page_link( 'polityka-prywatnosci' ) ); ?>">Polityce prywatności</a>. Zgodę możesz wycofać lub zmienić w każdej chwili w stopce strony.</p>
+    <p id="cookie-desc">Używamy plików cookies, aby zapewnić prawidłowe działanie strony, analizować ruch oraz, za Twoją zgodą, dopasowywać treści i działania marketingowe. Szczegóły znajdziesz w <a href="<?php echo esc_url( papernest_page_link( 'polityka-prywatnosci' ) ); ?>">Polityce prywatności</a>. Zgodę możesz wycofać lub zmienić w każdej chwili w stopce strony.</p>
     <div class="row">
       <button class="btn btn-primary btn-sm" type="button" data-cookie-action="accept-all">Akceptuję wszystkie</button>
       <button class="btn btn-outline btn-sm" type="button" data-cookie-action="reject">Odrzuć opcjonalne</button>
@@ -142,7 +142,7 @@ if ( ! defined( 'ABSPATH' ) ) {
           <span class="switch-label">Analityczne</span>
         </label>
       </div>
-      <p id="c-analytics-desc">Pomagają zrozumieć, jak odwiedzający korzystają ze strony — liczbę odwiedzin, źródła ruchu, popularność podstron.</p>
+      <p id="c-analytics-desc">Pomagają zrozumieć, jak odwiedzający korzystają ze strony, liczbę odwiedzin, źródła ruchu, popularność podstron.</p>
     </div>
 
     <div class="consent-category">

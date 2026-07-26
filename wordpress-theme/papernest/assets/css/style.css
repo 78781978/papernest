@@ -586,7 +586,13 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 @media (max-width:620px){
   .bento-grid{ grid-template-columns:1fr; }
   .bento-item.is-feature, .bento-item.span-wide{ grid-column:span 1; }
-  .bento-item.span-wide{ flex-direction:column; align-items:flex-start; }
+  /* Client asked for these centered on mobile -- .span-wide's row layout
+     was already centered on desktop, but the mobile column-stack override
+     reset it to left-aligned; the plain (non-feature) cards were never
+     centered at any width. Leaves .is-feature ("Cały proces...") alone --
+     that one wasn't part of the request. */
+  .bento-item.span-wide{ flex-direction:column; align-items:center; text-align:center; }
+  .bento-item:not(.is-feature):not(.span-wide){ align-items:center; text-align:center; }
 }
 
 /* ---------- Product cards ---------- */

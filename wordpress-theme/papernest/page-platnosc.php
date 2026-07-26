@@ -27,11 +27,11 @@ while ( have_posts() ) :
       <div class="card card-pad">
         <span class="eyebrow">Płatności</span>
         <h2 style="font-size:1.4rem;margin-bottom:14px">Metody płatności</h2>
-        <p style="color:var(--ink-600);line-height:1.75;margin-bottom:18px">W sklepie udostępniamy płatności online przez <strong style="color:var(--heading)">paynow</strong> — markę mBanku, który odpowiada za bezpieczeństwo transakcji.</p>
+        <p style="color:var(--ink-600);line-height:1.75;margin-bottom:18px">W sklepie udostępniamy płatności online przez <strong style="color:var(--heading)">paynow</strong> - markę mBanku, który odpowiada za bezpieczeństwo transakcji.</p>
         <ul class="icon-list">
-          <li><?php echo papernest_icon( 'shield' ); ?><span><strong style="color:var(--heading)">BLIK</strong> — szybka płatność kodem BLIK.</span></li>
-          <li><?php echo papernest_icon( 'trend' ); ?><span><strong style="color:var(--heading)">Szybkie przelewy online</strong> — wygodne płatności z większości polskich banków.</span></li>
-          <li><?php echo papernest_icon( 'cart' ); ?><span><strong style="color:var(--heading)">Karty płatnicze</strong> — płatność kartą, jeśli metoda będzie dostępna w koszyku.</span></li>
+          <li><?php echo papernest_icon( 'shield' ); ?><span><strong style="color:var(--heading)">BLIK</strong> - szybka płatność kodem BLIK.</span></li>
+          <li><?php echo papernest_icon( 'trend' ); ?><span><strong style="color:var(--heading)">Szybkie przelewy online</strong> - wygodne płatności z większości polskich banków.</span></li>
+          <li><?php echo papernest_icon( 'cart' ); ?><span><strong style="color:var(--heading)">Karty płatnicze</strong> - płatność kartą, jeśli metoda będzie dostępna w koszyku.</span></li>
         </ul>
         <div class="logo-strip"><?php papernest_photo_slot( 'papernest_logo_paynow', 'logo paynow', 'logo-slot' ); ?></div>
       </div>
@@ -45,9 +45,9 @@ while ( have_posts() ) :
         <h2 style="font-size:1.4rem;margin-bottom:14px">Metody dostawy</h2>
         <p style="color:var(--ink-600);line-height:1.75;margin-bottom:18px">Dostępne metody dostawy zależą od rodzaju produktu, gabarytu zamówienia oraz adresu dostawy. Dla standardowych przesyłek korzystamy z usług InPost oraz DPD.</p>
         <ul class="icon-list">
-          <li><?php echo papernest_icon( 'box' ); ?><span><strong style="color:var(--heading)">InPost Paczkomat®</strong> — odbiór w wybranym automacie paczkowym, wygodny dla mniejszych zamówień.</span></li>
-          <li><?php echo papernest_icon( 'truck' ); ?><span><strong style="color:var(--heading)">Kurier InPost</strong> — dostawa na wskazany adres: firma, dom lub magazyn.</span></li>
-          <li><?php echo papernest_icon( 'truck' ); ?><span><strong style="color:var(--heading)">Kurier DPD</strong> — dostawa kurierska zgodnie z zasadami przewoźnika.</span></li>
+          <li><?php echo papernest_icon( 'box' ); ?><span><strong style="color:var(--heading)">InPost Paczkomat®</strong> - odbiór w wybranym automacie paczkowym, wygodny dla mniejszych zamówień.</span></li>
+          <li><?php echo papernest_icon( 'truck' ); ?><span><strong style="color:var(--heading)">Kurier InPost</strong> - dostawa na wskazany adres: firma, dom lub magazyn.</span></li>
+          <li><?php echo papernest_icon( 'truck' ); ?><span><strong style="color:var(--heading)">Kurier DPD</strong> - dostawa kurierska zgodnie z zasadami przewoźnika.</span></li>
         </ul>
         <div class="logo-strip"><?php papernest_photo_slot( 'papernest_logo_inpost', 'logo InPost', 'logo-slot' ); ?><?php papernest_photo_slot( 'papernest_logo_dpd', 'logo DPD', 'logo-slot' ); ?></div>
       </div>
