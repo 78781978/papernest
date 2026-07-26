@@ -188,6 +188,12 @@ function papernest_logo( $class = '' ) {
 				'loading'       => 'eager',
 				'decoding'      => 'async',
 				'fetchpriority' => 'high',
+				// LiteSpeed Cache's lazy-load rewriting still intercepts this
+				// image regardless of loading="eager" (it rewrites the final
+				// HTML output after the theme renders it, with no way to know
+				// this is above-the-fold unless told explicitly) — data-no-lazy
+				// is its documented attribute for opting an image out.
+				'data-no-lazy'  => '1',
 				// wp_get_attachment_image() always builds a full srcset (every
 				// registered size up to the original), but without an explicit
 				// `sizes` override it guesses one from the requested size's own
@@ -202,7 +208,7 @@ function papernest_logo( $class = '' ) {
 		}
 	}
 	return sprintf(
-		'<img class="%1$s" src="%2$s/assets/img/logo/papernest-lockup.png" alt="PaperNest — Producent wyrobów z papieru" width="288" height="192" loading="eager">',
+		'<img class="%1$s" src="%2$s/assets/img/logo/papernest-lockup.png" alt="PaperNest — Producent wyrobów z papieru" width="288" height="192" loading="eager" data-no-lazy="1">',
 		esc_attr( $classes ),
 		PAPERNEST_URI
 	);
@@ -235,6 +241,42 @@ function papernest_theme_product_contact_block() {
 function papernest_illustration( $mod_key, $svg_file, $label = '', $priority = false ) {
 	$image_url = get_theme_mod( $mod_key, '' );
 	if ( $image_url ) {
+		// These slots store a raw uploaded URL (WP_Customize_Image_Control),
+		// not an attachment ID, so a plain <img src="..."> served whatever
+		// resolution the client happened to upload — one hero photo was
+		// 750x1024 natively and got served at that size to every visitor
+		// regardless of how small the frame actually renders on a phone.
+		// Resolving the real attachment lets wp_get_attachment_image() build
+		// its normal srcset (thumbnail/medium/etc.) so mobile browsers can
+		// pick a genuinely small candidate instead. Falls back to the raw
+		// <img> exactly as before if the URL doesn't resolve to a local
+		// attachment (e.g. hotlinked image, or the attachment was deleted).
+		$attachment_id = attachment_url_to_postid( $image_url );
+		if ( $attachment_id ) {
+			$attrs = $priority
+				? array(
+					'alt'           => $label,
+					'sizes'         => '(max-width: 980px) 90vw, 600px',
+					'loading'       => 'eager',
+					'fetchpriority' => 'high',
+					// LiteSpeed Cache's lazy-load rewriting still intercepts
+					// this image regardless of loading="eager" (it rewrites
+					// the final HTML output after the theme renders it, with
+					// no way to know this is above-the-fold unless told
+					// explicitly) — data-no-lazy is its documented opt-out.
+					'data-no-lazy'  => '1',
+				)
+				: array(
+					'alt'     => $label,
+					'sizes'   => '(max-width: 980px) 90vw, 600px',
+					'loading' => 'lazy',
+				);
+			$img = wp_get_attachment_image( $attachment_id, 'large', false, $attrs );
+			if ( $img ) {
+				echo $img; // phpcs:ignore -- wp_get_attachment_image() already escapes.
+				return;
+			}
+		}
 		if ( $priority ) {
 			// The hero image is the page's Largest Contentful Paint element —
 			// loading="lazy" was making the browser defer even discovering it,
@@ -243,7 +285,13 @@ function papernest_illustration( $mod_key, $svg_file, $label = '', $priority = f
 			// visible on the page, so it must load eagerly and with priority
 			// instead of being treated like a below-the-fold image.
 			printf(
-				'<img src="%1$s" alt="%2$s" loading="eager" fetchpriority="high">',
+				// data-no-lazy="1" is LiteSpeed Cache's documented opt-out for
+				// its own lazy-load rewriting, which otherwise still intercepts
+				// this image regardless of loading="eager" — LSCache rewrites
+				// image markup in the final HTML output after the theme has
+				// already rendered it, so it has no way to know this is the
+				// LCP element unless told explicitly.
+				'<img src="%1$s" alt="%2$s" loading="eager" fetchpriority="high" data-no-lazy="1">',
 				esc_url( $image_url ),
 				esc_attr( $label )
 			);
@@ -267,6 +315,27 @@ function papernest_illustration( $mod_key, $svg_file, $label = '', $priority = f
 function papernest_photo_slot( $mod_key, $label, $class = '' ) {
 	$image_url = get_theme_mod( $mod_key, '' );
 	if ( $image_url ) {
+		// Same reasoning as papernest_illustration() above: these slots store
+		// a raw URL, not an attachment ID, so resolve it back to one where
+		// possible so wp_get_attachment_image() can build a real srcset
+		// instead of serving whatever resolution was uploaded to everyone.
+		$attachment_id = attachment_url_to_postid( $image_url );
+		if ( $attachment_id ) {
+			$img = wp_get_attachment_image(
+				$attachment_id,
+				'large',
+				false,
+				array(
+					'alt'     => $label,
+					'sizes'   => '(max-width: 780px) 90vw, 500px',
+					'loading' => 'lazy',
+				)
+			);
+			if ( $img ) {
+				printf( '<div class="photo-slot photo-slot-filled %1$s">%2$s</div>', esc_attr( $class ), $img ); // phpcs:ignore
+				return;
+			}
+		}
 		printf(
 			'<div class="photo-slot photo-slot-filled %1$s"><img src="%2$s" alt="%3$s" loading="lazy"></div>',
 			esc_attr( $class ),
