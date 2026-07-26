@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <a class="skip-link" href="#main">Przejdź do treści</a>
 <header class="site-header">
-  <div class="container header-row">
+  <div class="container header-row<?php echo ( function_exists( 'papernest_is_wide_shop_page' ) && papernest_is_wide_shop_page() ) ? ' container-wide-shop' : ''; ?>">
     <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="brand" aria-label="PaperNest — strona główna">
       <?php echo papernest_logo(); ?>
     </a>

@@ -310,6 +310,10 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .site-header.is-scrolled .brand-logo{ height:110px !important; }
 
 .site-header .container{ max-width:var(--container-wide); }
+/* Same specificity as the rule above (both `.site-header .class`), so
+   source order decides -- this comes after, so on the shop pages that get
+   both classes the header goes fully wide instead of stopping at 1400px. */
+.site-header .container-wide-shop{ max-width:none; }
 .header-row{
   display:flex; align-items:center; justify-content:space-between; gap:var(--sp-5);
 }

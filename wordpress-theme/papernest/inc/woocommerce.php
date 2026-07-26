@@ -145,9 +145,18 @@ remove_action( 'woocommerce_sidebar', 'woocommerce_get_sidebar' );
 add_action( 'woocommerce_before_main_content', 'papernest_wc_wrapper_start', 10 );
 add_action( 'woocommerce_after_main_content', 'papernest_wc_wrapper_end', 10 );
 
+/**
+ * True on the shop/category grid (not single-product) -- used to widen the
+ * header, hero band, and product grid all together there, matching the
+ * client's "sklep na całą szerokość" request. Declared here rather than
+ * inline in each spot since header.php also needs it.
+ */
+function papernest_is_wide_shop_page() {
+	return is_shop() || is_product_category() || is_product_tag();
+}
+
 function papernest_wc_wrapper_start() {
-	$is_listing = is_shop() || is_product_category() || is_product_tag();
-	$class      = $is_listing ? 'container container-wide-shop' : 'container';
+	$class = papernest_is_wide_shop_page() ? 'container container-wide-shop' : 'container';
 	echo '<section class="section"><div class="' . esc_attr( $class ) . '">';
 }
 function papernest_wc_wrapper_end() {
