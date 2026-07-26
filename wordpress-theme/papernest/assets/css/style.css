@@ -987,7 +987,10 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     radial-gradient(65% 130% at 88% -15%, rgba(169,201,236,.4) 0%, rgba(169,201,236,0) 60%),
     linear-gradient(135deg, #0a1d3a 0%, #123561 45%, #356bb0 100%);
   color:#fff;
-  max-width:var(--container); margin:28px auto 0; border-radius:var(--r-xl);
+  /* Was capped at the normal 1240px container -- client asked for the blue
+     banner wide on every page, not just the content below it, so this now
+     only keeps a small side gutter instead of a hard max-width. */
+  margin:28px clamp(20px,3vw,56px) 0; border-radius:var(--r-xl);
   box-shadow:0 32px 60px rgba(10,29,58,.32), 0 10px 26px rgba(10,29,58,.2);
   padding-block:clamp(56px,7vw,92px) clamp(44px,5vw,64px);
   position:relative; overflow:hidden;
