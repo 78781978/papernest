@@ -156,7 +156,7 @@ function papernest_is_wide_shop_page() {
 }
 
 /**
- * Short tile label for a variation's attribute value, e.g. "2 rolki" -> "2",
+ * Short tile label for a variation's attribute value, e.g. "2 rolki" -> "2 szt",
  * "Paleta 62 szt." -> "Paleta" -- used on the shop-grid product card so the
  * quantity tiles stay compact instead of showing the full variation text.
  */
@@ -166,7 +166,7 @@ function papernest_variant_tile_label( $value ) {
 		return 'Paleta';
 	}
 	if ( preg_match( '/\d+/', $value, $matches ) ) {
-		return $matches[0];
+		return $matches[0] . ' szt';
 	}
 	return $value;
 }
