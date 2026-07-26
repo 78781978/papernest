@@ -1041,7 +1041,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .history-block{ display:grid; grid-template-columns:.9fr 1.1fr; gap:clamp(32px,6vw,72px); align-items:center; }
 @media (max-width:900px){
   .history-block{ grid-template-columns:1fr; }
-  .history-block .copy{ text-align:center; }
   .history-block .copy .hero-cta{ justify-content:center; }
 }
 .history-media{ position:relative; }
