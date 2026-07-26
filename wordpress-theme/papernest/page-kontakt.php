@@ -53,6 +53,15 @@ while ( have_posts() ) :
                   <a class="cline" href="<?php echo esc_url( $phone_tel ); ?>"><?php echo esc_html( $line ); ?></a>
                 <?php elseif ( $line === $email ) : ?>
                   <a class="cline" href="mailto:<?php echo esc_attr( $email ); ?>"><?php echo esc_html( $line ); ?></a>
+                <?php elseif ( false !== strpos( $line, ',' ) ) : ?>
+                  <?php
+                  // Address lines: break deliberately after the street/number
+                  // (at the comma) so the postal code + city always lands
+                  // together on their own second line, instead of an
+                  // uncontrolled wrap that could split the code from the city.
+                  list( $street_part, $city_part ) = array_map( 'trim', explode( ',', $line, 2 ) );
+                  ?>
+                  <span class="cline"><?php echo esc_html( $street_part ); ?>,<br><?php echo esc_html( $city_part ); ?></span>
                 <?php else : ?>
                   <span class="cline"><?php echo esc_html( $line ); ?></span>
                 <?php endif; ?>
