@@ -274,6 +274,20 @@ add_filter(
 // Drop WooCommerce's own breadcrumb — page-hero already shows one, and result page.
 remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20 );
 
+// Quantity-variant tiles right under the price (netto) on the single
+// product page, before the "Masz pytania" contact block. Registered at the
+// same priority as the core price template (10) so it lands right after it
+// -- WordPress runs same-priority hooks in registration order, and this
+// theme hook is always registered after WooCommerce's own.
+add_action(
+	'woocommerce_single_product_summary',
+	function () {
+		global $product;
+		echo papernest_product_variant_tiles( $product ); // phpcs:ignore
+	},
+	10
+);
+
 // Fixed contact block under the price on every single product page.
 add_action(
 	'woocommerce_single_product_summary',
