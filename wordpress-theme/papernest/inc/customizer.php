@@ -88,6 +88,31 @@ function papernest_customize_register( $wp_customize ) {
 		);
 	}
 
+	// Round logo badge used in the footer — separate from the main header
+	// logo (Site Identity above) because the footer shows it inside a small
+	// circle: a full lockup with wordmark/tagline gets awkwardly cropped
+	// there, so this is meant for an icon-only, roughly square version of
+	// the logo. Falls back to cropping the main logo if nothing's set here.
+	$wp_customize->add_setting(
+		'papernest_footer_logo_round',
+		array(
+			'default'           => '',
+			'sanitize_callback' => 'esc_url_raw',
+		)
+	);
+	$wp_customize->add_control(
+		new WP_Customize_Image_Control(
+			$wp_customize,
+			'papernest_footer_logo_round',
+			array(
+				'label'       => __( 'Okrągłe logo w stopce', 'papernest' ),
+				'description' => __( 'Osobny obrazek do okrągłej plakietki w stopce — najlepiej sama ikona/znaczek bez tekstu, w proporcji kwadratu. Jeśli puste, stopka użyje głównego logo (przycięte do koła).', 'papernest' ),
+				'section'     => 'title_tagline',
+				'priority'    => 9,
+			)
+		)
+	);
+
 	// Decorative illustrations (hero graphic, "O nas" graphic, industrial
 	// services graphic) — these ship with a built-in SVG drawing, but the
 	// client can replace any of them with her own photo/graphic here.

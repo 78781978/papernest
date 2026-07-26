@@ -11,7 +11,14 @@ if ( ! defined( 'ABSPATH' ) ) {
   <div class="container footer-top reveal">
     <div class="footer-brand">
       <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="brand">
-        <span class="brand-logo-plate is-round"><?php echo papernest_logo( 'footer-logo' ); ?></span>
+        <?php $footer_round_logo = get_theme_mod( 'papernest_footer_logo_round', '' ); ?>
+        <span class="brand-logo-plate is-round">
+          <?php if ( $footer_round_logo ) : ?>
+            <img class="brand-logo footer-logo" src="<?php echo esc_url( $footer_round_logo ); ?>" alt="PaperNest" loading="eager">
+          <?php else : ?>
+            <?php echo papernest_logo( 'footer-logo' ); ?>
+          <?php endif; ?>
+        </span>
       </a>
       <p>PaperNest to producent wyrobów z&nbsp;papieru z&nbsp;25-letnim doświadczeniem na rynku. Oferujemy wypełniacze papierowe, papiery do kurników oraz papiery remontowe.</p>
     </div>
