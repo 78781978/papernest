@@ -132,7 +132,14 @@ while ( have_posts() ) :
       ?>
       <div>
         <span class="eyebrow">Znajdź nas</span>
-        <h2 style="font-size:1.6rem;margin-bottom:20px">ul. <?php echo esc_html( $address ); ?></h2>
+        <?php
+        // Wraps naturally at any comma-less point otherwise, which was
+        // splitting the postal code itself mid-number ("72-" / "100
+        // Goleniów") on narrow phones -- force the break at the comma
+        // instead, so "72-100 Goleniów" always stays on its own line.
+        $map_heading_parts = array_map( 'trim', explode( ',', $address, 2 ) );
+        ?>
+        <h2 style="font-size:1.6rem;margin-bottom:20px">ul. <?php echo esc_html( $map_heading_parts[0] ); ?><?php if ( isset( $map_heading_parts[1] ) ) : ?>,<br><?php echo esc_html( $map_heading_parts[1] ); ?><?php endif; ?></h2>
         <div class="map-wrap">
           <iframe title="Mapa - PaperNest, Goleniów" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
             src="https://www.openstreetmap.org/export/embed.html?bbox=14.822%2C53.552%2C14.862%2C53.572&amp;layer=mapnik&amp;marker=53.562%2C14.842"></iframe>
