@@ -326,8 +326,21 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
    something else's rule interferes with just one of the two dimensions. */
 .brand-logo{ display:block; height:180px !important; width:auto; aspect-ratio:3/2 !important; flex:none; transition:height .35s var(--ease); }
 .brand-logo-plate{
-  display:inline-flex; align-items:center; background:#fff; border-radius:var(--r-md);
+  display:inline-flex; align-items:center; justify-content:center; background:#fff; border-radius:var(--r-md);
   padding:10px 16px; box-shadow:var(--shadow-sm);
+}
+/* Round footer badge: fixed 1:1 box instead of the rectangular plate, with
+   the logo image cropped to fill it — overrides the general .brand-logo's
+   own !important rules (height/aspect-ratio), which would otherwise force
+   the old rectangular shape back here too. object-position:top keeps the
+   round mark itself in frame rather than centering on the wordmark/text
+   below it, since a square crop can't fit the whole lockup image. */
+.brand-logo-plate.is-round{
+  width:64px; height:64px; border-radius:50%; padding:0; overflow:hidden; flex:none;
+}
+.brand-logo-plate.is-round .brand-logo.footer-logo{
+  width:100% !important; height:100% !important; aspect-ratio:1/1 !important;
+  object-fit:cover; object-position:center top;
 }
 /* !important is required here: the general .brand-logo height rule above
    also carries !important (added earlier to defensively fight an unrelated
@@ -784,7 +797,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 /* Reduced ~20% further (padding-block and gap) on top of the earlier ~30%
    reduction already applied — client asked for a shorter, tighter footer. */
 .footer-top{ padding-block:clamp(31px,4vw,50px); display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr 1.1fr; gap:1.7rem; }
-.footer-brand p{ margin-top:var(--sp-4); font-size:.9rem; line-height:1.7; max-width:34ch; color:rgba(255,255,255,.62); }
+.footer-brand p{ margin-top:var(--sp-4); font-size:.82rem; line-height:1.65; max-width:34ch; color:rgba(255,255,255,.62); }
 .footer-social{ display:flex; gap:var(--sp-3); margin-top:var(--sp-4); }
 .footer-social a{
   width:48px; height:48px; border-radius:50%; border:1px solid rgba(255,255,255,.18); display:flex; align-items:center; justify-content:center;
