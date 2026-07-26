@@ -99,6 +99,34 @@ function papernest_reveal( $content, $extra_class = '' ) {
 }
 
 /**
+ * BreadcrumbList structured data matching the visible .crumbs trail on the
+ * same page — kept as a separate call (rather than generating it from the
+ * .crumbs HTML) so it can never drift from exactly what's visually shown.
+ * $items is an ordered list of ['name' => ..., 'url' => ... or null for the
+ * current page]. Echoes the <script> tag directly.
+ */
+function papernest_breadcrumb_schema( $items ) {
+	$list_items = array();
+	foreach ( $items as $i => $item ) {
+		$entry = array(
+			'@type'    => 'ListItem',
+			'position' => $i + 1,
+			'name'     => $item['name'],
+		);
+		if ( ! empty( $item['url'] ) ) {
+			$entry['item'] = $item['url'];
+		}
+		$list_items[] = $entry;
+	}
+	$data = array(
+		'@context'        => 'https://schema.org',
+		'@type'           => 'BreadcrumbList',
+		'itemListElement' => $list_items,
+	);
+	echo '<script type="application/ld+json">' . wp_json_encode( $data ) . '</script>' . "\n"; // phpcs:ignore
+}
+
+/**
  * Fallback nav (used only until the client sets up Wygląd > Menu in wp-admin).
  */
 function papernest_default_nav() {

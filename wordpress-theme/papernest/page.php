@@ -21,6 +21,14 @@ while ( have_posts() ) :
 	<section class="page-hero" style="padding-block:56px 40px">
 		<div class="container">
 			<div class="crumbs"><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Strona główna</a> <span>/</span> <span><?php the_title(); ?></span></div>
+			<?php
+			papernest_breadcrumb_schema(
+				array(
+					array( 'name' => 'Strona główna', 'url' => home_url( '/' ) ),
+					array( 'name' => get_the_title(), 'url' => null ),
+				)
+			);
+			?>
 			<h1><?php the_title(); ?></h1>
 			<?php if ( has_excerpt() ) : ?>
 				<p><?php echo esc_html( get_the_excerpt() ); ?></p>

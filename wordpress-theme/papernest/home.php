@@ -13,6 +13,14 @@ get_header();
 <section class="page-hero">
   <div class="container">
     <div class="crumbs"><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Strona główna</a> <span>/</span> <span>Blog</span></div>
+    <?php
+    papernest_breadcrumb_schema(
+        array(
+            array( 'name' => 'Strona główna', 'url' => home_url( '/' ) ),
+            array( 'name' => 'Blog', 'url' => null ),
+        )
+    );
+    ?>
     <h1>Blog</h1>
     <p>Porady, nowości i kulisy produkcji prosto od producenta wyrobów z&nbsp;papieru.</p>
   </div>

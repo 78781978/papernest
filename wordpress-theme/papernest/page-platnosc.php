@@ -13,6 +13,14 @@ while ( have_posts() ) :
 <section class="page-hero" style="padding-block:56px 40px">
   <div class="container">
     <div class="crumbs"><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Strona główna</a> <span>/</span> <span>Płatność i Dostawa</span></div>
+    <?php
+    papernest_breadcrumb_schema(
+        array(
+            array( 'name' => 'Strona główna', 'url' => home_url( '/' ) ),
+            array( 'name' => 'Płatność i Dostawa', 'url' => null ),
+        )
+    );
+    ?>
     <h1><?php the_title(); ?></h1>
     <p>W&nbsp;PaperNest zależy nam na prostym i&nbsp;bezpiecznym procesie zakupu. Poniżej znajdziesz informacje o&nbsp;metodach płatności oraz sposobach dostawy zamówień.</p>
   </div>

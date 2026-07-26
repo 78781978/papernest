@@ -18,6 +18,14 @@ while ( have_posts() ) :
 <section class="page-hero" style="padding-block:56px 40px">
   <div class="container">
     <div class="crumbs"><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Strona główna</a> <span>/</span> <span>Odstąpienie od umowy</span></div>
+    <?php
+    papernest_breadcrumb_schema(
+        array(
+            array( 'name' => 'Strona główna', 'url' => home_url( '/' ) ),
+            array( 'name' => 'Odstąpienie od umowy', 'url' => null ),
+        )
+    );
+    ?>
     <h1><?php the_title(); ?></h1>
     <p>Masz 14 dni na odstąpienie od umowy zawartej na odległość bez podania przyczyny.</p>
   </div>

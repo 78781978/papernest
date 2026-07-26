@@ -331,6 +331,44 @@ add_action(
 );
 
 /**
+ * Organization structured data (schema.org) — sitewide, invisible JSON-LD
+ * telling Google this site belongs to a real business, with a name, logo,
+ * and contact details it can show directly in search results (a Knowledge
+ * Panel, or contact info under the listing). WooCommerce already outputs
+ * its own Product schema per-product (via WC_Structured_Data), so this
+ * only fills the gap that leaves: nothing describes the business itself.
+ * Zero effect on load time — it's a small script tag, not a request.
+ */
+add_action(
+	'wp_head',
+	function () {
+		$logo_id  = get_theme_mod( 'custom_logo' );
+		$logo_url = $logo_id ? wp_get_attachment_image_url( $logo_id, 'full' ) : '';
+		$data     = array(
+			'@context' => 'https://schema.org',
+			'@type'    => 'Organization',
+			'name'     => get_bloginfo( 'name' ),
+			'url'      => home_url( '/' ),
+			'telephone' => papernest_phone_display(),
+			'email'     => papernest_email(),
+			'address'   => array(
+				'@type'           => 'PostalAddress',
+				'streetAddress'   => papernest_address_line(),
+				'addressCountry'  => 'PL',
+			),
+		);
+		if ( $logo_url ) {
+			$data['logo'] = $logo_url;
+		}
+		$facebook = papernest_facebook_url();
+		if ( $facebook ) {
+			$data['sameAs'] = array( $facebook );
+		}
+		echo '<script type="application/ld+json">' . wp_json_encode( $data ) . '</script>' . "\n"; // phpcs:ignore
+	}
+);
+
+/**
  * A link to /kontakt/ somewhere on the site (not from this theme's own
  * templates — none of them use this text) renders the generic English
  * "Learn more" instead of descriptive Polish text, which Lighthouse's SEO

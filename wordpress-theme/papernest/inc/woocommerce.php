@@ -232,6 +232,51 @@ add_action(
 );
 
 /**
+ * "Ships today if ordered by X" line -- a well-known trust/urgency signal
+ * on premium e-commerce sites. Pure text, computed from the server clock,
+ * no request/script cost. $cutoff_hour is the only thing that should ever
+ * need changing here (the actual dispatch cut-off time); everything else
+ * (weekend handling, naming the right day) follows from it automatically.
+ */
+function papernest_shipping_estimate_text() {
+	$cutoff_hour = 14;
+	$now         = current_datetime();
+	$is_weekday  = (int) $now->format( 'N' ) <= 5;
+	$before_cutoff = (int) $now->format( 'G' ) < $cutoff_hour;
+
+	if ( $is_weekday && $before_cutoff ) {
+		return sprintf( 'Zamów dziś do godziny %d:00, a wyślemy jeszcze dzisiaj.', $cutoff_hour );
+	}
+
+	$ship_date = $now->modify( '+1 day' );
+	while ( (int) $ship_date->format( 'N' ) > 5 ) {
+		$ship_date = $ship_date->modify( '+1 day' );
+	}
+
+	if ( $ship_date->format( 'Y-m-d' ) === $now->modify( '+1 day' )->format( 'Y-m-d' ) ) {
+		return 'Zamów teraz, a wyślemy jutro.';
+	}
+
+	$days_pl = array(
+		1 => 'w poniedziałek',
+		2 => 'we wtorek',
+		3 => 'w środę',
+		4 => 'w czwartek',
+		5 => 'w piątek',
+	);
+	return 'Zamów teraz, a wyślemy ' . ( $days_pl[ (int) $ship_date->format( 'N' ) ] ?? '' ) . '.';
+}
+add_action(
+	'woocommerce_single_product_summary',
+	function () {
+		?>
+		<p class="shipping-estimate"><?php echo papernest_icon( 'clock' ); ?> <?php echo esc_html( papernest_shipping_estimate_text() ); ?></p>
+		<?php
+	},
+	36
+);
+
+/**
  * The shop toolbar (filters + sort) is WooCommerce's own
  * woocommerce_before_shop_loop output (ordering dropdown + result count);
  * we just wrap it to keep the .shop-toolbar visual style.
@@ -271,6 +316,13 @@ function papernest_wc_page_hero() {
 			</div>
 		</section>
 		<?php
+		papernest_breadcrumb_schema(
+			array(
+				array( 'name' => 'Strona główna', 'url' => home_url( '/' ) ),
+				array( 'name' => 'Sklep', 'url' => get_permalink( wc_get_page_id( 'shop' ) ) ),
+				array( 'name' => get_the_title(), 'url' => null ),
+			)
+		);
 		return;
 	}
 	?>
@@ -284,6 +336,12 @@ function papernest_wc_page_hero() {
 		</div>
 	</section>
 	<?php
+	papernest_breadcrumb_schema(
+		array(
+			array( 'name' => 'Strona główna', 'url' => home_url( '/' ) ),
+			array( 'name' => 'Sklep', 'url' => null ),
+		)
+	);
 }
 
 /**
@@ -298,6 +356,43 @@ add_filter(
 		$args['columns']        = 3;
 		return $args;
 	}
+);
+
+/**
+ * "Recently viewed" strip -- purely client-side (localStorage), so it costs
+ * nothing on the server and nothing on pages where a visitor hasn't viewed
+ * any products yet (main.js just leaves the container hidden). The current
+ * product's data goes out as a data-attribute on the container itself
+ * rather than a separate wp_localize_script call, since it's only ever
+ * needed by the one script that already has this element in hand.
+ */
+add_action(
+	'woocommerce_after_single_product_summary',
+	function () {
+		global $product;
+		if ( ! $product ) {
+			return;
+		}
+		$image_id  = $product->get_image_id();
+		$image_url = $image_id ? wp_get_attachment_image_url( $image_id, 'medium' ) : wc_placeholder_img_src( 'medium' );
+		?>
+		<section class="section-tight recently-viewed-section" data-recently-viewed hidden
+			data-product-id="<?php echo esc_attr( $product->get_id() ); ?>"
+			data-product-name="<?php echo esc_attr( $product->get_name() ); ?>"
+			data-product-url="<?php echo esc_url( get_permalink( $product->get_id() ) ); ?>"
+			data-product-image="<?php echo esc_url( $image_url ); ?>"
+			data-product-price="<?php echo esc_attr( wp_strip_all_tags( $product->get_price_html() ) ); ?>">
+			<div class="container">
+				<div class="section-head">
+					<span class="eyebrow">Historia przeglądania</span>
+					<h2>Ostatnio oglądane</h2>
+				</div>
+				<div class="recently-viewed-grid"></div>
+			</div>
+		</section>
+		<?php
+	},
+	25
 );
 
 /**

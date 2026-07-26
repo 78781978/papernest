@@ -22,6 +22,14 @@ while ( have_posts() ) :
 <section class="page-hero">
   <div class="container">
     <div class="crumbs"><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Strona główna</a> <span>/</span> <span>Portfolio</span></div>
+    <?php
+    papernest_breadcrumb_schema(
+        array(
+            array( 'name' => 'Strona główna', 'url' => home_url( '/' ) ),
+            array( 'name' => 'Portfolio', 'url' => null ),
+        )
+    );
+    ?>
     <h1><?php the_title(); ?></h1>
     <p>PaperNest w&nbsp;różnych zastosowaniach - odkryj, gdzie nasze wyroby z&nbsp;papieru sprawdzają się najlepiej.</p>
   </div>

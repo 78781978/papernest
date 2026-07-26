@@ -30,6 +30,14 @@ while ( have_posts() ) :
 <section class="page-hero">
   <div class="container">
     <div class="crumbs"><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Strona główna</a> <span>/</span> <span>Kontakt</span></div>
+    <?php
+    papernest_breadcrumb_schema(
+        array(
+            array( 'name' => 'Strona główna', 'url' => home_url( '/' ) ),
+            array( 'name' => 'Kontakt', 'url' => null ),
+        )
+    );
+    ?>
     <h1><?php the_title(); ?></h1>
     <p>Masz pytanie o&nbsp;produkty, wycenę hurtową lub usługę przewijania papieru? Napisz, zadzwoń lub odwiedź nas w&nbsp;Goleniowie.</p>
   </div>

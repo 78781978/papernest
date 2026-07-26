@@ -305,4 +305,95 @@ document.addEventListener('DOMContentLoaded', function () {
   if (!existingConsent) {
     setTimeout(showBanner, 700);
   }
+
+  /* Recently viewed products — purely client-side (localStorage), so it
+     costs nothing server-side and does nothing on pages/visitors with no
+     viewing history yet. Records the current product (if any) then renders
+     whatever's stored, excluding the product being looked at right now. */
+  (function () {
+    var STORAGE_KEY = 'papernest_recently_viewed';
+    var MAX_STORED = 8;
+    var MAX_SHOWN = 4;
+
+    function readStored() {
+      try {
+        var raw = window.localStorage.getItem(STORAGE_KEY);
+        var list = raw ? JSON.parse(raw) : [];
+        return Array.isArray(list) ? list : [];
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function writeStored(list) {
+      try {
+        window.localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+      } catch (e) {
+        /* localStorage unavailable (private mode, quota) — fail silently, nothing to show is fine */
+      }
+    }
+
+    var section = document.querySelector('[data-recently-viewed]');
+    if (!section) return;
+
+    var currentId = section.getAttribute('data-product-id');
+    if (currentId) {
+      var list = readStored().filter(function (item) { return String(item.id) !== String(currentId); });
+      list.unshift({
+        id: currentId,
+        name: section.getAttribute('data-product-name'),
+        url: section.getAttribute('data-product-url'),
+        image: section.getAttribute('data-product-image'),
+        price: section.getAttribute('data-product-price')
+      });
+      writeStored(list.slice(0, MAX_STORED));
+    }
+
+    var toShow = readStored()
+      .filter(function (item) { return String(item.id) !== String(currentId); })
+      .slice(0, MAX_SHOWN);
+    if (!toShow.length) return;
+
+    var grid = section.querySelector('.recently-viewed-grid');
+    toShow.forEach(function (item) {
+      var a = document.createElement('a');
+      a.href = item.url;
+      a.className = 'blog-card recently-viewed-card';
+      a.innerHTML =
+        '<span class="thumb"><img src="' + item.image + '" alt="" loading="lazy" width="300" height="188"></span>' +
+        '<div class="blog-card-body"><h3>' + item.name + '</h3><span class="recently-viewed-price">' + item.price + '</span></div>';
+      grid.appendChild(a);
+    });
+    section.hidden = false;
+  })();
+
+  /* Sticky "add to cart" bar on mobile — appears once the real add-to-cart
+     button scrolls out of view, matching a pattern common on larger
+     e-commerce sites. Reuses the existing form's own button rather than
+     submitting anything itself, so variable-product variation selection
+     still works exactly the same way it already does. */
+  (function () {
+    var form = document.querySelector('.summary form.cart, form.cart');
+    var realButton = document.querySelector('.single_add_to_cart_button');
+    if (!form || !realButton || !window.IntersectionObserver) return;
+
+    var bar = document.createElement('div');
+    bar.className = 'sticky-add-to-cart';
+    bar.innerHTML =
+      '<span class="sticky-add-to-cart-name">' + document.title.split('–')[0].trim() + '</span>' +
+      '<button type="button" class="btn btn-primary btn-sm">Dodaj do koszyka</button>';
+    document.body.appendChild(bar);
+
+    bar.querySelector('button').addEventListener('click', function () {
+      realButton.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      realButton.focus({ preventScroll: true });
+    });
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        bar.classList.toggle('is-visible', !entry.isIntersecting);
+      });
+    }, { threshold: 0 });
+    io.observe(realButton);
+  })();
 });

@@ -16,6 +16,14 @@ while ( have_posts() ) :
 <section class="page-hero">
   <div class="container">
     <div class="crumbs"><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Strona główna</a> <span>/</span> <span>O nas</span></div>
+    <?php
+    papernest_breadcrumb_schema(
+        array(
+            array( 'name' => 'Strona główna', 'url' => home_url( '/' ) ),
+            array( 'name' => 'O nas', 'url' => null ),
+        )
+    );
+    ?>
     <h1><?php the_title(); ?></h1>
     <p>Ponad 20 lat doświadczenia w&nbsp;przetwórstwie papieru - od lokalnego zakładu w&nbsp;Goleniowie po markę PaperNest, znaną w&nbsp;całej Polsce.</p>
   </div>
