@@ -367,33 +367,4 @@ document.addEventListener('DOMContentLoaded', function () {
     section.hidden = false;
   })();
 
-  /* Sticky "add to cart" bar on mobile — appears once the real add-to-cart
-     button scrolls out of view, matching a pattern common on larger
-     e-commerce sites. Reuses the existing form's own button rather than
-     submitting anything itself, so variable-product variation selection
-     still works exactly the same way it already does. */
-  (function () {
-    var form = document.querySelector('.summary form.cart, form.cart');
-    var realButton = document.querySelector('.single_add_to_cart_button');
-    if (!form || !realButton || !window.IntersectionObserver) return;
-
-    var bar = document.createElement('div');
-    bar.className = 'sticky-add-to-cart';
-    bar.innerHTML =
-      '<span class="sticky-add-to-cart-name">' + document.title.split('–')[0].trim() + '</span>' +
-      '<button type="button" class="btn btn-primary btn-sm">Dodaj do koszyka</button>';
-    document.body.appendChild(bar);
-
-    bar.querySelector('button').addEventListener('click', function () {
-      realButton.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      realButton.focus({ preventScroll: true });
-    });
-
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        bar.classList.toggle('is-visible', !entry.isIntersecting);
-      });
-    }, { threshold: 0 });
-    io.observe(realButton);
-  })();
 });
