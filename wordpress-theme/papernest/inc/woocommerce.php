@@ -381,13 +381,13 @@ add_action(
  * (weekend handling, naming the right day) follows from it automatically.
  */
 function papernest_shipping_estimate_text() {
-	$cutoff_hour = 14;
+	$cutoff_hour = 11;
 	$now         = current_datetime();
 	$is_weekday  = (int) $now->format( 'N' ) <= 5;
 	$before_cutoff = (int) $now->format( 'G' ) < $cutoff_hour;
 
 	if ( $is_weekday && $before_cutoff ) {
-		return sprintf( 'Zamów dziś do godziny %d:00, a wyślemy jeszcze dzisiaj.', $cutoff_hour );
+		return sprintf( 'Zamów dziś do godziny %d:00, a wyślemy jeszcze dzisiaj (nie dotyczy zamówień paletowych).', $cutoff_hour );
 	}
 
 	$ship_date = $now->modify( '+1 day' );
@@ -396,7 +396,7 @@ function papernest_shipping_estimate_text() {
 	}
 
 	if ( $ship_date->format( 'Y-m-d' ) === $now->modify( '+1 day' )->format( 'Y-m-d' ) ) {
-		return 'Zamów teraz, a wyślemy jutro.';
+		return 'Zamów teraz, a wyślemy jutro (nie dotyczy zamówień paletowych).';
 	}
 
 	$days_pl = array(
@@ -406,7 +406,7 @@ function papernest_shipping_estimate_text() {
 		4 => 'w czwartek',
 		5 => 'w piątek',
 	);
-	return 'Zamów teraz, a wyślemy ' . ( $days_pl[ (int) $ship_date->format( 'N' ) ] ?? '' ) . '.';
+	return 'Zamów teraz, a wyślemy ' . ( $days_pl[ (int) $ship_date->format( 'N' ) ] ?? '' ) . ' (nie dotyczy zamówień paletowych).';
 }
 add_action(
 	'woocommerce_single_product_summary',
