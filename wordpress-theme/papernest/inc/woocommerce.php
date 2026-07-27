@@ -682,3 +682,60 @@ add_action(
 		<?php
 	}
 );
+
+/**
+ * [papernest_specs] shortcode -- paste one "Etykieta: Wartość" line per row
+ * inside it, in a product's description, to get a specification table with
+ * the same consistent look every time. Solves product descriptions ending
+ * up with differently hand-built/pasted spec tables (some 2-column, some
+ * stacked) by giving a single, simple format instead of raw HTML.
+ * Usage in the description editor:
+ *   [papernest_specs]
+ *   Szerokość rolki: 64 cm
+ *   Długość nawoju: 200 mb
+ *   [/papernest_specs]
+ */
+add_shortcode(
+	'papernest_specs',
+	function ( $atts, $content = '' ) {
+		// wpautop() runs on `the_content` before do_shortcode() does, so a
+		// multi-line shortcode body arrives with each line break already
+		// turned into "<br />" (and the whole block possibly wrapped in
+		// <p></p>) -- undo that before splitting into label/value lines.
+		$content = preg_replace( '#<br\s*/?>#i', "\n", (string) $content );
+		$content = preg_replace( '#</?p[^>]*>#i', "\n", $content );
+		$lines   = preg_split( '/\r\n|\r|\n/', trim( $content ) );
+		$rows    = array();
+		foreach ( $lines as $line ) {
+			$line = trim( $line );
+			if ( '' === $line ) {
+				continue;
+			}
+			$parts = explode( ':', $line, 2 );
+			if ( count( $parts ) < 2 ) {
+				continue;
+			}
+			$rows[] = array(
+				'label' => trim( $parts[0] ),
+				'value' => trim( $parts[1] ),
+			);
+		}
+		if ( empty( $rows ) ) {
+			return '';
+		}
+		ob_start();
+		?>
+		<table class="spec-table">
+			<tbody>
+			<?php foreach ( $rows as $row ) : ?>
+				<tr>
+					<th><?php echo esc_html( $row['label'] ); ?></th>
+					<td><?php echo esc_html( $row['value'] ); ?></td>
+				</tr>
+			<?php endforeach; ?>
+			</tbody>
+		</table>
+		<?php
+		return ob_get_clean();
+	}
+);

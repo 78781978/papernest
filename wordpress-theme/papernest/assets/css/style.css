@@ -1272,6 +1272,35 @@ a.cline:hover{ color:var(--brand-green-deep); text-decoration:underline; }
 }
 .legal-toc{ background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg); padding:var(--sp-5); box-shadow:var(--shadow-sm); }
 .legal-toc h2{ font-family:var(--font-sans); font-size:.82rem; text-transform:uppercase; letter-spacing:.06em; color:var(--ink-500); margin-bottom:var(--sp-3); font-weight:600; }
+
+/* Product specification table, built via the [papernest_specs] shortcode --
+   label left (bold), value right, one consistent look everywhere it's used
+   instead of each product description hand-pasting its own table markup. */
+.spec-table{ width:100%; border-collapse:collapse; margin:var(--sp-5) 0; }
+.spec-table tr{ border-bottom:1px solid var(--line); }
+.spec-table tr:last-child{ border-bottom:none; }
+.spec-table th, .spec-table td{ padding:.9em 0; text-align:left; font-weight:400; vertical-align:top; }
+.spec-table th{ font-family:var(--font-sans); font-weight:700; color:var(--heading); width:45%; }
+.spec-table td{ color:var(--ink-600); }
+@media (max-width:480px){
+  .spec-table th, .spec-table td{ display:block; width:100%; padding:.25em 0; }
+  .spec-table th{ padding-top:.9em; }
+}
+
+/* Baseline for any OTHER table an editor pastes straight into a product
+   description (not via the shortcode above) -- keeps borders/spacing/font
+   visually consistent with .spec-table even though the raw markup differs
+   from product to product. */
+.woocommerce div.product .woocommerce-Tabs-panel--description table{
+  width:100%; border-collapse:collapse; margin:var(--sp-5) 0; font-size:.98rem;
+}
+.woocommerce div.product .woocommerce-Tabs-panel--description table th,
+.woocommerce div.product .woocommerce-Tabs-panel--description table td{
+  padding:.9em 1em; text-align:left; border:1px solid var(--line); color:var(--ink-600);
+}
+.woocommerce div.product .woocommerce-Tabs-panel--description table th{
+  font-family:var(--font-sans); font-weight:700; color:var(--heading); background:var(--paper-100);
+}
 .legal-toc a{ display:block; padding:.5em 0; font-size:.88rem; color:var(--ink-600); border-bottom:1px solid var(--line-soft); }
 .legal-toc a:hover{ color:var(--brand-green-deep); }
 .legal-toc a:last-child{ border-bottom:none; }
