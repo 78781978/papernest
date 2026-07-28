@@ -1208,7 +1208,7 @@ a.cline:hover{ color:var(--brand-green-deep); text-decoration:underline; }
 .product-share-btn svg{ width:18px; height:18px; }
 
 .tabs{ display:flex; gap:var(--sp-6); border-bottom:1px solid var(--line); margin-top:var(--sp-12); }
-.tab-btn{ background:none; border:0; padding:1em 0; font-weight:700; color:var(--ink-400); font-size:.98rem; position:relative; }
+.tab-btn{ background:none; border:0; padding:1em 0; font-weight:700; color:var(--ink-600); font-size:.98rem; position:relative; }
 .tab-btn.active{ color:var(--heading); }
 .tab-btn.active::after{ content:""; position:absolute; left:0; right:0; bottom:-1px; height:2px; background:var(--grad-gold); }
 .tab-panel{ display:none; padding-top:var(--sp-8); }
